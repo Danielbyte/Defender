@@ -6,7 +6,7 @@ Game::Game():
 	window(sf::VideoMode(windowWidth, windowHeight), "Defender")
 
 {
-	window.setVerticalSyncEnabled(true);
+	
 
 	// Load the text font
 	font.loadFromFile("resources/sansation.ttf");
@@ -20,15 +20,16 @@ Game::Game():
 
 
 	background_t.loadFromFile("resources/background.png");
-	background_s.setTexture(player_t);
-	//background_s.setOrigin(0,0);
-	background_s.setPosition(800.0f,600.0f);
+	background_s.setTexture(background_t);
+	background_s.setOrigin(windowWidth/2.0f, windowHeight/2.0f);
+	background_s.setPosition(windowWidth/2.0f,windowHeight/2.0f);
 }
 
 void Game::run()
 {
 	sf::Clock clock;
 	bool isPlaying = false;
+	window.setVerticalSyncEnabled(true);
 	while (window.isOpen())
 	{
 			float deltaTime = clock.restart().asSeconds();
@@ -50,23 +51,18 @@ void Game::run()
 				}
 
 			}
-			window.clear();
+			
 
 			if (!isPlaying)
 			{
-				
-				//window.draw(splashScreenText);
-				window.draw(background_s);
-			
+			    window.draw(splashScreenText);
 			}
 			else
 			{
-				splashScreenText.setString("PLAAAAAAAAAAAAAAAAAAAAAAY");
-				window.draw(splashScreenText);
+				window.draw(background_s);
 			}
 			
 			window.display();
-			
-			
+			window.clear();
 	}
 }
