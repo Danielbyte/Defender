@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <memory>
 
 class Game
 {
@@ -17,6 +18,8 @@ private:
 	unsigned int gameWidth;
 	unsigned int gameHeight;
 	sf::RenderWindow window;
+	sf::Text splashScreenText;
+	sf::Font font;
 };
 #endif
 
