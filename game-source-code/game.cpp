@@ -3,6 +3,7 @@
 Game::Game():
 	windowWidth{800ul},
 	windowHeight{600ul},
+	isPlaying{false},
 	window(sf::VideoMode(windowWidth, windowHeight), "Defender")
 
 {
@@ -28,30 +29,12 @@ Game::Game():
 void Game::run()
 {
 	sf::Clock clock;
-	bool isPlaying = false;
 	window.setVerticalSyncEnabled(true);
 	while (window.isOpen())
 	{
 			float deltaTime = clock.restart().asSeconds();
-			// Handle events
-			sf::Event event;
-			while (window.pollEvent(event))
-			{
-				// Window closed or escape key pressed: exit
-				if ((event.type == sf::Event::Closed) ||
-					((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))) {
-					isPlaying = false;
-					window.close();
-					break;
-				}
-				
-				if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Enter))
-				{
-					isPlaying = true;
-				}
-
-			}
-			
+			// Handle player input
+			handleInput();
 
 			if (!isPlaying)
 			{

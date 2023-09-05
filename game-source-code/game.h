@@ -20,6 +20,7 @@ public:
 private:
 	unsigned int windowWidth;
 	unsigned int windowHeight;
+	bool isPlaying;
 	sf::RenderWindow window;
 	sf::Text splashScreenText;
 	sf::Font font;
