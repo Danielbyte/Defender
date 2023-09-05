@@ -15,11 +15,18 @@ public:
 	Game();
 	void run();
 private:
-	unsigned int gameWidth;
-	unsigned int gameHeight;
+	unsigned int windowWidth;
+	unsigned int windowHeight;
 	sf::RenderWindow window;
 	sf::Text splashScreenText;
 	sf::Font font;
+
+	sf::Texture player_t;
+	sf::Sprite player_s;
+
+	sf::Texture background_t;
+	sf::Sprite background_s;
+
 };
 #endif
 

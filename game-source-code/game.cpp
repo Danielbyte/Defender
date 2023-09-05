@@ -1,22 +1,28 @@
 #include "game.h"
 
 Game::Game():
-	gameWidth{800ul},
-	gameHeight{600ul},
-	window(sf::VideoMode(gameWidth, gameHeight), "Defender")
+	windowWidth{800ul},
+	windowHeight{600ul},
+	window(sf::VideoMode(windowWidth, windowHeight), "Defender")
 
 {
 	window.setVerticalSyncEnabled(true);
 
 	// Load the text font
-	if (!font.loadFromFile("resources/sansation.ttf"))
+	font.loadFromFile("resources/sansation.ttf");
 
 	// Initialize the pause message
 	splashScreenText.setFont(font);
-	splashScreenText.setCharacterSize(40);
-	splashScreenText.setPosition(170.f, 150.f);
+	splashScreenText.setCharacterSize(20);
+	splashScreenText.setPosition(10.f, 180.f);
 	splashScreenText.setFillColor(sf::Color::White);
-	splashScreenText.setString("Welcome to SFML PONG!\nPress space to start the game");
+	splashScreenText.setString("Welcome to Defender!\nPress Enter to start the game");
+
+
+	background_t.loadFromFile("resources/background.png");
+	background_s.setTexture(player_t);
+	//background_s.setOrigin(0,0);
+	background_s.setPosition(800.0f,600.0f);
 }
 
 void Game::run()
@@ -33,27 +39,34 @@ void Game::run()
 				// Window closed or escape key pressed: exit
 				if ((event.type == sf::Event::Closed) ||
 					((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))) {
+					isPlaying = false;
 					window.close();
 					break;
 				}
-
-				// Space key pressed: play
-				if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Space))
+				
+				if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Enter))
 				{
-
+					isPlaying = true;
 				}
+
 			}
-			if (isPlaying)
-			{
-
-		    }
-
-		    else
-		    {
-			   window.draw(splashScreenText);
-		    }
-			// Display things on screen
-			window.display();
 			window.clear();
+
+			if (!isPlaying)
+			{
+				
+				//window.draw(splashScreenText);
+				window.draw(background_s);
+			
+			}
+			else
+			{
+				splashScreenText.setString("PLAAAAAAAAAAAAAAAAAAAAAAY");
+				window.draw(splashScreenText);
+			}
+			
+			window.display();
+			
+			
 	}
 }
