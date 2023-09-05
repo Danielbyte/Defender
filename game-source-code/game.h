@@ -14,6 +14,9 @@ class Game
 public:
 	Game();
 	void run();
+	void handleInput(); //Defined in playerInput.cpp
+	void updateGame(const float dt); //Defined in update.cpp
+	void display(); //Defined in displayManager.cpp
 private:
 	unsigned int windowWidth;
 	unsigned int windowHeight;
