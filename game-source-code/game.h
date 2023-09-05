@@ -14,6 +14,9 @@ public:
 	Game();
 	void run();
 private:
+	unsigned int gameWidth;
+	unsigned int gameHeight;
+	sf::RenderWindow window;
 };
 #endif
 
