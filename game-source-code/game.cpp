@@ -36,16 +36,10 @@ void Game::run()
 			// Handle player input
 			handleInput();
 
-			if (!isPlaying)
-			{
-			    window.draw(splashScreenText);
-			}
-			else
-			{
-				window.draw(background_s);
-			}
-			
-			window.display();
-			window.clear();
+			//Update game state
+			updateGame(deltaTime);
+
+			//Draw game entities
+			display();
 	}
 }
