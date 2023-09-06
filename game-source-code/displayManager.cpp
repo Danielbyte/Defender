@@ -5,7 +5,7 @@ void Game::display()
 	if (isPlaying)
 	{
 		window.draw(background_s);
-		window.draw(sprite_store->getPlayerShipSprite());
+		window.draw(player_sprite->getSprite());
 	}
 
 	else

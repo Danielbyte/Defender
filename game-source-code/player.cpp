@@ -8,11 +8,11 @@ Player::Player():
 }
 
 void Player::updatePlayer(const bool& left, const bool& right, const bool& up, const bool& down,
-	                      std::shared_ptr<SpriteStore>& sprite_store,const float& dt)
+	                      std::shared_ptr<PlayerSprite>& player_sprite,const float& dt)
 {
 	if (right)
 	{
-		sprite_store->updatePlayerShipSprite("right",x_playerPosition,y_playerPosition);
+		player_sprite->updateSpritePosition("right",x_playerPosition,y_playerPosition);
 		float rightBoundary = 800.0f - 25.0f;
 		x_playerPosition += movementConstant * dt;
 		//restrict player ship to right boundary
@@ -22,7 +22,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 
 	if (left)
 	{
-		sprite_store->updatePlayerShipSprite("left",x_playerPosition,y_playerPosition);
+		player_sprite->updateSpritePosition("left",x_playerPosition,y_playerPosition);
 		float leftBoundary = 25.0f;
 		x_playerPosition -= movementConstant * dt;
 		//Restrict player ship to left boundary
@@ -49,7 +49,8 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 			y_playerPosition = downBoundary;
 	}
 
-	sprite_store->updatePlayerShipSprite("either", x_playerPosition, y_playerPosition);
+	player_sprite->updateSpritePosition("either", x_playerPosition, y_playerPosition);
+	player_sprite->setTexture();
 }
 
 std::tuple<float,float> Player::getPlayerPosition() const

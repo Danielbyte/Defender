@@ -8,9 +8,12 @@ class SpriteStore
 public:
 	SpriteStore();
 	void updateSpritePosition(const std::string& direction, const float& x_pos, const float& y_pos);
-	virtual void updateSpriteTexture() = 0;
+	void updateSpriteTexture(sf::Texture& texture);
     sf::Sprite getSprite() const;
 	virtual void loadTextures() = 0;
+	bool getIfLeft() const;
+	bool getIfRight() const;
+	void InitialiseEntityOrigin(const sf::Vector2f& dimensions);
 
 private:
 	bool toTheLeft;

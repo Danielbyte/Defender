@@ -40,7 +40,7 @@ private:
 
 	//game objects
 	std::shared_ptr<Player> player_obj = std::make_shared<Player>();
-	std::shared_ptr<SpriteStore>sprite_store = std::make_shared<SpriteStore>();
+	std::shared_ptr<PlayerSprite>player_sprite = std::make_shared<PlayerSprite>();
 };
 #endif
 
