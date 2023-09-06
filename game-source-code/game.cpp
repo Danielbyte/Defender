@@ -4,7 +4,11 @@ Game::Game():
 	windowWidth{800ul},
 	windowHeight{600ul},
 	isPlaying{false},
-	window(sf::VideoMode(windowWidth, windowHeight), "Defender")
+	window(sf::VideoMode(windowWidth, windowHeight), "Defender"),
+	upPressed{false},
+	downPressed{false},
+	leftPressed{false},
+	rightPressed{false}
 
 {
 	

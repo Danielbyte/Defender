@@ -25,13 +25,33 @@ void Game::handleInput()
 				isPlaying = true;
 				break;
 
+			case sf::Keyboard::Up:
+				upPressed = true;
+				break;
+
+			case sf::Keyboard::Down:
+				downPressed = true;
+				break;
+
+			case sf::Keyboard::Left:
+				leftPressed = true;
+				break;
+
+			case sf::Keyboard::Right:
+				rightPressed = true;
+				break;
+
 			default:
 				break;
 			}
 		}
+
 		else
 		{
-
+			upPressed = false;
+			downPressed = false;
+			leftPressed = false;
+			rightPressed = false;
 		}
 	}
 }

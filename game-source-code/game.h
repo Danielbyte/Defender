@@ -31,6 +31,12 @@ private:
 	sf::Texture background_t;
 	sf::Sprite background_s;
 
+	//Player movement variables
+	bool upPressed;
+	bool downPressed;
+	bool leftPressed;
+	bool rightPressed;
+
 };
 #endif
 
