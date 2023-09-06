@@ -8,6 +8,7 @@
 #include <ctime>
 #include <iostream>
 #include <memory>
+#include "player.h"
 
 class Game
 {
@@ -36,6 +37,9 @@ private:
 	bool downPressed;
 	bool leftPressed;
 	bool rightPressed;
+
+	//game objects
+	std::shared_ptr<Player> player_obj = std::make_shared<Player>();
 
 };
 #endif
