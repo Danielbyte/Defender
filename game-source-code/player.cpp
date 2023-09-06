@@ -32,12 +32,21 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool up, co
 
 	if (up)
 	{
-		std::cout << "Player moving up" << std::endl;
+		y_playerPosition -= movementConstant * dt;
+		float upBoundary = 10.0f;
+		//Restrict player ship to updwards boundary of game window
+		if (y_playerPosition <= upBoundary)
+			y_playerPosition = upBoundary;
+
 	}
 
 	if (down)
 	{
-		std::cout << "Player moving down" << std::endl;
+		y_playerPosition += movementConstant * dt;
+		float downBoundary = 600.0f - 10.0f;
+		//Restrict player ship to downwards boundary of game window
+		if (y_playerPosition >= downBoundary)
+			y_playerPosition = downBoundary;
 	}
 
 	sprite_store->updatePlayerShipSprite("either", x_playerPosition, y_playerPosition);
