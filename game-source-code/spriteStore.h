@@ -3,25 +3,19 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 
-
 class SpriteStore
 {
 public:
 	SpriteStore();
-	void updatePlayerShipSprite(const std::string& shipDirection, const float& x_pos, const float& y_pos);
-	sf::Sprite getPlayerShipSprite();
-	void loadPlayerShipSprites();
+	void updateSpritePosition(const std::string& direction, const float& x_pos, const float& y_pos);
+	virtual void updateSpriteTexture() = 0;
+    sf::Sprite getSprite() const;
+	virtual void loadTextures() = 0;
 
 private:
-
-	bool playerFacingLeft;
-	bool playerFacingRight;
-
-
-	sf::Texture playerShip_lT; // player ship facing left(texture)
-	sf::Sprite playerShip_lS; // player ship facing left(sprite)
-	sf::Texture playerShip_rT; // player ship facing right(texture)
-	sf::Sprite playerShip_rS; // player ship facing right(sprite)
+	bool toTheLeft;
+	bool toTheRight;
+	sf::Sprite entitySprite;
 };
 #endif // !SPRITESTORE_H
 
