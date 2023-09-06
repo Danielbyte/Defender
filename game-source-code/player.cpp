@@ -7,8 +7,8 @@ Player::Player():
 	y_playerPosition = 300.0f;
 }
 
-void Player::updatePlayer(const bool& left, const bool& right, const bool up, const bool& down,
-	std::shared_ptr<SpriteStore>& sprite_store,const float& dt)
+void Player::updatePlayer(const bool& left, const bool& right, const bool& up, const bool& down,
+	                      std::shared_ptr<SpriteStore>& sprite_store,const float& dt)
 {
 	if (right)
 	{

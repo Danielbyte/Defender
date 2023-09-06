@@ -10,7 +10,7 @@ class Player
 {
 public:
 	Player();
-	void updatePlayer(const bool& left, const bool& right,const bool up, const bool& down,
+	void updatePlayer(const bool& left, const bool& right,const bool& up, const bool& down,
 		std::shared_ptr<SpriteStore>& sprite_store, const float& dt);
 
 	std::tuple<float,float> getPlayerPosition() const;

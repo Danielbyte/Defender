@@ -41,6 +41,10 @@ void Game::handleInput()
 				rightPressed = true;
 				break;
 
+			case sf::Keyboard::Space:
+				//Load player ship bullets
+				break;
+
 			default:
 				break;
 			}

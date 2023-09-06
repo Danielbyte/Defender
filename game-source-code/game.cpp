@@ -9,7 +9,6 @@ Game::Game():
 	downPressed{false},
 	leftPressed{false},
 	rightPressed{false}
-
 {
 	
 
