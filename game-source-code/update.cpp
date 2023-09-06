@@ -2,5 +2,5 @@
 
 void Game::updateGame(const float dt)
 {
-	player_obj->updatePlayer(leftPressed, rightPressed, upPressed, downPressed,sprite_store);
+	player_obj->updatePlayer(leftPressed, rightPressed, upPressed, downPressed,sprite_store,dt);
 }
