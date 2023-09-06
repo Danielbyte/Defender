@@ -40,7 +40,7 @@ void Game::run()
 			// Handle player input
 			handleInput();
 
-			//Update game state
+			//Update game loop
 			updateGame(deltaTime);
 
 			//Draw game entities

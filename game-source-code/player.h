@@ -2,13 +2,22 @@
 #define PLAYER_H
 
 #include <iostream>
+#include "spriteStore.h"
+#include <memory>
+#include <tuple>
 
 class Player
 {
 public:
 	Player();
-	void updatePlayer(const bool& left, const bool& right,const bool up, const bool& down);
+	void updatePlayer(const bool& left, const bool& right,const bool up, const bool& down,
+		std::shared_ptr<SpriteStore>& sprite_store);
+
+	std::tuple<float,float> getPlayerPosition() const;
+
 private:
+	float x_playerPosition;
+	float y_playerPosition;
 
 };
 #endif // !PLAYER_H
