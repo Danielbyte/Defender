@@ -7,7 +7,6 @@
 #include "LaserSprite.h"
 #include <memory>
 #include <tuple>
-#include <vector>
 #include <random>
 
 class Player : Shooter
@@ -20,7 +19,6 @@ public:
 
 	std::tuple<float,float> getPlayerPosition() const;
 	void createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite);
-
 	void updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite, const float dt);
 
 private:
