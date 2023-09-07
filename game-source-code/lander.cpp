@@ -102,45 +102,53 @@ void Lander::updateLander(const float& dt)
 void Lander::moveEast(const float& dt)
 {
 	xPosition += landerSpeed * dt;
+	restrictLander();
 }
 
 void Lander::moveWest(const float& dt)
 {
 	xPosition -= landerSpeed * dt;
+	restrictLander();
 }
 
 void Lander::moveNorth(const float& dt)
 {
 	yPosition -= landerSpeed * dt;
+	restrictLander();
 }
 
 void Lander::moveSouth(const float& dt)
 {
 	yPosition += landerSpeed * dt;
+	restrictLander();
 }
 
 void Lander::moveNorthEast(const float& dt)
 {
 	xPosition += landerSpeed * dt;
 	yPosition -= landerSpeed * dt;
+	restrictLander();
 }
 
 void Lander::moveSouthEast(const float& dt)
 {
 	xPosition += landerSpeed * dt;
 	yPosition += landerSpeed * dt;
+	restrictLander();
 }
 
 void Lander::moveSouthWest(const float& dt)
 {
 	xPosition -= landerSpeed * dt;
 	yPosition += landerSpeed * dt;
+	restrictLander();
 }
 
 void Lander::moveNorthWest(const float& dt)
 {
 	xPosition -= landerSpeed * dt;
 	yPosition -= landerSpeed * dt;
+	restrictLander();
 }
 
 Direction Lander::pickDirection()
@@ -226,5 +234,16 @@ Direction Lander::pickDirection()
 			return Direction::NorthEast;
 		}
 	}
+}
 
+void Lander::restrictLander()
+{
+	if (!reachedHumanoidZone)
+		return;
+
+	if (yPosition >= 470.0f)
+		yPosition = 470.0f;
+
+	if (yPosition <= 430.0f)
+		yPosition = 430.0f;
 }

@@ -22,6 +22,7 @@ public:
 	void moveSouthWest(const float& dt);
 	void moveNorthWest(const float& dt);
 	Direction pickDirection();
+	void restrictLander(); //Restrict lander to hover around humanoid zone
 
 private:
 	float xPosition;
