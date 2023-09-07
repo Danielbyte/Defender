@@ -59,25 +59,10 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 		if (y_playerPosition >= downBoundary)
 			y_playerPosition = downBoundary;
 	}
-
 	player_sprite->updateSpritePosition("either", x_playerPosition, y_playerPosition);
 	player_sprite->setTexture();
 
-	if (!projectile.empty())
-	{
-		auto projectile_iter = projectile.begin();
-		auto laser_sprite_iter = laser_sprite.begin();
-		
-		while (projectile_iter != projectile.end())
-		{
-			(*projectile_iter)->updateProjectile(dt);
-			auto [x, y] = (*projectile_iter)->getProjectilePosition();
-			(*laser_sprite_iter)->updateSpritePosition("either", x, y);
-			++projectile_iter;
-			++laser_sprite_iter;
-		}
-
-	}
+	updateLasers(laser_sprite, projectile, dt);
 }
 
 void Player::createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,
@@ -114,6 +99,25 @@ void Player::createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprit
 		auto laser_sp = std::make_shared<LaserSprite>(LaserSprite(direction, "blue"));
 		laser_sp->setTexture(direction, "blue");
 		laser_sprite.push_back(laser_sp);
+	}
+}
+
+void Player::updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,
+	std::vector<std::shared_ptr<Projectile>>& projectile, const float dt)
+{
+	if (projectile.empty())
+		return;
+
+	auto projectile_iter = projectile.begin();
+	auto laser_sprite_iter = laser_sprite.begin();
+
+	while (projectile_iter != projectile.end())
+	{
+		(*projectile_iter)->updateProjectile(dt);
+		auto [x, y] = (*projectile_iter)->getProjectilePosition();
+		(*laser_sprite_iter)->updateSpritePosition("either", x, y);
+		++projectile_iter;
+		++laser_sprite_iter;
 	}
 }
 

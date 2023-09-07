@@ -23,6 +23,9 @@ public:
 	void createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,
 		std::vector<std::shared_ptr<Projectile>>& projectile);
 
+	void updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,
+		std::vector<std::shared_ptr<Projectile>>& projectile, const float dt);
+
 private:
 	float x_playerPosition;
 	float y_playerPosition;
