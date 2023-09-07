@@ -7,9 +7,44 @@ Player::Player():
 	y_playerPosition = 300.0f;
 }
 
-void Player::updatePlayer(const bool& left, const bool& right, const bool& up, const bool& down,
-	                      std::shared_ptr<PlayerSprite>& player_sprite,const float& dt)
+void Player::updatePlayer(const bool& left, const bool& right, const bool& up, const bool& down,bool& space,
+	                      std::shared_ptr<PlayerSprite>& player_sprite,
+	                      std::vector<std::shared_ptr<Projectile>>& laser_projectile, 
+	                      std::vector<std::shared_ptr<PlayerLaserSprite>>& laser_sprite,const float& dt)
 {
+	if (space)
+	{
+		auto laser_pr = std::make_shared<Projectile>(Projectile(x_playerPosition, y_playerPosition, "right"));
+		laser_projectile.push_back(laser_pr);
+		//generate color of laser
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		int min = 0;
+		int max = 2;
+		std::uniform_int_distribution<int>distribution(min, max);
+		auto laser_color = distribution(gen);
+		if (laser_color == 0)
+		{
+			//generate green laser
+			auto laser_sp = std::make_shared<PlayerLaserSprite>(PlayerLaserSprite());
+		}
+
+		if (laser_color == 1)
+		{
+			//generate red laser
+			auto laser_sp = std::make_shared<PlayerLaserSprite>(PlayerLaserSprite());
+		}
+
+		if (laser_color == 2)
+		{
+			//generate blue laser
+			auto laser_sp = std::make_shared<PlayerLaserSprite>(PlayerLaserSprite());
+		}
+		
+
+		space = false;
+	}
+
 	if (right)
 	{
 		player_sprite->updateSpritePosition("right",x_playerPosition,y_playerPosition);
