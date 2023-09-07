@@ -42,11 +42,6 @@ std::tuple<float, float> Shooter::getProjectilePosition() const
 	return { xPosition, yPosition };
 }
 
-std::vector<std::shared_ptr<Shooter>> Shooter::getProjectiles()
-{
-	return projectiles;
-}
-
 void Shooter::createProjectile(std::shared_ptr<Shooter>& projectile)
 {
 	projectiles.push_back(projectile);
