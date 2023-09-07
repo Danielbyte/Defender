@@ -158,8 +158,8 @@ Direction Lander::pickDirection()
 		//decide whether to move diagonally up/down or move in a straight horizontal line
 		std::random_device rd;
 		std::mt19937 gen(rd());
-		float min = 0;
-		float max = 4;
+		int min = 0;
+		int max = 4;
 		std::uniform_int_distribution<int>distribution(min, max);
 		auto decision = distribution(gen);
 
@@ -199,8 +199,8 @@ Direction Lander::pickDirection()
 		//decide whether to move diagonally up/down or move in a straight horizontal line
 		std::random_device rd;
 		std::mt19937 gen(rd());
-		float min = 3;
-		float max = 7;
+		int min = 3;
+		int max = 7;
 		std::uniform_int_distribution<int>distribution(min, max);
 		auto decision = distribution(gen);
 
