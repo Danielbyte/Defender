@@ -1,9 +1,9 @@
-#include "playerLaserSprite.h"
+#include "laserSprite.h"
 
-PlayerLaserSprite::PlayerLaserSprite()
+LaserSprite::LaserSprite()
 {}
 
-PlayerLaserSprite::PlayerLaserSprite(const std::string& direction, const std::string& color)
+LaserSprite::LaserSprite(const std::string& direction, const std::string& color)
 {
 	loadTextures();
 	sf::Vector2f dimensions;
@@ -12,7 +12,7 @@ PlayerLaserSprite::PlayerLaserSprite(const std::string& direction, const std::st
 	InitialiseEntityOrigin(dimensions);
 }
 
-void PlayerLaserSprite::loadTextures()
+void LaserSprite::loadTextures()
 {
 	redRight_t.loadFromFile("resources/right-red-laser.png");
 	redLeft_t.loadFromFile("resources/left-red-laser.png");
@@ -22,7 +22,7 @@ void PlayerLaserSprite::loadTextures()
 	blueLeft_t.loadFromFile("resources/left-blue-laser.png");
 }
 
-void PlayerLaserSprite::setTexture(const std::string& direction, const std::string& color)
+void LaserSprite::setTexture(const std::string& direction, const std::string& color)
 {
 	if (direction == "right")
 	{
@@ -49,7 +49,7 @@ void PlayerLaserSprite::setTexture(const std::string& direction, const std::stri
 	}
 }
 
-sf::Texture PlayerLaserSprite::getTexture()
+sf::Texture LaserSprite::getTexture()
 {
 	return greenRight_t;
 }

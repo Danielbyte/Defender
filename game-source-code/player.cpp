@@ -11,7 +11,7 @@ Player::Player():
 void Player::updatePlayer(const bool& left, const bool& right, const bool& up, const bool& down,bool& space,
 	                      std::shared_ptr<PlayerSprite>& player_sprite,
 	                      std::vector<std::shared_ptr<Projectile>>& laser_projectile, 
-	                      std::vector<std::shared_ptr<PlayerLaserSprite>>& laser_sprite,const float& dt)
+	                      std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,const float& dt)
 {
 	if (space)
 	{
@@ -27,7 +27,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 		if (laser_color == 0)
 		{
 			//generate green laser
-			auto laser_sp = std::make_shared<PlayerLaserSprite>(PlayerLaserSprite(direction,"green"));
+			auto laser_sp = std::make_shared<LaserSprite>(LaserSprite(direction,"green"));
 			laser_sp->setTexture(direction, "green");
 			laser_sprite.push_back(laser_sp);
 		}
@@ -35,7 +35,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 		if (laser_color == 1)
 		{
 			//generate red laser
-			auto laser_sp = std::make_shared<PlayerLaserSprite>(PlayerLaserSprite(direction,"red"));
+			auto laser_sp = std::make_shared<LaserSprite>(LaserSprite(direction,"red"));
 			laser_sp->setTexture(direction, "red");
 			laser_sprite.push_back(laser_sp);
 		}
@@ -43,7 +43,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 		if (laser_color == 2)
 		{
 			//generate blue laser
-			auto laser_sp = std::make_shared<PlayerLaserSprite>(PlayerLaserSprite(direction,"blue"));
+			auto laser_sp = std::make_shared<LaserSprite>(LaserSprite(direction,"blue"));
 			laser_sp->setTexture(direction, "blue");
 			laser_sprite.push_back(laser_sp);
 		}

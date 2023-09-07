@@ -43,7 +43,7 @@ private:
 	std::shared_ptr<Player> player_obj = std::make_shared<Player>();
 	std::shared_ptr<PlayerSprite>player_sprite = std::make_shared<PlayerSprite>();
 
-	std::vector<std::shared_ptr<PlayerLaserSprite>>laser_sprite;
+	std::vector<std::shared_ptr<LaserSprite>>laser_sprite;
 	std::vector<std::shared_ptr<Projectile>>player_projectile;
 };
 #endif

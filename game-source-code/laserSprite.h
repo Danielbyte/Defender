@@ -1,13 +1,13 @@
-#ifndef PLAYERLASERSPRITE_H
-#define PLAYERLASERSPRITE_H
+#ifndef LASERSPRITE_H
+#define LASERSPRITE_H
 
 #include "spriteStore.h"
 
-class PlayerLaserSprite : public SpriteStore
+class LaserSprite : public SpriteStore
 {
 public:
-	PlayerLaserSprite();
-	PlayerLaserSprite(const std::string& direction, const std::string& color);
+	LaserSprite();
+	LaserSprite(const std::string& direction, const std::string& color);
 	void virtual loadTextures();
 	void setTexture(const std::string& direction, const std::string& color);
 	sf::Texture getTexture();
