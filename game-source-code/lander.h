@@ -4,6 +4,8 @@
 #include "shooter.h"
 #include <random>
 
+enum class Direction { North, South, East, West, NorthEast, SouthEast, SouthWest, NorthWest };
+
 class Lander : public Shooter
 {
 public:
@@ -19,6 +21,7 @@ public:
 	void moveSouthEast(const float& dt);
 	void moveSouthWest(const float& dt);
 	void moveNorthWest(const float& dt);
+	Direction pickDirection();
 
 private:
 	float xPosition;
@@ -27,7 +30,6 @@ private:
 	bool leftSide;
 	float landerSpeed;
 	bool reachedHumanoidZone;
-
 };
 #endif // !LANDER_H
 
