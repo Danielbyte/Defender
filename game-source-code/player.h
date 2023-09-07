@@ -25,6 +25,7 @@ private:
 	float x_playerPosition;
 	float y_playerPosition;
 	float movementConstant;
+	std::string direction;
 
 };
 #endif // !PLAYER_H

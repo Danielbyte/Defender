@@ -7,8 +7,10 @@ class PlayerLaserSprite : public SpriteStore
 {
 public:
 	PlayerLaserSprite();
+	PlayerLaserSprite(const std::string& direction, const std::string& color);
 	void virtual loadTextures();
-	void setTexture();
+	void setTexture(const std::string& direction, const std::string& color);
+	sf::Texture getTexture();
 
 private:
 	sf::Texture redRight_t;

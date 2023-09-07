@@ -5,6 +5,7 @@ Player::Player():
 {
 	x_playerPosition = 25.0f;
 	y_playerPosition = 300.0f;
+	direction = "right"; //player initially facing right
 }
 
 void Player::updatePlayer(const bool& left, const bool& right, const bool& up, const bool& down,bool& space,
@@ -14,7 +15,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 {
 	if (space)
 	{
-		auto laser_pr = std::make_shared<Projectile>(Projectile(x_playerPosition, y_playerPosition, "right"));
+		auto laser_pr = std::make_shared<Projectile>(Projectile(x_playerPosition, y_playerPosition, direction));
 		laser_projectile.push_back(laser_pr);
 		//generate color of laser
 		std::random_device rd;
@@ -26,28 +27,34 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 		if (laser_color == 0)
 		{
 			//generate green laser
-			auto laser_sp = std::make_shared<PlayerLaserSprite>(PlayerLaserSprite());
+			auto laser_sp = std::make_shared<PlayerLaserSprite>(PlayerLaserSprite(direction,"green"));
+			laser_sp->setTexture(direction, "green");
+			laser_sprite.push_back(laser_sp);
 		}
 
 		if (laser_color == 1)
 		{
 			//generate red laser
-			auto laser_sp = std::make_shared<PlayerLaserSprite>(PlayerLaserSprite());
+			auto laser_sp = std::make_shared<PlayerLaserSprite>(PlayerLaserSprite(direction,"red"));
+			laser_sp->setTexture(direction, "red");
+			laser_sprite.push_back(laser_sp);
 		}
 
 		if (laser_color == 2)
 		{
 			//generate blue laser
-			auto laser_sp = std::make_shared<PlayerLaserSprite>(PlayerLaserSprite());
+			auto laser_sp = std::make_shared<PlayerLaserSprite>(PlayerLaserSprite(direction,"blue"));
+			laser_sp->setTexture(direction, "blue");
+			laser_sprite.push_back(laser_sp);
 		}
 		
-
 		space = false;
 	}
 
 	if (right)
 	{
-		player_sprite->updateSpritePosition("right",x_playerPosition,y_playerPosition);
+		direction = "right";
+		player_sprite->updateSpritePosition(direction,x_playerPosition,y_playerPosition);
 		float rightBoundary = 800.0f - 25.0f;
 		x_playerPosition += movementConstant * dt;
 		//restrict player ship to right boundary
@@ -57,7 +64,8 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 
 	if (left)
 	{
-		player_sprite->updateSpritePosition("left",x_playerPosition,y_playerPosition);
+		direction = "left";
+		player_sprite->updateSpritePosition(direction,x_playerPosition,y_playerPosition);
 		float leftBoundary = 25.0f;
 		x_playerPosition -= movementConstant * dt;
 		//Restrict player ship to left boundary
@@ -86,6 +94,22 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 
 	player_sprite->updateSpritePosition("either", x_playerPosition, y_playerPosition);
 	player_sprite->setTexture();
+
+	if (!laser_projectile.empty())
+	{
+		auto projectile_iter = laser_projectile.begin();
+		auto laser_sprite_iter = laser_sprite.begin();
+		
+		while (projectile_iter != laser_projectile.end())
+		{
+			(*projectile_iter)->updateProjectile(dt);
+			auto [x, y] = (*projectile_iter)->getProjectilePosition();
+			(*laser_sprite_iter)->updateSpritePosition("either", x, y);
+			++projectile_iter;
+			++laser_sprite_iter;
+		}
+
+	}
 }
 
 std::tuple<float,float> Player::getPlayerPosition() const

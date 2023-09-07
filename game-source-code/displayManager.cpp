@@ -6,6 +6,10 @@ void Game::display()
 	{
 		window.draw(background_s);
 		window.draw(player_sprite->getSprite());
+		for (auto& laser : laser_sprite)
+		{
+			window.draw(laser->getSprite());
+		}
 	}
 
 	else

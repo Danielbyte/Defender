@@ -43,6 +43,7 @@ void Game::handleInput()
 
 			case sf::Keyboard::Space:
 				//Load player ship bullets
+				spacePressed = true;
 				break;
 
 			default:

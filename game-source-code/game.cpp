@@ -8,7 +8,8 @@ Game::Game():
 	upPressed{false},
 	downPressed{false},
 	leftPressed{false},
-	rightPressed{false}
+	rightPressed{false},
+	spacePressed{false}
 {
 	
 

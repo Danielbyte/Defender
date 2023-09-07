@@ -21,7 +21,6 @@ void SpriteStore::updateSpritePosition(const std::string& shipDirection, const f
 	}
 
 	entitySprite.setPosition(x_pos, y_pos);
-	entitySprite.setPosition(x_pos, y_pos);
 }
 
 sf::Sprite SpriteStore::getSprite() const
