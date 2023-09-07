@@ -4,50 +4,18 @@ Player::Player():
 	movementConstant{250.0f}
 {
 	x_playerPosition = 25.0f;
-	y_playerPosition = 300.0f;
+	y_playerPosition = 300.0f; 
 	direction = "right"; //player initially facing right
 }
 
 void Player::updatePlayer(const bool& left, const bool& right, const bool& up, const bool& down,bool& space,
 	                      std::shared_ptr<PlayerSprite>& player_sprite,
-	                      std::vector<std::shared_ptr<Projectile>>& laser_projectile, 
+	                      std::vector<std::shared_ptr<Projectile>>& projectile, 
 	                      std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,const float& dt)
 {
 	if (space)
 	{
-		auto laser_pr = std::make_shared<Projectile>(Projectile(x_playerPosition, y_playerPosition, direction));
-		laser_projectile.push_back(laser_pr);
-		//generate color of laser
-		std::random_device rd;
-		std::mt19937 gen(rd());
-		int min = 0;
-		int max = 2;
-		std::uniform_int_distribution<int>distribution(min, max);
-		auto laser_color = distribution(gen);
-		if (laser_color == 0)
-		{
-			//generate green laser
-			auto laser_sp = std::make_shared<LaserSprite>(LaserSprite(direction,"green"));
-			laser_sp->setTexture(direction, "green");
-			laser_sprite.push_back(laser_sp);
-		}
-
-		if (laser_color == 1)
-		{
-			//generate red laser
-			auto laser_sp = std::make_shared<LaserSprite>(LaserSprite(direction,"red"));
-			laser_sp->setTexture(direction, "red");
-			laser_sprite.push_back(laser_sp);
-		}
-
-		if (laser_color == 2)
-		{
-			//generate blue laser
-			auto laser_sp = std::make_shared<LaserSprite>(LaserSprite(direction,"blue"));
-			laser_sp->setTexture(direction, "blue");
-			laser_sprite.push_back(laser_sp);
-		}
-		
+		createLasers(laser_sprite, projectile);
 		space = false;
 	}
 
@@ -95,12 +63,12 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 	player_sprite->updateSpritePosition("either", x_playerPosition, y_playerPosition);
 	player_sprite->setTexture();
 
-	if (!laser_projectile.empty())
+	if (!projectile.empty())
 	{
-		auto projectile_iter = laser_projectile.begin();
+		auto projectile_iter = projectile.begin();
 		auto laser_sprite_iter = laser_sprite.begin();
 		
-		while (projectile_iter != laser_projectile.end())
+		while (projectile_iter != projectile.end())
 		{
 			(*projectile_iter)->updateProjectile(dt);
 			auto [x, y] = (*projectile_iter)->getProjectilePosition();
@@ -109,6 +77,43 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 			++laser_sprite_iter;
 		}
 
+	}
+}
+
+void Player::createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,
+	std::vector<std::shared_ptr<Projectile>>& projectile)
+{
+	auto laser_pr = std::make_shared<Projectile>(Projectile(x_playerPosition, y_playerPosition, direction));
+	projectile.push_back(laser_pr);
+	//generate color of laser
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	int min = 0;
+	int max = 2;
+	std::uniform_int_distribution<int>distribution(min, max);
+	auto laser_color = distribution(gen);
+	if (laser_color == 0)
+	{
+		//generate green laser
+		auto laser_sp = std::make_shared<LaserSprite>(LaserSprite(direction, "green"));
+		laser_sp->setTexture(direction, "green");
+		laser_sprite.push_back(laser_sp);
+	}
+
+	if (laser_color == 1)
+	{
+		//generate red laser
+		auto laser_sp = std::make_shared<LaserSprite>(LaserSprite(direction, "red"));
+		laser_sp->setTexture(direction, "red");
+		laser_sprite.push_back(laser_sp);
+	}
+
+	if (laser_color == 2)
+	{
+		//generate blue laser
+		auto laser_sp = std::make_shared<LaserSprite>(LaserSprite(direction, "blue"));
+		laser_sp->setTexture(direction, "blue");
+		laser_sprite.push_back(laser_sp);
 	}
 }
 
