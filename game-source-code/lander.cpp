@@ -89,42 +89,46 @@ void Lander::updateLander(const float& dt)
 	}
 }
 
-void Lander::moveEast()
+void Lander::moveEast(const float& dt)
 {
-
+	xPosition += landerSpeed * dt;
 }
 
-void Lander::moveWest()
+void Lander::moveWest(const float& dt)
 {
-
+	xPosition -= landerSpeed * dt;
 }
 
-void Lander::moveNorth()
+void Lander::moveNorth(const float& dt)
 {
-
+	yPosition -= landerSpeed * dt;
 }
 
-void Lander::moveSouth()
+void Lander::moveSouth(const float& dt)
 {
-
+	yPosition += landerSpeed * dt;
 }
 
-void Lander::moveNorthEast()
+void Lander::moveNorthEast(const float& dt)
 {
-
+	xPosition += landerSpeed * dt;
+	yPosition -= landerSpeed * dt;
 }
 
-void Lander::moveSouthEast()
+void Lander::moveSouthEast(const float& dt)
 {
-
+	xPosition += landerSpeed * dt;
+	yPosition += landerSpeed * dt;
 }
 
-void Lander::moveSouthWest()
+void Lander::moveSouthWest(const float& dt)
 {
-
+	xPosition -= landerSpeed * dt;
+	yPosition += landerSpeed * dt;
 }
 
-void Lander::moveNorthWest()
+void Lander::moveNorthWest(const float& dt)
 {
-
+	xPosition -= landerSpeed * dt;
+	yPosition -= landerSpeed * dt;
 }
