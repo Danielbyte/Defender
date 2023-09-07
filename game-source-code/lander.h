@@ -11,6 +11,14 @@ public:
 	std::tuple<float, float> getPosition() const;
 	void generateInitialPosition();
 	void updateLander(const float& dt);
+	void moveEast();
+	void moveWest();
+	void moveNorth();
+	void moveSouth();
+	void moveNorthEast();
+	void moveSouthEast();
+	void moveSouthWest();
+	void moveNorthWest();
 
 private:
 	float xPosition;
@@ -18,6 +26,7 @@ private:
 	bool rightSide;
 	bool leftSide;
 	float landerSpeed;
+	bool reachedHumanoidZone;
 
 };
 #endif // !LANDER_H

@@ -5,7 +5,8 @@ Lander::Lander():
 	yPosition{0.0f},
 	leftSide{false},
 	rightSide{false},
-	landerSpeed{350.0f}
+	landerSpeed{350.0f},
+	reachedHumanoidZone{false}
 {
 	//generate spawn position
 	generateInitialPosition();
@@ -44,7 +45,7 @@ void Lander::generateInitialPosition()
 
 void Lander::updateLander(const float& dt)
 {
-	if (yPosition < 450.0f)
+	if (yPosition < 450.0f && !reachedHumanoidZone)
 	{
 		yPosition += landerSpeed * dt;
 		if (rightSide)
@@ -62,6 +63,7 @@ void Lander::updateLander(const float& dt)
 
 	if (yPosition >= 450.0f)
 	{
+		reachedHumanoidZone = true;
 		//decide whether to move diagonally up/down or move in a straight horizontal line
 		std::random_device rd;
 		std::mt19937 gen(rd());
@@ -69,5 +71,60 @@ void Lander::updateLander(const float& dt)
 		float max = 2;
 		std::uniform_int_distribution<int>distribution(min, max);
 		auto decision = distribution(gen);
+		
+		if (decision == 0)
+		{
+			//move Horizontally straight
+		}
+
+		if (decision == 1)
+		{
+			//move Horizontally down
+		}
+
+		if (decision == 2)
+		{
+			//move Horizontally up
+		}
 	}
+}
+
+void Lander::moveEast()
+{
+
+}
+
+void Lander::moveWest()
+{
+
+}
+
+void Lander::moveNorth()
+{
+
+}
+
+void Lander::moveSouth()
+{
+
+}
+
+void Lander::moveNorthEast()
+{
+
+}
+
+void Lander::moveSouthEast()
+{
+
+}
+
+void Lander::moveSouthWest()
+{
+
+}
+
+void Lander::moveNorthWest()
+{
+
 }
