@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "playerSprite.h"
-#include "projectile.h"
+#include "shooter.h"
 #include "LaserSprite.h"
 #include <memory>
 #include <tuple>
@@ -16,15 +16,15 @@ public:
 	Player();
 	void updatePlayer(const bool& left, const bool& right,const bool& up, const bool& down, bool& space,
 		std::shared_ptr<PlayerSprite>& player_sprite, 
-		std::vector<std::shared_ptr<Projectile>>& projectile,
+		std::vector<std::shared_ptr<Shooter>>& projectile,
 		std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,const float& dt);
 
 	std::tuple<float,float> getPlayerPosition() const;
 	void createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,
-		std::vector<std::shared_ptr<Projectile>>& projectile);
+		std::vector<std::shared_ptr<Shooter>>& projectile);
 
 	void updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,
-		std::vector<std::shared_ptr<Projectile>>& projectile, const float dt);
+		std::vector<std::shared_ptr<Shooter>>& projectile, const float dt);
 
 private:
 	float x_playerPosition;

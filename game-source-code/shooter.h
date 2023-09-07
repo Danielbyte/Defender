@@ -1,13 +1,13 @@
-#ifndef PROJECTILE_H
-#define PROJECTILE_H
+#ifndef SHOOTER_H
+#define SHOOTER_H
 #include <string>
 #include <tuple>
 
-class Projectile
+class Shooter
 {
 public:
-	Projectile();
-	Projectile(const float& x, const float& y, const std::string _direction);
+	Shooter();
+	Shooter(const float& x, const float& y, const std::string _direction);
 	virtual void updateProjectile(const float& dt);
 	std::tuple<float, float> getProjectilePosition() const;
 

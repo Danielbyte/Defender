@@ -1,12 +1,12 @@
-#include "projectile.h"
+#include "shooter.h"
 
-Projectile::Projectile():
+Shooter::Shooter():
 	xPosition{00.0f},
 	yPosition{-100.0f},
 	projectileSpeed{0.0f}
 {}
 
-Projectile::Projectile(const float& x, const float& y, const std::string _direction)
+Shooter::Shooter(const float& x, const float& y, const std::string _direction)
 {
 	direction = _direction;
 	yPosition = y;
@@ -24,7 +24,7 @@ Projectile::Projectile(const float& x, const float& y, const std::string _direct
 	projectileSpeed = 350.0f;
 }
 
-void Projectile::updateProjectile(const float& dt)
+void Shooter::updateProjectile(const float& dt)
 {
 	if (direction == "right")
 	{
@@ -37,7 +37,7 @@ void Projectile::updateProjectile(const float& dt)
 	}
 }
 
-std::tuple<float, float> Projectile::getProjectilePosition() const
+std::tuple<float, float> Shooter::getProjectilePosition() const
 {
 	return { xPosition, yPosition };
 }
