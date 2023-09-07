@@ -10,21 +10,18 @@
 #include <vector>
 #include <random>
 
-class Player
+class Player : Shooter
 {
 public:
 	Player();
 	void updatePlayer(const bool& left, const bool& right,const bool& up, const bool& down, bool& space,
 		std::shared_ptr<PlayerSprite>& player_sprite, 
-		std::vector<std::shared_ptr<Shooter>>& projectile,
 		std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,const float& dt);
 
 	std::tuple<float,float> getPlayerPosition() const;
-	void createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,
-		std::vector<std::shared_ptr<Shooter>>& projectile);
+	void createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite);
 
-	void updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,
-		std::vector<std::shared_ptr<Shooter>>& projectile, const float dt);
+	void updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite, const float dt);
 
 private:
 	float x_playerPosition;

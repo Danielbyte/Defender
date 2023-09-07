@@ -9,13 +9,12 @@ Player::Player():
 }
 
 void Player::updatePlayer(const bool& left, const bool& right, const bool& up, const bool& down,bool& space,
-	                      std::shared_ptr<PlayerSprite>& player_sprite,
-	                      std::vector<std::shared_ptr<Shooter>>& projectile, 
-	                      std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,const float& dt)
+	                      std::shared_ptr<PlayerSprite>& player_sprite, std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,
+	                      const float& dt)
 {
 	if (space)
 	{
-		createLasers(laser_sprite, projectile);
+		createLasers(laser_sprite);
 		space = false;
 	}
 
@@ -62,15 +61,14 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 	player_sprite->updateSpritePosition("either", x_playerPosition, y_playerPosition);
 	player_sprite->setTexture();
 
-	updateLasers(laser_sprite, projectile, dt);
+	updateLasers(laser_sprite, dt);
 }
 
-void Player::createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,
-	std::vector<std::shared_ptr<Shooter>>& projectile)
+void Player::createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite)
 {
 	auto horizontalOffset = 75.0f;
 	auto laser_pr = std::make_shared<Shooter>(Shooter(x_playerPosition, y_playerPosition, direction,horizontalOffset));
-	projectile.push_back(laser_pr);
+	projectiles.push_back(laser_pr);
 	//generate color of laser
 	std::random_device rd;
 	std::mt19937 gen(rd());
@@ -103,16 +101,15 @@ void Player::createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprit
 	}
 }
 
-void Player::updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,
-	std::vector<std::shared_ptr<Shooter>>& projectile, const float dt)
+void Player::updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite, const float dt)
 {
-	if (projectile.empty())
+	if (projectiles.empty())
 		return;
 
-	auto projectile_iter = projectile.begin();
+	auto projectile_iter = projectiles.begin();
 	auto laser_sprite_iter = laser_sprite.begin();
 
-	while (projectile_iter != projectile.end())
+	while (projectile_iter != projectiles.end())
 	{
 		(*projectile_iter)->updateProjectile(dt);
 		auto [x, y] = (*projectile_iter)->getProjectilePosition();

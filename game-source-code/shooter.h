@@ -2,6 +2,8 @@
 #define SHOOTER_H
 #include <string>
 #include <tuple>
+#include <vector>
+#include <memory>
 
 class Shooter
 {
@@ -10,6 +12,11 @@ public:
 	Shooter(const float& x, const float& y, const std::string _direction, const float& horizontalOffset);
 	virtual void updateProjectile(const float& dt);
 	std::tuple<float, float> getProjectilePosition() const;
+	std::vector<std::shared_ptr<Shooter>> getProjectiles();
+	void createProjectile(std::shared_ptr<Shooter>& projectile);
+
+protected:
+	std::vector<std::shared_ptr<Shooter>>projectiles;
 
 private:
 	float xPosition;
