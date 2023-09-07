@@ -68,7 +68,8 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 void Player::createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,
 	std::vector<std::shared_ptr<Shooter>>& projectile)
 {
-	auto laser_pr = std::make_shared<Shooter>(Shooter(x_playerPosition, y_playerPosition, direction));
+	auto horizontalOffset = 75.0f;
+	auto laser_pr = std::make_shared<Shooter>(Shooter(x_playerPosition, y_playerPosition, direction,horizontalOffset));
 	projectile.push_back(laser_pr);
 	//generate color of laser
 	std::random_device rd;

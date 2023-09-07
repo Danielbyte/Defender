@@ -6,19 +6,19 @@ Shooter::Shooter():
 	projectileSpeed{0.0f}
 {}
 
-Shooter::Shooter(const float& x, const float& y, const std::string _direction)
+Shooter::Shooter(const float& x, const float& y, const std::string _direction, const float& horizontalOffset)
 {
 	direction = _direction;
 	yPosition = y;
 
 	if (direction == "right")
 	{
-		xPosition = x + 75.0f;
+		xPosition = x + horizontalOffset;
 	}
 
 	if (direction == "left")
 	{
-		xPosition = x - 75.0f;
+		xPosition = x - horizontalOffset;
 	}
 
 	projectileSpeed = 350.0f;

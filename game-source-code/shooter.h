@@ -7,7 +7,7 @@ class Shooter
 {
 public:
 	Shooter();
-	Shooter(const float& x, const float& y, const std::string _direction);
+	Shooter(const float& x, const float& y, const std::string _direction, const float& horizontalOffset);
 	virtual void updateProjectile(const float& dt);
 	std::tuple<float, float> getProjectilePosition() const;
 
