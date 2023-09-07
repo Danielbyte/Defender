@@ -10,11 +10,14 @@ public:
 	Lander();
 	std::tuple<float, float> getPosition() const;
 	void generateInitialPosition();
-	void updateLander();
+	void updateLander(const float& dt);
 
 private:
 	float xPosition;
 	float yPosition;
+	bool rightSide;
+	bool leftSide;
+	float landerSpeed;
 
 };
 #endif // !LANDER_H
