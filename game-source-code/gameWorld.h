@@ -1,6 +1,7 @@
 #ifndef GAMEWORLD_H
 #define GAMEWORLD_H
 
+#include <iostream>
 #include "lander.h"
 
 enum class Enemy{Lander,Bomber,Pod,None};

@@ -16,16 +16,22 @@ void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_obj
 	switch (enemy)
 	{
 	case Enemy::Lander:
+		createLander(lander_objects, lander_object_sprites);
 		break;
 	case Enemy::Bomber:
+		std::cout << "Create Bomber" << std::endl;
 		break;
 	case Enemy::Pod:
+		std::cout << "Create Pod" << std::endl;
 		break;
 	case Enemy::None:
+		std::cout << "Nothing" << std::endl;
 		break;
 	default:
 		break;
 	}
+
+	world_watch->restart(); //Remove once the other entity creation functions are done
 }
 
 Enemy GameWorld::generateEnemy()
@@ -65,5 +71,9 @@ Enemy GameWorld::generateEnemy()
 void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_objects,
 	std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites)
 {
-
+	auto lander_object = std::make_shared<Lander>();
+	lander_objects.push_back(lander_object);
+	auto lander_sprite = std::make_shared<LanderSprite>();
+	lander_object_sprites.push_back(lander_sprite);
+	world_watch->restart();
 }
