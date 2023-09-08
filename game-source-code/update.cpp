@@ -2,6 +2,9 @@
 
 void Game::updateGame(const float dt)
 {
+	if (!isPlaying)
+		return;
+
 	game_world->updateGameWorld(lander_objects, lander_object_sprites);
 
 	player_obj->updatePlayer(leftPressed, rightPressed, upPressed, downPressed,spacePressed,player_sprite,
@@ -17,7 +20,7 @@ void Game::updateLanders(const float dt)
 	auto sprite_iter = lander_object_sprites.begin();
 	while (object_iter != lander_objects.end())
 	{
-		(*object_iter)->updateLander(*sprite_iter,dt);
+		(*object_iter)->updateLander(*sprite_iter,dt,player_obj);
 		++object_iter;
 		++sprite_iter;
 	}

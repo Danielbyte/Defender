@@ -7,7 +7,9 @@ Lander::Lander():
 	rightSide{false},
 	landerSpeed{50.0f},
 	reachedHumanoidZone{false},
-	direction{Direction::Unknown}
+	direction{Direction::Unknown},
+	playerXposref{0.0f},
+	playerYposref{0.0f}
 {
 	//generate spawn position
 	generateInitialPosition();
@@ -44,7 +46,8 @@ void Lander::generateInitialPosition()
 	yPosition = distribution2(gen);
 }
 
-void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const float& dt)
+void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const float& dt, 
+	std::shared_ptr<Player>& player)
 {
 	if (!reachedHumanoidZone)
 	{
@@ -98,6 +101,10 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 			break;
 		}
 	}
+
+	auto [x, y] = player->getPlayerPosition();
+	playerXposref = x;
+	playerYposref = y;
 
 	lander_sprite->setTexture(lander_watch);
 	lander_sprite->updateSpritePosition("either", xPosition, yPosition);
@@ -291,5 +298,29 @@ void Lander::restrictLander(const float& dt)
 
 void Lander::updateProjectile(const float& dt)
 {
+	if (projectiles.empty())
+		return;
+
+	auto missile_iter = projectiles.begin();
+
+	while (missile_iter != projectiles.end())
+	{
+		auto _direction = (*missile_iter)->getProjectileDirection();
+
+		if (_direction == "left")
+		{
+			auto newX = xPosition - 100.0f * dt;
+			auto newY = ((newX - xPosition) / (playerXposref - xPosition)) * (playerYposref - yPosition) + yPosition;
+			(*missile_iter)->updateProjectileCoordinates(newX, newY);
+		}
+
+		if (_direction == "right")
+		{
+			auto newX = xPosition + 100.0f * dt;
+			auto newY = ((newX - xPosition) / (playerXposref - xPosition)) * (playerYposref - yPosition) + yPosition;
+			(*missile_iter)->updateProjectileCoordinates(newX, newY);
+		}
+		++missile_iter;
+	}
 
 }

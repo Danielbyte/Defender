@@ -14,7 +14,7 @@ public:
 	virtual void updateProjectile(const float& dt);
 	std::tuple<float, float> getProjectilePosition() const;
 	void createProjectile(std::shared_ptr<Shooter>& projectile);
-	void updateProjectileCoordinates(const float& x, const float& y);
+	void updateProjectileCoordinates(const float x, const float y);
 	void setProjectileDirection(const std::string& direction);
 	std::string getProjectileDirection() const;
 

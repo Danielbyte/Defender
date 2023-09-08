@@ -2,9 +2,8 @@
 #define LANDER_H
 
 #include "shooter.h"
-#include <random>
-#include "stopWatch.h"
 #include "landerSprite.h"
+#include "player.h"
 
 enum class Direction { North, South, East, West, NorthEast, SouthEast, SouthWest, NorthWest, Unknown };
 
@@ -14,7 +13,7 @@ public:
 	Lander();
 	std::tuple<float, float> getPosition() const;
 	void generateInitialPosition();
-	void updateLander(std::shared_ptr<LanderSprite>& lander_sprite,const float& dt);
+	void updateLander(std::shared_ptr<LanderSprite>& lander_sprite,const float& dt,std::shared_ptr<Player>& player);
 	void moveEast(const float& dt);
 	void moveWest(const float& dt);
 	void moveNorth(const float& dt);
@@ -37,6 +36,9 @@ private:
 	std::shared_ptr<StopWatch>lander_watch = std::make_shared<StopWatch>();
 	std::shared_ptr<StopWatch>movement_watch = std::make_shared<StopWatch>();
 	Direction direction;
+	//Reference to player position
+	float playerXposref;
+	float playerYposref;
 };
 #endif // !LANDER_H
 
