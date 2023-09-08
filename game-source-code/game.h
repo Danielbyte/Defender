@@ -54,6 +54,7 @@ private:
 	//Lander Entities
 	std::vector<std::shared_ptr<Lander>> lander_objects;
 	std::vector<std::shared_ptr<LanderSprite>> lander_object_sprites;
+	std::vector<std::shared_ptr<MissileSprite>> missile_sprites;
 };
 #endif
 

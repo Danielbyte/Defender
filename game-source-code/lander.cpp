@@ -9,10 +9,12 @@ Lander::Lander():
 	reachedHumanoidZone{false},
 	direction{Direction::Unknown},
 	playerXposref{0.0f},
-	playerYposref{0.0f}
+	playerYposref{0.0f},
+	missileWatchStarted{false}
 {
 	//generate spawn position
 	generateInitialPosition();
+	missile_texture_watch->stop();
 }
 
 std::tuple<float, float> Lander::getPosition() const
@@ -47,7 +49,7 @@ void Lander::generateInitialPosition()
 }
 
 void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const float& dt, 
-	std::shared_ptr<Player>& player)
+	std::shared_ptr<Player>& player, std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
 {
 	if (!reachedHumanoidZone)
 	{
@@ -105,8 +107,9 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 	auto [x, y] = player->getPlayerPosition();
 	playerXposref = x;
 	playerYposref = y;
-	createMissiles();
+	createMissiles(missile_sprites);
 	updateProjectile(dt);
+	updateMissileSprites(missile_sprites);
 
 	lander_sprite->setTexture(lander_watch);
 	lander_sprite->updateSpritePosition("either", xPosition, yPosition);
@@ -303,6 +306,12 @@ void Lander::updateProjectile(const float& dt)
 	if (projectiles.empty())
 		return;
 
+	if (!missileWatchStarted)
+	{
+		missile_texture_watch->restart();
+		missileWatchStarted = true;
+	}
+
 	auto missile_iter = projectiles.begin();
 
 	while (missile_iter != projectiles.end())
@@ -326,7 +335,7 @@ void Lander::updateProjectile(const float& dt)
 	}
 }
 
-void Lander::createMissiles()
+void Lander::createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
 {
 	std::random_device rd;
 	std::mt19937 gen(rd());
@@ -343,6 +352,10 @@ void Lander::createMissiles()
 			//missile should move right
 			auto missile = std::make_shared<Shooter>(xPosition,yPosition,"right",0.0f,0.0f);
 			projectiles.push_back(missile);
+
+			auto missile_sprite = std::make_shared<MissileSprite>();
+			missile_sprites.push_back(missile_sprite);
+			return;
 		}
 
 		//Lander is on the right of player
@@ -351,6 +364,27 @@ void Lander::createMissiles()
 			//missile should move left
 			auto missile = std::make_shared<Shooter>(xPosition, yPosition, "left", 0.0f, 0.0f);
 			projectiles.push_back(missile);
+
+			auto missile_sprite = std::make_shared<MissileSprite>();
+			missile_sprites.push_back(missile_sprite);
 		}
+	}
+}
+
+void Lander::updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
+{
+	if (projectiles.empty())
+		return;
+
+	auto missile_obj = projectiles.begin();
+	auto missile_sprite = missile_sprites.begin();
+
+	while (missile_obj != projectiles.end())
+	{
+		auto [x, y] = (*missile_obj)->getProjectilePosition();
+		(*missile_sprite)->updateSpritePosition("either", x, y);
+		(*missile_sprite)->setTexture(missile_texture_watch);
+		++missile_obj;
+		++missile_sprite;
 	}
 }

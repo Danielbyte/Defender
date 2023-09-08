@@ -4,6 +4,7 @@
 #include "shooter.h"
 #include "landerSprite.h"
 #include "player.h"
+#include "missileSprite.h"
 
 enum class Direction { North, South, East, West, NorthEast, SouthEast, SouthWest, NorthWest, Unknown };
 
@@ -13,7 +14,8 @@ public:
 	Lander();
 	std::tuple<float, float> getPosition() const;
 	void generateInitialPosition();
-	void updateLander(std::shared_ptr<LanderSprite>& lander_sprite,const float& dt,std::shared_ptr<Player>& player);
+	void updateLander(std::shared_ptr<LanderSprite>& lander_sprite,const float& dt,std::shared_ptr<Player>& player,
+		std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
 	void moveEast(const float& dt);
 	void moveWest(const float& dt);
 	void moveNorth(const float& dt);
@@ -25,6 +27,7 @@ public:
 	void pickDirection();
 	void restrictLander(const float& dt); //Restrict lander to hover around humanoid zone
 	void updateProjectile(const float& dt) override; //Provide own version
+	void updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
 
 private:
 	float xPosition;
@@ -39,7 +42,9 @@ private:
 	//Reference to player position
 	float playerXposref;
 	float playerYposref;
-	void createMissiles();
+	void createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
+	std::shared_ptr<StopWatch>missile_texture_watch = std::make_shared<StopWatch>();
+	bool missileWatchStarted;
 };
 #endif // !LANDER_H
 
