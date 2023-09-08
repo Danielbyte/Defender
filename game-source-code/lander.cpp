@@ -288,3 +288,8 @@ void Lander::restrictLander(const float& dt)
 			direction = Direction::SouthWest;
 	}
 }
+
+void Lander::updateProjectile(const float& dt)
+{
+
+}

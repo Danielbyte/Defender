@@ -25,6 +25,7 @@ public:
 	void moveNorthWest(const float& dt);
 	void pickDirection();
 	void restrictLander(const float& dt); //Restrict lander to hover around humanoid zone
+	void updateProjectile(const float& dt) override; //Provide own version
 
 private:
 	float xPosition;
