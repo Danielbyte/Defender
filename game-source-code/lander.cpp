@@ -195,6 +195,8 @@ Direction Lander::pickDirection()
 			//move south
 			return Direction::South;
 		}
+
+		return Direction::Unknown;
 	}
 
 	else
@@ -236,6 +238,8 @@ Direction Lander::pickDirection()
 			//move north easterly
 			return Direction::NorthEast;
 		}
+
+		return Direction::Unknown;
 	}
 }
 

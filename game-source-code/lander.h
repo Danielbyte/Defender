@@ -6,7 +6,7 @@
 #include "stopWatch.h"
 #include "landerSprite.h"
 
-enum class Direction { North, South, East, West, NorthEast, SouthEast, SouthWest, NorthWest };
+enum class Direction { North, South, East, West, NorthEast, SouthEast, SouthWest, NorthWest, Unknown };
 
 class Lander : public Shooter
 {

@@ -66,6 +66,8 @@ Enemy GameWorld::generateEnemy()
 		enemy = Enemy::None;
 		return enemy;
 	}
+
+	return Enemy::None;
 }
 
 void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_objects,
