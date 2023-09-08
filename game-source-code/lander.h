@@ -23,8 +23,8 @@ public:
 	void moveSouthEast(const float& dt);
 	void moveSouthWest(const float& dt);
 	void moveNorthWest(const float& dt);
-	Direction pickDirection();
-	void restrictLander(); //Restrict lander to hover around humanoid zone
+	void pickDirection();
+	void restrictLander(const float& dt); //Restrict lander to hover around humanoid zone
 
 private:
 	float xPosition;
@@ -34,6 +34,8 @@ private:
 	float landerSpeed;
 	bool reachedHumanoidZone;
 	std::shared_ptr<StopWatch>lander_watch = std::make_shared<StopWatch>();
+	std::shared_ptr<StopWatch>movement_watch = std::make_shared<StopWatch>();
+	Direction direction;
 };
 #endif // !LANDER_H
 

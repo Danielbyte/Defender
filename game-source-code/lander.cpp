@@ -6,7 +6,8 @@ Lander::Lander():
 	leftSide{false},
 	rightSide{false},
 	landerSpeed{50.0f},
-	reachedHumanoidZone{false}
+	reachedHumanoidZone{false},
+	direction{Direction::Unknown}
 {
 	//generate spawn position
 	generateInitialPosition();
@@ -59,14 +60,14 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 			moveSouthEast(dt);
 		}
 
-		if (yPosition >= 450.0f)
+		if (yPosition >= 480.0f)
 			reachedHumanoidZone = true;
 	}
 
 	if (reachedHumanoidZone)
 	{
 		//Lander should Hover around humanoid zone
-		Direction direction = pickDirection();
+		pickDirection();
 		switch (direction)
 		{
 		case Direction::North:
@@ -105,57 +106,60 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 void Lander::moveEast(const float& dt)
 {
 	xPosition += landerSpeed * dt;
-	restrictLander();
+	restrictLander(dt);
 }
 
 void Lander::moveWest(const float& dt)
 {
 	xPosition -= landerSpeed * dt;
-	restrictLander();
+	restrictLander(dt);
 }
 
 void Lander::moveNorth(const float& dt)
 {
 	yPosition -= landerSpeed * dt;
-	restrictLander();
+	restrictLander(dt);
 }
 
 void Lander::moveSouth(const float& dt)
 {
 	yPosition += landerSpeed * dt;
-	restrictLander();
+	restrictLander(dt);
 }
 
 void Lander::moveNorthEast(const float& dt)
 {
 	xPosition += landerSpeed * dt;
 	yPosition -= landerSpeed * dt;
-	restrictLander();
+	restrictLander(dt);
 }
 
 void Lander::moveSouthEast(const float& dt)
 {
 	xPosition += landerSpeed * dt;
 	yPosition += landerSpeed * dt;
-	restrictLander();
+	restrictLander(dt);
 }
 
 void Lander::moveSouthWest(const float& dt)
 {
 	xPosition -= landerSpeed * dt;
 	yPosition += landerSpeed * dt;
-	restrictLander();
+	restrictLander(dt);
 }
 
 void Lander::moveNorthWest(const float& dt)
 {
 	xPosition -= landerSpeed * dt;
 	yPosition -= landerSpeed * dt;
-	restrictLander();
+	restrictLander(dt);
 }
 
-Direction Lander::pickDirection()
+void Lander::pickDirection()
 {
+	if (movement_watch->time_elapsed() < 1.5f)
+		return;
+
 	if (rightSide)
 	{
 		//decide whether to move diagonally up/down or move in a straight horizontal line
@@ -169,34 +173,42 @@ Direction Lander::pickDirection()
 		if (decision == 0)
 		{
 			//move south westerly
-			return Direction::SouthWest;
+			movement_watch->restart();
+			direction = Direction::SouthWest;
+			return;
 		}
 
 		if (decision == 1)
 		{
 			//move westerly
-			return Direction::West;
+			movement_watch->restart();
+			direction = Direction::West;
+			return;
 		}
 
 		if (decision == 2)
 		{
 			//move north westerly
-			return Direction::NorthWest;
+			movement_watch->restart();
+			direction = Direction::NorthWest;
+			return;
 		}
 
 		if (decision == 3)
 		{
 			//move northerly
-			return Direction::North;
+			movement_watch->restart();
+			direction = Direction::North;
+			return;
 		}
 
 		if (decision == 4)
 		{
 			//move south
-			return Direction::South;
+			movement_watch->restart();
+			direction = Direction::South;
+			return;
 		}
-
-		return Direction::Unknown;
 	}
 
 	else
@@ -212,45 +224,67 @@ Direction Lander::pickDirection()
 		if (decision == 3)
 		{
 			//move south North
-			return Direction::North;
+			movement_watch->restart();
+			direction = Direction::North;
+			return;
 		}
 
 		if (decision == 4)
 		{
 			//move south
-			return Direction::South;
+			movement_watch->restart();
+			direction = Direction::South;
+			return;
 		}
 
 		if (decision == 5)
 		{
 			//move south easterly
-			return Direction::SouthEast;
+			movement_watch->restart();
+			direction = Direction::SouthEast;
+			return;
 		}
 
 		if (decision == 6)
 		{
 			//move easterly
-			return Direction::East;
+			movement_watch->restart();
+			direction = Direction::East;
+			return;
 		}
 
 		if (decision == 7)
 		{
 			//move north easterly
-			return Direction::NorthEast;
+			movement_watch->restart();
+			direction = Direction::NorthEast;
+			return;
 		}
-
-		return Direction::Unknown;
 	}
 }
 
-void Lander::restrictLander()
+void Lander::restrictLander(const float& dt)
 {
 	if (!reachedHumanoidZone)
 		return;
 
-	if (yPosition >= 470.0f)
-		yPosition = 470.0f;
+	if (yPosition >= 505.0f)
+	{
+		if (leftSide)
+			direction = Direction::NorthEast;
 
-	if (yPosition <= 430.0f)
-		yPosition = 430.0f;
+		if (rightSide)
+			direction = Direction::NorthWest;
+
+		return;
+	}
+
+	if (yPosition <= 455.0f)
+	{
+		if (leftSide)
+			direction = Direction::SouthEast;
+
+		if (rightSide)
+			direction = Direction::SouthWest;
+	}
 }
