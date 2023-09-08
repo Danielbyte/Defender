@@ -9,6 +9,7 @@
 #include <iostream>
 #include <memory>
 #include "player.h"
+#include "lander.h"
 
 class Game
 {
@@ -40,10 +41,14 @@ private:
 	bool spacePressed;
 
 	//game objects
+	//Player Entity
 	std::shared_ptr<Player> player_obj = std::make_shared<Player>();
 	std::shared_ptr<PlayerSprite>player_sprite = std::make_shared<PlayerSprite>();
-
 	std::vector<std::shared_ptr<LaserSprite>>laser_sprite;
+
+	//Lander Entities
+	std::vector<std::shared_ptr<Lander>> lander_objects;
+	std::vector<std::shared_ptr<LanderSprite>> lander_object_sprites;
 };
 #endif
 
