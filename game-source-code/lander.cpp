@@ -322,5 +322,9 @@ void Lander::updateProjectile(const float& dt)
 		}
 		++missile_iter;
 	}
+}
+
+void Lander::createMissiles()
+{
 
 }

@@ -39,6 +39,7 @@ private:
 	//Reference to player position
 	float playerXposref;
 	float playerYposref;
+	void createMissiles();
 };
 #endif // !LANDER_H
 
