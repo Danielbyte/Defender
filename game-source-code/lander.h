@@ -4,6 +4,7 @@
 #include "shooter.h"
 #include <random>
 #include "stopWatch.h"
+#include "landerSprite.h"
 
 enum class Direction { North, South, East, West, NorthEast, SouthEast, SouthWest, NorthWest };
 
@@ -13,7 +14,7 @@ public:
 	Lander();
 	std::tuple<float, float> getPosition() const;
 	void generateInitialPosition();
-	void updateLander(const float& dt);
+	void updateLander(std::shared_ptr<LanderSprite>& lander_sprite,const float& dt);
 	void moveEast(const float& dt);
 	void moveWest(const float& dt);
 	void moveNorth(const float& dt);

@@ -43,7 +43,7 @@ void Lander::generateInitialPosition()
 	yPosition = distribution2(gen);
 }
 
-void Lander::updateLander(const float& dt)
+void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const float& dt)
 {
 	if (!reachedHumanoidZone)
 	{
@@ -98,6 +98,8 @@ void Lander::updateLander(const float& dt)
 		}
 	}
 
+	lander_sprite->setTexture(lander_watch);
+	lander_sprite->updateSpritePosition("either", xPosition, yPosition);
 }
 
 void Lander::moveEast(const float& dt)
