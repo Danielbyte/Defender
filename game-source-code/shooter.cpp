@@ -47,3 +47,9 @@ void Shooter::createProjectile(std::shared_ptr<Shooter>& projectile)
 {
 	projectiles.push_back(projectile);
 }
+
+void Shooter::updateProjectileCoordinates(const float& x, const float& y)
+{
+	xPosition = x;
+	yPosition = y;
+}
