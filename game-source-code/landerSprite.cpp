@@ -1,11 +1,11 @@
 #include "landerSprite.h"
 
 LanderSprite::LanderSprite():
-	sprite_period{0.5f} //display each sprite for 0.5 sec
+	sprite_period{0.3f} //display each sprite for 0.5 sec
 {
 	sf::Vector2f dimensions;
-	dimensions.x = 32.0f;
-	dimensions.y = 32.0f;
+	dimensions.x = 16.0f;
+	dimensions.y = 16.0f;
 	loadTextures();
 	InitialiseEntityOrigin(dimensions);
 }

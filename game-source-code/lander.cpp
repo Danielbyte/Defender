@@ -5,7 +5,7 @@ Lander::Lander():
 	yPosition{0.0f},
 	leftSide{false},
 	rightSide{false},
-	landerSpeed{350.0f},
+	landerSpeed{50.0f},
 	reachedHumanoidZone{false}
 {
 	//generate spawn position

@@ -10,6 +10,11 @@ void Game::display()
 		{
 			window.draw(laser->getSprite());
 		}
+
+		for (auto& _lander : lander_object_sprites)
+		{
+			window.draw(_lander->getSprite());
+		}
 	}
 
 	else

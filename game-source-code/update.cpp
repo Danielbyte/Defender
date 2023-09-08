@@ -2,6 +2,8 @@
 
 void Game::updateGame(const float dt)
 {
+	game_world->updateGameWorld(lander_objects, lander_object_sprites);
+
 	player_obj->updatePlayer(leftPressed, rightPressed, upPressed, downPressed,spacePressed,player_sprite,
 		laser_sprite,dt);
 
