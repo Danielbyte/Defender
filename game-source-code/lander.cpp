@@ -105,6 +105,8 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 	auto [x, y] = player->getPlayerPosition();
 	playerXposref = x;
 	playerYposref = y;
+	createMissiles();
+	updateProjectile(dt);
 
 	lander_sprite->setTexture(lander_watch);
 	lander_sprite->updateSpritePosition("either", xPosition, yPosition);
