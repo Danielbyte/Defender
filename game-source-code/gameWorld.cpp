@@ -25,7 +25,7 @@ void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_obj
 		std::cout << "Create Pod" << std::endl;
 		break;
 	case Enemy::None:
-		std::cout << "Nothing" << std::endl;
+		std::cout << "Nothing" << std::endl; //control should never reach here
 		break;
 	default:
 		break;

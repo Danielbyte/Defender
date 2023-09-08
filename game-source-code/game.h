@@ -10,6 +10,7 @@
 #include <memory>
 #include "player.h"
 #include "lander.h"
+#include "gameWorld.h"
 
 class Game
 {
@@ -18,6 +19,7 @@ public:
 	void run();
 	void handleInput(); //Defined in playerInput.cpp
 	void updateGame(const float dt); //Defined in update.cpp
+	void updateLanders(const float dt);
 	void display(); //Defined in displayManager.cpp
 private:
 	unsigned int windowWidth;
@@ -41,6 +43,9 @@ private:
 	bool spacePressed;
 
 	//game objects
+	// game world
+	std::shared_ptr<GameWorld> game_world = std::make_shared<GameWorld>();
+
 	//Player Entity
 	std::shared_ptr<Player> player_obj = std::make_shared<Player>();
 	std::shared_ptr<PlayerSprite>player_sprite = std::make_shared<PlayerSprite>();

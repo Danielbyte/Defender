@@ -16,6 +16,7 @@ float StopWatch::time_elapsed()
 {
 	stop();
 	auto time_elapsed = end_time - start_time;
+	return time_elapsed;
 }
 
 void StopWatch::stop()
