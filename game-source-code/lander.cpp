@@ -97,6 +97,7 @@ void Lander::updateLander(const float& dt)
 			break;
 		}
 	}
+
 }
 
 void Lander::moveEast(const float& dt)

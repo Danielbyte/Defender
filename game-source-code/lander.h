@@ -3,6 +3,7 @@
 
 #include "shooter.h"
 #include <random>
+#include "stopWatch.h"
 
 enum class Direction { North, South, East, West, NorthEast, SouthEast, SouthWest, NorthWest };
 
@@ -31,6 +32,7 @@ private:
 	bool leftSide;
 	float landerSpeed;
 	bool reachedHumanoidZone;
+	std::shared_ptr<StopWatch>lander_watch = std::make_shared<StopWatch>();
 };
 #endif // !LANDER_H
 
