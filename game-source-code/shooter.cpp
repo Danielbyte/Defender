@@ -53,3 +53,13 @@ void Shooter::updateProjectileCoordinates(const float& x, const float& y)
 	xPosition = x;
 	yPosition = y;
 }
+
+void Shooter::setProjectileDirection(const std::string& _direction)
+{
+	direction = _direction;
+}
+
+std::string Shooter::getProjectileDirection() const
+{
+	return direction;
+}

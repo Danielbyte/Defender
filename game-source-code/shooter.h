@@ -15,6 +15,8 @@ public:
 	std::tuple<float, float> getProjectilePosition() const;
 	void createProjectile(std::shared_ptr<Shooter>& projectile);
 	void updateProjectileCoordinates(const float& x, const float& y);
+	void setProjectileDirection(const std::string& direction);
+	std::string getProjectileDirection() const;
 
 protected:
 	std::vector<std::shared_ptr<Shooter>>projectiles;
