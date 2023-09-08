@@ -15,6 +15,11 @@ void Game::display()
 		{
 			window.draw(_lander->getSprite());
 		}
+
+		for (auto& lander_missile : lander_missile_sprites)
+		{
+			window.draw(lander_missile->getSprite());
+		}
 	}
 
 	else

@@ -306,12 +306,6 @@ void Lander::updateProjectile(const float& dt)
 	if (projectiles.empty())
 		return;
 
-	if (!missileWatchStarted)
-	{
-		missile_texture_watch->restart();
-		missileWatchStarted = true;
-	}
-
 	auto missile_iter = projectiles.begin();
 
 	while (missile_iter != projectiles.end())
