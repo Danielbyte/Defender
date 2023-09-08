@@ -326,5 +326,29 @@ void Lander::updateProjectile(const float& dt)
 
 void Lander::createMissiles()
 {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	int min = 0;
+	int max = 70000;
+	std::uniform_int_distribution<int>distribution(min, max);
+	auto decision = distribution(gen);
 
+	if (decision % 5 == 0)
+	{
+		//Lander is on the left of player
+		if (xPosition < playerXposref)
+		{
+			//missile should move right
+			auto missile = std::make_shared<Shooter>(xPosition,yPosition,"right",0.0f,0.0f);
+			projectiles.push_back(missile);
+		}
+
+		//Lander is on the right of player
+		if (xPosition > playerXposref)
+		{
+			//missile should move left
+			auto missile = std::make_shared<Shooter>(xPosition, yPosition, "left", 0.0f, 0.0f);
+			projectiles.push_back(missile);
+		}
+	}
 }
