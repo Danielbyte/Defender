@@ -13,8 +13,8 @@ public:
 
 private:
 	float current_time();
-	float initial_time;
-	float final_time;
+	float start_time;
+	float end_time;
 };
 #endif // !STOPWATCH_H
 
