@@ -1,7 +1,7 @@
 #include "player.h"
 
 Player::Player():
-	movementConstant{250.0f}
+	playerSpeed{250.0f}
 {
 	x_playerPosition = 25.0f;
 	y_playerPosition = 300.0f; 
@@ -23,7 +23,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 		direction = "right";
 		player_sprite->updateSpritePosition(direction,x_playerPosition,y_playerPosition);
 		float rightBoundary = 800.0f - 25.0f;
-		x_playerPosition += movementConstant * dt;
+		x_playerPosition += playerSpeed * dt;
 		//restrict player ship to right boundary
 		if (x_playerPosition >= rightBoundary)
 			x_playerPosition = rightBoundary;
@@ -34,7 +34,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 		direction = "left";
 		player_sprite->updateSpritePosition(direction,x_playerPosition,y_playerPosition);
 		float leftBoundary = 25.0f;
-		x_playerPosition -= movementConstant * dt;
+		x_playerPosition -= playerSpeed * dt;
 		//Restrict player ship to left boundary
 		if (x_playerPosition <= leftBoundary)
 			x_playerPosition = leftBoundary;
@@ -42,7 +42,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 
 	if (up)
 	{
-		y_playerPosition -= movementConstant * dt;
+		y_playerPosition -= playerSpeed * dt;
 		float upBoundary = 10.0f;
 		//Restrict player ship to updwards boundary of game window
 		if (y_playerPosition <= upBoundary)
@@ -52,7 +52,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 
 	if (down)
 	{
-		y_playerPosition += movementConstant * dt;
+		y_playerPosition += playerSpeed * dt;
 		float downBoundary = 600.0f - 10.0f;
 		//Restrict player ship to downwards boundary of game window
 		if (y_playerPosition >= downBoundary)
@@ -66,8 +66,8 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 
 void Player::createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite)
 {
-	auto horizontalOffset = 75.0f;
-	auto verticalOffset = 1.5f;
+	auto horizontalOffset = 74.0f;
+	auto verticalOffset = 5.0f;
 	auto laser_pr = std::make_shared<Shooter>(Shooter(x_playerPosition, y_playerPosition, direction,horizontalOffset,
 		verticalOffset));
 	projectiles.push_back(laser_pr);

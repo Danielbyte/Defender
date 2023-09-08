@@ -24,7 +24,7 @@ public:
 private:
 	float x_playerPosition;
 	float y_playerPosition;
-	float movementConstant;
+	float playerSpeed;
 	std::string direction;
 
 };
