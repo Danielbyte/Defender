@@ -22,7 +22,7 @@ Shooter::Shooter(const float& x, const float& y, const std::string _direction, c
 		xPosition = x - horizontalOffset;
 	}
 
-	projectileSpeed = 500.0f;
+	projectileSpeed = 600.0f;
 }
 
 void Shooter::updateProjectile(const float& dt)
