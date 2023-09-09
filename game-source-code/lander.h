@@ -43,8 +43,6 @@ private:
 	float playerXposref;
 	float playerYposref;
 	void createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
-	std::shared_ptr<StopWatch>missile_texture_watch = std::make_shared<StopWatch>();
-	bool missileWatchStarted;
 };
 #endif // !LANDER_H
 

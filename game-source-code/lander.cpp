@@ -9,12 +9,10 @@ Lander::Lander():
 	reachedHumanoidZone{false},
 	direction{Direction::Unknown},
 	playerXposref{0.0f},
-	playerYposref{0.0f},
-	missileWatchStarted{false}
+	playerYposref{0.0f}
 {
 	//generate spawn position
 	generateInitialPosition();
-	missile_texture_watch->stop();
 }
 
 std::tuple<float, float> Lander::getPosition() const
@@ -377,7 +375,6 @@ void Lander::updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& m
 	{
 		auto [x, y] = (*missile_obj)->getProjectilePosition();
 		(*missile_sprite)->updateSpritePosition("either", x, y);
-		(*missile_sprite)->setTexture(missile_texture_watch);
 		++missile_obj;
 		++missile_sprite;
 	}
