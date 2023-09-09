@@ -2,7 +2,6 @@
 #define MISSILESPRITE_H
 
 #include "spriteStore.h"
-#include "stopWatch.h"
 
 class MissileSprite : public SpriteStore
 {

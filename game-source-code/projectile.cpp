@@ -51,25 +51,9 @@ std::tuple<float, float> Projectile::getProjectilePosition() const
 	return { xPosition, yPosition };
 }
 
-void Projectile::updatePosition(const float x, const float y)
-{
-	xPosition = x;
-	yPosition = y;
-}
-
 float Projectile::getProjectileSpeed() const
 {
 	return projectileSpeed;
-}
-
-std::tuple<float, float> Projectile::getTargetPosition() const
-{
-	return{ targetXpos, targetYpos };
-}
-
-std::tuple<float, float> Projectile::getInitialProjectilePosition() const
-{
-	return { initialXpos, initialYpos };
 }
 
 void Projectile::updateFrameCounter()
@@ -96,4 +80,10 @@ void Projectile::updateTrajectory(const float x)
 {
 	xPosition = x;
 	yPosition = (slope * x) + yIntercept;
+}
+
+void Projectile::updatePosition(const float x, const float y)
+{
+	xPosition = x;
+	yPosition = y;
 }

@@ -10,8 +10,6 @@ class Shooter
 {
 public:
 	Shooter();
-	//Shooter(const float& x, const float& y, const std::string _direction, const float& horizontalOffset,
-		//const float& verticalOffset);
 	virtual void updateProjectile(float dt);
 	void createProjectile(std::shared_ptr<Projectile>& projectile);
 	

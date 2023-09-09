@@ -16,15 +16,13 @@ public:
 	std::tuple<float, float> getProjectilePosition() const;
 
 	std::string getProjectileDirection() const;
-	void updatePosition(const float x, const float y);
 	float getProjectileSpeed() const;
 
-	std::tuple<float,float> getInitialProjectilePosition() const;
-	std::tuple<float, float> getTargetPosition() const;
 	void updateFrameCounter();
 	int getFrameCounter() const;
 	void updateTrajectory(const float x);
 	void calculateTrajectoryConstants();
+	void updatePosition(const float x, const float y);
 
 private:
 	float projectileSpeed;
