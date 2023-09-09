@@ -1,60 +1,36 @@
 #include "shooter.h"
 
-Shooter::Shooter():
-	xPosition{00.0f},
-	yPosition{-100.0f},
-	projectileSpeed{0.0f}
-{}
-
-Shooter::Shooter(const float& x, const float& y, const std::string _direction, const float& horizontalOffset,
-	const float& verticalOffset)
-{
-	direction = _direction;
-	yPosition = y + verticalOffset;
-
-	if (direction == "right")
-	{
-		xPosition = x + horizontalOffset;
-	}
-
-	if (direction == "left")
-	{
-		xPosition = x - horizontalOffset;
-	}
-
-	projectileSpeed = 600.0f;
-}
+Shooter::Shooter(){}
 
 void Shooter::updateProjectile(const float& dt)
 {
-	if (direction == "right")
+	if (projectiles.empty())
+		return;
+
+	auto projectile_iter = projectiles.begin();
+	while (projectile_iter != projectiles.end())
 	{
-		xPosition += projectileSpeed * dt;
+		auto direction = (*projectile_iter)->getProjectileDirection();
+		auto [xPosition, yPosition] = (*projectile_iter)->getProjectilePosition();
+		auto projectileSpeed = (*projectile_iter)->getProjectileSpeed();
+
+		if (direction == "right")
+		{
+			xPosition += projectileSpeed * dt;
+			(*projectile_iter)->updatePosition(xPosition, yPosition);
+		}
+
+		if (direction == "left")
+		{
+			xPosition -= projectileSpeed * dt;
+			(*projectile_iter)->updatePosition(xPosition, yPosition);
+		}
+		++projectile_iter;
 	}
 
-	if (direction == "left")
-	{
-		xPosition -= projectileSpeed * dt;
-	}
 }
 
-std::tuple<float, float> Shooter::getProjectilePosition() const
-{
-	return { xPosition, yPosition };
-}
-
-void Shooter::createProjectile(std::shared_ptr<Shooter>& projectile)
+void Shooter::createProjectile(std::shared_ptr<Projectile>& projectile)
 {
 	projectiles.push_back(projectile);
-}
-
-void Shooter::updateProjectileCoordinates(const float x, const float y)
-{
-	xPosition = x;
-	yPosition = y;
-}
-
-std::string Shooter::getProjectileDirection() const
-{
-	return direction;
 }
