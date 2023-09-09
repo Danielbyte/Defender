@@ -8,7 +8,9 @@ Projectile::Projectile():
 	yPosition{ -100.0f },
 	targetXpos{ 0.0f },
 	targetYpos{ 0.0f },
-	frame_counter{0}
+	frame_counter{0},
+	slope{0.0f},
+	yIntercept{0.0f}
 {}
 
 Projectile::Projectile(const float x, const float y, const std::string _direction, const float horizontalOffset,

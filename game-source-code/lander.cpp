@@ -332,11 +332,11 @@ void Lander::createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	int min = 0;
-	int max = 70000;
+	int max = 700;
 	std::uniform_int_distribution<int>distribution(min, max);
 	auto decision = distribution(gen);
 
-	if (decision % 3 == 0 && decision % 7 == 0)
+	if (decision < 3)
 	{
 		//Lander is on the left of player
 		if (xPosition < playerXposref)
