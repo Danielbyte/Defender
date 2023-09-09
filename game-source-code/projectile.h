@@ -10,8 +10,8 @@ class Projectile
 {
 public:
 	Projectile();
-	Projectile(const float& x, const float& y, const std::string _direction, const float& horizontalOffset,
-		const float& verticalOffset, const float _targetXpos, const float _targetYpos);
+	Projectile(const float x, const float y, const std::string _direction, const float horizontalOffset,
+		const float verticalOffset, const float _targetXpos, const float _targetYpos);
 
 	std::tuple<float, float> getProjectilePosition() const;
 
@@ -23,6 +23,8 @@ public:
 	std::tuple<float, float> getTargetPosition() const;
 	void updateFrameCounter();
 	int getFrameCounter() const;
+	void updateTrajectory(const float x);
+	void calculateTrajectoryConstants();
 
 private:
 	float projectileSpeed;
@@ -38,6 +40,9 @@ private:
 	float initialYpos;
 
 	int frame_counter; //monitors the animations of projectile animation
+
+	float slope;
+	float yIntercept;
 };
 #endif // !ENEMY_H
 

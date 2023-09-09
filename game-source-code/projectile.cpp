@@ -11,8 +11,8 @@ Projectile::Projectile():
 	frame_counter{0}
 {}
 
-Projectile::Projectile(const float& x, const float& y, const std::string _direction, const float& horizontalOffset,
-	const float& verticalOffset,const float _targetXpos, const float _targetYpos):
+Projectile::Projectile(const float x, const float y, const std::string _direction, const float horizontalOffset,
+	const float verticalOffset,const float _targetXpos, const float _targetYpos):
 	projectileSpeed{ 0.0f }
 {
 	direction = _direction;
@@ -78,4 +78,16 @@ void Projectile::updateFrameCounter()
 int Projectile::getFrameCounter() const
 {
 	return frame_counter;
+}
+
+void Projectile::calculateTrajectoryConstants()
+{
+	slope = (initialYpos - targetYpos) / (initialXpos - targetXpos);
+	yIntercept = initialYpos - (slope * initialXpos);
+}
+
+void Projectile::updateTrajectory(const float x)
+{
+	xPosition = x;
+	yPosition = slope * x + yIntercept;
 }
