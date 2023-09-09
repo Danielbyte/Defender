@@ -16,7 +16,7 @@ void CollisionsManager::playerLanderCollisions(std::shared_ptr<Player>& player, 
 	auto lander_iter = landers.begin();
 	auto lander_sprite_iter = lander_sprites.begin();
 	auto [playerXpos, playerYpos] = player->getPlayerPosition();
-
+	
 	while (lander_iter != landers.end())
 	{
 		auto [landerXpos, landerYpos] = (*lander_iter)->getPosition();
@@ -28,6 +28,7 @@ void CollisionsManager::playerLanderCollisions(std::shared_ptr<Player>& player, 
 		{
 			std::cout << "player-lander collision!" << std::endl;
 		}
+
 		++lander_iter;
 		++lander_sprite_iter;
 	}

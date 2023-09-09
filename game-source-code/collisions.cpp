@@ -34,7 +34,7 @@ bool Collisions::checkHorizontalCollisions(float obj1Right, float obj1Left, floa
 
 bool Collisions::checkVerticalCollisions(float obj1Top, float obj1Bottom, float obj2Top, float obj2Bottom)
 {
-	if ((obj1Bottom >= obj2Top && obj1Bottom <= obj2Bottom) && (obj1Top >= obj2Top && obj1Top <= obj2Bottom))
+	if ((obj1Bottom >= obj2Top && obj1Bottom <= obj2Bottom) || (obj1Top >= obj2Top && obj1Top <= obj2Bottom))
 		return true;
 
 	return false;

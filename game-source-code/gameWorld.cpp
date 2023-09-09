@@ -19,13 +19,13 @@ void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_obj
 		createLander(lander_objects, lander_object_sprites);
 		break;
 	case Enemy::Bomber:
-		std::cout << "Create Bomber" << std::endl;
+		//std::cout << "Create Bomber" << std::endl;
 		break;
 	case Enemy::Pod:
-		std::cout << "Create Pod" << std::endl;
+		//std::cout << "Create Pod" << std::endl;
 		break;
 	case Enemy::None:
-		std::cout << "Nothing" << std::endl; //control should never reach here
+		//std::cout << "Nothing" << std::endl; //control should never reach here
 		break;
 	default:
 		break;

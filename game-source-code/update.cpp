@@ -12,6 +12,8 @@ void Game::updateGame(const float dt)
 
 	if (!lander_objects.empty())
 		updateLanders(dt);
+
+	updateCollisions();
 }
 
 void Game::updateLanders(const float dt)
@@ -24,4 +26,9 @@ void Game::updateLanders(const float dt)
 		++object_iter;
 		++sprite_iter;
 	}
+}
+
+void Game::updateCollisions()
+{
+	update_collisions.playerLanderCollisions(player_obj, lander_objects, lander_object_sprites);
 }

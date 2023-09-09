@@ -11,6 +11,7 @@
 #include "player.h"
 #include "lander.h"
 #include "gameWorld.h"
+#include "collisionsManager.h"
 
 class Game
 {
@@ -20,6 +21,7 @@ public:
 	void handleInput(); //Defined in playerInput.cpp
 	void updateGame(const float dt); //Defined in update.cpp
 	void updateLanders(const float dt);
+	void updateCollisions();
 	void display(); //Defined in displayManager.cpp
 private:
 	unsigned int windowWidth;
@@ -55,6 +57,9 @@ private:
 	std::vector<std::shared_ptr<Lander>> lander_objects;
 	std::vector<std::shared_ptr<LanderSprite>> lander_object_sprites;
 	std::vector<std::shared_ptr<MissileSprite>> lander_missile_sprites;
+
+	//Collision object
+	CollisionsManager update_collisions;
 };
 #endif
 

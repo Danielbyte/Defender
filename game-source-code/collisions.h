@@ -1,6 +1,8 @@
 #ifndef COLLISIONS_H
 #define COLLISIONS_H
 
+#include <iostream>
+
 class Collisions
 {
 public:
