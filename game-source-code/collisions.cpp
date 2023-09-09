@@ -23,3 +23,8 @@ bool Collisions::checkHorizontalCollisions(float obj1Right, float obj1Left, floa
 
 	return false;
 }
+
+bool checkVerticalCollisions(float obj1Top, float obj1Bottom, float obj2Top, float obj2Bottom)
+{
+
+}

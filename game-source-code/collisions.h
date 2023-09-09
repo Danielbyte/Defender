@@ -10,6 +10,7 @@ public:
 
 private:
 	bool checkHorizontalCollisions(float obj1Right, float obj1Left, float obj2Right, float obj2Left);
+	bool checkVerticalCollisions(float obj1Top, float obj1Bottom, float obj2Top, float obj2Bottom);
 
 };
 #endif // !COLLISIONS_H
