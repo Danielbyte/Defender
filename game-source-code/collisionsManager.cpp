@@ -27,9 +27,26 @@ void CollisionsManager::playerLanderCollisions(std::shared_ptr<Player>& player, 
 		if (isColiided)
 		{
 			std::cout << "player-lander collision!" << std::endl;
+			//should set game over to true
 		}
 
 		++lander_iter;
 		++lander_sprite_iter;
+	}
+}
+
+void playerMissileCollisions(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& landers,
+	std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
+{
+	if (landers.empty())
+		return;
+
+	auto lander_iter = landers.begin();
+	auto missile_sprite_iter = missile_sprites.begin();
+
+	while (lander_iter != landers.end())
+	{
+		++lander_iter;
+		++missile_sprite_iter;
 	}
 }
