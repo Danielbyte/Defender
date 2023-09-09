@@ -2,7 +2,7 @@
 
 Shooter::Shooter(){}
 
-void Shooter::updateProjectile(const float& dt)
+void Shooter::updateProjectile(float dt)
 {
 	if (projectiles.empty())
 		return;

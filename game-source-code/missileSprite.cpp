@@ -1,7 +1,7 @@
 #include "missileSprite.h"
 
 MissileSprite::MissileSprite():
-	sprite_period{2000}
+	sprite_period{10}
 {
 	sf::Vector2f dimensions;
 	dimensions.x = 6.0f;

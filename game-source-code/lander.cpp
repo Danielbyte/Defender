@@ -299,10 +299,14 @@ void Lander::restrictLander(const float& dt)
 	}
 }
 
-void Lander::updateProjectile(const float& dt)
+void Lander::updateProjectile(float dt)
 {
 	if (projectiles.empty())
 		return;
+
+	//Avoid glitches in game
+	if (dt > 0.017f)
+		dt = 1 / 60.0f;
 
 	auto missile_iter = projectiles.begin();
 

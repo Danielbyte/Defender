@@ -75,8 +75,10 @@ std::tuple<float, float> Projectile::getInitialProjectilePosition() const
 void Projectile::updateFrameCounter()
 {
 	++frame_counter;
-	if (frame_counter > 4000)
+	if (frame_counter > 20)
+	{
 		frame_counter = 0;
+	}
 }
 
 int Projectile::getFrameCounter() const

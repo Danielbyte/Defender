@@ -26,7 +26,7 @@ public:
 	void moveNorthWest(const float& dt);
 	void pickDirection();
 	void restrictLander(const float& dt); //Restrict lander to hover around humanoid zone
-	void updateProjectile(const float& dt) override; //Provide own version
+	void updateProjectile(float dt) override; //Provide own version
 	void updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
 
 private:
