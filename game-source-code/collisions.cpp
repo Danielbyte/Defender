@@ -15,3 +15,11 @@ bool Collisions::checkCollision(float obj1Xposition, float obj1Yposition, float 
 	float obj2Top = obj2Yposition - (obj2Width / 2.0f);
 	float obj2Bottom = obj2Yposition + (obj2Width / 2.0f);
 }
+
+bool Collisions::checkHorizontalCollisions(float obj1Right, float obj1Left, float obj2Right, float obj2Left)
+{
+	if ((obj1Right >= obj2Left && obj1Right <= obj2Right) || (obj1Left >= obj2Left && obj1Left <= obj1Right))
+		return true;
+
+	return false;
+}

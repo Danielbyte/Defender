@@ -9,6 +9,7 @@ public:
 		float obj2Xposition,float obj2Yposition, float obj2Width, float obj2Length);
 
 private:
+	bool checkHorizontalCollisions(float obj1Right, float obj1Left, float obj2Right, float obj2Left);
 
 };
 #endif // !COLLISIONS_H
