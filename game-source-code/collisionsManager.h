@@ -12,8 +12,10 @@ public:
 	void playerLanderCollisions(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& landers,
 		std::vector<std::shared_ptr<LanderSprite>>& lander_sprites);
 
-
 private:
+	float playerWidth, playerLength;
+	float landerWidth, landerLength;
+	Collisions collisions;
 
 };
 #endif // !COLLISIONSMANAGER_H
