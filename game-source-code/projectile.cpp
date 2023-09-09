@@ -28,13 +28,15 @@ Projectile::Projectile(const float x, const float y, const std::string _directio
 	if (direction == "left")
 	{
 		xPosition = x - horizontalOffset;
-		initialYpos = xPosition;
+		initialXpos = xPosition;
 	}
 
 	projectileSpeed = 600.0f;
 
 	targetXpos = _targetXpos;
 	targetYpos = _targetYpos;
+
+	calculateTrajectoryConstants();
 }
 
 std::string Projectile::getProjectileDirection() const
@@ -89,5 +91,5 @@ void Projectile::calculateTrajectoryConstants()
 void Projectile::updateTrajectory(const float x)
 {
 	xPosition = x;
-	yPosition = slope * x + yIntercept;
+	yPosition = (slope * x) + yIntercept;
 }

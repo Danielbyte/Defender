@@ -309,23 +309,19 @@ void Lander::updateProjectile(const float& dt)
 	while (missile_iter != projectiles.end())
 	{
 		auto _direction = (*missile_iter)->getProjectileDirection();
-		auto [x1, y1] = (*missile_iter)->getInitialProjectilePosition();
-		auto [x2, y2] = (*missile_iter)->getTargetPosition();
-		auto [x, y] = (*missile_iter)->getProjectilePosition();
 
 		if (_direction == "left")
 		{
-
+			auto [x, y] = (*missile_iter)->getProjectilePosition();
 			auto newX = x - 100.0f * dt;
-			auto newY = ((newX - x1) / (x2 - x1)) * (y2 - y1) + y1;
-			(*missile_iter)->updatePosition(newX, newY);
+			(*missile_iter)->updateTrajectory(newX);
 		}
 
 		if (_direction == "right")
 		{
+			auto [x, y] = (*missile_iter)->getProjectilePosition();
 			auto newX = x + 100.0f * dt;
-			auto newY = ((newX - x1) / (x2 - x1)) * (y2 - y1) + y1;
-			(*missile_iter)->updatePosition(newX, newY);
+			(*missile_iter)->updateTrajectory(newX);
 		}
 		++missile_iter;
 	}
