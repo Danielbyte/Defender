@@ -21,10 +21,8 @@ public:
 
 	std::tuple<float,float> getInitialProjectilePosition() const;
 	std::tuple<float, float> getTargetPosition() const;
-
-protected:
-	std::shared_ptr<StopWatch>projectile_watch;
-
+	void updateFrameCounter();
+	int getFrameCounter() const;
 
 private:
 	float projectileSpeed;
@@ -39,6 +37,7 @@ private:
 	float initialXpos;
 	float initialYpos;
 
+	int frame_counter; //monitors the animations of projectile animation
 };
 #endif // !ENEMY_H
 

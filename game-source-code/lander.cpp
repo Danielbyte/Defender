@@ -340,7 +340,7 @@ void Lander::createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile
 	std::uniform_int_distribution<int>distribution(min, max);
 	auto decision = distribution(gen);
 
-	if (decision % 5 == 0)
+	if (decision % 3 == 0 && decision % 7 == 0)
 	{
 		//Lander is on the left of player
 		if (xPosition < playerXposref)
@@ -387,6 +387,9 @@ void Lander::updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& m
 	{
 		auto [x, y] = (*missile_obj)->getProjectilePosition();
 		(*missile_sprite)->updateSpritePosition("either", x, y);
+		(*missile_obj)->updateFrameCounter();
+		auto frame = (*missile_obj)->getFrameCounter();
+		(*missile_sprite)->setTexture(frame);
 		++missile_obj;
 		++missile_sprite;
 	}

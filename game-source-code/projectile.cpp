@@ -7,7 +7,8 @@ Projectile::Projectile():
 	xPosition{ 00.0f },
 	yPosition{ -100.0f },
 	targetXpos{ 0.0f },
-	targetYpos{ 0.0f }
+	targetYpos{ 0.0f },
+	frame_counter{0}
 {}
 
 Projectile::Projectile(const float& x, const float& y, const std::string _direction, const float& horizontalOffset,
@@ -65,4 +66,16 @@ std::tuple<float, float> Projectile::getTargetPosition() const
 std::tuple<float, float> Projectile::getInitialProjectilePosition() const
 {
 	return { initialXpos, initialYpos };
+}
+
+void Projectile::updateFrameCounter()
+{
+	++frame_counter;
+	if (frame_counter > 4000)
+		frame_counter = 0;
+}
+
+int Projectile::getFrameCounter() const
+{
+	return frame_counter;
 }

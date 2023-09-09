@@ -1,7 +1,7 @@
 #include "missileSprite.h"
 
 MissileSprite::MissileSprite():
-	sprite_period{0.2f}
+	sprite_period{2000}
 {
 	sf::Vector2f dimensions;
 	dimensions.x = 6.0f;
@@ -16,19 +16,17 @@ void MissileSprite::loadTextures()
 	missile2_t.loadFromFile("resources/missile2.png");
 }
 
-void MissileSprite::setTexture(std::shared_ptr<StopWatch>& watch)
+void MissileSprite::setTexture(const int _time)
 {
-	auto _time = watch->time_elapsed();
 
-	if (_time == 0 && _time <= sprite_period)
+	if (_time <= sprite_period)
 	{
 		updateSpriteTexture(missile1_t);
 		return;
 	}
 
-	if (_time > sprite_period && _time <= 2 * sprite_period)
+	if (_time > sprite_period)
 	{
 		updateSpriteTexture(missile2_t);
-		watch->restart();
 	}
 }
