@@ -9,7 +9,8 @@ Lander::Lander():
 	reachedHumanoidZone{false},
 	direction{Direction::Unknown},
 	playerXposref{0.0f},
-	playerYposref{0.0f}
+	playerYposref{0.0f},
+	missileSpeed{50.0f}
 {
 	//generate spawn position
 	generateInitialPosition();
@@ -106,6 +107,7 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 	playerXposref = x;
 	playerYposref = y;
 	createMissiles(missile_sprites);
+	auto missileSpeed = 2.0f;
 	updateProjectile(dt);
 	updateMissileSprites(missile_sprites);
 
@@ -318,7 +320,7 @@ void Lander::createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile
 			auto verticalOffset = 0.0f;
 			auto Id = projectiles.size() + 1;
 			auto missile = std::make_shared<Projectile>(xPosition,yPosition,"right",horizontalOffset,verticalOffset,
-				playerXposref,playerYposref,Id,ProjectileType::LanderMissile);
+				playerXposref,playerYposref,Id,ProjectileType::LanderMissile,missileSpeed);
 
 			createProjectile(missile);
 
@@ -335,7 +337,7 @@ void Lander::createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile
 			auto verticalOffset = 0.0f;
 			auto Id = projectiles.size() + 1;
 			auto missile = std::make_shared<Projectile>(xPosition, yPosition, "left", horizontalOffset,
-				verticalOffset,playerXposref,playerYposref, Id,ProjectileType::LanderMissile);
+				verticalOffset,playerXposref,playerYposref, Id,ProjectileType::LanderMissile,missileSpeed);
 
 			createProjectile(missile);
 

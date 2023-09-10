@@ -14,12 +14,11 @@ public:
 	Projectile();
 	Projectile(const float x, const float y, const std::string _direction, const float horizontalOffset,
 		const float verticalOffset, const float _targetXpos, const float _targetYpos,
-		unsigned long long int projectileId,ProjectileType _typeOfShooter);
+		unsigned long long int projectileId, ProjectileType _typeOfShooter, const float _speed);
 
 	std::tuple<float, float> getProjectilePosition() const;
 
 	std::string getProjectileDirection() const;
-	float getProjectileSpeed() const;
 
 	void updateFrameCounter();
 	int getFrameCounter() const;
@@ -28,9 +27,9 @@ public:
 	void updatePosition(const float x, const float y);
 	unsigned long long int getProjectileId() const;
 	ProjectileType getType() const;
+	float getSpeed() const;
 
 private:
-	float projectileSpeed;
 	std::string direction;
 	float xPosition;
 	float yPosition;
@@ -50,6 +49,7 @@ private:
 	unsigned long long int projectileId;
 
 	ProjectileType typeOfShooter;
+	float speed;
 };
 #endif // !ENEMY_H
 

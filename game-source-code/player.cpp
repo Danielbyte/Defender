@@ -1,7 +1,8 @@
 #include "player.h"
 
 Player::Player():
-	playerSpeed{250.0f}
+	playerSpeed{250.0f},
+	laserSpeed{600.0f}
 {
 	x_playerPosition = 25.0f;
 	y_playerPosition = 300.0f; 
@@ -70,7 +71,7 @@ void Player::createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprit
 	auto verticalOffset = 5.0f;
 	auto id = projectiles.size() + 1;
 	auto laser_pr = std::make_shared<Projectile>(Projectile(x_playerPosition, y_playerPosition, direction,
-		horizontalOffset, verticalOffset,x_playerPosition,y_playerPosition,id,ProjectileType::Laser));
+		horizontalOffset, verticalOffset,x_playerPosition,y_playerPosition,id,ProjectileType::Laser,laserSpeed));
 
 	createProjectile(laser_pr);
 	//projectiles.push_back(laser_pr);
@@ -114,7 +115,7 @@ void Player::updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprit
 
 	auto projectile_iter = projectiles.begin();
 	auto laser_sprite_iter = laser_sprite.begin();
-
+	auto laserSpeed = 600.0f;
 	updateProjectile(dt);
 
 	while (projectile_iter != projectiles.end())

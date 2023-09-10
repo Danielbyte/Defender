@@ -48,6 +48,7 @@ private:
 	float playerXposref;
 	float playerYposref;
 	void createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
+	float missileSpeed;
 };
 #endif // !LANDER_H
 

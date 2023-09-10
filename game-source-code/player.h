@@ -26,6 +26,7 @@ private:
 	float y_playerPosition;
 	float playerSpeed;
 	std::string direction;
+	float laserSpeed;
 
 };
 #endif // !PLAYER_H

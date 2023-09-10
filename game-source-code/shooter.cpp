@@ -20,14 +20,16 @@ void Shooter::updateProjectile(float dt)
 		if (_direction == "left")
 		{
 			auto [x, y] = (*missile_iter)->getProjectilePosition();
-			auto newX = x - 100.0f * dt;
+			auto speed = (*missile_iter)->getSpeed();
+			auto newX = x - speed * dt;
 			(*missile_iter)->updateTrajectory(newX);
 		}
 
 		if (_direction == "right")
 		{
 			auto [x, y] = (*missile_iter)->getProjectilePosition();
-			auto newX = x + 100.0f * dt;
+			auto speed = (*missile_iter)->getSpeed();
+			auto newX = x + speed * dt;
 			(*missile_iter)->updateTrajectory(newX);
 		}
 		++missile_iter;
