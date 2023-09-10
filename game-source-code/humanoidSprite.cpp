@@ -1,6 +1,13 @@
 #include "humanoidSprite.h"
 
-HumanoidSprite::HumanoidSprite(){}
+HumanoidSprite::HumanoidSprite()
+{
+	sf::Vector2f dimensions;
+	dimensions.x = 8.0f;
+	dimensions.y = 12.0f;
+	InitialiseEntityOrigin(dimensions);
+	loadTextures();
+}
 
 void HumanoidSprite::loadTextures()
 {
