@@ -18,6 +18,7 @@ public:
 private:
 	float playerWidth, playerLength;
 	float landerWidth, landerLength;
+	float missileWidth, missileLength;
 	Collisions collisions;
 
 };

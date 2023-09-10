@@ -12,6 +12,7 @@ public:
 	Shooter();
 	virtual void updateProjectile(float dt);
 	void createProjectile(std::shared_ptr<Projectile>& projectile);
+	std::vector<std::shared_ptr<Projectile>> getProjectiles();
 	
 protected:
 	std::vector<std::shared_ptr<Projectile>>projectiles;

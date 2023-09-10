@@ -4,7 +4,9 @@ CollisionsManager::CollisionsManager():
 playerWidth{20.0f},
 playerLength{50.0f},
 landerWidth{16.0f},
-landerLength{16.0f}
+landerLength{16.0f},
+missileWidth{6.0f},
+missileLength{6.0f}
 {}
 
 void CollisionsManager::playerLanderCollisions(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& landers,
@@ -35,7 +37,7 @@ void CollisionsManager::playerLanderCollisions(std::shared_ptr<Player>& player, 
 	}
 }
 
-void playerMissileCollisions(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& landers,
+void CollisionsManager::playerMissileCollisions(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& landers,
 	std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
 {
 	if (landers.empty())
@@ -44,8 +46,23 @@ void playerMissileCollisions(std::shared_ptr<Player>& player, std::vector<std::s
 	auto lander_iter = landers.begin();
 	auto missile_sprite_iter = missile_sprites.begin();
 
+	auto [playerXpos, playerYpos] = player->getPlayerPosition();
+
 	while (lander_iter != landers.end())
 	{
+		auto projectiles = (*lander_iter)->getProjectiles();
+		auto projectile_iter = projectiles.begin();
+		while (projectile_iter != projectiles.end())
+		{
+			auto [missileXpos, missileYpos] = (*projectile_iter)->getProjectilePosition();
+			auto isCollided = collisions.checkCollision(playerXpos, playerYpos, playerWidth, playerLength, missileXpos,
+				missileYpos, missileWidth, missileLength);
+
+			if (isCollided)
+				std::cout << "missile-player collisions" << std::endl;
+
+			++projectile_iter;
+		}
 		++lander_iter;
 		++missile_sprite_iter;
 	}

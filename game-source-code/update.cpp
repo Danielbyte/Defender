@@ -31,4 +31,5 @@ void Game::updateLanders(const float dt)
 void Game::updateCollisions()
 {
 	update_collisions.playerLanderCollisions(player_obj, lander_objects, lander_object_sprites);
+	update_collisions.playerMissileCollisions(player_obj, lander_objects, lander_missile_sprites);
 }

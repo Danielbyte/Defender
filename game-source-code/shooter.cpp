@@ -34,3 +34,8 @@ void Shooter::createProjectile(std::shared_ptr<Projectile>& projectile)
 {
 	projectiles.push_back(projectile);
 }
+
+std::vector<std::shared_ptr<Projectile>> Shooter::getProjectiles()
+{
+	return projectiles;
+}

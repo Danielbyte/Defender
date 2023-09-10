@@ -26,16 +26,16 @@ bool Collisions::checkCollision(float obj1Xposition, float obj1Yposition, float 
 
 bool Collisions::checkHorizontalCollisions(float obj1Right, float obj1Left, float obj2Right, float obj2Left)
 {
-	if ((obj1Right >= obj2Left && obj1Right <= obj2Right) || (obj1Left >= obj2Left && obj1Left <= obj1Right))
-		return true;
+	if (obj1Right < obj2Left || obj1Left > obj2Right)
+		return false;
 
-	return false;
+	return true;
 }
 
 bool Collisions::checkVerticalCollisions(float obj1Top, float obj1Bottom, float obj2Top, float obj2Bottom)
 {
-	if ((obj1Bottom >= obj2Top && obj1Bottom <= obj2Bottom) || (obj1Top >= obj2Top && obj1Top <= obj2Bottom))
-		return true;
+	if (obj1Bottom < obj2Top || obj1Top > obj2Bottom)
+		return false;
 
-	return false;
+	return true;
 }
