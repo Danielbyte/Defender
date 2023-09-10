@@ -92,6 +92,7 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 
 	std::shared_ptr<Shooter> shooter_obj = std::make_shared<Shooter>();
 	auto _projectiles = shooter_obj->getProjectiles();
+	auto laser_sprite = laser_sprites.begin();
 	
 	auto projectile_iter = _projectiles.begin();
 
@@ -100,7 +101,8 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 		if ((*projectile_iter)->getType() == ProjectileType::Laser)
 		{
 			auto lander_obj = landers.begin();
-
+			auto lander_sprite = lander_sprites.begin();
+			
 			while (lander_obj != landers.end())
 			{
 				auto [landerXpos, landerYpos] = (*lander_obj)->getPosition();
@@ -111,11 +113,16 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 
 				if (isCollided)
 				{
-					std::cout << "laser-lander collisions" << std::endl;
+					landers.erase(lander_obj);
+					lander_sprites.erase(lander_sprite);
 				}
-				++lander_obj;
+				else
+				{
+					++lander_obj;
+					++lander_sprite;
+				}
 			}
-
+			++laser_sprite;
 			++projectile_iter;
 		}
 
