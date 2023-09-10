@@ -22,6 +22,7 @@ public:
 	void updateGame(const float dt); //Defined in update.cpp
 	void updateLanders(const float dt);
 	void updateCollisions();
+	void updateProjectiles(const float dt);
 	void display(); //Defined in displayManager.cpp
 private:
 	unsigned int windowWidth;
@@ -60,6 +61,9 @@ private:
 
 	//Collision object
 	CollisionsManager update_collisions;
+
+	//Shooter object to update projectiles
+	std::shared_ptr<Shooter>shooter_object = std::make_shared<Shooter>();
 };
 #endif
 
