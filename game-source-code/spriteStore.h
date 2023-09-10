@@ -14,11 +14,14 @@ public:
 	bool getIfLeft() const;
 	bool getIfRight() const;
 	void InitialiseEntityOrigin(const sf::Vector2f& dimensions);
+	void remove();
+	bool needsDeletion() const;
 
 private:
 	bool toTheLeft;
 	bool toTheRight;
 	sf::Sprite entitySprite;
+	bool canDelete;
 };
 #endif // !SPRITESTORE_H
 

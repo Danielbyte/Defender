@@ -2,7 +2,8 @@
 
 SpriteStore::SpriteStore():
 	toTheLeft{false},
-	toTheRight{true}
+	toTheRight{true},
+	canDelete{false}
 {
 }
 
@@ -46,4 +47,14 @@ bool SpriteStore::getIfRight() const
 void SpriteStore::InitialiseEntityOrigin(const sf::Vector2f& dimensions)
 {
 	entitySprite.setOrigin(dimensions/2.0f);
+}
+
+void SpriteStore::remove()
+{
+	canDelete = true;
+}
+
+bool SpriteStore::needsDeletion() const
+{
+	return canDelete;
 }

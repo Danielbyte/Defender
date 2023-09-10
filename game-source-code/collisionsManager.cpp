@@ -102,7 +102,7 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 		{
 			auto lander_obj = landers.begin();
 			auto lander_sprite = lander_sprites.begin();
-			
+			auto hadAcollision = false;
 			while (lander_obj != landers.end())
 			{
 				auto [landerXpos, landerYpos] = (*lander_obj)->getPosition();
@@ -115,6 +115,11 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 				{
 					landers.erase(lander_obj);
 					lander_sprites.erase(lander_sprite);
+					(*laser_sprite)->remove();
+					shooter_obj->deleteProjectile((*projectile_iter)->getProjectileId());
+					shooter_obj->updateIds();
+					_projectiles.erase(projectile_iter);
+					hadAcollision = true;
 				}
 				else
 				{
@@ -122,8 +127,9 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 					++lander_sprite;
 				}
 			}
+
+			if (!hadAcollision) { ++projectile_iter; }
 			++laser_sprite;
-			++projectile_iter;
 		}
 
 		else
@@ -132,5 +138,17 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 		}
 	}
 
+	laser_sprite = laser_sprites.begin();
+	while (laser_sprite != laser_sprites.end())
+	{
+		if ((*laser_sprite)->needsDeletion())
+		{
+			laser_sprites.erase(laser_sprite);
+		}
+		else
+		{
+			++laser_sprite;
+		}
+	}
 
 }
