@@ -15,7 +15,7 @@ public:
 	std::tuple<float, float> getPosition() const;
 	void generateInitialPosition();
 
-	void updateLander(std::shared_ptr<LanderSprite>& lander_sprite,const float& dt,std::shared_ptr<Player>& player,
+	void updateLander(std::shared_ptr<LanderSprite>& lander_sprite,const float dt,std::shared_ptr<Player>& player,
 		std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
 
 	//model Lander movements

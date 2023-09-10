@@ -47,7 +47,7 @@ void Lander::generateInitialPosition()
 	yPosition = distribution2(gen);
 }
 
-void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const float& dt, 
+void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const float dt, 
 	std::shared_ptr<Player>& player, std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
 {
 	if (!reachedHumanoidZone)

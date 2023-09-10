@@ -6,7 +6,9 @@ playerLength{50.0f},
 landerWidth{16.0f},
 landerLength{16.0f},
 missileWidth{6.0f},
-missileLength{6.0f}
+missileLength{6.0f},
+laserWidth{2.0f},
+laserLength{100.0f}
 {}
 
 void CollisionsManager::playerLanderCollisions(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& landers,
@@ -37,7 +39,7 @@ void CollisionsManager::playerLanderCollisions(std::shared_ptr<Player>& player, 
 	}
 }
 
-void CollisionsManager::playerMissileCollisions(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& landers,
+void CollisionsManager::playerAndMissileCollisions(std::shared_ptr<Player>& player,
 	std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
 {
 	if (missile_sprites.empty())
@@ -80,4 +82,48 @@ void CollisionsManager::playerMissileCollisions(std::shared_ptr<Player>& player,
 			++projectile_iter;
 		}
 	}
+}
+
+void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lander>>& landers,
+	std::vector<std::shared_ptr<LanderSprite>>& lander_sprites, std::vector<std::shared_ptr<LaserSprite>>& laser_sprites)
+{
+	if (landers.empty())
+		return;
+
+	std::shared_ptr<Shooter> shooter_obj = std::make_shared<Shooter>();
+	auto _projectiles = shooter_obj->getProjectiles();
+	
+	auto projectile_iter = _projectiles.begin();
+
+	while (projectile_iter != _projectiles.end())
+	{
+		if ((*projectile_iter)->getType() == ProjectileType::Laser)
+		{
+			auto lander_obj = landers.begin();
+
+			while (lander_obj != landers.end())
+			{
+				auto [landerXpos, landerYpos] = (*lander_obj)->getPosition();
+				auto [laserXpos, laserYpos] = (*projectile_iter)->getProjectilePosition();
+
+				auto isCollided = collisions.checkCollision(landerXpos, landerYpos, landerWidth, landerLength, laserXpos,
+					laserYpos, laserWidth, laserLength);
+
+				if (isCollided)
+				{
+					std::cout << "laser-lander collisions" << std::endl;
+				}
+				++lander_obj;
+			}
+
+			++projectile_iter;
+		}
+
+		else
+		{
+			++projectile_iter;
+		}
+	}
+
+
 }

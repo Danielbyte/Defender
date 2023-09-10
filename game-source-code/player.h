@@ -15,7 +15,7 @@ public:
 	Player();
 	void updatePlayer(const bool& left, const bool& right,const bool& up, const bool& down, bool& space,
 		std::shared_ptr<PlayerSprite>& player_sprite, 
-		std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,const float& dt);
+		std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,const float dt);
 
 	std::tuple<float,float> getPlayerPosition() const;
 	void createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite);

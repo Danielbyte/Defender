@@ -8,7 +8,7 @@ LaserSprite::LaserSprite(const std::string& direction, const std::string& color)
 	loadTextures();
 	sf::Vector2f dimensions;
 	dimensions.x = 100.0f;
-	dimensions.y = 1.0f;
+	dimensions.y = 2.0f;
 	InitialiseEntityOrigin(dimensions);
 }
 

@@ -10,8 +10,7 @@ Player::Player():
 }
 
 void Player::updatePlayer(const bool& left, const bool& right, const bool& up, const bool& down,bool& space,
-	                      std::shared_ptr<PlayerSprite>& player_sprite, std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,
-	                      const float& dt)
+	std::shared_ptr<PlayerSprite>& player_sprite, std::vector<std::shared_ptr<LaserSprite>>& laser_sprite, const float dt)
 {
 	if (space)
 	{
