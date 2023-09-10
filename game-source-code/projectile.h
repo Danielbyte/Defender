@@ -28,6 +28,7 @@ public:
 	unsigned long long int getProjectileId() const;
 	ProjectileType getType() const;
 	float getSpeed() const;
+	void setNewId(unsigned long long int newId);
 
 private:
 	std::string direction;

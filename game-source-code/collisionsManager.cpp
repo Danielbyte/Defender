@@ -40,45 +40,43 @@ void CollisionsManager::playerLanderCollisions(std::shared_ptr<Player>& player, 
 void CollisionsManager::playerMissileCollisions(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& landers,
 	std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
 {
-	if (landers.empty() || missile_sprites.empty())
+	if (missile_sprites.empty())
 		return;
 
-	auto lander_iter = landers.begin();
-	
+	std::shared_ptr<Shooter>shooter_obj = std::make_shared<Shooter>();
+	auto _projectiles = shooter_obj->getProjectiles();
 
 	auto [playerXpos, playerYpos] = player->getPlayerPosition();
 
-	while (lander_iter != landers.end())
+	auto projectile_iter = _projectiles.begin();
+	auto missile_sprite_iter = missile_sprites.begin();
+
+	while (projectile_iter != _projectiles.end())
 	{
-		auto projectiles = (*lander_iter)->getProjectiles();
-		auto projectile_iter = projectiles.begin();
-		auto missile_sprite_iter = missile_sprites.begin();
-		while (projectile_iter != projectiles.end())
+		//Update w.r.t lander missiles only, else skip
+		if ((*projectile_iter)->getType() == ProjectileType::LanderMissile)
 		{
-			if ((*projectile_iter)->getType() == ProjectileType::LanderMissile)
+			auto [missileXpos, missileYpos] = (*projectile_iter)->getProjectilePosition();
+
+			auto isCollided = collisions.checkCollision(playerXpos, playerYpos, playerWidth, playerLength, missileXpos,
+				missileYpos, missileWidth, missileLength);
+
+			if (isCollided)
 			{
-				auto [missileXpos, missileYpos] = (*projectile_iter)->getProjectilePosition();
-
-				auto isCollided = collisions.checkCollision(playerXpos, playerYpos, playerWidth, playerLength, missileXpos,
-					missileYpos, missileWidth, missileLength);
-
-				if (isCollided)
-				{
-					(*lander_iter)->deleteProjectile((*projectile_iter)->getProjectileId());
-					missile_sprites.erase(missile_sprite_iter);
-					projectiles.erase(projectile_iter);
-				}
-				else
-				{
-					++projectile_iter;
-					++missile_sprite_iter;
-				}
+				auto Id = (*projectile_iter)->getProjectileId();
+				shooter_obj->deleteProjectile(Id);
+				missile_sprites.erase(missile_sprite_iter);
+				_projectiles.erase(projectile_iter);
 			}
 			else
 			{
 				++projectile_iter;
+				++missile_sprite_iter;
 			}
 		}
-		++lander_iter;
+		else
+		{
+			++projectile_iter;
+		}
 	}
 }

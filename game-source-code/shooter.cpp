@@ -46,4 +46,44 @@ std::vector<std::shared_ptr<Projectile>> Shooter::getProjectiles()
 	return projectiles;
 }
 
+//function to update projectile Ids once a projectile has been deleted
+void Shooter::updateIds()
+{
+	auto projectile_iter = projectiles.begin();
+	while (projectile_iter != projectiles.end())
+	{
+		if (projectile_iter == projectiles.begin())
+		{
+			(*projectile_iter)->setNewId(0);
+			++projectile_iter;
+		}
+
+		else
+		{
+			auto newId = (*(projectile_iter - 1))->getProjectileId() + 1;
+			(*projectile_iter)->setNewId(newId);
+			++projectile_iter;
+		}
+	}
+}
+
+void Shooter::deleteProjectile(unsigned long long int Id)
+{
+	auto projectile_iter = projectiles.begin();
+
+	while (projectile_iter != projectiles.end())
+	{
+		auto ID = (*projectile_iter)->getProjectileId();
+
+		if (ID == Id)
+		{
+			projectiles.erase(projectile_iter);
+		}
+		else
+		{
+			++projectile_iter;
+		}
+	}
+}
+
 std::vector<std::shared_ptr<Projectile>> Shooter::projectiles;

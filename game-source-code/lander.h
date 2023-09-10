@@ -32,8 +32,7 @@ public:
 
 
 	void updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
-	static void deleteProjectile(unsigned long long int Id);
-
+	
 private:
 	float xPosition;
 	float yPosition;

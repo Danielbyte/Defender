@@ -11,6 +11,8 @@ class Shooter
 public:
 	Shooter();
 	static void updateProjectile(float dt);
+	static void updateIds();
+	static void deleteProjectile(unsigned long long int Id);
 	static void createProjectile(std::shared_ptr<Projectile>& projectile);
     std::vector<std::shared_ptr<Projectile>> getProjectiles();
 	

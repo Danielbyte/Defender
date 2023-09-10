@@ -100,3 +100,8 @@ float Projectile::getSpeed() const
 {
 	return speed;
 }
+
+void Projectile::setNewId(unsigned long long int newId)
+{
+	projectileId = newId;
+}

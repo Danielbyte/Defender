@@ -374,22 +374,3 @@ void Lander::updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& m
 		}
 	}
 }
-
-void Lander::deleteProjectile(unsigned long long int Id)
-{
-	auto projectile_iter = projectiles.begin();
-
-	while (projectile_iter != projectiles.end())
-	{
-		auto ID = (*projectile_iter)->getProjectileId();
-
-		if (ID == Id)
-		{
-			projectiles.erase(projectile_iter);
-		}
-		else
-		{
-			++projectile_iter;
-		}
-	}
-}
