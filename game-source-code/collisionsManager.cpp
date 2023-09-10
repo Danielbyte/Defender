@@ -65,6 +65,7 @@ void CollisionsManager::playerMissileCollisions(std::shared_ptr<Player>& player,
 			{
 				auto Id = (*projectile_iter)->getProjectileId();
 				shooter_obj->deleteProjectile(Id);
+				shooter_obj->updateIds();
 				missile_sprites.erase(missile_sprite_iter);
 				_projectiles.erase(projectile_iter);
 			}
