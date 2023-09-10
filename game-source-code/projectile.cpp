@@ -15,7 +15,8 @@ Projectile::Projectile():
 {}
 
 Projectile::Projectile(const float x, const float y, const std::string _direction, const float horizontalOffset,
-	const float verticalOffset,const float _targetXpos, const float _targetYpos, const int _projectileId):
+	const float verticalOffset,const float _targetXpos, const float _targetYpos, unsigned long long int _projectileId,
+	ProjectileType _typeOfShooter):
 	projectileSpeed{ 0.0f }
 {
 	direction = _direction;
@@ -37,8 +38,11 @@ Projectile::Projectile(const float x, const float y, const std::string _directio
 	projectileSpeed = 600.0f;
 
 	targetXpos = _targetXpos;
-	targetYpos = _targetYpos;
+	if (_typeOfShooter == ProjectileType::Laser) { targetYpos = initialYpos; }
+	else { targetYpos = _targetYpos; }
+	
 	projectileId = _projectileId;
+	typeOfShooter = _typeOfShooter;
 	calculateTrajectoryConstants();
 }
 
@@ -89,7 +93,12 @@ void Projectile::updatePosition(const float x, const float y)
 	yPosition = y;
 }
 
-int Projectile::getProjectileId() const
+unsigned long long int Projectile::getProjectileId() const
 {
 	return projectileId;
+}
+
+ProjectileType Projectile::getType() const
+{
+	return typeOfShooter;
 }

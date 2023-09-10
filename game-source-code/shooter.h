@@ -10,12 +10,12 @@ class Shooter
 {
 public:
 	Shooter();
-	virtual void updateProjectile(float dt);
-	void createProjectile(std::shared_ptr<Projectile>& projectile);
-	std::vector<std::shared_ptr<Projectile>> getProjectiles();
+	static void updateProjectile(float dt);
+	static void createProjectile(std::shared_ptr<Projectile>& projectile);
+    std::vector<std::shared_ptr<Projectile>> getProjectiles();
 	
 protected:
-	std::vector<std::shared_ptr<Projectile>>projectiles;
+	static std::vector<std::shared_ptr<Projectile>>projectiles;
 };
 #endif // !PROJECTILE_H
 

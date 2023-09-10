@@ -55,20 +55,28 @@ void CollisionsManager::playerMissileCollisions(std::shared_ptr<Player>& player,
 		auto missile_sprite_iter = missile_sprites.begin();
 		while (projectile_iter != projectiles.end())
 		{
-			auto [missileXpos, missileYpos] = (*projectile_iter)->getProjectilePosition();
-			auto isCollided = collisions.checkCollision(playerXpos, playerYpos, playerWidth, playerLength, missileXpos,
-				missileYpos, missileWidth, missileLength);
-			std::cout << "Came" << std::endl;
-			if (isCollided)
+			if ((*projectile_iter)->getType() == ProjectileType::LanderMissile)
 			{
-				(*lander_iter)->deleteProjectile((*projectile_iter)->getProjectileId());
-				missile_sprites.erase(missile_sprite_iter);
-				projectiles.erase(projectile_iter);
+				auto [missileXpos, missileYpos] = (*projectile_iter)->getProjectilePosition();
+
+				auto isCollided = collisions.checkCollision(playerXpos, playerYpos, playerWidth, playerLength, missileXpos,
+					missileYpos, missileWidth, missileLength);
+
+				if (isCollided)
+				{
+					(*lander_iter)->deleteProjectile((*projectile_iter)->getProjectileId());
+					missile_sprites.erase(missile_sprite_iter);
+					projectiles.erase(projectile_iter);
+				}
+				else
+				{
+					++projectile_iter;
+					++missile_sprite_iter;
+				}
 			}
 			else
 			{
 				++projectile_iter;
-				++missile_sprite_iter;
 			}
 		}
 		++lander_iter;

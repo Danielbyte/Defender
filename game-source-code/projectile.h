@@ -6,12 +6,15 @@
 #include <memory>
 #include <string>
 
+enum class ProjectileType { Laser, LanderMissile };
+
 class Projectile
 {
 public:
 	Projectile();
 	Projectile(const float x, const float y, const std::string _direction, const float horizontalOffset,
-		const float verticalOffset, const float _targetXpos, const float _targetYpos,const int projectileId);
+		const float verticalOffset, const float _targetXpos, const float _targetYpos,
+		unsigned long long int projectileId,ProjectileType _typeOfShooter);
 
 	std::tuple<float, float> getProjectilePosition() const;
 
@@ -23,7 +26,8 @@ public:
 	void updateTrajectory(const float x);
 	void calculateTrajectoryConstants();
 	void updatePosition(const float x, const float y);
-	int getProjectileId() const;
+	unsigned long long int getProjectileId() const;
+	ProjectileType getType() const;
 
 private:
 	float projectileSpeed;
@@ -43,7 +47,9 @@ private:
 	float slope;
 	float yIntercept;
 
-	int projectileId;
+	unsigned long long int projectileId;
+
+	ProjectileType typeOfShooter;
 };
 #endif // !ENEMY_H
 

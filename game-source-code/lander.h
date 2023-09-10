@@ -14,8 +14,11 @@ public:
 	Lander();
 	std::tuple<float, float> getPosition() const;
 	void generateInitialPosition();
+
 	void updateLander(std::shared_ptr<LanderSprite>& lander_sprite,const float& dt,std::shared_ptr<Player>& player,
 		std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
+
+	//model Lander movements
 	void moveEast(const float& dt);
 	void moveWest(const float& dt);
 	void moveNorth(const float& dt);
@@ -26,9 +29,10 @@ public:
 	void moveNorthWest(const float& dt);
 	void pickDirection();
 	void restrictLander(const float& dt); //Restrict lander to hover around humanoid zone
-	void updateProjectile(float dt) override; //Provide own version
+
+
 	void updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
-	void deleteProjectile(const int Id);
+	static void deleteProjectile(unsigned long long int Id);
 
 private:
 	float xPosition;
@@ -44,7 +48,6 @@ private:
 	float playerXposref;
 	float playerYposref;
 	void createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
-	int projectileId;
 };
 #endif // !LANDER_H
 

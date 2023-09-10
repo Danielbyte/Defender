@@ -9,8 +9,7 @@ Lander::Lander():
 	reachedHumanoidZone{false},
 	direction{Direction::Unknown},
 	playerXposref{0.0f},
-	playerYposref{0.0f},
-	projectileId{1}
+	playerYposref{0.0f}
 {
 	//generate spawn position
 	generateInitialPosition();
@@ -300,38 +299,6 @@ void Lander::restrictLander(const float& dt)
 	}
 }
 
-void Lander::updateProjectile(float dt)
-{
-	if (projectiles.empty())
-		return;
-
-	//Avoid glitches in game
-	if (dt > 0.017f)
-		dt = 1 / 60.0f;
-
-	auto missile_iter = projectiles.begin();
-
-	while (missile_iter != projectiles.end())
-	{
-		auto _direction = (*missile_iter)->getProjectileDirection();
-
-		if (_direction == "left")
-		{
-			auto [x, y] = (*missile_iter)->getProjectilePosition();
-			auto newX = x - 100.0f * dt;
-			(*missile_iter)->updateTrajectory(newX);
-		}
-
-		if (_direction == "right")
-		{
-			auto [x, y] = (*missile_iter)->getProjectilePosition();
-			auto newX = x + 100.0f * dt;
-			(*missile_iter)->updateTrajectory(newX);
-		}
-		++missile_iter;
-	}
-}
-
 void Lander::createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
 {
 	std::random_device rd;
@@ -349,12 +316,11 @@ void Lander::createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile
 			//missile should move right
 			auto horizontalOffset = 0.0f;
 			auto verticalOffset = 0.0f;
+			auto Id = projectiles.size() + 1;
 			auto missile = std::make_shared<Projectile>(xPosition,yPosition,"right",horizontalOffset,verticalOffset,
-				playerXposref,playerYposref,projectileId);
-			
-			++projectileId;
+				playerXposref,playerYposref,Id,ProjectileType::LanderMissile);
 
-			projectiles.push_back(missile);
+			createProjectile(missile);
 
 			auto missile_sprite = std::make_shared<MissileSprite>();
 			missile_sprites.push_back(missile_sprite);
@@ -367,12 +333,11 @@ void Lander::createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile
 			//missile should move left
 			auto horizontalOffset = 0.0f;
 			auto verticalOffset = 0.0f;
+			auto Id = projectiles.size() + 1;
 			auto missile = std::make_shared<Projectile>(xPosition, yPosition, "left", horizontalOffset,
-				verticalOffset,playerXposref,playerYposref, projectileId);
+				verticalOffset,playerXposref,playerYposref, Id,ProjectileType::LanderMissile);
 
-			++projectileId;
-
-			projectiles.push_back(missile);
+			createProjectile(missile);
 
 			auto missile_sprite = std::make_shared<MissileSprite>();
 			missile_sprites.push_back(missile_sprite);
@@ -390,17 +355,25 @@ void Lander::updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& m
 
 	while (missile_obj != projectiles.end())
 	{
-		auto [x, y] = (*missile_obj)->getProjectilePosition();
-		(*missile_sprite)->updateSpritePosition("either", x, y);
-		(*missile_obj)->updateFrameCounter();
-		auto frame = (*missile_obj)->getFrameCounter();
-		(*missile_sprite)->setTexture(frame);
-		++missile_obj;
-		++missile_sprite;
+		if ((*missile_obj)->getType() == ProjectileType::LanderMissile)
+		{
+			auto [x, y] = (*missile_obj)->getProjectilePosition();
+			(*missile_sprite)->updateSpritePosition("either", x, y);
+			(*missile_obj)->updateFrameCounter();
+			auto frame = (*missile_obj)->getFrameCounter();
+			(*missile_sprite)->setTexture(frame);
+			++missile_obj;
+			++missile_sprite;
+		}
+
+		else
+		{
+			++missile_obj;
+		}
 	}
 }
 
-void Lander::deleteProjectile(const int Id)
+void Lander::deleteProjectile(unsigned long long int Id)
 {
 	auto projectile_iter = projectiles.begin();
 
@@ -411,7 +384,6 @@ void Lander::deleteProjectile(const int Id)
 		if (ID == Id)
 		{
 			projectiles.erase(projectile_iter);
-			std::cout << "Came" << std::endl;
 		}
 		else
 		{

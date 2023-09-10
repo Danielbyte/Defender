@@ -7,27 +7,31 @@ void Shooter::updateProjectile(float dt)
 	if (projectiles.empty())
 		return;
 
-	auto projectile_iter = projectiles.begin();
-	while (projectile_iter != projectiles.end())
+	//Avoid glitches in game
+	if (dt > 0.017f)
+		dt = 1 / 60.0f;
+
+	auto missile_iter = projectiles.begin();
+
+	while (missile_iter != projectiles.end())
 	{
-		auto direction = (*projectile_iter)->getProjectileDirection();
-		auto [xPosition, yPosition] = (*projectile_iter)->getProjectilePosition();
-		auto projectileSpeed = (*projectile_iter)->getProjectileSpeed();
+		auto _direction = (*missile_iter)->getProjectileDirection();
 
-		if (direction == "right")
+		if (_direction == "left")
 		{
-			xPosition += projectileSpeed * dt;
-			(*projectile_iter)->updatePosition(xPosition, yPosition);
+			auto [x, y] = (*missile_iter)->getProjectilePosition();
+			auto newX = x - 100.0f * dt;
+			(*missile_iter)->updateTrajectory(newX);
 		}
 
-		if (direction == "left")
+		if (_direction == "right")
 		{
-			xPosition -= projectileSpeed * dt;
-			(*projectile_iter)->updatePosition(xPosition, yPosition);
+			auto [x, y] = (*missile_iter)->getProjectilePosition();
+			auto newX = x + 100.0f * dt;
+			(*missile_iter)->updateTrajectory(newX);
 		}
-		++projectile_iter;
+		++missile_iter;
 	}
-
 }
 
 void Shooter::createProjectile(std::shared_ptr<Projectile>& projectile)
@@ -39,3 +43,5 @@ std::vector<std::shared_ptr<Projectile>> Shooter::getProjectiles()
 {
 	return projectiles;
 }
+
+std::vector<std::shared_ptr<Projectile>> Shooter::projectiles;
