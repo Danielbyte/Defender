@@ -2,7 +2,7 @@
 
 Player::Player():
 	playerSpeed{250.0f},
-	laserSpeed{500.0f}
+	laserSpeed{400.0f}
 {
 	x_playerPosition = 25.0f;
 	y_playerPosition = 300.0f; 

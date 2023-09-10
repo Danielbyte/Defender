@@ -34,7 +34,7 @@ void Game::run()
 {
 	sf::Clock clock;
 	window.setVerticalSyncEnabled(true);
-	window.setFramerateLimit(60);
+	//window.setFramerateLimit(60);
 	while (window.isOpen())
 	{
 			float deltaTime = clock.restart().asSeconds();
