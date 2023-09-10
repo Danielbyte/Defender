@@ -7,11 +7,11 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
-#include <memory>
 #include "player.h"
 #include "lander.h"
 #include "gameWorld.h"
 #include "collisionsManager.h"
+#include "humanoid.h"
 
 class Game
 {
@@ -64,6 +64,9 @@ private:
 
 	//Shooter object to update projectiles
 	std::shared_ptr<Shooter>shooter_object = std::make_shared<Shooter>();
+
+	//Humanoid objects
+	std::vector<std::shared_ptr<Humanoid>> humanoid_objects;
 };
 #endif
 
