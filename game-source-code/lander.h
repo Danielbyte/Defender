@@ -28,6 +28,7 @@ public:
 	void restrictLander(const float& dt); //Restrict lander to hover around humanoid zone
 	void updateProjectile(float dt) override; //Provide own version
 	void updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
+	void deleteProjectile(const int Id);
 
 private:
 	float xPosition;
@@ -43,6 +44,7 @@ private:
 	float playerXposref;
 	float playerYposref;
 	void createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
+	int projectileId;
 };
 #endif // !LANDER_H
 

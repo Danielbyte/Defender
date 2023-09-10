@@ -9,7 +9,8 @@ Lander::Lander():
 	reachedHumanoidZone{false},
 	direction{Direction::Unknown},
 	playerXposref{0.0f},
-	playerYposref{0.0f}
+	playerYposref{0.0f},
+	projectileId{1}
 {
 	//generate spawn position
 	generateInitialPosition();
@@ -349,7 +350,9 @@ void Lander::createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile
 			auto horizontalOffset = 0.0f;
 			auto verticalOffset = 0.0f;
 			auto missile = std::make_shared<Projectile>(xPosition,yPosition,"right",horizontalOffset,verticalOffset,
-				playerXposref,playerYposref);
+				playerXposref,playerYposref,projectileId);
+			
+			++projectileId;
 
 			projectiles.push_back(missile);
 
@@ -365,7 +368,9 @@ void Lander::createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile
 			auto horizontalOffset = 0.0f;
 			auto verticalOffset = 0.0f;
 			auto missile = std::make_shared<Projectile>(xPosition, yPosition, "left", horizontalOffset,
-				verticalOffset,playerXposref,playerYposref);
+				verticalOffset,playerXposref,playerYposref, projectileId);
+
+			++projectileId;
 
 			projectiles.push_back(missile);
 
@@ -392,5 +397,25 @@ void Lander::updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& m
 		(*missile_sprite)->setTexture(frame);
 		++missile_obj;
 		++missile_sprite;
+	}
+}
+
+void Lander::deleteProjectile(const int Id)
+{
+	auto projectile_iter = projectiles.begin();
+
+	while (projectile_iter != projectiles.end())
+	{
+		auto ID = (*projectile_iter)->getProjectileId();
+
+		if (ID == Id)
+		{
+			projectiles.erase(projectile_iter);
+			std::cout << "Came" << std::endl;
+		}
+		else
+		{
+			++projectile_iter;
+		}
 	}
 }

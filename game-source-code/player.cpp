@@ -70,7 +70,7 @@ void Player::createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprit
 	auto verticalOffset = 5.0f;
 
 	auto laser_pr = std::make_shared<Projectile>(Projectile(x_playerPosition, y_playerPosition, direction,
-		horizontalOffset, verticalOffset,x_playerPosition,y_playerPosition));
+		horizontalOffset, verticalOffset,x_playerPosition,y_playerPosition,0));
 
 	projectiles.push_back(laser_pr);
 

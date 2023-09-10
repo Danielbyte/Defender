@@ -31,20 +31,20 @@ void CollisionsManager::playerLanderCollisions(std::shared_ptr<Player>& player, 
 			std::cout << "player-lander collision!" << std::endl;
 			//should set game over to true
 		}
-
-		++lander_iter;
-		++lander_sprite_iter;
+		
+			++lander_iter;
+			++lander_sprite_iter;
 	}
 }
 
 void CollisionsManager::playerMissileCollisions(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& landers,
 	std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
 {
-	if (landers.empty())
+	if (landers.empty() || missile_sprites.empty())
 		return;
 
 	auto lander_iter = landers.begin();
-	auto missile_sprite_iter = missile_sprites.begin();
+	
 
 	auto [playerXpos, playerYpos] = player->getPlayerPosition();
 
@@ -52,18 +52,25 @@ void CollisionsManager::playerMissileCollisions(std::shared_ptr<Player>& player,
 	{
 		auto projectiles = (*lander_iter)->getProjectiles();
 		auto projectile_iter = projectiles.begin();
+		auto missile_sprite_iter = missile_sprites.begin();
 		while (projectile_iter != projectiles.end())
 		{
 			auto [missileXpos, missileYpos] = (*projectile_iter)->getProjectilePosition();
 			auto isCollided = collisions.checkCollision(playerXpos, playerYpos, playerWidth, playerLength, missileXpos,
 				missileYpos, missileWidth, missileLength);
-
+			std::cout << "Came" << std::endl;
 			if (isCollided)
-				std::cout << "missile-player collisions" << std::endl;
-
-			++projectile_iter;
+			{
+				(*lander_iter)->deleteProjectile((*projectile_iter)->getProjectileId());
+				missile_sprites.erase(missile_sprite_iter);
+				projectiles.erase(projectile_iter);
+			}
+			else
+			{
+				++projectile_iter;
+				++missile_sprite_iter;
+			}
 		}
 		++lander_iter;
-		++missile_sprite_iter;
 	}
 }

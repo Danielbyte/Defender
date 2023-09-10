@@ -10,11 +10,12 @@ Projectile::Projectile():
 	targetYpos{ 0.0f },
 	frame_counter{0},
 	slope{0.0f},
-	yIntercept{0.0f}
+	yIntercept{0.0f},
+	projectileId{0}
 {}
 
 Projectile::Projectile(const float x, const float y, const std::string _direction, const float horizontalOffset,
-	const float verticalOffset,const float _targetXpos, const float _targetYpos):
+	const float verticalOffset,const float _targetXpos, const float _targetYpos, const int _projectileId):
 	projectileSpeed{ 0.0f }
 {
 	direction = _direction;
@@ -37,7 +38,7 @@ Projectile::Projectile(const float x, const float y, const std::string _directio
 
 	targetXpos = _targetXpos;
 	targetYpos = _targetYpos;
-
+	projectileId = _projectileId;
 	calculateTrajectoryConstants();
 }
 
@@ -86,4 +87,9 @@ void Projectile::updatePosition(const float x, const float y)
 {
 	xPosition = x;
 	yPosition = y;
+}
+
+int Projectile::getProjectileId() const
+{
+	return projectileId;
 }
