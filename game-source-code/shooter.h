@@ -10,7 +10,7 @@ class Shooter
 {
 public:
 	Shooter();
-	static void updateProjectile(float dt);
+	static void updateProjectile(float dt,const ProjectileType type);
 	static void updateIds();
 	static void deleteProjectile(unsigned long long int Id);
 	static void createProjectile(std::shared_ptr<Projectile>& projectile);

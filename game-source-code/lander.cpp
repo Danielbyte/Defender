@@ -10,7 +10,7 @@ Lander::Lander():
 	direction{Direction::Unknown},
 	playerXposref{0.0f},
 	playerYposref{0.0f},
-	missileSpeed{50.0f}
+	missileSpeed{150.0f}
 {
 	//generate spawn position
 	generateInitialPosition();
@@ -107,8 +107,7 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 	playerXposref = x;
 	playerYposref = y;
 	createMissiles(missile_sprites);
-	auto missileSpeed = 2.0f;
-	updateProjectile(dt);
+	updateProjectile(dt, ProjectileType::LanderMissile);
 	updateMissileSprites(missile_sprites);
 
 	lander_sprite->setTexture(lander_watch);

@@ -4,7 +4,7 @@
 #include <string>
 #include <tuple>
 
-enum class HumanoidState{Walking,Abducted,Falling};
+enum class HumanoidState{Walking,Abducted,Falling, Dead};
 
 class Humanoid
 {

@@ -108,20 +108,10 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 				auto [landerXpos, landerYpos] = (*lander_obj)->getPosition();
 				auto [laserXpos, laserYpos] = (*projectile_iter)->getProjectilePosition();
 
-				auto offset = 30.0f;
-				auto isCollided = false;
-				if ((*projectile_iter)->getProjectileDirection() == "right")
-				{
-					    isCollided = collisions.checkCollision(landerXpos, landerYpos, landerWidth, landerLength,
-						laserXpos - offset, laserYpos, laserWidth, laserLength);
-				}
-				else
-				{
-					isCollided = collisions.checkCollision(landerXpos, landerYpos, landerWidth, landerLength,
-						laserXpos + offset, laserYpos, laserWidth, laserLength);
-				}
 
-
+			    auto isCollided = collisions.checkCollision(landerXpos, landerYpos, landerWidth, landerLength,laserXpos,
+					laserYpos, laserWidth, laserLength);
+				
 				if (isCollided)
 				{
 					landers.erase(lander_obj);

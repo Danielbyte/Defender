@@ -39,6 +39,8 @@ void Game::updateCollisions()
 void Game::updateProjectiles(const float dt)
 {
 	std::shared_ptr<Lander>lander_object = std::make_shared<Lander>();
-	shooter_object->updateProjectile(dt);
 	lander_object->updateMissileSprites(lander_missile_sprites);
+	
+	if (lander_objects.empty())
+	shooter_object->updateProjectile(dt,ProjectileType::LanderMissile);
 }

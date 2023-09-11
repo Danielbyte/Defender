@@ -2,7 +2,7 @@
 
 Player::Player():
 	playerSpeed{250.0f},
-	laserSpeed{400.0f}
+	laserSpeed{700.0f}
 {
 	x_playerPosition = 25.0f;
 	y_playerPosition = 300.0f; 
@@ -58,9 +58,9 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 		if (y_playerPosition >= downBoundary)
 			y_playerPosition = downBoundary;
 	}
+	
 	player_sprite->updateSpritePosition("either", x_playerPosition, y_playerPosition);
 	player_sprite->setTexture();
-
 	updateLasers(laser_sprite, dt);
 }
 
@@ -115,7 +115,7 @@ void Player::updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprit
 	auto projectile_iter = projectiles.begin();
 	auto laser_sprite_iter = laser_sprite.begin();
 	auto laserSpeed = 600.0f;
-	updateProjectile(dt);
+	updateProjectile(dt, ProjectileType::Laser);
 
 	while (projectile_iter != projectiles.end())
 	{
