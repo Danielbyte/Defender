@@ -2,13 +2,15 @@
 #define HUMANOIDSPRITE_H
 
 #include "spriteStore.h"
+#include "stopWatch.h"
+#include "humanoid.h"
 
 class HumanoidSprite : public SpriteStore
 {
 public:
 	HumanoidSprite();
 	void virtual loadTextures();
-	void setTexture();
+	void setTexture(std::string _direction, std::shared_ptr<StopWatch>& watch,const HumanoidState state);
 
 private:
 	sf::Texture humanoidLeft1_t;
@@ -19,6 +21,7 @@ private:
 	sf::Texture fallingHumanoid2_t;
 	sf::Texture fallingHumanoid3_t;
 
+	float texture_period;
 };
 #endif // !HUMANOIDSPRITE_H
 

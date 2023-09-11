@@ -11,7 +11,7 @@
 #include "lander.h"
 #include "gameWorld.h"
 #include "collisionsManager.h"
-#include "humanoid.h"
+#include "humanoidSprite.h"
 
 class Game
 {
@@ -67,6 +67,7 @@ private:
 
 	//Humanoid objects
 	std::vector<std::shared_ptr<Humanoid>> humanoid_objects;
+	std::vector<std::shared_ptr<HumanoidSprite>> humanoid_sprites;
 };
 #endif
 

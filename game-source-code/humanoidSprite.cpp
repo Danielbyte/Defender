@@ -1,6 +1,7 @@
 #include "humanoidSprite.h"
 
-HumanoidSprite::HumanoidSprite()
+HumanoidSprite::HumanoidSprite():
+	texture_period{1.0f}
 {
 	sf::Vector2f dimensions;
 	dimensions.x = 8.0f;
@@ -20,7 +21,7 @@ void HumanoidSprite::loadTextures()
 	fallingHumanoid3_t.loadFromFile("resources/falling-humanoid3.png");
 }
 
-void HumanoidSprite::setTexture()
+void HumanoidSprite::setTexture(std::string direction, std::shared_ptr<StopWatch>& watch, const HumanoidState state)
 {
 
 }
