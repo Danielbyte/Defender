@@ -33,6 +33,7 @@ void HumanoidSprite::setTexture(std::string direction, std::shared_ptr<StopWatch
 
 	case HumanoidState::Falling:
 		//load falling textures
+		falling(direction, watch);
 		break;
 	default:
 		break;
@@ -65,4 +66,22 @@ void HumanoidSprite::walkingAndAbuction(std::string direction,std::shared_ptr<St
 		updateSpriteTexture(humanoidRight2_t);
 		watch->restart();
 	}
+}
+
+void HumanoidSprite::falling(std::string direction, std::shared_ptr<StopWatch>& watch)
+{
+	texture_period = 0.3f;
+	auto _time = watch->time_elapsed();
+
+	if (_time >= 0.0f && _time <= texture_period)
+		updateSpriteTexture(fallingHumanoid1_t);
+
+	if (_time > texture_period && _time <= 2 * texture_period)
+	    updateSpriteTexture(fallingHumanoid2_t);
+	
+	if (_time > 2 * texture_period && _time <= 3 * texture_period)
+	{
+		updateSpriteTexture(humanoidRight1_t);
+		watch->restart();
+	}	
 }

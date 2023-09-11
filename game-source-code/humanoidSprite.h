@@ -13,8 +13,8 @@ public:
 	void setTexture(std::string _direction, std::shared_ptr<StopWatch>& watch,const HumanoidState state);
 
 private:
-	void walkingAndAbuction(std::string direction,std::shared_ptr<StopWatch>& watch);
-	void falling(std::shared_ptr<StopWatch>& watch);
+	void walkingAndAbuction(std::string direction, std::shared_ptr<StopWatch>& watch);
+	void falling(std::string direction, std::shared_ptr<StopWatch>& watch);
 
 	sf::Texture humanoidLeft1_t;
 	sf::Texture humanoidLeft2_t;
