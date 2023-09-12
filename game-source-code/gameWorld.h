@@ -12,13 +12,15 @@ enum class Enemy{Lander,Bomber,Pod,None};
 class GameWorld
 {
 public:
-	GameWorld(std::vector<std::shared_ptr<Humanoid>>& humanoid_objects,
-		std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites);
+	GameWorld();
 
 	void updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_objects,
 		std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites);
 
 	Enemy generateEnemy();
+
+	void placeHumanoids(std::vector<std::shared_ptr<Humanoid>>& humanoid_objects,
+		std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites);
 
 private:
 	std::shared_ptr<StopWatch> world_watch = std::make_shared<StopWatch>();
@@ -26,12 +28,6 @@ private:
 
 	void createLander(std::vector<std::shared_ptr<Lander>>& lander_objects,
 		std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites);
-
-	void placeHumanoids(std::vector<std::shared_ptr<Humanoid>>& humanoid_objects,
-		std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites);
-
-	float generateXposition(std::set<float>& existentXpositions);
-	std::string generateDirection();
 };
 #endif // !GAMEWORLD_H
 

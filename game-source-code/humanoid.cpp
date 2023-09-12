@@ -5,15 +5,9 @@ state{HumanoidState::Walking}, //Humanoid initially walking
 direction{"unknown"},
 xPosition{0.0f},
 yPosition{0.0f},
-speed{25.0f}
-{}
-
-Humanoid::Humanoid(const float initXpos, const float initYpos, std::string _direction) :
-	state{ HumanoidState::Walking }
+speed{0.9f}
 {
-	direction = _direction;
-	xPosition = initXpos;
-	yPosition = initYpos;
+	placeHumanoid();
 }
 
 HumanoidState Humanoid::getHumanoidState() const
@@ -40,10 +34,11 @@ void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& h
 {
 	if (direction == "right")
 		xPosition += speed * dt;
+		
 
 	if (direction == "left")
-		xPosition -= speed * dt;
-
+	    xPosition -= speed * dt;
+		
 	updateHumanoidSprite(humanoid_sprite);
 }
 
@@ -65,4 +60,37 @@ void Humanoid::updateHumanoidSprite(std::shared_ptr<HumanoidSprite>& humanoid_sp
 		default:
 			break;
 		}
+}
+
+void Humanoid::placeHumanoid()
+{
+	 yPosition = 580.0f;
+     generateXposition();
+	 direction = generateDirection();
+}
+
+void Humanoid::generateXposition()
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	float min = 4.0f;
+	float max = 796.0f;
+	std::uniform_real_distribution<float>distribution(min, max);
+
+	xPosition = distribution(gen);
+}
+
+std::string Humanoid::generateDirection()
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	int min = 1;
+	int max = 10;
+	std::uniform_int_distribution<int>distribution(min, max);
+	auto direction = distribution(gen);
+
+	if (direction <= 5)
+		return "right";
+
+	return "left";
 }

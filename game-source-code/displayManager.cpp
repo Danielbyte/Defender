@@ -20,6 +20,11 @@ void Game::display()
 		{
 			window.draw(lander_missile->getSprite());
 		}
+
+		for (auto& humanoid : humanoid_sprites)
+		{
+			window.draw(humanoid->getSprite());
+		}
 	}
 
 	else

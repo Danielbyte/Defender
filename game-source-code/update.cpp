@@ -7,6 +7,8 @@ void Game::updateGame(const float dt)
 
 	game_world->updateGameWorld(lander_objects, lander_object_sprites);
 
+	updateHumanoids(dt);
+
 	player_obj->updatePlayer(leftPressed, rightPressed, upPressed, downPressed,spacePressed,player_sprite,
 		laser_sprite,dt);
 
@@ -39,9 +41,11 @@ void Game::updateCollisions()
 void Game::updateHumanoids(const float dt)
 {
 	auto humanoid_sprite = humanoid_sprites.begin();
-	for (auto& humanoid : humanoid_objects)
+	auto humanoid = humanoid_objects.begin();
+	while (humanoid != humanoid_objects.end())
 	{
-		humanoid->updateHumanoid(dt, *humanoid_sprite);
+		(*humanoid)->updateHumanoid(dt, *humanoid_sprite);
+		++humanoid;
 		++humanoid_sprite;
 	}
 }

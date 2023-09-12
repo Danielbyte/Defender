@@ -28,6 +28,8 @@ Game::Game():
 	background_s.setTexture(background_t);
 	background_s.setOrigin(windowWidth/2.0f, windowHeight/2.0f);
 	background_s.setPosition(windowWidth/2.0f,windowHeight/2.0f);
+
+	game_world->placeHumanoids(humanoid_objects, humanoid_sprites);
 }
 
 void Game::run()

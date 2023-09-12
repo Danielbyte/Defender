@@ -53,7 +53,7 @@ private:
 	std::vector<std::shared_ptr<HumanoidSprite>> humanoid_sprites;
 
 	// game world
-	std::shared_ptr<GameWorld> game_world = std::make_shared<GameWorld>(humanoid_objects,humanoid_sprites);
+	std::shared_ptr<GameWorld> game_world = std::make_shared<GameWorld>();
 
 	//Player Entity
 	std::shared_ptr<Player> player_obj = std::make_shared<Player>();

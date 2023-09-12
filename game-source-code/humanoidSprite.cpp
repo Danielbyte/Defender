@@ -1,7 +1,7 @@
 #include "humanoidSprite.h"
 
 HumanoidSprite::HumanoidSprite():
-	texture_period{1.0f}
+	texture_period{0.5f}
 {
 	sf::Vector2f dimensions;
 	dimensions.x = 8.0f;
@@ -39,7 +39,7 @@ void HumanoidSprite::setTexture(std::string direction, const std::string state, 
 
 void HumanoidSprite::walkingAndAbuction(std::string direction)
 {
-	texture_period = 1.0f;
+	texture_period = 0.5f;
 	auto _time = humanoid_watch->time_elapsed();
 
 	if (direction == "left")
@@ -67,7 +67,7 @@ void HumanoidSprite::walkingAndAbuction(std::string direction)
 
 void HumanoidSprite::falling(std::string direction)
 {
-	texture_period = 0.3f;
+	texture_period = 1.0f;
 	auto _time = humanoid_watch->time_elapsed();
 
 	if (_time >= 0.0f && _time <= texture_period)
