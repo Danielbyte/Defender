@@ -7,7 +7,7 @@ class SpriteStore
 {
 public:
 	SpriteStore();
-	void updateSpritePosition(const std::string& direction, const float& x_pos, const float& y_pos);
+	void updateSpritePosition(const std::string& direction, const float x_pos, const float y_pos);
 	void updateSpriteTexture(sf::Texture& texture);
     sf::Sprite getSprite() const;
 	virtual void loadTextures() = 0;

@@ -4,7 +4,7 @@
 #include <iostream>
 #include "lander.h"
 #include "humanoidSprite.h"
-//#include <random>
+#include "humanoid.h"
 #include <set>
 
 enum class Enemy{Lander,Bomber,Pod,None};

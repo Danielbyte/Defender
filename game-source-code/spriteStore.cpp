@@ -7,7 +7,7 @@ SpriteStore::SpriteStore():
 {
 }
 
-void SpriteStore::updateSpritePosition(const std::string& entityDirection, const float& x_pos,const float& y_pos)
+void SpriteStore::updateSpritePosition(const std::string& entityDirection, const float x_pos,const float y_pos)
 {
 	if (entityDirection == "right")
 	{

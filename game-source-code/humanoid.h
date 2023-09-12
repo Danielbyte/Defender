@@ -3,6 +3,8 @@
 
 #include <string>
 #include <tuple>
+#include "humanoidSprite.h"
+#include <memory>
 
 
 enum class HumanoidState{Walking,Abducted,Falling, Dead};
@@ -16,16 +18,15 @@ public:
 	void setHumanoidState(const HumanoidState _state);
 	std::string getHumanoidDirection() const;
 	std::tuple<float, float> getPosition() const;
-	void updatePosition(const float dt);
+	void updateHumanoid(const float dt, std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites);
 
 private:
+	void updateHumanoidSprite(std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites);
 	HumanoidState state;
 	std::string direction;
 	float xPosition;
 	float yPosition;
 	float speed;
-	
-
 };
 #endif // !HUMANOID_H
 
