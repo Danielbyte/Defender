@@ -7,7 +7,7 @@ Lander::Lander():
 	rightSide{false},
 	landerSpeed{50.0f},
 	reachedHumanoidZone{false},
-	direction{Direction::Stagnant},
+	direction{Direction::Other},
 	playerXposref{0.0f},
 	playerYposref{0.0f},
 	missileSpeed{150.0f},
@@ -73,36 +73,40 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 	if (reachedHumanoidZone)
 	{
 		//Lander should Hover around humanoid zone
-		pickDirection(humanoids);
-		switch (direction)
+		pickDirection(humanoids,dt);
+		if (!isAbducting)
 		{
-		case Direction::North:
-			moveNorth(dt);
-			break;
-		case Direction::South:
-			moveSouth(dt);
-			break;
-		case Direction::East:
-			moveEast(dt);
-			break;
-		case Direction::West:
-			moveWest(dt);
-			break;
-		case Direction::NorthEast:
-			moveNorthEast(dt);
-			break;
-		case Direction::SouthEast:
-			moveSouthEast(dt);
-			break;
-		case Direction::SouthWest:
-			moveSouthWest(dt);
-			break;
-		case Direction::NorthWest:
-			moveNorthWest(dt);
-			break;
-		default:
-			break;
+			switch (direction)
+			{
+			case Direction::North:
+				moveNorth(dt);
+				break;
+			case Direction::South:
+				moveSouth(dt);
+				break;
+			case Direction::East:
+				moveEast(dt);
+				break;
+			case Direction::West:
+				moveWest(dt);
+				break;
+			case Direction::NorthEast:
+				moveNorthEast(dt);
+				break;
+			case Direction::SouthEast:
+				moveSouthEast(dt);
+				break;
+			case Direction::SouthWest:
+				moveSouthWest(dt);
+				break;
+			case Direction::NorthWest:
+				moveNorthWest(dt);
+				break;
+			default:
+				break;
+			}
 		}
+
 	}
 
 	auto [x, y] = player->getPlayerPosition();
@@ -168,19 +172,21 @@ void Lander::moveNorthWest(const float& dt)
 	restrictLander(dt);
 }
 
-void Lander::pickDirection(std::vector<std::shared_ptr<Humanoid>>& humanoids)
+void Lander::pickDirection(std::vector<std::shared_ptr<Humanoid>>& humanoids, const float dt)
 {
-	auto shouldAbduct = false;
 	//Check if there is a humanoid beneath
 	auto humanoidBeneath = checkForHumanoid(humanoids);
 	if (humanoidBeneath)
-	    shouldAbduct = abductionDecision();//decide whether to ubduct it or not
+	   abductionDecision();//decide whether to ubduct it or not
 
-	if (shouldAbduct)
-		std::cout << "Abduct humanoid" << std::endl;
+	if (isAbducting)
+		abductionProcess(dt); //Lander has decided to abduct
+	
+	if (isAbducting)
+		return;
 
 	//if decided to abduct, do abduction operations
-	if (movement_watch->time_elapsed() < 1.5f || isAbducting)
+	if (movement_watch->time_elapsed() < 1.5f)
 		return;
 
 	if (rightSide)
@@ -288,7 +294,7 @@ void Lander::pickDirection(std::vector<std::shared_ptr<Humanoid>>& humanoids)
 
 void Lander::restrictLander(const float& dt)
 {
-	if (!reachedHumanoidZone)
+	if (!reachedHumanoidZone || isAbducting)
 		return;
 
 	if (yPosition >= 505.0f)
@@ -388,20 +394,27 @@ void Lander::updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& m
 
 bool Lander::checkForHumanoid(std::vector<std::shared_ptr<Humanoid>>& humanoids)
 {
+	if (isAbducting)
+		return false;
+
 	for (auto& humanoid : humanoids)
 	{
 		auto [humanoidXpos, humanoidYpos] = humanoid->getPosition();
 		auto distance_betwwen = std::fabs(xPosition - humanoidXpos);
 		if (distance_betwwen <= 0.4f)
+		{
+			std::cout << "distance between: " << distance_betwwen << std::endl;
 			return true;
+		}
+			
 	}
 	return false;
 }
 
-bool Lander::abductionDecision()
+void Lander::abductionDecision()
 {
 	if (isAbducting)
-		return false;
+		return;
 
 	std::random_device rd;
 	std::mt19937 gen(rd());
@@ -409,13 +422,29 @@ bool Lander::abductionDecision()
 	int max = 2578;
 	std::uniform_int_distribution<int>distribution(min, max);
 	auto decision = distribution(gen);
-	auto threshold = 510;
+	auto threshold = 1000;
 
-	if (decision <= threshold)
+	if (decision <= threshold && reachedHumanoidZone)
 	{
 		isAbducting = true;
-		return true;
+		std::cout << "Abduuuuuuuct" << std::endl;
+		return;
 	}
+}
 
-	return false;
+void Lander::setToascend()
+{
+	ascend = true;
+}
+
+void Lander::abductionProcess(const float dt)
+{
+	direction = Direction::Other;
+	//if (!ascend)
+//	{
+		moveSouth(dt);
+		return;
+	//}
+
+	//moveNorth(dt);
 }

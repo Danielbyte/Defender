@@ -8,7 +8,7 @@
 #include "humanoid.h"
 #include <cmath>
 
-enum class Direction { North, South, East, West, NorthEast, SouthEast, SouthWest, NorthWest, Stagnant };
+enum class Direction { North, South, East, West, NorthEast, SouthEast, SouthWest, NorthWest, Other };
 
 class Lander : public Shooter
 {
@@ -29,16 +29,18 @@ public:
 	void moveSouthEast(const float& dt);
 	void moveSouthWest(const float& dt);
 	void moveNorthWest(const float& dt);
-	void pickDirection(std::vector<std::shared_ptr<Humanoid>>& humanoids);
+	void pickDirection(std::vector<std::shared_ptr<Humanoid>>& humanoids, const float dt);
 	void restrictLander(const float& dt); //Restrict lander to hover around humanoid zone
 
 
 	void updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
 	bool checkForHumanoid(std::vector<std::shared_ptr<Humanoid>>& humanoids);
+	void setToascend();
+	void abductionProcess(const float dt);
 	
 private:
 	void createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
-	bool abductionDecision();
+	void abductionDecision();
 	float xPosition;
 	float yPosition;
 	bool rightSide;
@@ -53,6 +55,7 @@ private:
 	float playerYposref;
 	float missileSpeed;
 	bool isAbducting; //lander in the process of abducting a lander
+	bool ascend;
 };
 #endif // !LANDER_H
 
