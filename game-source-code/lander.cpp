@@ -7,10 +7,11 @@ Lander::Lander():
 	rightSide{false},
 	landerSpeed{50.0f},
 	reachedHumanoidZone{false},
-	direction{Direction::Unknown},
+	direction{Direction::Stagnant},
 	playerXposref{0.0f},
 	playerYposref{0.0f},
-	missileSpeed{150.0f}
+	missileSpeed{150.0f},
+	isAbducting{false}
 {
 	//generate spawn position
 	generateInitialPosition();
@@ -48,7 +49,8 @@ void Lander::generateInitialPosition()
 }
 
 void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const float dt, 
-	std::shared_ptr<Player>& player, std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
+	std::shared_ptr<Player>& player, std::vector<std::shared_ptr<MissileSprite>>& missile_sprites,
+	std::vector<std::shared_ptr<Humanoid>>& humanoids)
 {
 	if (!reachedHumanoidZone)
 	{
@@ -71,7 +73,7 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 	if (reachedHumanoidZone)
 	{
 		//Lander should Hover around humanoid zone
-		pickDirection();
+		pickDirection(humanoids);
 		switch (direction)
 		{
 		case Direction::North:
@@ -166,9 +168,15 @@ void Lander::moveNorthWest(const float& dt)
 	restrictLander(dt);
 }
 
-void Lander::pickDirection()
+void Lander::pickDirection(std::vector<std::shared_ptr<Humanoid>>& humanoids)
 {
-	if (movement_watch->time_elapsed() < 1.5f)
+	//Check if there is a humanoid beneath
+	auto humanoidBeneath = checkForHumanoid(humanoids);
+	if (humanoidBeneath)
+		std::cout << "Humanoid beneath" << std::endl;
+	//decide whether to ubduct it or not
+	//if decided to abduct, do abduction operations
+	if (movement_watch->time_elapsed() < 1.5f || isAbducting)
 		return;
 
 	if (rightSide)
@@ -372,4 +380,16 @@ void Lander::updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& m
 			++missile_obj;
 		}
 	}
+}
+
+bool Lander::checkForHumanoid(std::vector<std::shared_ptr<Humanoid>>& humanoids)
+{
+	for (auto& humanoid : humanoids)
+	{
+		auto [humanoidXpos, humanoidYpos] = humanoid->getPosition();
+		auto distance_betwwen = std::fabs(xPosition - humanoidXpos);
+		if (distance_betwwen <= 0.4f)
+			return true;
+	}
+	return false;
 }

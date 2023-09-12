@@ -25,7 +25,7 @@ void Game::updateLanders(const float dt)
 	auto sprite_iter = lander_object_sprites.begin();
 	while (object_iter != lander_objects.end())
 	{
-		(*object_iter)->updateLander(*sprite_iter,dt,player_obj,lander_missile_sprites);
+		(*object_iter)->updateLander(*sprite_iter,dt,player_obj,lander_missile_sprites,humanoid_objects);
 		++object_iter;
 		++sprite_iter;
 	}
