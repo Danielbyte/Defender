@@ -4,6 +4,7 @@
 #include <string>
 #include <tuple>
 
+
 enum class HumanoidState{Walking,Abducted,Falling, Dead};
 
 class Humanoid
@@ -23,6 +24,7 @@ private:
 	float xPosition;
 	float yPosition;
 	float speed;
+	
 
 };
 #endif // !HUMANOID_H

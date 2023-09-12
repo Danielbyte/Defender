@@ -45,9 +45,14 @@ private:
 	bool rightPressed;
 	bool spacePressed;
 
-	//game objects
+	//GAME ENTITIES
+	
+	//Humanoid objects
+	std::vector<std::shared_ptr<Humanoid>> humanoid_objects;
+	std::vector<std::shared_ptr<HumanoidSprite>> humanoid_sprites;
+
 	// game world
-	std::shared_ptr<GameWorld> game_world = std::make_shared<GameWorld>();
+	std::shared_ptr<GameWorld> game_world = std::make_shared<GameWorld>(humanoid_objects,humanoid_sprites);
 
 	//Player Entity
 	std::shared_ptr<Player> player_obj = std::make_shared<Player>();
@@ -64,10 +69,6 @@ private:
 
 	//Shooter object to update projectiles
 	std::shared_ptr<Shooter>shooter_object = std::make_shared<Shooter>();
-
-	//Humanoid objects
-	std::vector<std::shared_ptr<Humanoid>> humanoid_objects;
-	std::vector<std::shared_ptr<HumanoidSprite>> humanoid_sprites;
 };
 #endif
 

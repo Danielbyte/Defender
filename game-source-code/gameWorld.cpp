@@ -1,8 +1,11 @@
 #include "gameWorld.h"
 
-GameWorld::GameWorld():
+GameWorld::GameWorld(std::vector<std::shared_ptr<Humanoid>>& humanoid_objects,
+	std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites):
 enemy{Enemy::None} //initially, there are no enemies
-{}
+{
+	placeHumanoids(humanoid_objects, humanoid_sprites);
+}
 
 void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_objects,
 	std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites)
@@ -120,7 +123,7 @@ std::string GameWorld::generateDirection()
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	int min = 1;
-	float max = 10;
+	int max = 10;
 	std::uniform_int_distribution<int>distribution(min, max);
 	auto direction = distribution(gen);
 
