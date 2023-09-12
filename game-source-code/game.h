@@ -21,6 +21,7 @@ public:
 	void handleInput(); //Defined in playerInput.cpp
 	void updateGame(const float dt); //Defined in update.cpp
 	void updateLanders(const float dt);
+	void updateHumanoids(const float dt);
 	void updateCollisions();
 	void updateProjectiles(const float dt);
 	void display(); //Defined in displayManager.cpp

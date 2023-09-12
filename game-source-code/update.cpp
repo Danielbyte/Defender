@@ -36,6 +36,16 @@ void Game::updateCollisions()
 	update_collisions.landerAndLaserCollisions(lander_objects, lander_object_sprites, laser_sprite);
 }
 
+void Game::updateHumanoids(const float dt)
+{
+	auto humanoid_sprite = humanoid_sprites.begin();
+	for (auto& humanoid : humanoid_objects)
+	{
+		humanoid->updateHumanoid(dt, *humanoid_sprite);
+		++humanoid_sprite;
+	}
+}
+
 void Game::updateProjectiles(const float dt)
 {
 	std::shared_ptr<Lander>lander_object = std::make_shared<Lander>();

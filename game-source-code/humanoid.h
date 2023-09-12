@@ -18,10 +18,10 @@ public:
 	void setHumanoidState(const HumanoidState _state);
 	std::string getHumanoidDirection() const;
 	std::tuple<float, float> getPosition() const;
-	void updateHumanoid(const float dt, std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites);
+	void updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& humanoid_sprite);
 
 private:
-	void updateHumanoidSprite(std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites);
+	void updateHumanoidSprite(std::shared_ptr<HumanoidSprite>& humanoid_sprite);
 	HumanoidState state;
 	std::string direction;
 	float xPosition;

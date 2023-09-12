@@ -36,7 +36,7 @@ std::tuple<float, float> Humanoid::getPosition() const
 	return { xPosition, yPosition };
 }
 
-void Humanoid::updateHumanoid(const float dt, std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites)
+void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& humanoid_sprite)
 {
 	if (direction == "right")
 		xPosition += speed * dt;
@@ -44,23 +44,20 @@ void Humanoid::updateHumanoid(const float dt, std::vector<std::shared_ptr<Humano
 	if (direction == "left")
 		xPosition -= speed * dt;
 
-	updateHumanoidSprite(humanoid_sprites);
+	updateHumanoidSprite(humanoid_sprite);
 }
 
-void Humanoid::updateHumanoidSprite(std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites)
+void Humanoid::updateHumanoidSprite(std::shared_ptr<HumanoidSprite>& humanoid_sprite)
 {
-	auto humanoid_sprite = humanoid_sprites.begin();
-	while (humanoid_sprite != humanoid_sprites.end())
-	{
 		switch (state)
 		{
 		case HumanoidState::Walking:
 		case HumanoidState::Abducted:
-			(*humanoid_sprite)->setTexture(direction, "Walking",xPosition,yPosition);
+			humanoid_sprite->setTexture(direction, "Walking",xPosition,yPosition);
 			break;
 		
 		case HumanoidState::Falling:
-			(*humanoid_sprite)->setTexture(direction, "Falling", xPosition, yPosition);
+			humanoid_sprite->setTexture(direction, "Falling", xPosition, yPosition);
 			break;
 
 		case HumanoidState::Dead:
@@ -68,7 +65,4 @@ void Humanoid::updateHumanoidSprite(std::vector<std::shared_ptr<HumanoidSprite>>
 		default:
 			break;
 		}
-		
-		++humanoid_sprite;
-	}
 }
