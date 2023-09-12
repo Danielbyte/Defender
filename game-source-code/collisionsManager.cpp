@@ -158,5 +158,23 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 void CollisionsManager::landerAndHumanoidCollisions(std::vector<std::shared_ptr<Lander>>& landers,
 	std::vector<std::shared_ptr<Humanoid>>& humanoids)
 {
+	for (auto& lander : landers)
+	{
+		for (auto& humanoid : humanoids)
+		{
+			auto [humanoidXpos, humanoidYpos] = humanoid->getPosition();
+			auto [landerXpos, landerYpos] = lander->getPosition();
+			auto humanoid_state = humanoid->getHumanoidState();
+			if (humanoid_state == HumanoidState::Walking)
+			{
+				auto isCollided = collisions.checkCollision(humanoidXpos, humanoidYpos, humanoidWidth, humanoidLength,
+					landerXpos, landerYpos, landerWidth, landerLength);
 
+				if (isCollided)
+				{
+					lander->setToascend();
+				}
+			}
+		}
+	}
 }
