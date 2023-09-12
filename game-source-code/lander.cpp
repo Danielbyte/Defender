@@ -11,7 +11,8 @@ Lander::Lander():
 	playerXposref{0.0f},
 	playerYposref{0.0f},
 	missileSpeed{150.0f},
-	isAbducting{false}
+	isAbducting{false},
+	ascend{false}
 {
 	//generate spawn position
 	generateInitialPosition();
@@ -440,11 +441,11 @@ void Lander::setToascend()
 void Lander::abductionProcess(const float dt)
 {
 	direction = Direction::Other;
-	//if (!ascend)
-//	{
+	if (!ascend)
+	{
 		moveSouth(dt);
 		return;
-	//}
+	}
 
-	//moveNorth(dt);
+	moveNorth(dt);
 }

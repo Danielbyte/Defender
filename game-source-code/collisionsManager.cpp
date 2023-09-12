@@ -8,7 +8,9 @@ landerLength{16.0f},
 missileWidth{6.0f},
 missileLength{6.0f},
 laserWidth{2.0f},
-laserLength{100.0f}
+laserLength{100.0f},
+humanoidWidth{6.0f},
+humanoidLength{16.0f}
 {}
 
 void CollisionsManager::playerLanderCollisions(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& landers,
@@ -151,5 +153,10 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 			++laser_sprite;
 		}
 	}
+}
+
+void CollisionsManager::landerAndHumanoidCollisions(std::vector<std::shared_ptr<Lander>>& landers,
+	std::vector<std::shared_ptr<Humanoid>>& humanoids)
+{
 
 }

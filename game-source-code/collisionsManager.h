@@ -18,11 +18,15 @@ public:
 	void landerAndLaserCollisions(std::vector<std::shared_ptr<Lander>>& landers, std::vector<std::shared_ptr<LanderSprite>>&
 		lander_sprites,std::vector<std::shared_ptr<LaserSprite>>& laser_sprites);
 
+	void landerAndHumanoidCollisions(std::vector<std::shared_ptr<Lander>>& landers,
+		std::vector<std::shared_ptr<Humanoid>>& humanoids);
+
 private:
 	float playerWidth, playerLength;
 	float landerWidth, landerLength;
 	float missileWidth, missileLength;
 	float laserWidth, laserLength;
+	float humanoidWidth, humanoidLength;
 	Collisions collisions;
 
 };
