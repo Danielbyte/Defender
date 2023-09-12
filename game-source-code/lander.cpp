@@ -170,11 +170,15 @@ void Lander::moveNorthWest(const float& dt)
 
 void Lander::pickDirection(std::vector<std::shared_ptr<Humanoid>>& humanoids)
 {
+	auto shouldAbduct = false;
 	//Check if there is a humanoid beneath
 	auto humanoidBeneath = checkForHumanoid(humanoids);
 	if (humanoidBeneath)
-		std::cout << "Humanoid beneath" << std::endl;
-	//decide whether to ubduct it or not
+	    shouldAbduct = abductionDecision();//decide whether to ubduct it or not
+
+	if (shouldAbduct)
+		std::cout << "Abduct humanoid" << std::endl;
+
 	//if decided to abduct, do abduction operations
 	if (movement_watch->time_elapsed() < 1.5f || isAbducting)
 		return;
@@ -391,5 +395,27 @@ bool Lander::checkForHumanoid(std::vector<std::shared_ptr<Humanoid>>& humanoids)
 		if (distance_betwwen <= 0.4f)
 			return true;
 	}
+	return false;
+}
+
+bool Lander::abductionDecision()
+{
+	if (isAbducting)
+		return false;
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	int min = 1;
+	int max = 2578;
+	std::uniform_int_distribution<int>distribution(min, max);
+	auto decision = distribution(gen);
+	auto threshold = 510;
+
+	if (decision <= threshold)
+	{
+		isAbducting = true;
+		return true;
+	}
+
 	return false;
 }

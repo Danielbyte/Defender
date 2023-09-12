@@ -38,6 +38,7 @@ public:
 	
 private:
 	void createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
+	bool abductionDecision();
 	float xPosition;
 	float yPosition;
 	bool rightSide;
