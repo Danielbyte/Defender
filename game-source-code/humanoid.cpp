@@ -32,6 +32,14 @@ std::tuple<float, float> Humanoid::getPosition() const
 
 void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& humanoid_sprite)
 {
+	if (state == HumanoidState::Abducted)
+	{
+		auto newSpeed = 50.0f; //set to lander speed
+		yPosition -= newSpeed * dt;
+		updateHumanoidSprite(humanoid_sprite);
+		return;
+	}
+
 	if (direction == "right")
 		xPosition += speed * dt;
 		
@@ -94,4 +102,9 @@ void Humanoid::generateDirection()
 
 	if(_direction > 5)
 		direction = "left";
+}
+
+void Humanoid::setToAbducted()
+{
+	state = HumanoidState::Abducted;
 }

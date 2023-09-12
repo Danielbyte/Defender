@@ -173,6 +173,7 @@ void CollisionsManager::landerAndHumanoidCollisions(std::vector<std::shared_ptr<
 				if (isCollided)
 				{
 					lander->setToascend();
+					humanoid->setToAbducted();
 				}
 			}
 		}

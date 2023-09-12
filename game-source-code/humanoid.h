@@ -21,6 +21,7 @@ public:
 	std::tuple<float, float> getPosition() const;
 	void updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& humanoid_sprite);
 	void placeHumanoid();
+	void setToAbducted();
 
 private:
 	void updateHumanoidSprite(std::shared_ptr<HumanoidSprite>& humanoid_sprite);
