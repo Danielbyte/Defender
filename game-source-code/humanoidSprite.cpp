@@ -4,8 +4,8 @@ HumanoidSprite::HumanoidSprite():
 	texture_period{0.5f}
 {
 	sf::Vector2f dimensions;
-	dimensions.x = 8.0f;
-	dimensions.y = 12.0f;
+	dimensions.x = 6.0f;
+	dimensions.y = 16.0f;
 	InitialiseEntityOrigin(dimensions);
 	loadTextures();
 }
@@ -21,11 +21,12 @@ void HumanoidSprite::loadTextures()
 	fallingHumanoid3_t.loadFromFile("resources/falling-humanoid3.png");
 }
 
-void HumanoidSprite::setTexture(std::string direction, const std::string state, float xPos, float yPos)
+void HumanoidSprite::setTexture(std::string direction, const std::string state, float xPos, float yPos,
+	std::shared_ptr<StopWatch>humanoid_watch)
 {
 	if (state == "Walking" || state == "Abducted")
 	{
-		walkingAndAbuction(direction);
+		walkingAndAbuction(direction,humanoid_watch);
 		updateSpritePosition(direction, xPos, yPos);
 		return;
 	}
@@ -37,11 +38,14 @@ void HumanoidSprite::setTexture(std::string direction, const std::string state, 
 	}
 }
 
-void HumanoidSprite::walkingAndAbuction(std::string direction)
+void HumanoidSprite::walkingAndAbuction(std::string direction, std::shared_ptr<StopWatch>humanoid_watch)
 {
-	texture_period = 0.5f;
+	texture_period = 1.101f;
+	
 	auto _time = humanoid_watch->time_elapsed();
-
+	if (_time > 2 * texture_period)
+		humanoid_watch->restart();
+	
 	if (direction == "left")
 	{
 		if (_time >= 0.0f && _time <= texture_period)
@@ -50,23 +54,28 @@ void HumanoidSprite::walkingAndAbuction(std::string direction)
 		if (_time > texture_period && _time <= 2 * texture_period)
 		{
 			updateSpriteTexture(humanoidLeft2_t);
-			humanoid_watch->restart();
+			//humanoid_watch->restart();
 		}
 		return;	
 	}
 
-	if (_time >= 0.0f && _time <= texture_period)
-		updateSpriteTexture(humanoidRight1_t);
-
-	if (_time > texture_period && 2 * texture_period)
+	if (direction == "right")
 	{
-		updateSpriteTexture(humanoidRight2_t);
-		humanoid_watch->restart();
+		if (_time >= 0.0f && _time <= texture_period)
+			updateSpriteTexture(humanoidRight1_t);
+
+		if (_time > texture_period && _time <= 2 * texture_period)
+		{
+			updateSpriteTexture(humanoidRight2_t);
+			//humanoid_watch->restart();
+		}
+		return;
 	}
 }
 
 void HumanoidSprite::falling(std::string direction)
 {
+	/*
 	texture_period = 1.0f;
 	auto _time = humanoid_watch->time_elapsed();
 
@@ -80,5 +89,5 @@ void HumanoidSprite::falling(std::string direction)
 	{
 		updateSpriteTexture(humanoidRight1_t);
 		humanoid_watch->restart();
-	}	
+	}	*/
 }

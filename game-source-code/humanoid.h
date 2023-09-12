@@ -25,12 +25,13 @@ public:
 private:
 	void updateHumanoidSprite(std::shared_ptr<HumanoidSprite>& humanoid_sprite);
 	void generateXposition();
-	std::string generateDirection();
+	void generateDirection();
 	HumanoidState state;
 	std::string direction;
 	float xPosition;
 	float yPosition;
 	float speed;
+	std::shared_ptr<StopWatch>humanoid_watch = std::make_shared<StopWatch>();
 };
 #endif // !HUMANOID_H
 

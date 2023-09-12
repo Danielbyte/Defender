@@ -3,16 +3,18 @@
 
 #include "spriteStore.h"
 #include "stopWatch.h"
+#include <iostream>
 
 class HumanoidSprite : public SpriteStore
 {
 public:
 	HumanoidSprite();
 	void virtual loadTextures();
-	void setTexture(std::string _direction, const std::string _state, float xPos, float yPos);
+	void setTexture(std::string _direction, const std::string _state, float xPos, float yPos,
+		std::shared_ptr<StopWatch>humanoid_watch);
 
 private:
-	void walkingAndAbuction(std::string direction);
+	void walkingAndAbuction(std::string direction, std::shared_ptr<StopWatch>humanoid_watch);
 	void falling(std::string direction);
 
 	sf::Texture humanoidLeft1_t;
@@ -25,7 +27,7 @@ private:
 
 	float texture_period;
 
-	std::shared_ptr<StopWatch>humanoid_watch = std::make_shared<StopWatch>();
+	//std::shared_ptr<StopWatch>humanoid_watch = std::make_shared<StopWatch>();
 };
 #endif // !HUMANOIDSPRITE_H
 

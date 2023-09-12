@@ -48,11 +48,11 @@ void Humanoid::updateHumanoidSprite(std::shared_ptr<HumanoidSprite>& humanoid_sp
 		{
 		case HumanoidState::Walking:
 		case HumanoidState::Abducted:
-			humanoid_sprite->setTexture(direction, "Walking",xPosition,yPosition);
+			humanoid_sprite->setTexture(direction, "Walking",xPosition,yPosition,humanoid_watch);
 			break;
 		
 		case HumanoidState::Falling:
-			humanoid_sprite->setTexture(direction, "Falling", xPosition, yPosition);
+			humanoid_sprite->setTexture(direction, "Falling", xPosition, yPosition,humanoid_watch);
 			break;
 
 		case HumanoidState::Dead:
@@ -66,7 +66,7 @@ void Humanoid::placeHumanoid()
 {
 	 yPosition = 580.0f;
      generateXposition();
-	 direction = generateDirection();
+	 generateDirection();
 }
 
 void Humanoid::generateXposition()
@@ -80,17 +80,18 @@ void Humanoid::generateXposition()
 	xPosition = distribution(gen);
 }
 
-std::string Humanoid::generateDirection()
+void Humanoid::generateDirection()
 {
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	int min = 1;
 	int max = 10;
 	std::uniform_int_distribution<int>distribution(min, max);
-	auto direction = distribution(gen);
+	auto _direction = distribution(gen);
 
-	if (direction <= 5)
-		return "right";
+	if (_direction <= 5)
+		direction = "right";
 
-	return "left";
+	if(_direction > 5)
+		direction = "left";
 }
