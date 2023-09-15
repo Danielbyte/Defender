@@ -217,3 +217,24 @@ void CollisionsManager::dropHumanoid(std::shared_ptr<Humanoid>& humanoid, std::v
 
 	humanoid->setHumanoidState(HumanoidState::Falling);
 }
+
+void CollisionsManager::playerAndFallingHumanoidCollisions(std::shared_ptr<Player>& player,
+	std::vector<std::shared_ptr<Humanoid>>& humanoids)
+{
+	for (auto& humanoid : humanoids)
+	{
+		if (humanoid->getHumanoidState() == HumanoidState::Falling)
+		{
+			auto [humanoidXpos, humanoidYpos] = humanoid->getPosition();
+			auto [playerXpos, playerYpos] = player->getPlayerPosition();
+			
+			auto isCollided = collisions.checkCollision(playerXpos, playerYpos, playerWidth, playerLength, humanoidXpos,
+				humanoidYpos, humanoidWidth, humanoidLength);
+
+			if (isCollided)
+			{
+				std::cout << "Humanoid being saved!" << std::endl;
+			}
+		}
+	}
+}

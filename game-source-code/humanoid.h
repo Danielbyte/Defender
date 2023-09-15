@@ -9,7 +9,7 @@
 #include <random>
 
 
-enum class HumanoidState{Walking,Abducted,Falling, Dead};
+enum class HumanoidState{Walking,Abducted,Falling,Dead,Rescued};
 
 class Humanoid
 {
