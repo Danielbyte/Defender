@@ -87,7 +87,8 @@ void CollisionsManager::playerAndMissileCollisions(std::shared_ptr<Player>& play
 }
 
 void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lander>>& landers,
-	std::vector<std::shared_ptr<LanderSprite>>& lander_sprites, std::vector<std::shared_ptr<LaserSprite>>& laser_sprites)
+	std::vector<std::shared_ptr<LanderSprite>>& lander_sprites, std::vector<std::shared_ptr<LaserSprite>>& laser_sprites,
+	std::vector<std::shared_ptr<Humanoid>>& humanoids)
 {
 	if (landers.empty())
 		return;
@@ -153,6 +154,12 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 			++laser_sprite;
 		}
 	}
+
+	for (auto& humanoid : humanoids)
+	{
+		if (humanoid->getHumanoidState() == HumanoidState::Abducted)
+		dropHumanoid(humanoid, landers);
+	}
 }
 
 void CollisionsManager::landerAndHumanoidCollisions(std::vector<std::shared_ptr<Lander>>& landers,
@@ -162,6 +169,8 @@ void CollisionsManager::landerAndHumanoidCollisions(std::vector<std::shared_ptr<
 	{
 		for (auto& humanoid : humanoids)
 		{
+
+
 			auto humanoid_state = humanoid->getHumanoidState();
 			switch (humanoid_state)
 			{
@@ -169,6 +178,7 @@ void CollisionsManager::landerAndHumanoidCollisions(std::vector<std::shared_ptr<
 				setAbductionStates(lander, humanoid);
 				break;
 			case HumanoidState::Abducted:
+				//checkStateOfAbductingLander(humanoid, isCollided);
 				break;
 			case HumanoidState::Falling:
 				break;
@@ -191,5 +201,19 @@ void CollisionsManager::setAbductionStates(std::shared_ptr<Lander>& lander, std:
 	{
 		lander->setToascend();
 		humanoid->setToAbducted();
+		humanoid->setAbductingLanderId(lander->getLocalId()); //reference to the abducting id
 	}
+}
+
+void CollisionsManager::dropHumanoid(std::shared_ptr<Humanoid>& humanoid, std::vector<std::shared_ptr<Lander>>& landers)
+{
+	//If player shoot lander which is in the process of abducting a humanoid, the humanoid will begin to fall
+	auto id = humanoid->getAbductingLanderId();
+	for (auto& lander : landers)
+	{
+		if (id == lander->getLocalId())
+			return;
+	}
+
+	humanoid->setHumanoidState(HumanoidState::Falling);
 }

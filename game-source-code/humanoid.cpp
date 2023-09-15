@@ -5,7 +5,8 @@ state{HumanoidState::Walking}, //Humanoid initially walking
 direction{"unknown"},
 xPosition{0.0f},
 yPosition{0.0f},
-speed{0.9f}
+speed{0.9f},
+abductingLanderId{0}
 {
 	placeHumanoid();
 }
@@ -107,4 +108,14 @@ void Humanoid::generateDirection()
 void Humanoid::setToAbducted()
 {
 	state = HumanoidState::Abducted;
+}
+
+unsigned int Humanoid::getAbductingLanderId() const
+{
+	return abductingLanderId;
+}
+
+void Humanoid::setAbductingLanderId(const unsigned int id)
+{
+	abductingLanderId = id;
 }

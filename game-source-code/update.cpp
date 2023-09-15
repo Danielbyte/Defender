@@ -35,7 +35,7 @@ void Game::updateCollisions()
 {
 	update_collisions.playerLanderCollisions(player_obj, lander_objects, lander_object_sprites);
 	update_collisions.playerAndMissileCollisions(player_obj, lander_missile_sprites);
-	update_collisions.landerAndLaserCollisions(lander_objects, lander_object_sprites, laser_sprite);
+	update_collisions.landerAndLaserCollisions(lander_objects, lander_object_sprites, laser_sprite,humanoid_objects);
 	update_collisions.landerAndHumanoidCollisions(lander_objects, humanoid_objects);
 }
 

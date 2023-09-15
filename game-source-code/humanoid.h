@@ -22,6 +22,8 @@ public:
 	void updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& humanoid_sprite);
 	void placeHumanoid();
 	void setToAbducted();
+	void setAbductingLanderId(const unsigned int);
+	unsigned int getAbductingLanderId() const;
 
 private:
 	void updateHumanoidSprite(std::shared_ptr<HumanoidSprite>& humanoid_sprite);
@@ -33,6 +35,7 @@ private:
 	float yPosition;
 	float speed;
 	std::shared_ptr<StopWatch>humanoid_watch = std::make_shared<StopWatch>();
+	unsigned int abductingLanderId;
 };
 #endif // !HUMANOID_H
 

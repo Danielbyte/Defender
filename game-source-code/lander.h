@@ -37,6 +37,7 @@ public:
 	bool checkForHumanoid(std::vector<std::shared_ptr<Humanoid>>& humanoids);
 	void setToascend();
 	void abductionProcess(const float dt);
+	unsigned int getLocalId();
 	
 private:
 	void createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
@@ -56,6 +57,10 @@ private:
 	float missileSpeed;
 	bool isAbducting; //lander in the process of abducting a lander
 	bool ascend;
+	static unsigned int globalId;
+	unsigned int localId; //Id with same scope as lander object
+	static void setId();
+	void setLocalId();
 };
 #endif // !LANDER_H
 

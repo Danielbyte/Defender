@@ -12,10 +12,13 @@ Lander::Lander():
 	playerYposref{0.0f},
 	missileSpeed{150.0f},
 	isAbducting{false},
-	ascend{false}
+	ascend{false},
+	localId{0}
 {
 	//generate spawn position
 	generateInitialPosition();
+	setId();
+	setLocalId();
 }
 
 std::tuple<float, float> Lander::getPosition() const
@@ -397,7 +400,6 @@ bool Lander::checkForHumanoid(std::vector<std::shared_ptr<Humanoid>>& humanoids)
 {
 	if (isAbducting)
 		return false;
-
 	for (auto& humanoid : humanoids)
 	{
 		auto humanoid_state  = humanoid->getHumanoidState();
@@ -424,7 +426,8 @@ void Lander::abductionDecision()
 	int max = 2578;
 	std::uniform_int_distribution<int>distribution(min, max);
 	auto decision = distribution(gen);
-	auto threshold = 1000;
+	auto threshold = 2000;
+	std::cout << "Decision" << decision << std::endl;
 
 	if (decision <= threshold && reachedHumanoidZone)
 	{
@@ -450,3 +453,20 @@ void Lander::abductionProcess(const float dt)
 
 	moveNorth(dt);
 }
+
+void Lander::setId()
+{
+	++globalId;
+}
+
+void Lander::setLocalId()
+{
+	localId = globalId;
+}
+
+unsigned int Lander::getLocalId()
+{
+	return localId;
+}
+
+unsigned int Lander::globalId = 0;
