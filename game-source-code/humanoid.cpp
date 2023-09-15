@@ -40,6 +40,14 @@ void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& h
 		updateHumanoidSprite(humanoid_sprite);
 		return;
 	}
+	
+	if (state == HumanoidState::Falling)
+	{
+		auto newSpeed = 50.0f;
+		yPosition += newSpeed * dt;
+		updateHumanoidSprite(humanoid_sprite);
+		return;
+	}
 
 	if (direction == "right")
 		xPosition += speed * dt;
