@@ -15,7 +15,7 @@ public:
 
 private:
 	void walkingAndAbuction(std::string direction, std::shared_ptr<StopWatch>humanoid_watch);
-	void falling(std::string direction);
+	void falling(std::string direction, std::shared_ptr<StopWatch>humanoid_watch);
 
 	sf::Texture humanoidLeft1_t;
 	sf::Texture humanoidLeft2_t;

@@ -400,6 +400,7 @@ bool Lander::checkForHumanoid(std::vector<std::shared_ptr<Humanoid>>& humanoids)
 {
 	if (isAbducting)
 		return false;
+
 	for (auto& humanoid : humanoids)
 	{
 		auto humanoid_state  = humanoid->getHumanoidState();
@@ -426,8 +427,7 @@ void Lander::abductionDecision()
 	int max = 2578;
 	std::uniform_int_distribution<int>distribution(min, max);
 	auto decision = distribution(gen);
-	auto threshold = 2000;
-	std::cout << "Decision" << decision << std::endl;
+	auto threshold = 1000;
 
 	if (decision <= threshold && reachedHumanoidZone)
 	{
