@@ -162,20 +162,34 @@ void CollisionsManager::landerAndHumanoidCollisions(std::vector<std::shared_ptr<
 	{
 		for (auto& humanoid : humanoids)
 		{
-			auto [humanoidXpos, humanoidYpos] = humanoid->getPosition();
-			auto [landerXpos, landerYpos] = lander->getPosition();
 			auto humanoid_state = humanoid->getHumanoidState();
-			if (humanoid_state == HumanoidState::Walking)
+			switch (humanoid_state)
 			{
-				auto isCollided = collisions.checkCollision(humanoidXpos, humanoidYpos, humanoidWidth, humanoidLength,
-					landerXpos, landerYpos, landerWidth, landerLength);
-
-				if (isCollided)
-				{
-					lander->setToascend();
-					humanoid->setToAbducted();
-				}
+			case HumanoidState::Walking:
+				setAbductionStates(lander, humanoid);
+				break;
+			case HumanoidState::Abducted:
+				break;
+			case HumanoidState::Falling:
+				break;
+			default:
+				break;
 			}
 		}
+	}
+}
+
+void CollisionsManager::setAbductionStates(std::shared_ptr<Lander>& lander, std::shared_ptr<Humanoid>& humanoid)
+{
+	auto [humanoidXpos, humanoidYpos] = humanoid->getPosition();
+	auto [landerXpos, landerYpos] = lander->getPosition();
+
+	auto isCollided = collisions.checkCollision(humanoidXpos, humanoidYpos, humanoidWidth, humanoidLength,
+		landerXpos, landerYpos, landerWidth, landerLength);
+
+	if (isCollided)
+	{
+		lander->setToascend();
+		humanoid->setToAbducted();
 	}
 }
