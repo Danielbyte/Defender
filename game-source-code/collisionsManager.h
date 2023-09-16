@@ -25,6 +25,8 @@ public:
 	void playerAndFallingHumanoidCollisions(std::shared_ptr<Player>& player,
 		std::vector<std::shared_ptr<Humanoid>>& humanoids,std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites);
 
+	void humanoidAndGroundCollisions(std::vector<std::shared_ptr<Humanoid>>& humanoids);
+
 private:
 	void setAbductionStates(std::shared_ptr<Lander>& lander, std::shared_ptr<Humanoid>& humanoid);
 
@@ -35,6 +37,7 @@ private:
 	float missileWidth, missileLength;
 	float laserWidth, laserLength;
 	float humanoidWidth, humanoidLength;
+	float groundLevel;
 	Collisions collisions;
 
 };

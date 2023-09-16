@@ -10,7 +10,8 @@ missileLength{6.0f},
 laserWidth{2.0f},
 laserLength{100.0f},
 humanoidWidth{6.0f},
-humanoidLength{16.0f}
+humanoidLength{16.0f},
+groundLevel{580.0f}
 {}
 
 void CollisionsManager::playerLanderCollisions(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& landers,
@@ -244,5 +245,29 @@ void CollisionsManager::playerAndFallingHumanoidCollisions(std::shared_ptr<Playe
 		
 		}
 		++humanoid_sprite;
+	}
+}
+
+void CollisionsManager::humanoidAndGroundCollisions(std::vector<std::shared_ptr<Humanoid>>& humanoids)
+{
+	for (auto& humanoid : humanoids)
+	{
+		auto [xHumanoidPos, yHumanoidPos] = humanoid->getPosition();
+		if (yHumanoidPos >= groundLevel)
+		{
+			auto humanoidState = humanoid->getHumanoidState();
+			switch (humanoidState)
+			{
+			case HumanoidState::Falling:
+				break;
+
+			case HumanoidState::Rescued:
+				humanoid->setHumanoidState(HumanoidState::Walking);
+				break;
+
+			default:
+				break;
+			}
+		}
 	}
 }
