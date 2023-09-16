@@ -219,22 +219,30 @@ void CollisionsManager::dropHumanoid(std::shared_ptr<Humanoid>& humanoid, std::v
 }
 
 void CollisionsManager::playerAndFallingHumanoidCollisions(std::shared_ptr<Player>& player,
-	std::vector<std::shared_ptr<Humanoid>>& humanoids)
+	std::vector<std::shared_ptr<Humanoid>>& humanoids, std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites)
 {
+	auto humanoid_sprite = humanoid_sprites.begin();
+
 	for (auto& humanoid : humanoids)
 	{
-		if (humanoid->getHumanoidState() == HumanoidState::Falling)
-		{
-			auto [humanoidXpos, humanoidYpos] = humanoid->getPosition();
-			auto [playerXpos, playerYpos] = player->getPlayerPosition();
-			
-			auto isCollided = collisions.checkCollision(playerXpos, playerYpos, playerWidth, playerLength, humanoidXpos,
-				humanoidYpos, humanoidWidth, humanoidLength);
+		auto [humanoidXpos, humanoidYpos] = humanoid->getPosition();
+		auto [playerXpos, playerYpos] = player->getPlayerPosition();
 
-			if (isCollided)
+		auto isCollided = collisions.checkCollision(playerXpos, playerYpos, playerWidth, playerLength, humanoidXpos,
+			humanoidYpos, humanoidWidth, humanoidLength);
+
+		if (isCollided)
+		{
+			if (humanoid->getHumanoidState() == HumanoidState::Falling)
+				humanoid->setHumanoidState(HumanoidState::Rescued);
+
+			if (humanoid->getHumanoidState() == HumanoidState::Rescued)
 			{
-				std::cout << "Humanoid being saved!" << std::endl;
+				auto distanceBetween = abs(playerXpos - humanoidXpos);
+				humanoid->setDistance(distanceBetween);
 			}
+		
 		}
+		++humanoid_sprite;
 	}
 }

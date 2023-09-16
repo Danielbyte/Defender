@@ -6,7 +6,8 @@ direction{"unknown"},
 xPosition{0.0f},
 yPosition{0.0f},
 speed{0.9f},
-abductingLanderId{0}
+abductingLanderId{0},
+distance {0.0f}
 {
 	placeHumanoid();
 }
@@ -31,8 +32,15 @@ std::tuple<float, float> Humanoid::getPosition() const
 	return { xPosition, yPosition };
 }
 
-void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& humanoid_sprite)
+void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& humanoid_sprite,std::shared_ptr<Player>& p)
 {
+	if (state == HumanoidState::Rescued)
+	{
+		updateHumanoid(p, humanoid_sprite);
+		return;
+	}
+		
+
 	if (state == HumanoidState::Abducted)
 	{
 		auto newSpeed = 50.0f; //set to lander speed
@@ -59,12 +67,28 @@ void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& h
 	updateHumanoidSprite(humanoid_sprite);
 }
 
+void Humanoid::updateHumanoid(std::shared_ptr<Player>& player, std::shared_ptr<HumanoidSprite>& humanoid_sprite)
+{
+	auto [xPlayerPos, yPlayerPos] = player->getPlayerPosition();
+	if (xPosition <= xPlayerPos)
+		xPosition = xPlayerPos - distance;
+	
+	if (xPosition > xPlayerPos)
+		xPosition = xPlayerPos + distance;
+
+	auto offset = 18.0f;
+	yPosition = yPlayerPos + offset;
+
+	updateHumanoidSprite(humanoid_sprite);
+}
+
 void Humanoid::updateHumanoidSprite(std::shared_ptr<HumanoidSprite>& humanoid_sprite)
 {
 		switch (state)
 		{
 		case HumanoidState::Walking:
 		case HumanoidState::Abducted:
+		case HumanoidState::Rescued:
 			humanoid_sprite->setTexture(direction, "Walking",xPosition,yPosition,humanoid_watch);
 			break;
 		
@@ -126,4 +150,10 @@ unsigned int Humanoid::getAbductingLanderId() const
 void Humanoid::setAbductingLanderId(const unsigned int id)
 {
 	abductingLanderId = id;
+}
+
+void Humanoid::setDistance(const float distanceBetween)
+{
+	auto offset = 0.2f;
+	distance = distanceBetween - offset;
 }

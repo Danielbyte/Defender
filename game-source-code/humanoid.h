@@ -7,6 +7,7 @@
 #include <memory>
 #include <iostream>
 #include <random>
+#include "player.h"
 
 
 enum class HumanoidState{Walking,Abducted,Falling,Dead,Rescued};
@@ -19,11 +20,13 @@ public:
 	void setHumanoidState(const HumanoidState _state);
 	std::string getHumanoidDirection() const;
 	std::tuple<float, float> getPosition() const;
-	void updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& humanoid_sprite);
+	void updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& humanoid_sprite, std::shared_ptr<Player>& p);
+	void updateHumanoid(std::shared_ptr<Player>& player, std::shared_ptr<HumanoidSprite>& humanoid_sprite);
 	void placeHumanoid();
 	void setToAbducted();
 	void setAbductingLanderId(const unsigned int);
 	unsigned int getAbductingLanderId() const;
+	void setDistance(const float distance);
 
 private:
 	void updateHumanoidSprite(std::shared_ptr<HumanoidSprite>& humanoid_sprite);
@@ -36,6 +39,7 @@ private:
 	float speed;
 	std::shared_ptr<StopWatch>humanoid_watch = std::make_shared<StopWatch>();
 	unsigned int abductingLanderId;
+	float distance;
 };
 #endif // !HUMANOID_H
 
