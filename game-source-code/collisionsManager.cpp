@@ -248,27 +248,42 @@ void CollisionsManager::playerAndFallingHumanoidCollisions(std::shared_ptr<Playe
 	}
 }
 
-void CollisionsManager::humanoidAndGroundCollisions(std::vector<std::shared_ptr<Humanoid>>& humanoids)
+void CollisionsManager::humanoidAndGroundCollisions(std::vector<std::shared_ptr<Humanoid>>& humanoids,
+	std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites)
 {
-	for (auto& humanoid : humanoids)
+	auto humanoid_sprite = humanoid_sprites.begin();
+	auto humanoid = humanoids.begin();
+	while (humanoid != humanoids.end())
 	{
-		auto [xHumanoidPos, yHumanoidPos] = humanoid->getPosition();
+		auto [xHumanoidPos, yHumanoidPos] = (*humanoid)->getPosition();
+		auto humanoidDead = false;
+
 		if (yHumanoidPos >= groundLevel)
 		{
-			auto humanoidState = humanoid->getHumanoidState();
+			auto humanoidState = (*humanoid)->getHumanoidState();
 			switch (humanoidState)
 			{
 			case HumanoidState::Falling:
-				humanoid->setHumanoidState(HumanoidState::Dead);
+				(*humanoid)->setHumanoidState(HumanoidState::Dead);
+				humanoid_sprites.erase(humanoid_sprite);
+				humanoids.erase(humanoid);
+				humanoidDead = true;
 				break;
 
 			case HumanoidState::Rescued:
-				humanoid->setHumanoidState(HumanoidState::Walking);
+				(*humanoid)->setHumanoidState(HumanoidState::Walking);
 				break;
 
 			default:
 				break;
 			}
+
+			if (!humanoidDead) { ++humanoid; ++humanoid_sprite; }
+		}
+		else
+		{
+			++humanoid;
+			++humanoid_sprite;
 		}
 	}
 }
