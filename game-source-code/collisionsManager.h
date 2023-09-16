@@ -27,6 +27,10 @@ public:
 
 	void humanoidAndGroundCollisions(std::vector<std::shared_ptr<Humanoid>>& humanoids);
 
+	void playerLaserAndHumanoidCollisions(std::vector<std::shared_ptr<Humanoid>>& humanoids,
+		std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites, 
+		std::vector<std::shared_ptr<LaserSprite>>& laser_sprites);
+
 private:
 	void setAbductionStates(std::shared_ptr<Lander>& lander, std::shared_ptr<Humanoid>& humanoid);
 
