@@ -4,7 +4,7 @@ Player::Player():
 	playerSpeed{250.0f},
 	laserSpeed{700.0f}
 {
-	x_playerPosition = 25.0f;
+	x_playerPosition = 400.0f;
 	y_playerPosition = 300.0f; 
 	direction = "right"; //player initially facing right
 }
@@ -25,8 +25,8 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 		float rightBoundary = 800.0f - 25.0f;
 		x_playerPosition += playerSpeed * dt;
 		//restrict player ship to right boundary
-		if (x_playerPosition >= rightBoundary)
-			x_playerPosition = rightBoundary;
+		//if (x_playerPosition >= rightBoundary)
+			//x_playerPosition = rightBoundary;
 	}
 
 	if (left)
@@ -36,8 +36,8 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 		float leftBoundary = 25.0f;
 		x_playerPosition -= playerSpeed * dt;
 		//Restrict player ship to left boundary
-		if (x_playerPosition <= leftBoundary)
-			x_playerPosition = leftBoundary;
+		//if (x_playerPosition <= leftBoundary)
+		//	x_playerPosition = leftBoundary;
 	}
 
 	if (up)
@@ -136,4 +136,9 @@ void Player::updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprit
 std::tuple<float,float> Player::getPlayerPosition() const
 {
 	return { x_playerPosition,y_playerPosition };
+}
+
+std::string Player::getDirection() const
+{
+	return direction;
 }

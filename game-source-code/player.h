@@ -20,6 +20,7 @@ public:
 	std::tuple<float,float> getPlayerPosition() const;
 	void createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite);
 	void updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite, const float dt);
+	std::string getDirection() const;
 
 private:
 	float x_playerPosition;

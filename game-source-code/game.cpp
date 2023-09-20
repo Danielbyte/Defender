@@ -31,7 +31,16 @@ Game::Game():
 	background_t.loadFromFile("resources/background.png");
 	background_s.setTexture(background_t);
 	background_s.setOrigin(windowWidth/2.0f, windowHeight/2.0f);
-	background_s.setPosition(windowWidth/2.0f,windowHeight/2.0f);
+	background1Position.x = windowWidth / 2.0f;
+	background1Position.y = windowHeight / 2.0f;
+	background_s.setPosition(background1Position);
+
+	background_t2.loadFromFile("resources/background2.png");
+	background_s2.setTexture(background_t2);
+	background_s2.setOrigin(windowWidth / 2.0f, windowHeight / 2.0f);
+	background2Position.x = (windowWidth / 2.0f) - 600.0f;
+	background2Position.y = windowHeight / 2.0f;
+	background_s2.setPosition(background2Position);
 
 	game_world->placeHumanoids(humanoid_objects, humanoid_sprites);
 }
