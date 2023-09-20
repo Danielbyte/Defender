@@ -1,9 +1,11 @@
 #include "game.h"
 
-void Game::display()
+void Game::display(const float dt)
 {
 	if (isPlaying)
 	{
+		updateCamera(dt);
+		window.setView(gameView);
 		window.draw(background_s);
 		window.draw(player_sprite->getSprite());
 		for (auto& laser : laser_sprite)
@@ -34,4 +36,12 @@ void Game::display()
 
 	window.display();
 	window.clear();
+}
+
+void Game::updateCamera(const float dt)
+{
+	const float scrollSpeed = 10.0f;
+	auto [playerXpos, playerYpos] = player_obj->getPlayerPosition();
+	viewCenter.x = playerXpos + (viewCenter.x - playerXpos) * scrollSpeed * dt;
+	gameView.setCenter(viewCenter);
 }

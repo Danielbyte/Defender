@@ -24,8 +24,10 @@ public:
 	void updateHumanoids(const float dt);
 	void updateCollisions();
 	void updateProjectiles(const float dt);
-	void display(); //Defined in displayManager.cpp
+	void display(const float dt); //Defined in displayManager.cpp
 private:
+	void updateCamera(const float dt);
+
 	unsigned int windowWidth;
 	unsigned int windowHeight;
 	bool isPlaying;
@@ -38,6 +40,11 @@ private:
 
 	sf::Texture background_t;
 	sf::Sprite background_s;
+
+	//View to set up the camera for scrolling
+	sf::View gameView;
+	sf::Vector2f viewCenter;
+	sf::Vector2f viewSize;
 
 	//Player movement variables
 	bool upPressed;

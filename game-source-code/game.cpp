@@ -11,7 +11,11 @@ Game::Game():
 	rightPressed{false},
 	spacePressed{false}
 {
-	
+	viewCenter.x = windowWidth / 2.0f;
+	viewCenter.y = windowHeight / 2.0f;
+	viewSize = 2.0f * viewCenter;
+	gameView.setCenter(viewCenter);
+	gameView.setSize(viewSize);
 
 	// Load the text font
 	font.loadFromFile("resources/sansation.ttf");
@@ -47,6 +51,6 @@ void Game::run()
 			updateGame(deltaTime);
 
 			//Draw game entities
-			display();
+			display(deltaTime);
 	}
 }
