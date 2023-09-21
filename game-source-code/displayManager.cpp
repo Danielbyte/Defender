@@ -9,6 +9,7 @@ void Game::display(const float dt)
 		window.setView(gameView);
 		window.draw(background_s);
 		window.draw(background_s2);
+		window.draw(landscape1_sprite->getSprite());
 		window.draw(player_sprite->getSprite());
 		for (auto& laser : laser_sprite)
 		{
@@ -28,7 +29,7 @@ void Game::display(const float dt)
 		for (auto& humanoid : humanoid_sprites)
 		{
 			window.draw(humanoid->getSprite());
-		}
+		}	
 	}
 
 	else
@@ -80,9 +81,11 @@ void Game::updateBackgroundView()
 				background1Position.x = background2Position.x + backgroundWidth;
 
 			background_s.setPosition(background1Position);
+			landscape1->updateTerrain(landscape1_sprite, background1Position.x);
 			return;
 		}
 		background1Position.x = background2Position.x - backgroundWidth;
+		landscape1->updateTerrain(landscape1_sprite, background1Position.x);
 		background_s.setPosition(background1Position);
 	}
 }

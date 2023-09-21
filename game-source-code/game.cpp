@@ -34,6 +34,7 @@ Game::Game():
 	background1Position.x = windowWidth / 2.0f;
 	background1Position.y = windowHeight / 2.0f;
 	background_s.setPosition(background1Position);
+	landscape1->updateTerrain(landscape1_sprite, background1Position.x);
 
 	background_t2.loadFromFile("resources/background2.png");
 	background_s2.setTexture(background_t2);

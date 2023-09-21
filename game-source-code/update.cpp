@@ -5,12 +5,14 @@ void Game::updateGame(const float dt)
 	if (!isPlaying)
 		return;
 
-	game_world->updateGameWorld(lander_objects, lander_object_sprites);
+	
 
 	updateHumanoids(dt);
 
 	player_obj->updatePlayer(leftPressed, rightPressed, upPressed, downPressed,spacePressed,player_sprite,
 		laser_sprite,dt);
+
+	game_world->updateGameWorld(lander_objects, lander_object_sprites);
 
 	if (!lander_objects.empty())
 		updateLanders(dt);

@@ -5,7 +5,8 @@
 #include "lander.h"
 #include "humanoidSprite.h"
 #include "humanoid.h"
-#include <set>
+#include "landscape.h"
+#include "landscapeSprite.h"
 
 enum class Enemy{Lander,Bomber,Pod,None};
 
@@ -24,6 +25,7 @@ public:
 
 private:
 	std::shared_ptr<StopWatch> world_watch = std::make_shared<StopWatch>();
+	std::shared_ptr<Landscape> landscape_object = std::make_shared<Landscape>();
 	Enemy enemy;
 
 	void createLander(std::vector<std::shared_ptr<Lander>>& lander_objects,

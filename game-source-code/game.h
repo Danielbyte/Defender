@@ -12,6 +12,8 @@
 #include "gameWorld.h"
 #include "collisionsManager.h"
 #include "humanoidSprite.h"
+#include "landscape.h"
+#include "landscapeSprite.h"
 
 class Game
 {
@@ -66,6 +68,8 @@ private:
 
 	// game world
 	std::shared_ptr<GameWorld> game_world = std::make_shared<GameWorld>();
+	std::shared_ptr<Landscape> landscape1 = std::make_shared<Landscape>();
+	std::shared_ptr<LandscapeSprite> landscape1_sprite = std::make_shared<LandscapeSprite>();
 
 	//Player Entity
 	std::shared_ptr<Player> player_obj = std::make_shared<Player>();
