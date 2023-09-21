@@ -6,11 +6,12 @@
 class LandscapeSprite : public SpriteStore
 {
 public:
-	LandscapeSprite();
+	LandscapeSprite(const int id);
 	void virtual loadTextures();
 
 private:
-	sf::Texture pixel_t;
+	sf::Texture terrain1_t;
+	sf::Texture terrain2_t;
 };
 #endif // !LANDSCAPESPRITE_H
 

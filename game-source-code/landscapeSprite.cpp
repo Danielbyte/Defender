@@ -1,16 +1,22 @@
 #include "landscapeSprite.h"
 
-LandscapeSprite::LandscapeSprite()
+LandscapeSprite::LandscapeSprite(const int id)
 {
 	sf::Vector2f dimensions;
 	dimensions.x = 1200.0f;
 	dimensions.y = 68.0f;
 	loadTextures();
 	InitialiseEntityOrigin(dimensions);
-	updateSpriteTexture(pixel_t);
+
+	if (id == 1)
+	updateSpriteTexture(terrain1_t);
+
+	if (id == 2)
+		updateSpriteTexture(terrain2_t);
 }
 
 void LandscapeSprite::loadTextures()
 {
-	pixel_t.loadFromFile("resources/terrain-1.png");
+	terrain1_t.loadFromFile("resources/terrain-1.png");
+	terrain2_t.loadFromFile("resources/terrain-2.png");
 }

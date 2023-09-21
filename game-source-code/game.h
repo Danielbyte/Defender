@@ -69,7 +69,9 @@ private:
 	// game world
 	std::shared_ptr<GameWorld> game_world = std::make_shared<GameWorld>();
 	std::shared_ptr<Landscape> landscape1 = std::make_shared<Landscape>();
-	std::shared_ptr<LandscapeSprite> landscape1_sprite = std::make_shared<LandscapeSprite>();
+	std::shared_ptr<LandscapeSprite> landscape1_sprite = std::make_shared<LandscapeSprite>(1);
+	std::shared_ptr<Landscape> landscape2 = std::make_shared<Landscape>();
+	std::shared_ptr<LandscapeSprite> landscape2_sprite = std::make_shared<LandscapeSprite>(2);
 
 	//Player Entity
 	std::shared_ptr<Player> player_obj = std::make_shared<Player>();

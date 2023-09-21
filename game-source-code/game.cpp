@@ -42,6 +42,7 @@ Game::Game():
 	background2Position.x = (windowWidth / 2.0f) - 600.0f;
 	background2Position.y = windowHeight / 2.0f;
 	background_s2.setPosition(background2Position);
+	landscape2->updateTerrain(landscape2_sprite, background2Position.x);
 
 	game_world->placeHumanoids(humanoid_objects, humanoid_sprites);
 }
