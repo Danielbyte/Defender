@@ -11,6 +11,8 @@ void Game::display(const float dt)
 		window.draw(background_s2);
 		window.draw(landscape1_sprite->getSprite());
 		window.draw(landscape2_sprite->getSprite());
+		window.draw(viewDivider_s);
+		window.draw(miniManpBorders_s);
 		window.draw(player_sprite->getSprite());
 		for (auto& laser : laser_sprite)
 		{
@@ -53,6 +55,8 @@ void Game::updateCamera(const float dt)
 void Game::updateBackgroundView()
 {
 	auto [playerXpos, playerYpos] = player_obj->getPlayerPosition();
+	viewDivider_s.setPosition(playerXpos, 100.0f);
+	miniManpBorders_s.setPosition(playerXpos, 50.0f);
 	auto backgroundWidth = 1200.0f;
 
 	auto distance1 = abs(playerXpos - background1Position.x);

@@ -45,6 +45,28 @@ Game::Game():
 	landscape2->updateTerrain(landscape2_sprite, background2Position.x);
 
 	game_world->placeHumanoids(humanoid_objects, humanoid_sprites);
+
+	viewDivider_t.loadFromFile("resources/minimap-line.png");
+	viewDivider_s.setTexture(viewDivider_t);
+	sf::Vector2f lowerLineBoundary;
+	sf::Vector2f linePosition;
+	linePosition.x = windowWidth / 2.0f;
+	linePosition.y = 100.0f;
+	lowerLineBoundary.x = static_cast<float>(windowWidth);
+	lowerLineBoundary.y = 2.0f;
+	viewDivider_s.setOrigin(lowerLineBoundary/2.0f);
+	viewDivider_s.setPosition(linePosition);
+
+	miniMapBorders_t.loadFromFile("resources/minimap-borders.png");
+	miniManpBorders_s.setTexture(miniMapBorders_t);
+	sf::Vector2f miniMapBorderDimensions;
+	sf::Vector2f miniMapPosition;
+	miniMapPosition.y = 50.0f;
+	miniMapBorderDimensions.x = 600.0f;
+	miniMapBorderDimensions.y = 100.0f;
+	miniManpBorders_s.setOrigin(miniMapBorderDimensions / 2.0f);
+	miniManpBorders_s.setPosition(miniMapPosition);
+	
 }
 
 void Game::run()

@@ -31,15 +31,13 @@ private:
 	void updateCamera(const float dt);
 	void updateBackgroundView();
 
+	//Window
 	unsigned int windowWidth;
 	unsigned int windowHeight;
 	bool isPlaying;
 	sf::RenderWindow window;
 	sf::Text splashScreenText;
 	sf::Font font;
-
-	sf::Texture player_t;
-	sf::Sprite player_s;
 
 	sf::Texture background_t;
 	sf::Sprite background_s;
@@ -52,6 +50,12 @@ private:
 	sf::View gameView;
 	sf::Vector2f viewCenter;
 	sf::Vector2f viewSize;
+
+	//Minimap
+	sf::Texture viewDivider_t;
+	sf::Sprite viewDivider_s;
+	sf::Texture miniMapBorders_t;
+	sf::Sprite miniManpBorders_s;
 
 	//Player movement variables
 	bool upPressed;
