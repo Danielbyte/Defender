@@ -63,9 +63,19 @@ Game::Game():
 	sf::Vector2f miniMapPosition;
 	miniMapPosition.y = 50.0f;
 	miniMapBorderDimensions.x = 600.0f;
-	miniMapBorderDimensions.y = 100.0f;
+	miniMapBorderDimensions.y = 102.0f;
 	miniManpBorders_s.setOrigin(miniMapBorderDimensions / 2.0f);
 	miniManpBorders_s.setPosition(miniMapPosition);
+
+	mainGameSection_t.loadFromFile("resources/mainGameSection.png");
+	mainGameSection_s.setTexture(mainGameSection_t);
+	sf::Vector2f gameSectionDimension;
+	sf::Vector2f gameSectionPosition;
+	gameSectionPosition.y = 50.0f;
+	gameSectionDimension.x = 400.0f;
+	gameSectionDimension.y = 102.0f;
+	mainGameSection_s.setOrigin(gameSectionDimension / 2.0f);
+	mainGameSection_s.setPosition(gameSectionPosition);
 	
 }
 

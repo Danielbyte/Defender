@@ -56,6 +56,8 @@ private:
 	sf::Sprite viewDivider_s;
 	sf::Texture miniMapBorders_t;
 	sf::Sprite miniManpBorders_s;
+	sf::Texture mainGameSection_t;
+	sf::Sprite mainGameSection_s;
 
 	//Player movement variables
 	bool upPressed;
