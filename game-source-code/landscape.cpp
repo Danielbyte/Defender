@@ -1,7 +1,7 @@
 #include "landscape.h"
 
 Landscape::Landscape():
-	yPosition{560.0f},
+	yPosition{525.0f},
 	xPosition{0}
 {}
 

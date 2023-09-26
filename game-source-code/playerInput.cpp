@@ -3,6 +3,7 @@
 void Game::handleInput()
 {
 	sf::Event event;
+	isMoving = false;
 	while (window.pollEvent(event))
 	{
 		if (event.type == sf::Event::Closed)
@@ -35,10 +36,12 @@ void Game::handleInput()
 
 			case sf::Keyboard::Left:
 				leftPressed = true;
+				isMoving = true;
 				break;
 
 			case sf::Keyboard::Right:
 				rightPressed = true;
+				isMoving = true;
 				break;
 
 			case sf::Keyboard::Space:

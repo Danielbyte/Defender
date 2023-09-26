@@ -3,8 +3,8 @@
 LandscapeSprite::LandscapeSprite(const int id)
 {
 	sf::Vector2f dimensions;
-	dimensions.x = 1200.0f;
-	dimensions.y = 68.0f;
+	dimensions.x = 3200.0f;
+	dimensions.y = 100.0f;
 	loadTextures();
 	InitialiseEntityOrigin(dimensions);
 

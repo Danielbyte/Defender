@@ -5,15 +5,15 @@ void Game::display(const float dt)
 	if (isPlaying)
 	{
 		updateCamera(dt);
+		miniMapUpdate(dt);
 		updateBackgroundView();
+		window.clear();
 		window.setView(gameView);
 		window.draw(background_s);
 		window.draw(background_s2);
 		window.draw(landscape1_sprite->getSprite());
 		window.draw(landscape2_sprite->getSprite());
-		window.draw(viewDivider_s);
-		window.draw(miniManpBorders_s);
-		window.draw(mainGameSection_s);
+		window.draw(miniMap_s);
 		window.draw(player_sprite->getSprite());
 		for (auto& laser : laser_sprite)
 		{
@@ -33,7 +33,12 @@ void Game::display(const float dt)
 		for (auto& humanoid : humanoid_sprites)
 		{
 			window.draw(humanoid->getSprite());
-		}	
+		}
+
+		window.setView(miniMapView);
+		window.draw(miniTerrain1_s);
+		//window.draw(miniTerrain2_s);
+		//window.draw(miniMainSection_s);
 	}
 
 	else
@@ -49,17 +54,15 @@ void Game::updateCamera(const float dt)
 {
 	const float scrollSpeed = 10.0f;
 	auto [playerXpos, playerYpos] = player_obj->getPlayerPosition();
-	viewCenter.x = playerXpos + (viewCenter.x - playerXpos) * scrollSpeed * dt;
+	viewCenter.x = playerXpos;
 	gameView.setCenter(viewCenter);
+	miniMapView.setCenter(viewCenter.x - 400.0f,viewCenter.y);
 }
 
 void Game::updateBackgroundView()
 {
 	auto [playerXpos, playerYpos] = player_obj->getPlayerPosition();
-	viewDivider_s.setPosition(playerXpos, 100.0f);
-	miniManpBorders_s.setPosition(playerXpos, 51.0f);
-	mainGameSection_s.setPosition(playerXpos, 51.0f);
-	auto backgroundWidth = 1200.0f;
+	auto backgroundWidth = 3200.0f;
 
 	auto distance1 = abs(playerXpos - background1Position.x);
 	auto distance2 = abs(playerXpos - background2Position.x);
@@ -103,4 +106,9 @@ void Game::updateBackgroundView()
 		landscape1->updateTerrain(landscape1_sprite, background1Position.x);
 		background_s.setPosition(background1Position);
 	}
+}
+
+void Game::miniMapUpdate(const float dt)
+{
+	miniMap_s.setPosition(viewCenter.x, 51.0f);		
 }

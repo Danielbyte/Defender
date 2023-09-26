@@ -30,6 +30,7 @@ public:
 private:
 	void updateCamera(const float dt);
 	void updateBackgroundView();
+	void miniMapUpdate(const float dt);
 
 	//Window
 	unsigned int windowWidth;
@@ -49,15 +50,26 @@ private:
 	//View to set up the camera for scrolling
 	sf::View gameView;
 	sf::Vector2f viewCenter;
-	sf::Vector2f viewSize;
+	sf::Vector2f gameViewSize;
+
+	//Mini-map views
+	sf::View miniMapView;
+	sf::Vector2f miniMapViewSize;
 
 	//Minimap
-	sf::Texture viewDivider_t;
-	sf::Sprite viewDivider_s;
-	sf::Texture miniMapBorders_t;
-	sf::Sprite miniManpBorders_s;
-	sf::Texture mainGameSection_t;
-	sf::Sprite mainGameSection_s;
+	sf::Vector2f miniMapPosition;
+	sf::Texture miniMap_t;
+	sf::Sprite miniMap_s;
+
+	sf::Texture miniMainSection_t;
+	sf::Sprite miniMainSection_s;
+
+
+	sf::Texture miniTerrain1_t;
+	sf::Vector2f t1Pos;
+	sf::Sprite miniTerrain1_s;
+	sf::Texture miniTerrain2_t;
+	sf::Sprite miniTerrain2_s;
 
 	//Player movement variables
 	bool upPressed;
@@ -65,6 +77,7 @@ private:
 	bool leftPressed;
 	bool rightPressed;
 	bool spacePressed;
+	bool isMoving;
 
 	//GAME ENTITIES
 	
