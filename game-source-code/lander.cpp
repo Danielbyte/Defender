@@ -14,9 +14,25 @@ Lander::Lander():
 	isAbducting{false},
 	ascend{false},
 	localId{0}
+{}
+
+Lander::Lander(std::shared_ptr<Player>& player):
+	xPosition{ 0.0f },
+	yPosition{ 0.0f },
+	leftSide{ false },
+	rightSide{ false },
+	landerSpeed{ 50.0f },
+	reachedHumanoidZone{ false },
+	direction{ Direction::Other },
+	playerXposref{ 0.0f },
+	playerYposref{ 0.0f },
+	missileSpeed{ 150.0f },
+	isAbducting{ false },
+	ascend{ false },
+	localId{ 0 }
 {
 	//generate spawn position
-	generateInitialPosition();
+	generateInitialPosition(player);
 	setId();
 	setLocalId();
 }
@@ -26,15 +42,16 @@ std::tuple<float, float> Lander::getPosition() const
 	return { xPosition,yPosition };
 }
 
-void Lander::generateInitialPosition()
+void Lander::generateInitialPosition(std::shared_ptr<Player>& player)
 {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	float minXposition = 16.0f;
-	float maxXposition = 784.0f;
+	float minXposition = -10.0f;
+	float maxXposition = 100.0f;
 	std::uniform_real_distribution<float>distribution(minXposition, maxXposition);
 	xPosition = distribution(gen);
-	auto middle = 400.0f;
+	auto [playerXpos, playerYpos] = player->getPlayerPosition();
+	auto middle = playerXpos;
 	
 	if (xPosition >= middle)
 	{
@@ -46,7 +63,7 @@ void Lander::generateInitialPosition()
 		leftSide = true;
 	}
 
-	float minYposition = 16.0f;
+	float minYposition = 116.0f;
 	float maxYposition = 400.0f;
 	std::uniform_real_distribution<float>distribution2(minYposition, maxYposition);
 	yPosition = distribution2(gen);

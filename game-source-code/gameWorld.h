@@ -16,7 +16,7 @@ public:
 	GameWorld();
 
 	void updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_objects,
-		std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites);
+		std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites, std::shared_ptr<Player>& player);
 
 	Enemy generateEnemy();
 
@@ -29,7 +29,9 @@ private:
 	Enemy enemy;
 
 	void createLander(std::vector<std::shared_ptr<Lander>>& lander_objects,
-		std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites);
+		std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites, std::shared_ptr<Player>& player);
+	
+	int numberOfLanders;
 };
 #endif // !GAMEWORLD_H
 

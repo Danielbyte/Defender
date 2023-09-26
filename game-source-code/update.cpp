@@ -12,7 +12,7 @@ void Game::updateGame(const float dt)
 	player_obj->updatePlayer(leftPressed, rightPressed, upPressed, downPressed,spacePressed,player_sprite,
 		laser_sprite,dt);
 
-	game_world->updateGameWorld(lander_objects, lander_object_sprites);
+	game_world->updateGameWorld(lander_objects, lander_object_sprites, player_obj);
 
 	if (!lander_objects.empty())
 		updateLanders(dt);

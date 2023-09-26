@@ -114,8 +114,8 @@ void Humanoid::generateXposition()
 {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	float min = 4.0f;
-	float max = 796.0f;
+	float min = -10.0f;
+	float max = 1000.0f;
 	std::uniform_real_distribution<float>distribution(min, max);
 
 	xPosition = distribution(gen);

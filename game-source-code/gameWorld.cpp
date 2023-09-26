@@ -1,11 +1,12 @@
 #include "gameWorld.h"
 
 GameWorld::GameWorld():
-enemy{Enemy::None} //initially, there are no enemies
+enemy{Enemy::None}, //initially, there are no enemies
+numberOfLanders{0}
 {}
 
 void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_objects,
-	std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites)
+	std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites, std::shared_ptr<Player>& player)
 {
 	auto _time = world_watch->time_elapsed();
 	generateEnemy();
@@ -16,7 +17,7 @@ void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_obj
 	switch (enemy)
 	{
 	case Enemy::Lander:
-		createLander(lander_objects, lander_object_sprites);
+		createLander(lander_objects, lander_object_sprites, player);
 		break;
 	case Enemy::Bomber:
 		//std::cout << "Create Bomber" << std::endl;
@@ -71,20 +72,26 @@ Enemy GameWorld::generateEnemy()
 }
 
 void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_objects,
-	std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites)
+	std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites, std::shared_ptr<Player>& player)
 {
-	auto lander_object = std::make_shared<Lander>();
+	if (numberOfLanders == 6)
+		return;
+
+	auto lander_object = std::make_shared<Lander>(player);
 	lander_objects.push_back(lander_object);
+
 	auto lander_sprite = std::make_shared<LanderSprite>();
 	lander_object_sprites.push_back(lander_sprite);
 	world_watch->restart();
+	
+	++numberOfLanders;
 }
 
 void GameWorld::placeHumanoids(std::vector<std::shared_ptr<Humanoid>>& humanoid_objects,
 	std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites)
 {
 	//generate 5 humanoids
-	for (int i = 0; i < 4; ++i)
+	for (int i = 0; i < 5; ++i)
 	{
 		auto humanoid = std::make_shared<Humanoid>();
 		humanoid_objects.push_back(humanoid);
