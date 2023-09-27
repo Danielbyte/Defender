@@ -71,7 +71,8 @@ TEST_CASE("Test if timer can be restarted")
 auto playerSpawnPosition_x = 400.0f;
 auto playerSpawnPosition_y = 300.0f;
 auto initialPlayerDirection = "right";
-auto deltaTime = 1 / 60.0f;
+auto deltaTime = 10.0f;
+auto playerSpeed = 250.0f;
 
 TEST_CASE("Test if player is spawned at the right position")
 {
@@ -139,4 +140,32 @@ TEST_CASE("Test if player direction is updated to face left if user presses left
 
 	//The player should now face the right
 	CHECK_EQ(final_direction, "right");
+}
+
+TEST_CASE("Test if player position is updated when user presses right arrow key")
+{
+	auto player = std::make_shared<Player>();
+	auto player_sprite = std::make_shared<PlayerSprite>();
+	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+
+	auto initial_direction = player->getDirection();
+	auto left = false;
+	auto right = true;
+	auto up = false;
+	auto down = false;
+	auto space = false;
+	auto gameOver = false;
+	auto [initialXpos, initialYpos] = player->getPlayerPosition();
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, deltaTime, gameOver);
+	auto [finalXpos, finalYpos] = player->getPlayerPosition();
+
+	//Expect initial positions before player presses right arrow
+	CHECK(initialXpos == playerSpawnPosition_x);
+	CHECK(initialYpos == playerSpawnPosition_y);
+
+	//Expected positions after player moves right
+	auto expectedXposition = playerSpawnPosition_x + playerSpeed * deltaTime;
+	auto expectedYpos = playerSpawnPosition_y;
+	CHECK_EQ(finalXpos, expectedXposition);
+	CHECK_EQ(finalYpos, expectedYpos);
 }
