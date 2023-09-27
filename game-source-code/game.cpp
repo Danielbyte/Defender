@@ -12,7 +12,8 @@ Game::Game():
 	spacePressed{false},
 	isMoving{false},
 	gameOver{false},
-	playerWon{false}
+	playerWon{false},
+	landersDestroyed{0}
 {
 	viewCenter.x = 400.0f;
 	viewCenter.y = windowHeight / 2.0f;
@@ -40,8 +41,14 @@ Game::Game():
 	endOfGame.setFont(font);
 	endOfGame.setCharacterSize(40);
 	endOfGame.setPosition(20.f, 90.f);
-	endOfGame.setFillColor(sf::Color::White);
+	endOfGame.setFillColor(sf::Color::Red);
 	endOfGame.setString("GAME OVER!");
+
+	winText.setFont(font);
+	winText.setCharacterSize(40);
+	winText.setPosition(20.f, 90.f);
+	winText.setFillColor(sf::Color::Green);
+	winText.setString("YOU WON!");
 
 	background_t.loadFromFile("resources/background.png");
 	background_s.setTexture(background_t);

@@ -38,7 +38,16 @@ void Game::updateCollisions()
 {
 	update_collisions.playerLanderCollisions(player_obj, lander_objects, lander_object_sprites);
 	update_collisions.playerAndMissileCollisions(player_obj, lander_missile_sprites);
-	update_collisions.landerAndLaserCollisions(lander_objects, lander_object_sprites, laser_sprite,humanoid_objects);
+	update_collisions.landerAndLaserCollisions(lander_objects, lander_object_sprites, laser_sprite,humanoid_objects,
+		landersDestroyed);
+
+	auto totalLanders = 6;
+	if (landersDestroyed == totalLanders)
+	{
+		playerWon = true;
+		return;
+	}
+
 	update_collisions.landerAndHumanoidCollisions(lander_objects, humanoid_objects);
 	update_collisions.playerAndFallingHumanoidCollisions(player_obj, humanoid_objects,humanoid_sprites);
 	update_collisions.humanoidAndGroundCollisions(humanoid_objects,humanoid_sprites);

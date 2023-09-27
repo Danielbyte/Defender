@@ -100,7 +100,7 @@ void CollisionsManager::playerAndMissileCollisions(std::shared_ptr<Player>& play
 
 void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lander>>& landers,
 	std::vector<std::shared_ptr<LanderSprite>>& lander_sprites, std::vector<std::shared_ptr<LaserSprite>>& laser_sprites,
-	std::vector<std::shared_ptr<Humanoid>>& humanoids)
+	std::vector<std::shared_ptr<Humanoid>>& humanoids, int& landersDestroyed)
 {
 	if (landers.empty())
 		return;
@@ -136,6 +136,7 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 					shooter_obj->updateIds();
 					_projectiles.erase(projectile_iter);
 					hadAcollision = true;
+					++landersDestroyed;
 				}
 				else
 				{

@@ -14,6 +14,18 @@ void Game::display(const float dt)
 		return;
 	}
 
+	if (playerWon)
+	{
+		viewCenter.x = 400.0f;
+		viewCenter.y = windowHeight / 2.0f;
+		gameView.setCenter(viewCenter);
+		window.setView(gameView);
+		window.draw(winText);
+		window.display();
+		window.clear();
+		return;
+	}
+
 	if (isPlaying)
 	{
 		updateCamera(dt);

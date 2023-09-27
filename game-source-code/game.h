@@ -39,6 +39,7 @@ private:
 	sf::RenderWindow window;
 	sf::Text splashScreenText;
 	sf::Text endOfGame;
+	sf::Text winText;
 	sf::Font font;
 
 	sf::Texture background_t;
@@ -111,6 +112,7 @@ private:
 
 	bool gameOver;
 	bool playerWon;
+	int landersDestroyed;
 };
 #endif
 
