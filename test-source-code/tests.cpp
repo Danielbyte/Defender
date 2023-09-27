@@ -73,7 +73,7 @@ auto playerSpawnPosition_y = 300.0f;
 auto initialPlayerDirection = "right";
 auto deltaTime = 10.0f;
 auto playerSpeed = 250.0f;
-auto lowerrBound = 598.0f;
+auto lowerrBound = 590.0f;
 auto upperBound = 10.0f;
 
 TEST_CASE("Test if player is spawned at the right position")
@@ -276,6 +276,28 @@ TEST_CASE("Test if player is restricted to the upper bound of the screen")
 
 	//Expected positions after player moves up (out of bounds)
 	auto expectedYposition = upperBound;
+	auto expectedXpos = playerSpawnPosition_x;
+	CHECK_EQ(finalYpos, expectedYposition);
+	CHECK_EQ(finalXpos, expectedXpos);
+}
+
+TEST_CASE("Test if player is restricted to lower bounds of game screen")
+{
+	auto player = std::make_shared<Player>();
+	auto player_sprite = std::make_shared<PlayerSprite>();
+	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+
+	auto left = false;
+	auto right = false;
+	auto up = false; 
+	auto down = true;//will move 2500 units down
+	auto space = false;
+	auto gameOver = false;
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, deltaTime, gameOver);
+	auto [finalXpos, finalYpos] = player->getPlayerPosition();
+
+	//Expected positions after player moves down (out of bounds)
+	auto expectedYposition = lowerrBound;
 	auto expectedXpos = playerSpawnPosition_x;
 	CHECK_EQ(finalYpos, expectedYposition);
 	CHECK_EQ(finalXpos, expectedXpos);
