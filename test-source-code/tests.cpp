@@ -66,3 +66,16 @@ TEST_CASE("Test if timer can be restarted")
 	DOCTEST_CHECK_LE(final_time, initial_time);
 	DOCTEST_CHECK_GT(initial_time, final_time);
 }
+
+//Test cases for the player object
+auto playerSpawnPosition_x = 400.0f;
+auto playerSpawnPosition_y = 300.0f;
+
+TEST_CASE("Test if player is spawned at the right position")
+{
+	auto player = std::make_shared<Player>();
+	auto [xPosition, yPosition] = player->getPlayerPosition();
+
+	CHECK_EQ(xPosition, playerSpawnPosition_x);
+	CHECK_EQ(yPosition, playerSpawnPosition_y);
+}
