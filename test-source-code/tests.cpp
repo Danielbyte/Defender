@@ -70,6 +70,7 @@ TEST_CASE("Test if timer can be restarted")
 //Test cases for the player object
 auto playerSpawnPosition_x = 400.0f;
 auto playerSpawnPosition_y = 300.0f;
+auto initialPlayerDirection = "right";
 
 TEST_CASE("Test if player is spawned at the right position")
 {
@@ -98,4 +99,11 @@ TEST_CASE("Test if player state can be correctly set")
 	CHECK_EQ(initial_state, PlayerState::Alive);
 	//After the player state has been set to dead, player state should be dead
 	CHECK_EQ(final_state, PlayerState::Dead);
+}
+
+TEST_CASE("Test if the initial player direction is to the right")
+{
+	auto player = std::make_shared<Player>();
+	auto direction = player->getDirection();
+	CHECK_EQ(direction, initialPlayerDirection);
 }
