@@ -2,6 +2,7 @@
 #define SPRITESTORE_H
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include "stopWatch.h"
 
 class SpriteStore
 {

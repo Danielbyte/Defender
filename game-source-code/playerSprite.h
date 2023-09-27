@@ -8,11 +8,13 @@ class PlayerSprite : public SpriteStore
 public:
 	PlayerSprite();
 	void virtual loadTextures();
-	void setTexture();
+	void setTexture(std::string playerState, bool& gameOver, StopWatch& animation_watch);
 
 private:
 	sf::Texture player_tR;
 	sf::Texture player_tL;
+	sf::Texture player_death_tR;
+	sf::Texture player_death_TL;
 };
 
 #endif // !PLAYERSPRITE_H

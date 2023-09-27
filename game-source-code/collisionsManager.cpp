@@ -45,6 +45,11 @@ void CollisionsManager::playerLanderCollisions(std::shared_ptr<Player>& player, 
 void CollisionsManager::playerAndMissileCollisions(std::shared_ptr<Player>& player,
 	std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
 {
+	PlayerState state = player->getPlayerState();
+
+	if (state == PlayerState::Dead)
+		return;
+
 	if (missile_sprites.empty())
 		return;
 
@@ -73,6 +78,8 @@ void CollisionsManager::playerAndMissileCollisions(std::shared_ptr<Player>& play
 				shooter_obj->updateIds();
 				missile_sprites.erase(missile_sprite_iter);
 				_projectiles.erase(projectile_iter);
+				player->restartAnimationWatch();
+				player->setPlayerState(PlayerState::Dead);
 			}
 			else
 			{

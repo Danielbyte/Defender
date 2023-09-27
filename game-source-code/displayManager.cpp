@@ -2,6 +2,14 @@
 
 void Game::display(const float dt)
 {
+	if (gameOver)
+	{
+		window.draw(endOfGame);
+		window.display();
+		window.clear();
+		return;
+	}
+
 	if (isPlaying)
 	{
 		updateCamera(dt);

@@ -10,7 +10,9 @@ Game::Game():
 	leftPressed{false},
 	rightPressed{false},
 	spacePressed{false},
-	isMoving{false}
+	isMoving{false},
+	gameOver{false},
+	playerWon{false}
 {
 	viewCenter.x = 400.0f;
 	viewCenter.y = windowHeight / 2.0f;
@@ -35,6 +37,11 @@ Game::Game():
 	splashScreenText.setFillColor(sf::Color::White);
 	splashScreenText.setString("Welcome to Defender!\nPress Enter to start the game");
 
+	endOfGame.setFont(font);
+	endOfGame.setCharacterSize(40);
+	endOfGame.setPosition(20.f, 180.f);
+	endOfGame.setFillColor(sf::Color::White);
+	endOfGame.setString("GAME OVER!");
 
 	background_t.loadFromFile("resources/background.png");
 	background_s.setTexture(background_t);
@@ -63,9 +70,9 @@ Game::Game():
 
 	miniTerrain1_t.loadFromFile("resources/terrain-1-mini.png");
 	miniTerrain1_s.setTexture(miniTerrain1_t);
-	miniTerrain1_s.setOrigin(800.0f, 50 / 2.0f);
+	miniTerrain1_s.setOrigin(800.0f, 30 / 2.0f);
 	t1Pos.x = 450.0f;
-	t1Pos.y = 75.0f;
+	t1Pos.y = 85.0f;
 	miniTerrain1_s.setPosition(t1Pos);
 
 	miniTerrain2_t.loadFromFile("resources/terrain-2-mini.png");

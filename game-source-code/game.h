@@ -38,6 +38,7 @@ private:
 	bool isPlaying;
 	sf::RenderWindow window;
 	sf::Text splashScreenText;
+	sf::Text endOfGame;
 	sf::Font font;
 
 	sf::Texture background_t;
@@ -107,6 +108,9 @@ private:
 
 	//Shooter object to update projectiles
 	std::shared_ptr<Shooter>shooter_object = std::make_shared<Shooter>();
+
+	bool gameOver;
+	bool playerWon;
 };
 #endif
 

@@ -2,7 +2,8 @@
 
 Player::Player():
 	playerSpeed{250.0f},
-	laserSpeed{700.0f}
+	laserSpeed{700.0f},
+	state{PlayerState::Alive}
 {
 	x_playerPosition = 400.0f;
 	y_playerPosition = 300.0f; 
@@ -10,7 +11,8 @@ Player::Player():
 }
 
 void Player::updatePlayer(const bool& left, const bool& right, const bool& up, const bool& down,bool& space,
-	std::shared_ptr<PlayerSprite>& player_sprite, std::vector<std::shared_ptr<LaserSprite>>& laser_sprite, const float dt)
+	std::shared_ptr<PlayerSprite>& player_sprite, std::vector<std::shared_ptr<LaserSprite>>& laser_sprite, const float dt,
+	bool& gameOver)
 {
 	if (space)
 	{
@@ -24,9 +26,6 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 		player_sprite->updateSpritePosition(direction,x_playerPosition,y_playerPosition);
 		float rightBoundary = 800.0f - 25.0f;
 		x_playerPosition += playerSpeed * dt;
-		//restrict player ship to right boundary
-		//if (x_playerPosition >= rightBoundary)
-			//x_playerPosition = rightBoundary;
 	}
 
 	if (left)
@@ -35,9 +34,6 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 		player_sprite->updateSpritePosition(direction,x_playerPosition,y_playerPosition);
 		float leftBoundary = 25.0f;
 		x_playerPosition -= playerSpeed * dt;
-		//Restrict player ship to left boundary
-		//if (x_playerPosition <= leftBoundary)
-		//	x_playerPosition = leftBoundary;
 	}
 
 	if (up)
@@ -47,7 +43,6 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 		//Restrict player ship to updwards boundary of game window
 		if (y_playerPosition <= upBoundary)
 			y_playerPosition = upBoundary;
-
 	}
 
 	if (down)
@@ -60,7 +55,20 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 	}
 	
 	player_sprite->updateSpritePosition("either", x_playerPosition, y_playerPosition);
-	player_sprite->setTexture();
+
+	switch (state)
+	{
+	case PlayerState::Alive:
+		player_sprite->setTexture("alive", gameOver ,animation_watch);
+		break;
+	case PlayerState::Dead:
+	    player_sprite->setTexture("dead", gameOver, animation_watch);
+		return;
+		break;
+	default:
+		break;
+	}
+	
 	updateLasers(laser_sprite, dt);
 }
 
@@ -141,4 +149,19 @@ std::tuple<float,float> Player::getPlayerPosition() const
 std::string Player::getDirection() const
 {
 	return direction;
+}
+
+void Player::restartAnimationWatch()
+{
+	animation_watch.restart();
+}
+
+void Player::setPlayerState(PlayerState _state)
+{
+	state = _state;
+}
+
+PlayerState Player::getPlayerState() const
+{
+	return state;
 }
