@@ -42,13 +42,13 @@ Game::Game():
 	endOfGame.setCharacterSize(40);
 	endOfGame.setPosition(20.f, 90.f);
 	endOfGame.setFillColor(sf::Color::Red);
-	endOfGame.setString("GAME OVER!");
+	endOfGame.setString("GAME OVER!\nPress Esc to quit");
 
 	winText.setFont(font);
 	winText.setCharacterSize(40);
 	winText.setPosition(20.f, 90.f);
 	winText.setFillColor(sf::Color::Green);
-	winText.setString("YOU WON!");
+	winText.setString("YOU WON!\nPress Esc to quit");
 
 	background_t.loadFromFile("resources/background.png");
 	background_s.setTexture(background_t);

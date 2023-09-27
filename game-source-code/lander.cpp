@@ -449,7 +449,6 @@ void Lander::abductionDecision()
 	if (decision <= threshold && reachedHumanoidZone)
 	{
 		isAbducting = true;
-		std::cout << "Abduuuuuuuct" << std::endl;
 		return;
 	}
 }
