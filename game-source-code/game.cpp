@@ -39,7 +39,7 @@ Game::Game():
 
 	endOfGame.setFont(font);
 	endOfGame.setCharacterSize(40);
-	endOfGame.setPosition(20.f, 180.f);
+	endOfGame.setPosition(20.f, 90.f);
 	endOfGame.setFillColor(sf::Color::White);
 	endOfGame.setString("GAME OVER!");
 

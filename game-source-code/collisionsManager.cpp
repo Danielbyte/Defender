@@ -17,6 +17,10 @@ groundLevel{580.0f}
 void CollisionsManager::playerLanderCollisions(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& landers,
 	std::vector<std::shared_ptr<LanderSprite>>& lander_sprites)
 {
+	PlayerState state = player->getPlayerState();
+	if (state == PlayerState::Dead)
+		return;
+
 	if (landers.empty())
 		return;
 
@@ -33,8 +37,8 @@ void CollisionsManager::playerLanderCollisions(std::shared_ptr<Player>& player, 
 
 		if (isColiided)
 		{
-			std::cout << "player-lander collision!" << std::endl;
-			//should set game over to true
+			player->restartAnimationWatch();
+			player->setPlayerState(PlayerState::Dead);
 		}
 		
 			++lander_iter;

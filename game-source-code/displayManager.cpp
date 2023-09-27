@@ -4,6 +4,10 @@ void Game::display(const float dt)
 {
 	if (gameOver)
 	{
+		viewCenter.x = 400.0f;
+		viewCenter.y = windowHeight / 2.0f;
+		gameView.setCenter(viewCenter);
+		window.setView(gameView);
 		window.draw(endOfGame);
 		window.display();
 		window.clear();
