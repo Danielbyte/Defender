@@ -46,3 +46,23 @@ TEST_CASE("Test if timer can be stopped")
 	DOCTEST_CHECK_GT(final_time1, initial_time);
 	DOCTEST_CHECK_GT(final_time2, initial_time);
 }
+
+TEST_CASE("Test if timer can be restarted")
+{
+	std::shared_ptr<StopWatch>stop_watch = std::make_shared<StopWatch>();
+	//Pass some time
+	while (stop_watch->time_elapsed() < 0.1f)
+	{
+		//do nothing
+	}
+	//record the time
+	auto initial_time = stop_watch->time_elapsed();
+
+	//restart stop watch
+	stop_watch->restart();
+	auto final_time = stop_watch->time_elapsed();
+
+	//final time should be lesser than initial time
+	DOCTEST_CHECK_LE(final_time, initial_time);
+	DOCTEST_CHECK_GT(initial_time, final_time);
+}
