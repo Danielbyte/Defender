@@ -348,3 +348,23 @@ TEST_CASE("Test if player flies towards and beyond the left edge of the game scr
 	CHECK(finalXpos == expectedXpos);
 	CHECK(finalYpos == expectedYposition);
 }
+
+TEST_CASE("Test if a laser is generated if user presses space key")
+{
+	auto player = std::make_shared<Player>();
+	auto player_sprite = std::make_shared<PlayerSprite>();
+	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+
+	auto left = false;
+	auto right = false;
+	auto up = false;
+	auto down = false;
+	auto space = true;;
+	auto gameOver = false;
+
+	//no laser sprites prior space press
+	CHECK(laser_sprites.empty() == true);
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, deltaTime, gameOver);
+	//laser should have lasers sprites afte space key press
+	CHECK(laser_sprites.empty() == false);
+}
