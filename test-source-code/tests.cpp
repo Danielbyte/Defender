@@ -86,3 +86,16 @@ TEST_CASE("Check if the initial player state is alive")
 	PlayerState state = player->getPlayerState();
 	CHECK_EQ(state, PlayerState::Alive);
 }
+
+TEST_CASE("Test if player state can be correctly set")
+{
+	auto player = std::make_shared<Player>();
+	auto initial_state = player->getPlayerState();
+	player->setPlayerState(PlayerState::Dead);
+	auto final_state = player->getPlayerState();
+
+	//initially, the player should be alive
+	CHECK_EQ(initial_state, PlayerState::Alive);
+	//After the player state has been set to dead, player state should be dead
+	CHECK_EQ(final_state, PlayerState::Dead);
+}
