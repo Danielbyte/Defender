@@ -169,3 +169,31 @@ TEST_CASE("Test if player position is updated when user presses right arrow key"
 	CHECK_EQ(finalXpos, expectedXposition);
 	CHECK_EQ(finalYpos, expectedYpos);
 }
+
+TEST_CASE("Test if player position is updated when user presses left arrow key")
+{
+	auto player = std::make_shared<Player>();
+	auto player_sprite = std::make_shared<PlayerSprite>();
+	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+
+	auto initial_direction = player->getDirection();
+	auto left = true;
+	auto right = false;
+	auto up = false;
+	auto down = false;
+	auto space = false;
+	auto gameOver = false;
+	auto [initialXpos, initialYpos] = player->getPlayerPosition();
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, deltaTime, gameOver);
+	auto [finalXpos, finalYpos] = player->getPlayerPosition();
+
+	//Expect initial positions before player presses right arrow
+	CHECK(initialXpos == playerSpawnPosition_x);
+	CHECK(initialYpos == playerSpawnPosition_y);
+
+	//Expected positions after player moves left
+	auto expectedXposition = playerSpawnPosition_x - playerSpeed * deltaTime;
+	auto expectedYpos = playerSpawnPosition_y;
+	CHECK_EQ(finalXpos, expectedXposition);
+	CHECK_EQ(finalYpos, expectedYpos);
+}
