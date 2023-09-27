@@ -79,3 +79,10 @@ TEST_CASE("Test if player is spawned at the right position")
 	CHECK_EQ(xPosition, playerSpawnPosition_x);
 	CHECK_EQ(yPosition, playerSpawnPosition_y);
 }
+
+TEST_CASE("Check if the initial player state is alive")
+{
+	auto player = std::make_shared<Player>();
+	PlayerState state = player->getPlayerState();
+	CHECK_EQ(state, PlayerState::Alive);
+}
