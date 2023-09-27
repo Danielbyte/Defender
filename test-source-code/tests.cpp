@@ -302,3 +302,26 @@ TEST_CASE("Test if player is restricted to lower bounds of game screen")
 	CHECK_EQ(finalYpos, expectedYposition);
 	CHECK_EQ(finalXpos, expectedXpos);
 }
+
+TEST_CASE("Test if player flies towards and beyond the right edge of the game screen")
+{
+	auto player = std::make_shared<Player>();
+	auto player_sprite = std::make_shared<PlayerSprite>();
+	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+
+	auto left = false;
+	auto right = true; //will move 2500 units right
+	auto up = false;
+	auto down = false;
+	auto space = false;
+	auto gameOver = false;
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, deltaTime, gameOver);
+	auto [finalXpos, finalYpos] = player->getPlayerPosition();
+
+	//Expected positions after player moves 2500 units right;
+	auto expectedYposition = playerSpawnPosition_y;
+	auto expectedXpos = playerSpawnPosition_x + playerSpeed * deltaTime;
+
+	CHECK(finalXpos == expectedXpos);
+	CHECK(finalYpos == expectedYposition);
+}
