@@ -376,3 +376,14 @@ TEST_CASE("Test if the humanoid is in an initial moving state")
 	auto state = humanoid->getHumanoidState();
 	CHECK_EQ(state, HumanoidState::Walking);
 }
+
+TEST_CASE("Test if humanoid state can be correctly set")
+{
+	auto humanoid = std::make_shared<Humanoid>();
+	HumanoidState initial_state = humanoid->getHumanoidState();
+	humanoid->setHumanoidState(HumanoidState::Abducted);
+	HumanoidState final_state = humanoid->getHumanoidState();
+
+	CHECK(initial_state == HumanoidState::Walking);
+	CHECK(final_state == HumanoidState::Abducted);
+}
