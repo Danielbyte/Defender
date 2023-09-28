@@ -371,6 +371,7 @@ TEST_CASE("Test if a laser is generated if user presses space key")
 
 //Test cases for the humanoid object
 auto humanoidSpeed = 0.9f;
+auto abductionSpeed = 50.0f; //vertical humanoid speed changes on abduction to make sure it sync with lander speed 
 
 TEST_CASE("Test if the humanoid is in an initial moving state")
 {
@@ -442,4 +443,24 @@ TEST_CASE("Test if humanoid moves to the right or left depending on spawning pos
 		CHECK(finalXposition == expectedXpos);
 		CHECK(finalYposition == expectedYpos);
 	}
+}
+
+TEST_CASE("Test if humanoid can move up once abducted")
+{
+	auto humanoid = std::make_shared<Humanoid>();
+	auto humanoid_sprite = std::make_shared<HumanoidSprite>();
+	auto player = std::make_shared<Player>();
+	auto [initXpos, initYpos] = humanoid->getPosition();
+
+	humanoid->setToAbducted();
+
+	//update humanoid
+	humanoid->updateHumanoid(deltaTime, humanoid_sprite, player);
+	//Capture humanoid position after abduction
+	auto [finalXpos, finalYpos] = humanoid->getPosition();
+
+	auto expectedYpos = initYpos - abductionSpeed * deltaTime;
+	auto expectedXpos = initXpos; //no movement int the vertical 
+	CHECK(finalYpos == expectedYpos);
+	CHECK(finalXpos == expectedXpos);
 }
