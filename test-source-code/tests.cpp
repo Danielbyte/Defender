@@ -522,3 +522,24 @@ TEST_CASE("Test if lander is generated in either left or right side of player")
 	//counter should be exactly 1
 	CHECK(counter == 1);
 }
+
+TEST_CASE("Test if lander side is set with respect to player position")
+{
+	auto player = std::make_shared<Player>();
+	auto lander = std::make_shared<Lander>(player);
+	auto counter = 0;
+
+	auto [right, left] = lander->test_getSide();
+	auto [landerXpos, landerYpos] = lander->getPosition();
+	auto [playerXpos, playerYpos] = player->getPlayerPosition();
+
+	if (right)
+	{
+		CHECK_GT(landerXpos, playerXpos);
+	}
+
+	if (left)
+	{
+		CHECK_LE(landerXpos, playerXpos);
+	}
+}
