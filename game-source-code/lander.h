@@ -39,7 +39,9 @@ public:
 	void setToascend();
 	void abductionProcess(const float dt);
 	unsigned int getLocalId();
-	std::tuple<bool, bool> test_getSide(); //function for test purposed
+    //functions for test purposed
+	std::tuple<bool, bool> test_getSide();
+	bool test_getIfInHumanoidZone() const;
 	
 private:
 	void createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);

@@ -491,3 +491,8 @@ std::tuple<bool, bool> Lander::test_getSide()
 {
 	return { rightSide, leftSide };
 }
+
+bool Lander::test_getIfInHumanoidZone() const
+{
+	return reachedHumanoidZone;
+}

@@ -498,6 +498,7 @@ TEST_CASE("Test if humanoid falls to its death after abducting lander is shot by
 
 //Test cases for the lander object
 auto landerSpeed = 50.0f;
+auto landerHumanoidZone = 480.0f;
 
 TEST_CASE("Test if lander is generated in either left or right side of player")
 {
@@ -542,4 +543,28 @@ TEST_CASE("Test if lander side is set with respect to player position")
 	{
 		CHECK_LE(landerXpos, playerXpos);
 	}
+}
+
+TEST_CASE("Test if lander can detect once it reaches the humanoid region")
+{
+	auto player = std::make_shared<Player>();
+	auto lander = std::make_shared<Lander>(player);
+
+	auto lander_sprite = std::make_shared<LanderSprite>();
+	std::vector<std::shared_ptr<MissileSprite>> missile_sprites;
+	std::vector<std::shared_ptr<Humanoid>> humanoids;
+
+
+	auto inHumanoidZone = lander->test_getIfInHumanoidZone();
+	//lander should initially be not in humanoid zone
+	CHECK(inHumanoidZone == false);
+	lander->updateLander(lander_sprite, deltaTime, player, missile_sprites, humanoids);
+
+	//keep moving lander until it reaches the humanoid zone
+	for (int i = 0; i <= 100; ++i)
+		lander->moveSouth(deltaTime);
+
+	lander->updateLander(lander_sprite, deltaTime, player, missile_sprites, humanoids);
+	inHumanoidZone = lander->test_getIfInHumanoidZone();
+	CHECK(inHumanoidZone == true);
 }
