@@ -368,3 +368,11 @@ TEST_CASE("Test if a laser is generated if user presses space key")
 	//laser should have lasers sprites afte space key press
 	CHECK(laser_sprites.empty() == false);
 }
+
+//Test cases for the humanoid object
+TEST_CASE("Test if the humanoid is in an initial moving state")
+{
+	auto humanoid = std::make_shared<Humanoid>();
+	auto state = humanoid->getHumanoidState();
+	CHECK_EQ(state, HumanoidState::Walking);
+}
