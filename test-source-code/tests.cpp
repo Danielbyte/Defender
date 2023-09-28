@@ -387,3 +387,26 @@ TEST_CASE("Test if humanoid state can be correctly set")
 	CHECK(initial_state == HumanoidState::Walking);
 	CHECK(final_state == HumanoidState::Abducted);
 }
+
+TEST_CASE("Test if humanoid is given direction")
+{
+	auto humanoid = std::make_shared<Humanoid>();
+	auto direction = humanoid->getHumanoidDirection();
+	int counter = 0;
+	
+	//The direction is randomly generated
+	if (direction == "right")
+	{
+		CHECK(direction == "right");
+		++counter;
+	}
+
+	if (direction == "left")
+	{
+		CHECK(direction == "left");
+		++counter;
+	}
+
+	//counter should be exactly 1
+	CHECK(counter == 1);
+}
