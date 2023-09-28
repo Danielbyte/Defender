@@ -370,6 +370,8 @@ TEST_CASE("Test if a laser is generated if user presses space key")
 }
 
 //Test cases for the humanoid object
+auto humanoidSpeed = 0.9f;
+
 TEST_CASE("Test if the humanoid is in an initial moving state")
 {
 	auto humanoid = std::make_shared<Humanoid>();
@@ -409,4 +411,35 @@ TEST_CASE("Test if humanoid is given direction")
 
 	//counter should be exactly 1
 	CHECK(counter == 1);
+}
+
+TEST_CASE("Test if humanoid moves to the right or left depending on spawning position")
+{
+	auto humanoid = std::make_shared<Humanoid>();
+	auto player = std::make_shared<Player>();
+	auto humanoid_sprite = std::make_shared<HumanoidSprite>();
+	auto direction = humanoid->getHumanoidDirection();
+	auto [initXPosition, initYPosition] = humanoid->getPosition();
+
+	humanoid->updateHumanoid(deltaTime, humanoid_sprite, player);
+	//capture humanoid position after update
+	auto [finalXposition, finalYposition] = humanoid->getPosition();
+
+	if (direction == "right")
+	{
+		//humanoid should be moving towards the right
+		auto expectedXpos = initXPosition + humanoidSpeed * deltaTime;
+		auto expectedYpos = initYPosition;
+		CHECK(finalXposition == expectedXpos);
+		CHECK(finalYposition == expectedYpos);
+	}
+
+	if (direction == "left")
+	{
+		//humanoid should be moving towards the left
+		auto expectedXpos = initXPosition - humanoidSpeed * deltaTime;
+		auto expectedYpos = initYPosition;
+		CHECK(finalXposition == expectedXpos);
+		CHECK(finalYposition == expectedYpos);
+	}
 }
