@@ -495,3 +495,30 @@ TEST_CASE("Test if humanoid falls to its death after abducting lander is shot by
 	CHECK_EQ(initXpos, secondXpos);
 	CHECK_EQ(secondXpos, thirdXpos);
 }
+
+//Test cases for the lander object
+auto landerSpeed = 50.0f;
+
+TEST_CASE("Test if lander is generated in either left or right side of player")
+{
+	auto player = std::make_shared<Player>();
+	auto lander = std::make_shared<Lander>(player);
+	auto counter = 0;
+
+	auto [right, left] = lander->test_getSide();
+
+	if (right)
+	{
+		CHECK(right == true);
+		++counter;
+	}
+
+	if (left)
+	{
+		CHECK(left == true);
+		++counter;
+	}
+
+	//counter should be exactly 1
+	CHECK(counter == 1);
+}

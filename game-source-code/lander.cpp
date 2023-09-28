@@ -486,3 +486,8 @@ unsigned int Lander::getLocalId()
 }
 
 unsigned int Lander::globalId = 0;
+
+std::tuple<bool, bool> Lander::test_getSide()
+{
+	return { rightSide, leftSide };
+}
