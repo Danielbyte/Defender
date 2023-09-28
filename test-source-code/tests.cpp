@@ -568,3 +568,17 @@ TEST_CASE("Test if lander can detect once it reaches the humanoid region")
 	inHumanoidZone = lander->test_getIfInHumanoidZone();
 	CHECK(inHumanoidZone == true);
 }
+
+TEST_CASE("Test if lander can move straight East")
+{
+	auto lander = std::make_shared<Lander>();
+	auto [initXpos, initYpos] = lander->getPosition();
+	lander->moveEast(deltaTime);
+	//Get the lander position after moving eas
+	auto [finalXpos, finalYpos] = lander->getPosition();
+	auto expectedXpos = initXpos + landerSpeed * deltaTime;
+	auto expectedYpos = initYpos;
+
+	CHECK(finalXpos == expectedXpos);
+	CHECK(finalYpos == expectedYpos);
+}
