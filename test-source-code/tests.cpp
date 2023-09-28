@@ -582,3 +582,17 @@ TEST_CASE("Test if lander can move straight East")
 	CHECK(finalXpos == expectedXpos);
 	CHECK(finalYpos == expectedYpos);
 }
+
+TEST_CASE("Test if lander can move West")
+{
+	auto lander = std::make_shared<Lander>();
+	auto [initXpos, initYpos] = lander->getPosition();
+	lander->moveWest(deltaTime);
+
+	auto [finalXpos, finalYpos] = lander->getPosition();
+	auto expectedXpos = initXpos - landerSpeed * deltaTime;
+	auto expectedYpos = initYpos;
+
+	CHECK(finalXpos == expectedXpos);
+	CHECK(finalYpos == expectedYpos);
+}
