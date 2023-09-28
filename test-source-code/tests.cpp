@@ -662,3 +662,16 @@ TEST_CASE("Test if lander moves South Westerly")
 	CHECK_EQ(finalXpos, expectedXpos);
 	CHECK_EQ(finalYpos, expectesYpos);
 }
+
+TEST_CASE("Test if lander can move North Westerly")
+{
+	auto lander = std::make_shared<Lander>();
+	auto [initXpos, initYpos] = lander->getPosition();
+	auto dt = 0.02f;
+	lander->moveNorthWest(dt);
+	auto [finalXpos, finalYpos] = lander->getPosition();
+	auto expectedXpos = initXpos - landerSpeed * dt;
+	auto expectedYpos = initYpos - landerSpeed * dt;
+	CHECK_EQ(finalXpos, expectedXpos);
+	CHECK_EQ(finalYpos, expectedYpos);
+}
