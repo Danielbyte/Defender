@@ -464,3 +464,34 @@ TEST_CASE("Test if humanoid can move up once abducted")
 	CHECK(finalYpos == expectedYpos);
 	CHECK(finalXpos == expectedXpos);
 }
+
+TEST_CASE("Test if humanoid falls to its death after abducting lander is shot by player")
+{
+	auto humanoid = std::make_shared<Humanoid>();
+	auto humanoid_sprite = std::make_shared<HumanoidSprite>();
+	auto player = std::make_shared<Player>();
+	auto [initXpos, initYpos] = humanoid->getPosition();
+
+	//model abduction of humanoid
+	humanoid->setToAbducted();
+	humanoid->updateHumanoid(deltaTime, humanoid_sprite, player);
+	humanoid->updateHumanoid(deltaTime, humanoid_sprite, player);
+	auto [secondXpos, secondYpos] = humanoid->getPosition();
+	//Model abducting lander getting shot
+	humanoid->setHumanoidState(HumanoidState::Falling);
+	//update humanoid
+	humanoid->updateHumanoid(deltaTime,humanoid_sprite,player);
+	auto [thirdXpos, thirdYpos] = humanoid->getPosition();
+
+	auto expectedYpos = secondYpos + abductionSpeed * deltaTime;
+	CHECK(thirdYpos == expectedYpos);
+
+	//initial position should be greater than second position
+	CHECK_GT(initYpos, secondYpos);
+	//third position should be greater than second position
+	CHECK_GT(thirdYpos, secondYpos);
+
+	//horizontal position of humanoid should remain unchanged
+	CHECK_EQ(initXpos, secondXpos);
+	CHECK_EQ(secondXpos, thirdXpos);
+}
