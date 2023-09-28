@@ -675,3 +675,8 @@ TEST_CASE("Test if lander can move North Westerly")
 	CHECK_EQ(finalXpos, expectedXpos);
 	CHECK_EQ(finalYpos, expectedYpos);
 }
+
+//PROJECTILE TESTS
+//Laser Projectiles
+//Save for the last iteration
+//I AM NOT HERE TO SUFFER
