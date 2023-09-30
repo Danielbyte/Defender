@@ -31,6 +31,7 @@ void Game::display(const float dt)
 		updateCamera(dt);
 		miniMapUpdate(dt);
 		updateBackgroundView();
+		updateMiniMapLandscape();
 		window.clear();
 		window.setView(gameView);
 		window.draw(background_s);
@@ -130,6 +131,53 @@ void Game::updateBackgroundView()
 
 		landscape1->updateTerrain(landscape1_sprite, background1Position.x);
 		background_s.setPosition(background1Position);
+	}
+}
+
+void Game::updateMiniMapLandscape()
+{
+	auto [playerXpos, playerYpos] = player_obj->getPlayerPosition();
+	auto backgroundWidth = 1600.0f;
+	auto scalingFactor = 0.5f;
+	auto scaledPlayerXpos = playerXpos * scalingFactor;
+
+	auto distance1 = abs(scaledPlayerXpos - t1Pos.x);
+	auto distance2 = abs(scaledPlayerXpos - t2Pos.x);
+	auto playerDirection = player_obj->getDirection();
+
+	if (distance2 > distance1)
+	{
+		if (playerDirection == "right")
+		{
+			if (scaledPlayerXpos >= t1Pos.x)
+				t2Pos.x = t1Pos.x + backgroundWidth;
+
+			miniTerrain2_s.setPosition(t2Pos);
+			return;
+		}
+
+		if (scaledPlayerXpos <= t1Pos.x)
+			t2Pos.x = t1Pos.x - backgroundWidth;
+
+		miniTerrain2_s.setPosition(t2Pos);
+		return;
+	}
+
+	if (distance1 > distance2)
+	{
+		if (playerDirection == "right")
+		{
+			if (scaledPlayerXpos >= t2Pos.x)
+				t1Pos.x = t2Pos.x + backgroundWidth;
+
+			miniTerrain1_s.setPosition(t1Pos);
+			return;
+		}
+
+		if (scaledPlayerXpos <= t2Pos.x)
+			t1Pos.x = t2Pos.x - backgroundWidth;
+
+		miniTerrain1_s.setPosition(t1Pos);
 	}
 }
 
