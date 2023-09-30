@@ -61,7 +61,7 @@ void Game::display(const float dt)
 
 		window.setView(miniMapView);
 		window.draw(miniTerrain1_s);
-		//window.draw(miniTerrain2_s);
+	    window.draw(miniTerrain2_s);
 		//window.draw(miniMainSection_s);
 	}
 
@@ -80,7 +80,8 @@ void Game::updateCamera(const float dt)
 	auto [playerXpos, playerYpos] = player_obj->getPlayerPosition();
 	viewCenter.x = playerXpos;
 	gameView.setCenter(viewCenter);
-	miniMapView.setCenter(viewCenter.x - 400.0f,viewCenter.y);
+	auto scalingFactor = 0.5f;
+	miniMapView.setCenter((viewCenter.x - 400.0f) * scalingFactor, viewCenter.y);
 }
 
 void Game::updateBackgroundView()

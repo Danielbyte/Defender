@@ -31,6 +31,7 @@ private:
 	void updateCamera(const float dt);
 	void updateBackgroundView();
 	void miniMapUpdate(const float dt);
+	void updateMiniMapLandscape();
 
 	//Window
 	unsigned int windowWidth;
@@ -72,6 +73,7 @@ private:
 	sf::Sprite miniTerrain1_s;
 	sf::Texture miniTerrain2_t;
 	sf::Sprite miniTerrain2_s;
+	sf::Vector2f t2Pos;
 
 	//Player movement variables
 	bool upPressed;

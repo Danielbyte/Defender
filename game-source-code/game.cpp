@@ -84,8 +84,10 @@ Game::Game():
 
 	miniTerrain2_t.loadFromFile("resources/terrain-2-mini.png");
 	miniTerrain2_s.setTexture(miniTerrain2_t);
-	miniTerrain2_s.setOrigin(600.0f, 18 / 2.0f);
-	miniTerrain2_s.setPosition(315.5f, 91.5f);
+	miniTerrain2_s.setOrigin(800.0f, 30 / 2.0f);
+	t2Pos.x = -1150.0f;
+	t2Pos.y = 85.0f;
+	miniTerrain2_s.setPosition(t2Pos);
 
 	miniMainSection_t.loadFromFile("resources/miniMainSection.png");
 	miniMainSection_s.setTexture(miniMainSection_t);
