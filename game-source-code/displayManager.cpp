@@ -7,10 +7,10 @@ void Game::display(const float dt)
 		viewCenter.x = 400.0f;
 		viewCenter.y = windowHeight / 2.0f;
 		gameView.setCenter(viewCenter);
-		window.setView(gameView);
-		window.draw(endOfGame);
-		window.display();
-		window.clear();
+		window->setView(gameView);
+		window->draw(endOfGame);
+		window->display();
+		window->clear();
 		return;
 	}
 
@@ -19,10 +19,10 @@ void Game::display(const float dt)
 		viewCenter.x = 400.0f;
 		viewCenter.y = windowHeight / 2.0f;
 		gameView.setCenter(viewCenter);
-		window.setView(gameView);
-		window.draw(winText);
-		window.display();
-		window.clear();
+		window->setView(gameView);
+		window->draw(winText);
+		window->display();
+		window->clear();
 		return;
 	}
 
@@ -32,47 +32,47 @@ void Game::display(const float dt)
 		miniMapUpdate(dt);
 		updateBackgroundView();
 		updateMiniMapLandscape();
-		window.clear();
-		window.setView(gameView);
-		window.draw(background_s);
-		window.draw(background_s2);
-		window.draw(landscape1_sprite->getSprite());
-		window.draw(landscape2_sprite->getSprite());
-		window.draw(miniMap_s);
-		window.draw(player_sprite->getSprite());
+		window->clear();
+		window->setView(gameView);
+		window->draw(background_s);
+		window->draw(background_s2);
+		window->draw(landscape1_sprite->getSprite());
+		window->draw(landscape2_sprite->getSprite());
+		window->draw(miniMap_s);
+		window->draw(player_sprite->getSprite());
 		for (auto& laser : laser_sprite)
 		{
-			window.draw(laser->getSprite());
+			window->draw(laser->getSprite());
 		}
 
 		for (auto& _lander : lander_object_sprites)
 		{
-			window.draw(_lander->getSprite());
+			window->draw(_lander->getSprite());
 		}
 
 		for (auto& lander_missile : lander_missile_sprites)
 		{
-			window.draw(lander_missile->getSprite());
+			window->draw(lander_missile->getSprite());
 		}
 
 		for (auto& humanoid : humanoid_sprites)
 		{
-			window.draw(humanoid->getSprite());
+			window->draw(humanoid->getSprite());
 		}
 
-		window.setView(miniMapView);
-		window.draw(miniTerrain1_s);
-	    window.draw(miniTerrain2_s);
-		window.draw(miniMainSection_s);
+		window->setView(miniMapView);
+		window->draw(miniTerrain1_s);
+	    window->draw(miniTerrain2_s);
+		window->draw(miniMainSection_s);
 	}
 
 	else
 	{
-		window.draw(splashScreenText);
+		window->draw(splashScreenText);
 	}
 
-	window.display();
-	window.clear();
+	window->display();
+	window->clear();
 }
 
 void Game::updateCamera(const float dt)

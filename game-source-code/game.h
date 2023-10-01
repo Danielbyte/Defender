@@ -34,10 +34,12 @@ private:
 	void updateMiniMapLandscape();
 
 	//Window
-	unsigned int windowWidth;
-	unsigned int windowHeight;
+	unsigned int windowWidth = 800ul;
+	unsigned int windowHeight = 600ul;
 	bool isPlaying;
-	sf::RenderWindow window;
+	std::shared_ptr<sf::RenderWindow> window = std::make_shared<sf::RenderWindow>
+		(sf::VideoMode(windowWidth, windowHeight), "Defender");
+
 	sf::Text splashScreenText;
 	sf::Text endOfGame;
 	sf::Text winText;

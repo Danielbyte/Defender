@@ -4,12 +4,12 @@ void Game::handleInput()
 {
 	sf::Event event;
 	isMoving = false;
-	while (window.pollEvent(event))
+	while (window->pollEvent(event))
 	{
 		if (event.type == sf::Event::Closed)
 		{
 			isPlaying = false;
-			window.close();
+			window->close();
 			break;
 		}
 		
@@ -19,7 +19,7 @@ void Game::handleInput()
 			{
 			case sf::Keyboard::Escape:
 				isPlaying = false;
-				window.close();
+				window->close();
 				break;
 
 			case sf::Keyboard::Enter:

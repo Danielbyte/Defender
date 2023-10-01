@@ -1,10 +1,7 @@
 #include "game.h"
 
 Game::Game():
-	windowWidth{800ul},
-	windowHeight{600ul},
 	isPlaying{false},
-	window(sf::VideoMode(windowWidth, windowHeight), "Defender"),
 	upPressed{false},
 	downPressed{false},
 	leftPressed{false},
@@ -100,9 +97,9 @@ Game::Game():
 void Game::run()
 {
 	sf::Clock clock;
-	window.setVerticalSyncEnabled(true);
+	window->setVerticalSyncEnabled(true);
 	//window.setFramerateLimit(60);
-	while (window.isOpen())
+	while (window->isOpen())
 	{
 			float deltaTime = clock.restart().asSeconds();
 			// Handle player input
