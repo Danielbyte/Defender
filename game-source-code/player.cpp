@@ -14,6 +14,11 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 	std::shared_ptr<PlayerSprite>& player_sprite, std::vector<std::shared_ptr<LaserSprite>>& laser_sprite, const float dt,
 	bool& gameOver)
 {
+	auto horizontalOffset = 400.0f;
+	auto verticalOffset = 0.0f;
+	auto miniMapXpos = x_playerPosition - horizontalOffset;
+	auto miniMapYpos = y_playerPosition - verticalOffset;
+
 	if (space)
 	{
 		createLasers(laser_sprite);
@@ -23,7 +28,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 	if (right)
 	{
 		direction = "right";
-		player_sprite->updateSpritePosition(direction,x_playerPosition,y_playerPosition);
+		player_sprite->updateSpritePosition(direction,x_playerPosition,y_playerPosition,miniMapXpos,miniMapYpos);
 		float rightBoundary = 800.0f - 25.0f;
 		x_playerPosition += playerSpeed * dt;
 	}
@@ -31,7 +36,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 	if (left)
 	{
 		direction = "left";
-		player_sprite->updateSpritePosition(direction,x_playerPosition,y_playerPosition);
+		player_sprite->updateSpritePosition(direction,x_playerPosition,y_playerPosition,miniMapXpos, miniMapYpos);
 		float leftBoundary = 25.0f;
 		x_playerPosition -= playerSpeed * dt;
 	}
@@ -54,7 +59,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 			y_playerPosition = downBoundary;
 	}
 	
-	player_sprite->updateSpritePosition("either", x_playerPosition, y_playerPosition);
+	player_sprite->updateSpritePosition("either", x_playerPosition, y_playerPosition,miniMapXpos, miniMapYpos);
 
 	switch (state)
 	{
@@ -124,13 +129,14 @@ void Player::updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprit
 	auto laser_sprite_iter = laser_sprite.begin();
 	auto laserSpeed = 600.0f;
 	updateProjectile(dt, ProjectileType::Laser);
+	auto NA = 0.0f; //none applicable fiels
 
 	while (projectile_iter != projectiles.end())
 	{
 		if ((*projectile_iter)->getType() == ProjectileType::Laser)
 		{
 			auto [x, y] = (*projectile_iter)->getProjectilePosition();
-			(*laser_sprite_iter)->updateSpritePosition("either", x, y);
+			(*laser_sprite_iter)->updateSpritePosition("either", x, y, NA, NA);
 			++projectile_iter;
 			++laser_sprite_iter;
 		}

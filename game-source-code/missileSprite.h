@@ -13,6 +13,7 @@ public:
 private:
 	sf::Texture missile1_t;
 	sf::Texture missile2_t;
+	sf::Texture NA;
 	float sprite_period; //time witch a sprite should display
 
 };

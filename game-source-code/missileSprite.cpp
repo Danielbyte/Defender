@@ -6,8 +6,9 @@ MissileSprite::MissileSprite():
 	sf::Vector2f dimensions;
 	dimensions.x = 6.0f;
 	dimensions.y = 6.0f;
+	sf::Vector2f miniDimensions;
 	loadTextures();
-	InitialiseEntityOrigin(dimensions);
+	InitialiseEntityOrigin(dimensions, miniDimensions);
 }
 
 void MissileSprite::loadTextures()
@@ -21,12 +22,12 @@ void MissileSprite::setTexture(const int _time)
 
 	if (_time <= sprite_period)
 	{
-		updateSpriteTexture(missile1_t);
+		updateSpriteTexture(missile1_t, NA);
 		return;
 	}
 
 	if (_time > sprite_period)
 	{
-		updateSpriteTexture(missile2_t);
+		updateSpriteTexture(missile2_t, NA);
 	}
 }
