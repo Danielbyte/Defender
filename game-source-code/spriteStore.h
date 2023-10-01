@@ -8,13 +8,15 @@ class SpriteStore
 {
 public:
 	SpriteStore();
-	void updateSpritePosition(const std::string& direction, const float x_pos, const float y_pos);
-	void updateSpriteTexture(sf::Texture& texture);
+	void updateSpritePosition(const std::string& direction, const float x_pos, const float y_pos,
+		const float miniXpos, const float miniYpos);
+	void updateSpriteTexture(sf::Texture& texture, sf::Texture& miniTexture);
     sf::Sprite getSprite() const;
+	sf::Sprite getMiniSprite() const;
 	virtual void loadTextures() = 0;
 	bool getIfLeft() const;
 	bool getIfRight() const;
-	void InitialiseEntityOrigin(const sf::Vector2f& dimensions);
+	void InitialiseEntityOrigin(const sf::Vector2f& dimensions, const sf::Vector2f miniDimensios);
 	void remove();
 	bool needsDeletion() const;
 
@@ -22,6 +24,7 @@ private:
 	bool toTheLeft;
 	bool toTheRight;
 	sf::Sprite entitySprite;
+	sf::Sprite miniSprite; // sprites for mini map
 	bool canDelete;
 };
 #endif // !SPRITESTORE_H
