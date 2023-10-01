@@ -28,11 +28,9 @@ void Game::display(const float dt)
 
 	if (isPlaying)
 	{
-		updateCamera(dt);
-		//miniMapUpdate(dt);
+		updateCamera();
 		minimap->update(player_obj);
 		updateBackgroundView();
-		//updateMiniMapLandscape();
 		window->clear();
 		window->setView(gameView);
 		window->draw(background_s);
@@ -73,14 +71,11 @@ void Game::display(const float dt)
 	window->clear();
 }
 
-void Game::updateCamera(const float dt)
+void Game::updateCamera()
 {
-	const float scrollSpeed = 10.0f;
 	auto [playerXpos, playerYpos] = player_obj->getPlayerPosition();
 	viewCenter.x = playerXpos;
 	gameView.setCenter(viewCenter);
-	auto scalingFactor = 0.5f;
-	miniMapView.setCenter((viewCenter.x - 400.0f) * scalingFactor, viewCenter.y);
 	miniMapSection_s.setPosition(viewCenter.x, 51.0f);
 }
 
@@ -131,12 +126,4 @@ void Game::updateBackgroundView()
 		landscape1->updateTerrain(landscape1_sprite, background1Position.x);
 		background_s.setPosition(background1Position);
 	}
-}
-
-void Game::miniMapUpdate(const float dt)
-{
-	auto scalingFactor = 0.5f;
-
-	gameSectionPosition.x = (viewCenter.x - 400.0f) * scalingFactor;
-	miniMainSection_s.setPosition(gameSectionPosition);
 }

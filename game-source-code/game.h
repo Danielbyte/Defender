@@ -29,10 +29,8 @@ public:
 	void updateProjectiles(const float dt);
 	void display(const float dt); //Defined in displayManager.cpp
 private:
-	void updateCamera(const float dt);
+	void updateCamera();
 	void updateBackgroundView();
-	void miniMapUpdate(const float dt);
-	void updateMiniMapLandscape();
 
 	//Window
 	unsigned int windowWidth = 800ul;
@@ -66,10 +64,6 @@ private:
 	sf::Vector2f miniMapSectionPosition;
 	sf::Texture miniMapSection_t;
 	sf::Sprite miniMapSection_s;
-
-	sf::Texture miniMainSection_t;
-	sf::Sprite miniMainSection_s;
-	sf::Vector2f gameSectionPosition;
 
 	//Player movement variables
 	bool upPressed;

@@ -72,12 +72,6 @@ Game::Game():
 	miniMapSection_s.setOrigin(400.0f, 50.0f);
 	miniMapSection_s.setPosition(miniMapSectionPosition);
 
-	miniMainSection_t.loadFromFile("resources/miniMainSection.png");
-	miniMainSection_s.setTexture(miniMainSection_t);
-	miniMainSection_s.setOrigin(400 / 2.0f, 100 / 2.0f);
-	gameSectionPosition.x = 0.0f;
-	gameSectionPosition.y = 51.0f;
-	miniMainSection_s.setPosition(0.0f, 51);	
 }
 
 void Game::run()
