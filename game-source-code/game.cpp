@@ -72,20 +72,6 @@ Game::Game():
 	miniMapSection_s.setOrigin(400.0f, 50.0f);
 	miniMapSection_s.setPosition(miniMapSectionPosition);
 
-	miniTerrain1_t.loadFromFile("resources/terrain-1-mini.png");
-	miniTerrain1_s.setTexture(miniTerrain1_t);
-	miniTerrain1_s.setOrigin(800.0f, 30 / 2.0f);
-	t1Pos.x = 450.0f + 250.0f;
-	t1Pos.y = 85.0f;
-	miniTerrain1_s.setPosition(t1Pos);
-
-	miniTerrain2_t.loadFromFile("resources/terrain-2-mini.png");
-	miniTerrain2_s.setTexture(miniTerrain2_t);
-	miniTerrain2_s.setOrigin(800.0f, 30 / 2.0f);
-	t2Pos.x = -1150.0f + 250.0f;
-	t2Pos.y = 85.0f;
-	miniTerrain2_s.setPosition(t2Pos);
-
 	miniMainSection_t.loadFromFile("resources/miniMainSection.png");
 	miniMainSection_s.setTexture(miniMainSection_t);
 	miniMainSection_s.setOrigin(400 / 2.0f, 100 / 2.0f);

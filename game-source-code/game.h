@@ -71,14 +71,6 @@ private:
 	sf::Sprite miniMainSection_s;
 	sf::Vector2f gameSectionPosition;
 
-
-	sf::Texture miniTerrain1_t;
-	sf::Vector2f t1Pos;
-	sf::Sprite miniTerrain1_s;
-	sf::Texture miniTerrain2_t;
-	sf::Sprite miniTerrain2_s;
-	sf::Vector2f t2Pos;
-
 	//Player movement variables
 	bool upPressed;
 	bool downPressed;
