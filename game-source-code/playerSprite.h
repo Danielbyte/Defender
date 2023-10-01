@@ -15,6 +15,7 @@ private:
 	sf::Texture player_tL;
 	sf::Texture player_death_tR;
 	sf::Texture player_death_TL;
+	sf::Texture miniPlayer_t;
 };
 
 #endif // !PLAYERSPRITE_H
