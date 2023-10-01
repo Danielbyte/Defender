@@ -19,6 +19,7 @@ private:
 	sf::Texture greenLeft_t;
 	sf::Texture blueRight_t;
 	sf::Texture blueLeft_t;
+	sf::Texture NA;
 
 };
 #endif // !PLAYERLASERSPRITE_H

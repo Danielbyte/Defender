@@ -9,7 +9,8 @@ LaserSprite::LaserSprite(const std::string& direction, const std::string& color)
 	sf::Vector2f dimensions;
 	dimensions.x = 100.0f;
 	dimensions.y = 2.0f;
-	InitialiseEntityOrigin(dimensions);
+	sf::Vector2f miniDimensions;
+	InitialiseEntityOrigin(dimensions, miniDimensions);
 }
 
 void LaserSprite::loadTextures()
@@ -27,25 +28,25 @@ void LaserSprite::setTexture(const std::string& direction, const std::string& co
 	if (direction == "right")
 	{
 		if (color == "green")
-			updateSpriteTexture(greenRight_t);
+			updateSpriteTexture(greenRight_t, NA);
 		
 		if (color == "red")
-			updateSpriteTexture(redRight_t);
+			updateSpriteTexture(redRight_t, NA);
 
 		if (color == "blue")
-			updateSpriteTexture(blueRight_t);
+			updateSpriteTexture(blueRight_t, NA);
 	}
 
 	if (direction == "left")
 	{
 		if (color == "green")
-			updateSpriteTexture(greenLeft_t);
+			updateSpriteTexture(greenLeft_t, NA);
 
 		if (color == "red")
-			updateSpriteTexture(redLeft_t);
+			updateSpriteTexture(redLeft_t, NA);
 
 		if (color == "blue")
-			updateSpriteTexture(blueLeft_t);
+			updateSpriteTexture(blueLeft_t, NA);
 	}
 }
 

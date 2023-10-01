@@ -12,6 +12,7 @@ public:
 private:
 	sf::Texture terrain1_t;
 	sf::Texture terrain2_t;
+	sf::Texture miniMap_t;
 };
 #endif // !LANDSCAPESPRITE_H
 
