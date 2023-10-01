@@ -14,6 +14,7 @@ class Minimap
 public:
 	Minimap();
 	void update(std::shared_ptr<Player>& player);
+	void drawMiniMap(std::shared_ptr<sf::RenderWindow>& window);
 
 private:
 	void updateLandscape(std::shared_ptr<Player>& player);
@@ -24,10 +25,6 @@ private:
 	sf::View miniMapView;
 	sf::Vector2f miniMapViewSize;
 	sf::Vector2f viewCenter;
-
-	sf::Vector2f miniMapPosition;
-	sf::Texture miniMap_t;
-	sf::Sprite miniMap_s;
 
 	sf::Texture miniMainSection_t;
 	sf::Sprite miniMainSection_s;

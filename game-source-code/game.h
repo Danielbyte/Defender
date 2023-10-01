@@ -14,6 +14,7 @@
 #include "humanoidSprite.h"
 #include "landscape.h"
 #include "landscapeSprite.h"
+#include "minimap.h"
 
 class Game
 {
@@ -62,9 +63,9 @@ private:
 	sf::Vector2f miniMapViewSize;
 
 	//Minimap
-	sf::Vector2f miniMapPosition;
-	sf::Texture miniMap_t;
-	sf::Sprite miniMap_s;
+	sf::Vector2f miniMapSectionPosition;
+	sf::Texture miniMapSection_t;
+	sf::Sprite miniMapSection_s;
 
 	sf::Texture miniMainSection_t;
 	sf::Sprite miniMainSection_s;
@@ -87,6 +88,7 @@ private:
 	bool isMoving;
 
 	//GAME ENTITIES
+	std::shared_ptr<Minimap> minimap = std::make_shared<Minimap>();
 	
 	//Humanoid objects
 	std::vector<std::shared_ptr<Humanoid>> humanoid_objects;

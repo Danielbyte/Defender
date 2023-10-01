@@ -29,16 +29,17 @@ void Game::display(const float dt)
 	if (isPlaying)
 	{
 		updateCamera(dt);
-		miniMapUpdate(dt);
+		//miniMapUpdate(dt);
+		minimap->update(player_obj);
 		updateBackgroundView();
-		updateMiniMapLandscape();
+		//updateMiniMapLandscape();
 		window->clear();
 		window->setView(gameView);
 		window->draw(background_s);
 		window->draw(background_s2);
 		window->draw(landscape1_sprite->getSprite());
 		window->draw(landscape2_sprite->getSprite());
-		window->draw(miniMap_s);
+		window->draw(miniMapSection_s);
 		window->draw(player_sprite->getSprite());
 		for (auto& laser : laser_sprite)
 		{
@@ -60,10 +61,7 @@ void Game::display(const float dt)
 			window->draw(humanoid->getSprite());
 		}
 
-		window->setView(miniMapView);
-		window->draw(miniTerrain1_s);
-	    window->draw(miniTerrain2_s);
-		window->draw(miniMainSection_s);
+		minimap->drawMiniMap(window);
 	}
 
 	else
@@ -83,6 +81,7 @@ void Game::updateCamera(const float dt)
 	gameView.setCenter(viewCenter);
 	auto scalingFactor = 0.5f;
 	miniMapView.setCenter((viewCenter.x - 400.0f) * scalingFactor, viewCenter.y);
+	miniMapSection_s.setPosition(viewCenter.x, 51.0f);
 }
 
 void Game::updateBackgroundView()
@@ -183,7 +182,6 @@ void Game::updateMiniMapLandscape()
 
 void Game::miniMapUpdate(const float dt)
 {
-	miniMap_s.setPosition(viewCenter.x, 51.0f);	
 	auto scalingFactor = 0.5f;
 
 	gameSectionPosition.x = (viewCenter.x - 400.0f) * scalingFactor;

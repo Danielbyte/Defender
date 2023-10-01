@@ -65,12 +65,12 @@ Game::Game():
 
 	game_world->placeHumanoids(humanoid_objects, humanoid_sprites);
 
-	miniMap_t.loadFromFile("resources/minimap.png");
-	miniMap_s.setTexture(miniMap_t);
-	miniMapPosition.x = windowWidth / 2.0f;
-	miniMapPosition.y = 51.0f;
-	miniMap_s.setOrigin(400.0f, 50.0f);
-	miniMap_s.setPosition(miniMapPosition);
+	miniMapSection_t.loadFromFile("resources/minimap.png");
+	miniMapSection_s.setTexture(miniMapSection_t);
+	miniMapSectionPosition.x = windowWidth / 2.0f;
+	miniMapSectionPosition.y = 51.0f;
+	miniMapSection_s.setOrigin(400.0f, 50.0f);
+	miniMapSection_s.setPosition(miniMapSectionPosition);
 
 	miniTerrain1_t.loadFromFile("resources/terrain-1-mini.png");
 	miniTerrain1_s.setTexture(miniTerrain1_t);

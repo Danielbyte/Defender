@@ -17,14 +17,6 @@ Minimap::Minimap():
 	miniMapView.setCenter(viewCenter);
 	miniMapView.setViewport(sf::FloatRect(0.3125f, 0.0f, 0.375f, 1.0f));
 
-	miniMap_t.loadFromFile("resources/minimap.png");
-	miniMap_s.setTexture(miniMap_t);
-	auto windowWidth = 800.0f;
-	miniMapPosition.x = windowWidth / 2.0f;
-	miniMapPosition.y = 51.0f;
-	miniMap_s.setOrigin(400.0f, 50.0f);
-	miniMap_s.setPosition(miniMapPosition);
-
 	miniTerrain1_t.loadFromFile("resources/terrain-1-mini.png");
 	miniTerrain1_s.setTexture(miniTerrain1_t);
 	miniTerrain1_s.setOrigin(800.0f, 30 / 2.0f);
@@ -52,6 +44,9 @@ void Minimap::update(std::shared_ptr<Player>& player)
 	auto [playerXpos, playerYpos] = player->getPlayerPosition();
 	viewCenter.x = playerXpos;
 	miniMapView.setCenter((viewCenter.x - mapOffset) * scalingFactor, viewCenter.y);
+
+	gameSectionPosition.x = (viewCenter.x - mapOffset) * scalingFactor;
+	miniMainSection_s.setPosition(gameSectionPosition);
 
 	updateLandscape(player);
 }
@@ -101,4 +96,12 @@ void Minimap::updateLandscape(std::shared_ptr<Player>& player)
 
 		miniTerrain1_s.setPosition(t1Pos);
 	}
+}
+
+void Minimap::drawMiniMap(std::shared_ptr<sf::RenderWindow>& window)
+{
+	window->setView(miniMapView);
+	window->draw(miniTerrain1_s);
+	window->draw(miniTerrain2_s);
+	window->draw(miniMainSection_s);
 }
