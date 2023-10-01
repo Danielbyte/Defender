@@ -47,9 +47,58 @@ Minimap::Minimap():
 	miniMainSection_s.setPosition(0.0f, 51);
 }
 
-void Minimap::updateCamera(std::shared_ptr<Player>& player, std::shared_ptr<sf::RenderWindow>& window)
+void Minimap::update(std::shared_ptr<Player>& player)
 {
 	auto [playerXpos, playerYpos] = player->getPlayerPosition();
 	viewCenter.x = playerXpos;
 	miniMapView.setCenter((viewCenter.x - mapOffset) * scalingFactor, viewCenter.y);
+
+	updateLandscape(player);
+}
+
+void Minimap::updateLandscape(std::shared_ptr<Player>& player)
+{
+	auto [playerXpos, playerYpos] = player->getPlayerPosition();
+	auto backgroundWidth = 1600.0f;
+	auto scalingFactor = 0.5f;
+	auto scaledPlayerXpos = playerXpos * scalingFactor;
+
+	auto distance1 = abs(scaledPlayerXpos - t1Pos.x);
+	auto distance2 = abs(scaledPlayerXpos - t2Pos.x);
+	auto playerDirection = player->getDirection();
+
+	if (distance2 > distance1)
+	{
+		if (playerDirection == "right")
+		{
+			if (scaledPlayerXpos >= t1Pos.x)
+				t2Pos.x = t1Pos.x + backgroundWidth;
+
+			miniTerrain2_s.setPosition(t2Pos);
+			return;
+		}
+
+		if (scaledPlayerXpos <= t1Pos.x)
+			t2Pos.x = t1Pos.x - backgroundWidth;
+
+		miniTerrain2_s.setPosition(t2Pos);
+		return;
+	}
+
+	if (distance1 > distance2)
+	{
+		if (playerDirection == "right")
+		{
+			if (scaledPlayerXpos >= t2Pos.x)
+				t1Pos.x = t2Pos.x + backgroundWidth;
+
+			miniTerrain1_s.setPosition(t1Pos);
+			return;
+		}
+
+		if (scaledPlayerXpos <= t2Pos.x)
+			t1Pos.x = t2Pos.x - backgroundWidth;
+
+		miniTerrain1_s.setPosition(t1Pos);
+	}
 }

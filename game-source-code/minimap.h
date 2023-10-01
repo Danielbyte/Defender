@@ -13,9 +13,10 @@ class Minimap
 {
 public:
 	Minimap();
-	void updateCamera(std::shared_ptr<Player>& player, std::shared_ptr<sf::RenderWindow>& window);
+	void update(std::shared_ptr<Player>& player);
 
 private:
+	void updateLandscape(std::shared_ptr<Player>& player);
 	float scalingFactor;
 	float mapOffset;
 	sf::Vector2f highLighterSize; //highlights the main game section
