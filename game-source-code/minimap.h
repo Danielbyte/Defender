@@ -16,9 +16,13 @@ public:
 	void updateCamera(std::shared_ptr<Player>& player, std::shared_ptr<sf::RenderWindow>& window);
 
 private:
+	float scalingFactor;
+	float mapOffset;
+	sf::Vector2f highLighterSize; //highlights the main game section
 	//Mini-map views
 	sf::View miniMapView;
 	sf::Vector2f miniMapViewSize;
+	sf::Vector2f viewCenter;
 
 	sf::Vector2f miniMapPosition;
 	sf::Texture miniMap_t;
