@@ -6,8 +6,9 @@ LanderSprite::LanderSprite():
 	sf::Vector2f dimensions;
 	dimensions.x = 16.0f;
 	dimensions.y = 16.0f;
+	sf::Vector2f miniDimensions;
 	loadTextures();
-	InitialiseEntityOrigin(dimensions);
+	InitialiseEntityOrigin(dimensions, miniDimensions);
 }
 
 void LanderSprite::setTexture(std::shared_ptr<StopWatch>& watch)
@@ -15,25 +16,25 @@ void LanderSprite::setTexture(std::shared_ptr<StopWatch>& watch)
 	auto _time = watch->time_elapsed();
 	if (_time >= 0 && _time <= sprite_period)
 	{
-		updateSpriteTexture(lander1_t);
+		updateSpriteTexture(lander1_t, miniMap_t);
 		return;
 	}
 
 	if (_time > sprite_period && _time <= 2 * sprite_period)
 	{
-		updateSpriteTexture(lander2_t);
+		updateSpriteTexture(lander2_t, miniMap_t);
 		return;
 	}
 
 	if (_time > 2 * sprite_period && _time <= 3 * sprite_period)
 	{
-		updateSpriteTexture(lander3_t);
+		updateSpriteTexture(lander3_t, miniMap_t);
 		return;
 	}
 
 	if (_time > 3 * sprite_period && _time <= 4 * sprite_period)
 	{
-		updateSpriteTexture(lander4_t);
+		updateSpriteTexture(lander4_t, miniMap_t);
 		watch->restart();
 	}
 }

@@ -16,6 +16,7 @@ private:
 	sf::Texture lander2_t;
 	sf::Texture lander3_t;
 	sf::Texture lander4_t;
+	sf::Texture miniMap_t;
 	float sprite_period; //time witch a sprite should display
 
 };

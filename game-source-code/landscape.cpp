@@ -8,5 +8,6 @@ Landscape::Landscape():
 void Landscape::updateTerrain(std::shared_ptr<LandscapeSprite>& landscape_sprite,const float x_position)
 {
 	xPosition = x_position;
-	landscape_sprite->updateSpritePosition("either", xPosition, yPosition);
+	auto NA = 0.0f;
+	landscape_sprite->updateSpritePosition("either", xPosition, yPosition,NA, NA);
 }

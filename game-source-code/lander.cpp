@@ -137,8 +137,12 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 	updateProjectile(dt, ProjectileType::LanderMissile);
 	updateMissileSprites(missile_sprites);
 
+	auto horizontalOffset = 400.0f;
+	auto verticalOffset = 0.0f;
+	auto miniMapXpos = xPosition - horizontalOffset;
+	auto miniMapYpos = yPosition - verticalOffset;
 	lander_sprite->setTexture(lander_watch);
-	lander_sprite->updateSpritePosition("either", xPosition, yPosition);
+	lander_sprite->updateSpritePosition("either", xPosition, yPosition, miniMapXpos, miniMapYpos);
 }
 
 void Lander::moveEast(const float& dt)
@@ -390,6 +394,11 @@ void Lander::updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& m
 	if (projectiles.empty())
 		return;
 
+	auto horizontalOffset = 400.0f;
+	auto verticalOffset = 0.0f;
+	auto miniMapXpos = xPosition - horizontalOffset;
+	auto miniMapYpos = yPosition - verticalOffset;
+
 	auto missile_obj = projectiles.begin();
 	auto missile_sprite = missile_sprites.begin();
 
@@ -398,7 +407,7 @@ void Lander::updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& m
 		if ((*missile_obj)->getType() == ProjectileType::LanderMissile)
 		{
 			auto [x, y] = (*missile_obj)->getProjectilePosition();
-			(*missile_sprite)->updateSpritePosition("either", x, y);
+			(*missile_sprite)->updateSpritePosition("either", x, y, miniMapXpos,miniMapYpos);
 			(*missile_obj)->updateFrameCounter();
 			auto frame = (*missile_obj)->getFrameCounter();
 			(*missile_sprite)->setTexture(frame);
