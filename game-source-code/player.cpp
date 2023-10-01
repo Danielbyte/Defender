@@ -15,9 +15,11 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 	bool& gameOver)
 {
 	auto horizontalOffset = 400.0f;
-	auto verticalOffset = 0.0f;
-	auto miniMapXpos = x_playerPosition - horizontalOffset;
-	auto miniMapYpos = y_playerPosition - verticalOffset;
+	auto verticalOffset = 40.0f;
+	auto horizontallScalingFactor = 0.5f;
+	auto verticalScalingFactor = (1.0f / 6.0f);
+	auto miniMapXpos = (x_playerPosition - horizontalOffset) * horizontallScalingFactor;
+	auto miniMapYpos = (y_playerPosition - verticalOffset) * verticalScalingFactor;
 
 	if (space)
 	{
@@ -44,7 +46,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 	if (up)
 	{
 		y_playerPosition -= playerSpeed * dt;
-		float upBoundary = 10.0f;
+		float upBoundary = 110.0f;
 		//Restrict player ship to updwards boundary of game window
 		if (y_playerPosition <= upBoundary)
 			y_playerPosition = upBoundary;

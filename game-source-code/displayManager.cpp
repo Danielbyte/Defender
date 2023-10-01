@@ -59,7 +59,7 @@ void Game::display(const float dt)
 			window->draw(humanoid->getSprite());
 		}
 
-		minimap->drawMiniMap(window);
+		minimap->drawMiniMap(window, player_sprite);
 	}
 
 	else

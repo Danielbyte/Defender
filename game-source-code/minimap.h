@@ -14,7 +14,7 @@ class Minimap
 public:
 	Minimap();
 	void update(std::shared_ptr<Player>& player);
-	void drawMiniMap(std::shared_ptr<sf::RenderWindow>& window);
+	void drawMiniMap(std::shared_ptr<sf::RenderWindow>& window, std::shared_ptr<PlayerSprite>& player_icon);
 
 private:
 	void updateLandscape(std::shared_ptr<Player>& player);
