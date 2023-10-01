@@ -24,6 +24,7 @@ private:
 	sf::Texture fallingHumanoid1_t;
 	sf::Texture fallingHumanoid2_t;
 	sf::Texture fallingHumanoid3_t;
+	sf::Texture miniMap_t;
 
 	float texture_period;
 
