@@ -66,6 +66,7 @@ private:
 
 	sf::Texture miniMainSection_t;
 	sf::Sprite miniMainSection_s;
+	sf::Vector2f gameSectionPosition;
 
 
 	sf::Texture miniTerrain1_t;

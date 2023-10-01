@@ -63,7 +63,7 @@ void Game::display(const float dt)
 		window.setView(miniMapView);
 		window.draw(miniTerrain1_s);
 	    window.draw(miniTerrain2_s);
-		//window.draw(miniMainSection_s);
+		window.draw(miniMainSection_s);
 	}
 
 	else
@@ -183,5 +183,9 @@ void Game::updateMiniMapLandscape()
 
 void Game::miniMapUpdate(const float dt)
 {
-	miniMap_s.setPosition(viewCenter.x, 51.0f);		
+	miniMap_s.setPosition(viewCenter.x, 51.0f);	
+	auto scalingFactor = 0.5f;
+
+	gameSectionPosition.x = (viewCenter.x - 400.0f) * scalingFactor;
+	miniMainSection_s.setPosition(gameSectionPosition);
 }
