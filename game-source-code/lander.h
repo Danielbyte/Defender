@@ -46,6 +46,7 @@ public:
 private:
 	void createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
 	void abductionDecision();
+	void generateTeleportPosition(std::shared_ptr<Player>& player);
 	float xPosition;
 	float yPosition;
 	bool rightSide;

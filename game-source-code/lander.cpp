@@ -44,15 +44,10 @@ std::tuple<float, float> Lander::getPosition() const
 
 void Lander::generateInitialPosition(std::shared_ptr<Player>& player)
 {
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	float minXposition = -10.0f;
-	float maxXposition = 100.0f;
-	std::uniform_real_distribution<float>distribution(minXposition, maxXposition);
-	xPosition = distribution(gen);
+	generateTeleportPosition(player);
+
 	auto [playerXpos, playerYpos] = player->getPlayerPosition();
 	auto middle = playerXpos;
-	
 	if (xPosition >= middle)
 	{
 		rightSide = true;
@@ -62,11 +57,6 @@ void Lander::generateInitialPosition(std::shared_ptr<Player>& player)
 	{
 		leftSide = true;
 	}
-
-	float minYposition = 116.0f;
-	float maxYposition = 400.0f;
-	std::uniform_real_distribution<float>distribution2(minYposition, maxYposition);
-	yPosition = distribution2(gen);
 }
 
 void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const float dt, 
@@ -506,4 +496,27 @@ std::tuple<bool, bool> Lander::test_getSide()
 bool Lander::test_getIfInHumanoidZone() const
 {
 	return reachedHumanoidZone;
+}
+
+void Lander::generateTeleportPosition(std::shared_ptr<Player>& player)
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	auto minAngle = 0.0f;
+	auto maxAngle = 360.0f;
+	std::uniform_real_distribution<float>distribution(minAngle, maxAngle);
+	auto angle = distribution(gen);
+
+	auto [xPlayerPos, yPlayerPos] = player->getPlayerPosition();
+	auto radius = 100.0f;
+	auto pi = 22.0f / 7.0f;
+	xPosition = xPlayerPos + radius * cos(angle * pi / 180.0f);
+	yPosition = yPlayerPos + radius * sin(angle * pi / 180.0f);
+
+	if (yPlayerPos <= 120.0f)
+	{
+		angle = 0.0f;
+		xPosition = xPlayerPos + radius * cos(angle * pi / 180.0f);
+		yPosition = yPlayerPos + radius * sin(angle * pi / 180.0f);
+	}
 }
