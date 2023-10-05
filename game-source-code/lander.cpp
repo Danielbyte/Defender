@@ -66,13 +66,9 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 	std::shared_ptr<Player>& player, std::vector<std::shared_ptr<MissileSprite>>& missile_sprites,
 	std::vector<std::shared_ptr<Humanoid>>& humanoids)
 {
-	if (lander_watch->time_elapsed() > 0.7f)
-		isTeleporting = false;
 
-	if (isTeleporting)
-		return;
-
-	if (!reachedHumanoidZone)
+		
+	if (!reachedHumanoidZone && !isTeleporting)
 	{
 		if (rightSide)
 		{

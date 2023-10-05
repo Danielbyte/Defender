@@ -11,8 +11,10 @@ public:
 	void updateSpritePosition(const std::string& direction, const float x_pos, const float y_pos,
 		const float miniXpos, const float miniYpos);
 	void updateSpriteTexture(sf::Texture& texture, sf::Texture& miniTexture);
+	void updateAnimationSpriteTexture(sf::Texture, sf::Texture& animationTexture);
     sf::Sprite getSprite() const;
 	sf::Sprite getMiniSprite() const;
+	sf::Sprite getAnimationSprite() const;
 	virtual void loadTextures() = 0;
 	bool getIfLeft() const;
 	bool getIfRight() const;
@@ -25,6 +27,7 @@ private:
 	bool toTheRight;
 	sf::Sprite entitySprite;
 	sf::Sprite miniSprite; // sprites for mini map
+	sf::Sprite animationSprite;
 	bool canDelete;
 };
 #endif // !SPRITESTORE_H
