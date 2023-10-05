@@ -20,15 +20,18 @@ void HumanoidSprite::loadTextures()
 	fallingHumanoid1_t.loadFromFile("resources/falling-humanoid1.png");
 	fallingHumanoid2_t.loadFromFile("resources/falling-humanoid2.png");
 	fallingHumanoid3_t.loadFromFile("resources/falling-humanoid3.png");
+	miniMap_t.loadFromFile("resources/mini-humanoid.png");
 }
 
 void HumanoidSprite::setTexture(std::string direction, const std::string state, float xPos, float yPos,
 	std::shared_ptr<StopWatch>humanoid_watch)
 {
 	auto horizontalOffset = 400.0f;
-	auto verticalOffset = 0.0f;
-	auto miniMapXpos = xPos - horizontalOffset;
-	auto miniMapYpos = yPos - verticalOffset;
+	auto verticalOffset = 40.0f;
+	auto horizontalScalingFactor = 0.5f;
+	auto verticalScalingfFactor = 1.0f / 6.0f;
+	auto miniMapXpos = (xPos - horizontalOffset) * horizontalScalingFactor;
+	auto miniMapYpos = (yPos - verticalOffset) * verticalScalingfFactor;
 
 	if (state == "Walking" || state == "Abducted")
 	{

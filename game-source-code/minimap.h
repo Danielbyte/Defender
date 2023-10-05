@@ -14,7 +14,8 @@ class Minimap
 public:
 	Minimap();
 	void update(std::shared_ptr<Player>& player);
-	void drawMiniMap(std::shared_ptr<sf::RenderWindow>& window, std::shared_ptr<PlayerSprite>& player_icon, std::vector<std::shared_ptr<LanderSprite>>& lander_sprites);
+	void drawMiniMap(std::shared_ptr<sf::RenderWindow>& window, std::shared_ptr<PlayerSprite>& player_icon, std::vector<std::shared_ptr<LanderSprite>>& lander_sprites,
+		std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites);
 
 private:
 	void updateLandscape(std::shared_ptr<Player>& player);
