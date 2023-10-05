@@ -11,14 +11,14 @@ public:
 	void updateSpritePosition(const std::string& direction, const float x_pos, const float y_pos,
 		const float miniXpos, const float miniYpos);
 	void updateSpriteTexture(sf::Texture& texture, sf::Texture& miniTexture);
-	void updateAnimationSpriteTexture(sf::Texture, sf::Texture& animationTexture);
+	void updateAnimationSpriteTexture(sf::Texture& animationTexture, sf::Texture& miniTexture);
     sf::Sprite getSprite() const;
 	sf::Sprite getMiniSprite() const;
 	sf::Sprite getAnimationSprite() const;
 	virtual void loadTextures() = 0;
 	bool getIfLeft() const;
 	bool getIfRight() const;
-	void InitialiseEntityOrigin(const sf::Vector2f& dimensions, const sf::Vector2f miniDimensios);
+	void InitialiseEntityOrigin(const sf::Vector2f& dimensions, const sf::Vector2f miniDimensios, const sf::Vector2f animationDimensions);
 	void remove();
 	bool needsDeletion() const;
 

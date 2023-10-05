@@ -525,3 +525,8 @@ void Lander::generateTeleportPosition(std::shared_ptr<Player>& player)
 		yPosition = yPlayerPos + radius * sin(angle * pi / 180.0f);
 	}
 }
+
+bool Lander::getIfTeleporting() const
+{
+	return isTeleporting;
+}

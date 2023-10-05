@@ -24,6 +24,7 @@ void SpriteStore::updateSpritePosition(const std::string& entityDirection, const
 
 	entitySprite.setPosition(x_pos, y_pos);
 	miniSprite.setPosition(miniXpos, miniYpos);
+	animationSprite.setPosition(x_pos, y_pos);
 }
 
 sf::Sprite SpriteStore::getSprite() const
@@ -47,10 +48,11 @@ bool SpriteStore::getIfRight() const
 	return toTheRight;
 }
 
-void SpriteStore::InitialiseEntityOrigin(const sf::Vector2f& dimensions, const sf::Vector2f miniDimensions)
+void SpriteStore::InitialiseEntityOrigin(const sf::Vector2f& dimensions, const sf::Vector2f miniDimensions, const sf::Vector2f animationDimensions)
 {
 	entitySprite.setOrigin(dimensions/2.0f);
 	miniSprite.setOrigin(miniDimensions / 2.0f);
+	animationSprite.setOrigin(animationDimensions / 2.0f);
 }
 
 void SpriteStore::remove()
@@ -66,4 +68,15 @@ bool SpriteStore::needsDeletion() const
 sf::Sprite SpriteStore::getMiniSprite() const
 {
 	return miniSprite;
+}
+
+void SpriteStore::updateAnimationSpriteTexture(sf::Texture& animationTexture, sf::Texture& miniTexture)
+{
+	animationSprite.setTexture(animationTexture);
+	miniSprite.setTexture(miniTexture);
+}
+
+sf::Sprite SpriteStore::getAnimationSprite() const
+{
+	return animationSprite;
 }

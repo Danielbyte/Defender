@@ -42,6 +42,7 @@ public:
     //functions for test purposed
 	std::tuple<bool, bool> test_getSide();
 	bool test_getIfInHumanoidZone() const;
+	bool getIfTeleporting() const;
 	
 private:
 	void createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);

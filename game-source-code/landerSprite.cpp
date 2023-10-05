@@ -3,12 +3,18 @@
 LanderSprite::LanderSprite():
 	sprite_period{0.3f} //display each sprite for 0.5 sec
 {
-	sf::Vector2f dimensions;
-	dimensions.x = 100.0f;
-	dimensions.y = 100.0f;
+	sf::Vector2f mainDimensions;
+	mainDimensions.x = 16.0f;
+	mainDimensions.y = 16.0f;
+
 	sf::Vector2f miniDimensions;
+
+	sf::Vector2f teleportDimensions;
+	teleportDimensions.x = 100.0f;
+	teleportDimensions.y = 100.0f;
+
 	loadTextures();
-	InitialiseEntityOrigin(dimensions, miniDimensions);
+	InitialiseEntityOrigin(mainDimensions, miniDimensions, teleportDimensions);
 }
 
 void LanderSprite::setTexture(std::shared_ptr<StopWatch>& watch, bool& isTeleporting)
@@ -20,45 +26,38 @@ void LanderSprite::setTexture(std::shared_ptr<StopWatch>& watch, bool& isTelepor
 		auto period = 0.1;
 		if (_time >= 0.0f && _time <= period)
 		{
-			updateSpriteTexture(landerTeleport1_t, miniMap_t);
+			updateAnimationSpriteTexture(landerTeleport1_t, miniMap_t);
 		}
 
-		if (_time >= 0.0f && _time <= 2 * period)
+		if (_time >= period && _time <= 2 * period)
 		{
-			updateSpriteTexture(landerTeleport2_t, miniMap_t);
+			updateAnimationSpriteTexture(landerTeleport2_t, miniMap_t);
 		}
 
 		if (_time >= 2 * period && _time <= 3 * period)
 		{
-			updateSpriteTexture(landerTeleport3_t, miniMap_t);
+			updateAnimationSpriteTexture(landerTeleport3_t, miniMap_t);
 		}
 
 		if (_time >= 3 * period && _time <= 4 * period)
 		{
-			updateSpriteTexture(landerTeleport4_t, miniMap_t);
+			updateAnimationSpriteTexture(landerTeleport4_t, miniMap_t);
 		}
 
 		if (_time >= 4 * period && _time <= 5 * period)
 		{
-			updateSpriteTexture(landerTeleport5_t, miniMap_t);
+			updateAnimationSpriteTexture(landerTeleport5_t, miniMap_t);
 		}
 
 		if (_time >= 5 * period && _time <= 6 * period)
 		{
-			updateSpriteTexture(landerTeleport6_t, miniMap_t);
+			updateAnimationSpriteTexture(landerTeleport6_t, miniMap_t);
 		}
 
 		if (_time >= 6 * period && _time <= 7 * period)
 		{
-			updateSpriteTexture(landerTeleport7_t, miniMap_t);
+			updateAnimationSpriteTexture(landerTeleport7_t, miniMap_t);
 			isTeleporting = false;
-
-			sf::Vector2f dimensions;
-			dimensions.x = 16.0f;
-			dimensions.y = 16.0f;
-			sf::Vector2f miniDimensions;
-			InitialiseEntityOrigin(dimensions, miniDimensions);
-
 			watch->restart();
 		}
 

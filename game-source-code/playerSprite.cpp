@@ -4,12 +4,13 @@ PlayerSprite::PlayerSprite()
 {
 	sf::Vector2f dimensions;
 	sf::Vector2f miniDimensions;
+	sf::Vector2f NA;
 	dimensions.x = 50.0f;
 	dimensions.y = 20.0f;
 	miniDimensions.x = 27.0f;
 	miniDimensions.y = 10.0f;
 	loadTextures();
-	InitialiseEntityOrigin(dimensions, miniDimensions);
+	InitialiseEntityOrigin(dimensions, miniDimensions, NA);
 }
 
 void PlayerSprite::loadTextures()

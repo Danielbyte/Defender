@@ -6,8 +6,9 @@ LandscapeSprite::LandscapeSprite(const int id)
 	dimensions.x = 3200.0f;
 	dimensions.y = 100.0f;
 	sf::Vector2f miniDimensions;
+	sf::Vector2f NA;
 	loadTextures();
-	InitialiseEntityOrigin(dimensions, miniDimensions);
+	InitialiseEntityOrigin(dimensions, miniDimensions, NA);
 
 	if (id == 1)
 	updateSpriteTexture(terrain1_t, miniMap_t);

@@ -44,9 +44,16 @@ void Game::display(const float dt)
 			window->draw(laser->getSprite());
 		}
 
+		auto lander = lander_objects.begin();
 		for (auto& _lander : lander_object_sprites)
 		{
-			window->draw(_lander->getSprite());
+			if ((*lander)->getIfTeleporting())
+				window->draw(_lander->getAnimationSprite());
+
+			if (!(*lander)->getIfTeleporting())
+				window->draw(_lander->getSprite());
+
+			++lander;
 		}
 
 		for (auto& lander_missile : lander_missile_sprites)

@@ -7,7 +7,10 @@ HumanoidSprite::HumanoidSprite():
 	dimensions.x = 6.0f;
 	dimensions.y = 16.0f;
 	sf::Vector2f miniDimensions;
-	InitialiseEntityOrigin(dimensions, miniDimensions);
+
+	sf::Vector2f NA;
+
+	InitialiseEntityOrigin(dimensions, miniDimensions, NA);
 	loadTextures();
 }
 

@@ -7,8 +7,9 @@ MissileSprite::MissileSprite():
 	dimensions.x = 6.0f;
 	dimensions.y = 6.0f;
 	sf::Vector2f miniDimensions;
+	sf::Vector2f NA;
 	loadTextures();
-	InitialiseEntityOrigin(dimensions, miniDimensions);
+	InitialiseEntityOrigin(dimensions, miniDimensions, NA);
 }
 
 void MissileSprite::loadTextures()
