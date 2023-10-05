@@ -6,7 +6,7 @@ PlayerSprite::PlayerSprite()
 	sf::Vector2f miniDimensions;
 	dimensions.x = 50.0f;
 	dimensions.y = 20.0f;
-	miniDimensions.x = 10.0f;
+	miniDimensions.x = 27.0f;
 	miniDimensions.y = 10.0f;
 	loadTextures();
 	InitialiseEntityOrigin(dimensions, miniDimensions);
