@@ -62,6 +62,7 @@ private:
 	float missileSpeed;
 	bool isAbducting; //lander in the process of abducting a lander
 	bool ascend;
+	bool isTeleporting;
 	static unsigned int globalId;
 	unsigned int localId; //Id with same scope as lander object
 	static void setId();

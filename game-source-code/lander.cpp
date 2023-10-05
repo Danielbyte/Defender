@@ -13,6 +13,7 @@ Lander::Lander():
 	missileSpeed{150.0f},
 	isAbducting{false},
 	ascend{false},
+	isTeleporting{true},
 	localId{0}
 {}
 
@@ -29,6 +30,7 @@ Lander::Lander(std::shared_ptr<Player>& player):
 	missileSpeed{ 150.0f },
 	isAbducting{ false },
 	ascend{ false },
+	isTeleporting{true},
 	localId{ 0 }
 {
 	//generate spawn position

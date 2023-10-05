@@ -41,6 +41,13 @@ void LanderSprite::setTexture(std::shared_ptr<StopWatch>& watch)
 
 void LanderSprite::loadTextures()
 {
+	landerTeleport1_t.loadFromFile("resources/lander-teleport-1.png");
+	landerTeleport1_t.loadFromFile("resources/lander-teleport-2.png");
+	landerTeleport1_t.loadFromFile("resources/lander-teleport-3.png");
+	landerTeleport1_t.loadFromFile("resources/lander-teleport-4.png");
+	landerTeleport1_t.loadFromFile("resources/lander-teleport-5.png");
+	landerTeleport1_t.loadFromFile("resources/lander-teleport-6.png");
+	landerTeleport1_t.loadFromFile("resources/lander-teleport-7.png");
 	lander1_t.loadFromFile("resources/lander1.png");
 	lander2_t.loadFromFile("resources/lander2.png");
 	lander3_t.loadFromFile("resources/lander3.png");
