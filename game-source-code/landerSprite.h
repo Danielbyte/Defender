@@ -9,7 +9,7 @@ class LanderSprite : public SpriteStore
 public:
 	LanderSprite();
 	void virtual loadTextures();
-	void setTexture(std::shared_ptr<StopWatch>& watch);
+	void setTexture(std::shared_ptr<StopWatch>& watch, const bool isTeleporting);
 
 private:
 	sf::Texture landerTeleport1_t;

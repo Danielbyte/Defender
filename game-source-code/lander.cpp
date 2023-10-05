@@ -37,6 +37,7 @@ Lander::Lander(std::shared_ptr<Player>& player):
 	generateInitialPosition(player);
 	setId();
 	setLocalId();
+	lander_watch->restart();
 }
 
 std::tuple<float, float> Lander::getPosition() const
@@ -65,6 +66,12 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 	std::shared_ptr<Player>& player, std::vector<std::shared_ptr<MissileSprite>>& missile_sprites,
 	std::vector<std::shared_ptr<Humanoid>>& humanoids)
 {
+	if (lander_watch->time_elapsed() > 0.7f)
+		isTeleporting = false;
+
+	if (isTeleporting)
+		return;
+
 	if (!reachedHumanoidZone)
 	{
 		if (rightSide)
@@ -136,7 +143,7 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 
 	auto miniMapXpos = (xPosition - horizontalOffset) * horizontallScalingFactor;
 	auto miniMapYpos = (yPosition - verticalOffset) * verticalScalingFactor;
-	lander_sprite->setTexture(lander_watch);
+	lander_sprite->setTexture(lander_watch, isTeleporting);
 	lander_sprite->updateSpritePosition("either", xPosition, yPosition, miniMapXpos, miniMapYpos);
 }
 

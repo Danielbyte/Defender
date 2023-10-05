@@ -11,9 +11,51 @@ LanderSprite::LanderSprite():
 	InitialiseEntityOrigin(dimensions, miniDimensions);
 }
 
-void LanderSprite::setTexture(std::shared_ptr<StopWatch>& watch)
+void LanderSprite::setTexture(std::shared_ptr<StopWatch>& watch, const bool isTeleporting)
 {
 	auto _time = watch->time_elapsed();
+
+	if (isTeleporting)
+	{
+		auto period = 0.1;
+		if (_time >= 0.0f && _time <= period)
+		{
+
+		}
+
+		if (_time >= 0.0f && _time <= 2 * period)
+		{
+
+		}
+
+		if (_time >= 2 * period && _time <= 3 * period)
+		{
+
+		}
+
+		if (_time >= 3 * period && _time <= 4 * period)
+		{
+
+		}
+
+		if (_time >= 4 * period && _time <= 5 * period)
+		{
+
+		}
+
+		if (_time >= 5 * period && _time <= 6 * period)
+		{
+
+		}
+
+		if (_time >= 6 * period && _time <= 7 * period)
+		{
+
+		}
+
+		return;
+	}
+
 	if (_time >= 0 && _time <= sprite_period)
 	{
 		updateSpriteTexture(lander1_t, miniMap_t);
