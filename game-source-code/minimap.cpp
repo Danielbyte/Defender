@@ -98,11 +98,14 @@ void Minimap::updateLandscape(std::shared_ptr<Player>& player)
 	}
 }
 
-void Minimap::drawMiniMap(std::shared_ptr<sf::RenderWindow>& window, std::shared_ptr<PlayerSprite>& player_icon)
+void Minimap::drawMiniMap(std::shared_ptr<sf::RenderWindow>& window, std::shared_ptr<PlayerSprite>& player_icon, std::vector<std::shared_ptr<LanderSprite>>& lander_sprites)
 {
 	window->setView(miniMapView);
 	window->draw(miniTerrain1_s);
 	window->draw(miniTerrain2_s);
 	window->draw(miniMainSection_s);
 	window->draw(player_icon->getMiniSprite());
+
+	for (auto& lander_icon : lander_sprites)
+		window->draw(lander_icon->getMiniSprite());
 }

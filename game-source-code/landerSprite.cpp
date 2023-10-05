@@ -45,4 +45,5 @@ void LanderSprite::loadTextures()
 	lander2_t.loadFromFile("resources/lander2.png");
 	lander3_t.loadFromFile("resources/lander3.png");
 	lander4_t.loadFromFile("resources/lander4.png");
+	miniMap_t.loadFromFile("resources/mini-lander.png");
 }

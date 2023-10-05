@@ -138,9 +138,12 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 	updateMissileSprites(missile_sprites);
 
 	auto horizontalOffset = 400.0f;
-	auto verticalOffset = 0.0f;
-	auto miniMapXpos = xPosition - horizontalOffset;
-	auto miniMapYpos = yPosition - verticalOffset;
+	auto verticalOffset = 40.0f;
+	auto horizontallScalingFactor = 0.5f;
+	auto verticalScalingFactor = (1.0f / 6.0f);
+
+	auto miniMapXpos = (xPosition - horizontalOffset) * horizontallScalingFactor;
+	auto miniMapYpos = (yPosition - verticalOffset) * verticalScalingFactor;
 	lander_sprite->setTexture(lander_watch);
 	lander_sprite->updateSpritePosition("either", xPosition, yPosition, miniMapXpos, miniMapYpos);
 }
@@ -398,7 +401,6 @@ void Lander::updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& m
 	auto verticalOffset = 0.0f;
 	auto miniMapXpos = xPosition - horizontalOffset;
 	auto miniMapYpos = yPosition - verticalOffset;
-
 	auto missile_obj = projectiles.begin();
 	auto missile_sprite = missile_sprites.begin();
 
