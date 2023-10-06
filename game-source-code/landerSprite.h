@@ -19,6 +19,8 @@ private:
 	sf::Texture landerTeleport5_t;
 	sf::Texture landerTeleport6_t;
 	sf::Texture landerTeleport7_t;
+	sf::Texture landerTeleport8_t;
+	sf::Texture landerTeleport9_t;
 	sf::Texture lander1_t;
 	sf::Texture lander2_t;
 	sf::Texture lander3_t;
