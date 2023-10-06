@@ -37,7 +37,6 @@ void Game::updateLanders(const float dt)
 void Game::updateCollisions()
 {
 	update_collisions.playerLanderCollisions(player_obj, lander_objects, lander_object_sprites);
-	//update_collisions.playerAndMissileCollisions(player_obj, lander_missile_sprites);
 	update_collisions.landerAndLaserCollisions(lander_objects, lander_object_sprites, laser_sprite,humanoid_objects,
 		landersDestroyed);
 
@@ -70,7 +69,5 @@ void Game::updateProjectiles(const float dt)
 {
 	std::shared_ptr<Lander>lander_object = std::make_shared<Lander>();
 	lander_object->updateMissileSprites(lander_missile_sprites);
-	
-	if (lander_objects.empty())
 	shooter_object->updateProjectile(dt,ProjectileType::LanderMissile);
 }

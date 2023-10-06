@@ -129,8 +129,6 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 	playerXposref = x;
 	playerYposref = y;
 	createMissiles(missile_sprites);
-	updateProjectile(dt, ProjectileType::LanderMissile);
-	updateMissileSprites(missile_sprites);
 
 	auto horizontalOffset = 400.0f;
 	auto verticalOffset = 40.0f;
