@@ -6,7 +6,8 @@ numberOfLanders{0}
 {}
 
 void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_objects,
-	std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites, std::shared_ptr<Player>& player)
+	std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites, std::shared_ptr<Player>& player,
+	std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
 {
 	auto _time = world_watch->time_elapsed();
 	generateEnemy();
@@ -33,6 +34,7 @@ void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_obj
 	}
 
 	world_watch->restart(); //Remove once the other entity creation functions are done
+	garbageCollector(missile_sprites);
 }
 
 Enemy GameWorld::generateEnemy()
@@ -97,5 +99,51 @@ void GameWorld::placeHumanoids(std::vector<std::shared_ptr<Humanoid>>& humanoid_
 		humanoid_objects.push_back(humanoid);
 		auto humanoid_sprite = std::make_shared<HumanoidSprite>();
 		humanoid_sprites.push_back(humanoid_sprite);
+	}
+}
+
+void GameWorld::garbageCollector(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
+{
+	auto _projectiles = shooter_obj->getProjectiles();
+	auto missile_sprite = missile_sprites.begin();
+	auto projectile_iter = _projectiles.begin();
+
+	while (projectile_iter != _projectiles.end())
+	{
+		if ((*projectile_iter)->getType() == ProjectileType::LanderMissile)
+		{
+			if ((*projectile_iter)->getDelete())
+			{
+				(*missile_sprite)->remove();
+				shooter_obj->deleteProjectile((*projectile_iter)->getProjectileId());
+				shooter_obj->updateIds();
+				_projectiles.erase(projectile_iter);
+			}
+
+			else
+			{
+				++projectile_iter;
+			}
+
+			++missile_sprite;
+		}
+
+		else
+		{
+			++projectile_iter;
+		}
+	}
+
+	missile_sprite = missile_sprites.begin();
+	while (missile_sprite != missile_sprites.end())
+	{
+		if ((*missile_sprite)->needsDeletion())
+		{
+			missile_sprites.erase(missile_sprite);
+		}
+		else
+		{
+			++missile_sprite;
+		}
 	}
 }

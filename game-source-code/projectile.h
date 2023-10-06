@@ -29,6 +29,7 @@ public:
 	ProjectileType getType() const;
 	float getSpeed() const;
 	void setNewId(unsigned long long int newId);
+	bool getDelete() const;
 
 private:
 	std::string direction;
@@ -51,6 +52,8 @@ private:
 
 	ProjectileType typeOfShooter;
 	float speed;
+	bool Delete;
+	std::shared_ptr<StopWatch>lifeTime = std::make_shared<StopWatch>();
 };
 #endif // !ENEMY_H
 

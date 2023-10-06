@@ -13,7 +13,7 @@ void Game::updateGame(const float dt)
 	if (player_obj->getPlayerState() == PlayerState::Dead)
 		return;
 
-	game_world->updateGameWorld(lander_objects, lander_object_sprites, player_obj);
+	game_world->updateGameWorld(lander_objects, lander_object_sprites, player_obj, lander_missile_sprites);
 
 	if (!lander_objects.empty())
 		updateLanders(dt);
