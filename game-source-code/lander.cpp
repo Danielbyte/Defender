@@ -524,6 +524,13 @@ void Lander::generateTeleportPosition(std::shared_ptr<Player>& player)
 		xPosition = xPlayerPos + radius * cos(angle * pi / 180.0f);
 		yPosition = yPlayerPos + radius * sin(angle * pi / 180.0f);
 	}
+
+	//Don't generate landers in humanoid zone
+	//landers should teleport to humanoid zone rather
+	if (yPlayerPos >= 480.0f)
+	{
+		yPosition = 400.0f;
+	}
 }
 
 bool Lander::getIfTeleporting() const
