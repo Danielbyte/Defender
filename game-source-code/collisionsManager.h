@@ -32,7 +32,7 @@ public:
 
 	void playerLaserAndHumanoidCollisions(std::vector<std::shared_ptr<Humanoid>>& humanoids,
 		std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites, 
-		std::vector<std::shared_ptr<LaserSprite>>& laser_sprites);
+		std::vector<std::shared_ptr<LaserSprite>>& laser_sprites, std::vector<std::shared_ptr<Projectile>>& lasers);
 
 private:
 	void setAbductionStates(std::shared_ptr<Lander>& lander, std::shared_ptr<Humanoid>& humanoid);
