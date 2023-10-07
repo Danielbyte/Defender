@@ -22,7 +22,7 @@ public:
 	std::string getProjectileDirection() const;
 
 	void updateFrameCounter();
-	int getFrameCounter() const;
+	float getFrameCounter() const;
 	void updateTrajectory(const float x);
 	void calculateTrajectoryConstants();
 	void updatePosition(const float x, const float y);
@@ -55,6 +55,7 @@ private:
 	float speed;
 	bool Delete;
 	std::shared_ptr<StopWatch>lifeTime = std::make_shared<StopWatch>();
+	std::shared_ptr<StopWatch>color_watch = std::make_shared<StopWatch>();
 };
 #endif // !ENEMY_H
 

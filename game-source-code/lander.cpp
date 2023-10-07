@@ -521,7 +521,7 @@ void Lander::generateTeleportPosition(std::shared_ptr<Player>& player)
 	if (yPosition >= 480.0f)
 	{
 		yPosition = 400.0f;
-		xPosition += 60.0f;
+		xPosition += 100.0f;
 	}
 }
 

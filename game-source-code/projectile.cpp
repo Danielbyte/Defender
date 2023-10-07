@@ -47,6 +47,7 @@ Projectile::Projectile(const float x, const float y, const std::string _directio
 	speed = _speed;
 	Delete = false;
 	lifeTime->restart();
+	color_watch->restart();
 }
 
 std::string Projectile::getProjectileDirection() const
@@ -61,16 +62,15 @@ std::tuple<float, float> Projectile::getProjectilePosition() const
 
 void Projectile::updateFrameCounter()
 {
-	++frame_counter;
-	if (frame_counter > 30)
+	if (color_watch->time_elapsed() >= 0.4f)
 	{
-		frame_counter = 0;
+		color_watch->restart();
 	}
 }
 
-int Projectile::getFrameCounter() const
+float Projectile::getFrameCounter() const
 {
-	return frame_counter;
+	return color_watch->time_elapsed();
 }
 
 bool Projectile::getDelete() const

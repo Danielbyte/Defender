@@ -8,7 +8,7 @@ class MissileSprite : public SpriteStore
 public:
 	MissileSprite();
 	void virtual loadTextures();
-	void setTexture(const int _time);
+	void setTexture(const float _time);
 
 private:
 	sf::Texture missile1_t;
