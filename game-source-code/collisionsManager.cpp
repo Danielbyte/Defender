@@ -106,26 +106,27 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 		return;
 
 	auto laser_sprite = laser_sprites.begin();
-	auto lander_sprite = lander_sprites.begin();
-	auto lander = landers.begin();
+	auto laser = lasers.begin();
 
-	for (auto& laser : lasers)
+	while (laser != lasers.end())
 	{
-	    while (lander != landers.end())
+		auto lander_sprite = lander_sprites.begin();
+		auto lander = landers.begin();
+		while (lander != landers.end())
 		{
 			auto [landerXpos, landerYpos] = (*lander)->getPosition();
-			auto [laserXpos, laserYpos] = laser->getProjectilePosition();
+			auto [laserXpos, laserYpos] = (*laser)->getProjectilePosition();
 
-			auto isCollided = collisions.checkCollision(landerXpos, landerYpos, landerWidth, landerLength, laserXpos, laserYpos,
-				laserWidth, laserLength);
+			auto isCollided = collisions.checkCollision(landerXpos, landerYpos, landerWidth, landerLength,
+				laserXpos, laserYpos, laserWidth, laserLength);
 
 			if (isCollided)
 			{
 				landers.erase(lander);
 				lander_sprites.erase(lander_sprite);
 				(*laser_sprite)->remove();
+				++landersDestroyed;
 			}
-
 			else
 			{
 				++lander;
@@ -133,11 +134,11 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 			}
 		}
 		++laser_sprite;
+		++laser;
 	}
 	
-	
 	laser_sprite = laser_sprites.begin();
-	auto laser = lasers.begin();
+	laser = lasers.begin();
 	while (laser_sprite != laser_sprites.end())
 	{
 		if ((*laser_sprite)->needsDeletion())

@@ -39,7 +39,9 @@ Projectile::Projectile(const float x, const float y, const std::string _directio
 	if (_typeOfShooter == ProjectileType::Laser) { targetYpos = initialYpos; }
 	else { targetYpos = _targetYpos; }
 	
-	projectileId = _projectileId;
+	if (_typeOfShooter == ProjectileType::LanderMissile)
+		projectileId = _projectileId;
+
 	typeOfShooter = _typeOfShooter;
 	calculateTrajectoryConstants();
 	speed = _speed;
@@ -90,7 +92,8 @@ void Projectile::updateTrajectory(const float x)
 	if (lifeTime->time_elapsed() >= 1.0f)
 		Delete = true;
 
-	//if (yPosition <= 100.0f)
+	if (yPosition <= 100.0f)
+		Delete = true;
 		//std::cout << "Delete" << std::endl;
 }
 
