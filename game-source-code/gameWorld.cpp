@@ -110,39 +110,18 @@ void GameWorld::garbageCollector(std::vector<std::shared_ptr<MissileSprite>>& mi
 
 	while (projectile_iter != _projectiles.end())
 	{
-		if ((*projectile_iter)->getType() == ProjectileType::LanderMissile)
+		
+
+		if ((*projectile_iter)->getDelete())
 		{
-			if ((*projectile_iter)->getDelete())
-			{
-				(*missile_sprite)->remove();
-				shooter_obj->deleteProjectile((*projectile_iter)->getProjectileId());
-				shooter_obj->updateIds();
-				_projectiles.erase(projectile_iter);
-			}
-
-			else
-			{
-				++projectile_iter;
-			}
-
-			++missile_sprite;
+			shooter_obj->deleteProjectile((*projectile_iter)->getProjectileId());
+			_projectiles.erase(projectile_iter);
+			missile_sprites.erase(missile_sprite);
 		}
 
 		else
 		{
 			++projectile_iter;
-		}
-	}
-
-	missile_sprite = missile_sprites.begin();
-	while (missile_sprite != missile_sprites.end())
-	{
-		if ((*missile_sprite)->needsDeletion())
-		{
-			missile_sprites.erase(missile_sprite);
-		}
-		else
-		{
 			++missile_sprite;
 		}
 	}

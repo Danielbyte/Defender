@@ -2,12 +2,14 @@
 
 Shooter::Shooter(){}
 
-void Shooter::updateProjectile(float dt, const ProjectileType type)
+void Shooter::updateProjectile(float dt, const ProjectileType type,
+	std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
 {
 	if (projectiles.empty())
 		return;
 
 	auto projectile_iter = projectiles.begin();
+	auto missile_sprite = missile_sprites.begin();
 
 	while (projectile_iter != projectiles.end())
 	{
@@ -18,6 +20,14 @@ void Shooter::updateProjectile(float dt, const ProjectileType type)
 			auto speed = (*projectile_iter)->getSpeed();
 			auto newX = x - speed * dt;
 			(*projectile_iter)->updateTrajectory(newX);
+
+			auto [xPos, yPos] = (*projectile_iter)->getProjectilePosition();
+
+			if (yPos <= 100.0f)
+			{
+				(*missile_sprite)->remove();
+			}
+
 		}
 
 		if (_direction == "right")
@@ -26,9 +36,33 @@ void Shooter::updateProjectile(float dt, const ProjectileType type)
 			auto speed = (*projectile_iter)->getSpeed();
 			auto newX = x + speed * dt;
 			(*projectile_iter)->updateTrajectory(newX);
+
+			auto [xPos, yPos] = (*projectile_iter)->getProjectilePosition();
+
+			if (yPos <= 100.0f)
+			{
+				(*missile_sprite)->remove();
+			}
 		}
 		
 		++projectile_iter;
+		++missile_sprite;
+	}
+
+	projectile_iter = projectiles.begin();
+	missile_sprite = missile_sprites.begin();
+	while (missile_sprite != missile_sprites.end())
+	{
+		if ((*missile_sprite)->needsDeletion())
+		{
+			deleteProjectile((*projectile_iter)->getProjectileId());
+			missile_sprites.erase(missile_sprite);
+		}
+		else
+		{
+			++missile_sprite;
+			++projectile_iter;
+		}
 	}
 }
 
@@ -69,27 +103,6 @@ void Shooter::createProjectile(std::shared_ptr<Projectile>& projectile)
 std::vector<std::shared_ptr<Projectile>> Shooter::getProjectiles()
 {
 	return projectiles;
-}
-
-//function to update projectile Ids once a projectile has been deleted
-void Shooter::updateIds()
-{
-	auto projectile_iter = projectiles.begin();
-	while (projectile_iter != projectiles.end())
-	{
-		if (projectile_iter == projectiles.begin())
-		{
-			(*projectile_iter)->setNewId(0);
-			++projectile_iter;
-		}
-
-		else
-		{
-			auto newId = (*(projectile_iter - 1))->getProjectileId() + 1;
-			(*projectile_iter)->setNewId(newId);
-			++projectile_iter;
-		}
-	}
 }
 
 void Shooter::deleteProjectile(unsigned long long int Id)

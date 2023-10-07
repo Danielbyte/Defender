@@ -79,7 +79,6 @@ void CollisionsManager::playerAndMissileCollisions(std::shared_ptr<Player>& play
 			{
 				auto Id = (*projectile_iter)->getProjectileId();
 				shooter_obj->deleteProjectile(Id);
-				shooter_obj->updateIds();
 				missile_sprites.erase(missile_sprite_iter);
 				_projectiles.erase(projectile_iter);
 				player->restartAnimationWatch();

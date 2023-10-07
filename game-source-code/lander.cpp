@@ -356,9 +356,8 @@ void Lander::createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile
 			//missile should move right
 			auto horizontalOffset = 0.0f;
 			auto verticalOffset = 0.0f;
-			auto Id = projectiles.size() + 1;
 			auto missile = std::make_shared<Projectile>(xPosition,yPosition,"right",horizontalOffset,verticalOffset,
-				playerXposref,playerYposref,Id,ProjectileType::LanderMissile,missileSpeed);
+				playerXposref,playerYposref, ProjectileType::LanderMissile,missileSpeed);
 
 			createProjectile(missile);
 
@@ -373,9 +372,8 @@ void Lander::createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile
 			//missile should move left
 			auto horizontalOffset = 0.0f;
 			auto verticalOffset = 0.0f;
-			auto Id = projectiles.size() + 1;
 			auto missile = std::make_shared<Projectile>(xPosition, yPosition, "left", horizontalOffset,
-				verticalOffset,playerXposref,playerYposref, Id,ProjectileType::LanderMissile,missileSpeed);
+				verticalOffset,playerXposref,playerYposref,ProjectileType::LanderMissile,missileSpeed);
 
 			createProjectile(missile);
 

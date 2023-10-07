@@ -16,8 +16,7 @@ Projectile::Projectile():
 {}
 
 Projectile::Projectile(const float x, const float y, const std::string _direction, const float horizontalOffset,
-	const float verticalOffset,const float _targetXpos, const float _targetYpos, unsigned long long int _projectileId,
-	ProjectileType _typeOfShooter, const float _speed)
+	const float verticalOffset,const float _targetXpos, const float _targetYpos, ProjectileType _typeOfShooter, const float _speed)
 {
 	direction = _direction;
 	yPosition = y + verticalOffset;
@@ -39,8 +38,11 @@ Projectile::Projectile(const float x, const float y, const std::string _directio
 	if (_typeOfShooter == ProjectileType::Laser) { targetYpos = initialYpos; }
 	else { targetYpos = _targetYpos; }
 	
-	if (_typeOfShooter == ProjectileType::LanderMissile)
-		projectileId = _projectileId;
+	if (_typeOfShooter != ProjectileType::Laser)
+	{
+		setId();
+		setProjectileId();
+	}
 
 	typeOfShooter = _typeOfShooter;
 	calculateTrajectoryConstants();
@@ -91,10 +93,11 @@ void Projectile::updateTrajectory(const float x)
 
 	if (lifeTime->time_elapsed() >= 1.0f)
 		Delete = true;
+}
 
-	if (yPosition <= 100.0f)
-		Delete = true;
-		//std::cout << "Delete" << std::endl;
+void Projectile::markForDeletion()
+{
+	Delete = true;
 }
 
 void Projectile::updatePosition(const float x, const float y)
@@ -118,7 +121,14 @@ float Projectile::getSpeed() const
 	return speed;
 }
 
-void Projectile::setNewId(unsigned long long int newId)
+void Projectile::setId()
 {
-	projectileId = newId;
+	++projectileId_G;
 }
+
+void Projectile::setProjectileId()
+{
+	projectileId = projectileId_G;
+}
+
+unsigned long long int Projectile::projectileId_G = 0;

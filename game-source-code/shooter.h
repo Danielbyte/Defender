@@ -5,14 +5,14 @@
 #include <vector>
 #include <memory>
 #include "projectile.h"
+#include "missileSprite.h"
 
 class Shooter
 {
 public:
 	Shooter();
-	static void updateProjectile(float dt,const ProjectileType type);
+	static void updateProjectile(float dt,const ProjectileType type, std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
 	void updateProjectile(const float dt, std::vector<std::shared_ptr<Projectile>>& projectile);
-	static void updateIds();
 	static void deleteProjectile(unsigned long long int Id);
 	static void createProjectile(std::shared_ptr<Projectile>& projectile);
     std::vector<std::shared_ptr<Projectile>> getProjectiles();
