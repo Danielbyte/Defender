@@ -11,8 +11,8 @@ Player::Player():
 }
 
 void Player::updatePlayer(const bool& left, const bool& right, const bool& up, const bool& down,bool& space,
-	std::shared_ptr<PlayerSprite>& player_sprite, std::vector<std::shared_ptr<LaserSprite>>& laser_sprite, const float dt,
-	bool& gameOver)
+	std::shared_ptr<PlayerSprite>& player_sprite, std::vector<std::shared_ptr<LaserSprite>>& laser_sprite, 
+	std::vector<std::shared_ptr<Projectile>>& lasers,const float dt, bool& gameOver)
 {
 	auto horizontalOffset = 400.0f;
 	auto verticalOffset = 40.0f;
@@ -23,7 +23,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 
 	if (space)
 	{
-		createLasers(laser_sprite);
+		createLasers(laser_sprite, lasers);
 		space = false;
 	}
 
@@ -76,19 +76,18 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 		break;
 	}
 	
-	updateLasers(laser_sprite, dt);
+	updateLasers(laser_sprite, lasers, dt);
 }
 
-void Player::createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite)
+void Player::createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite, std::vector<std::shared_ptr<Projectile>>& lasers)
 {
 	auto horizontalOffset = 74.0f;
 	auto verticalOffset = 5.0f;
 	auto id = projectiles.size() + 1;
-	auto laser_pr = std::make_shared<Projectile>(Projectile(x_playerPosition, y_playerPosition, direction,
+	auto laser_projectile = std::make_shared<Projectile>(Projectile(x_playerPosition, y_playerPosition, direction,
 		horizontalOffset, verticalOffset,x_playerPosition,y_playerPosition,id,ProjectileType::Laser,laserSpeed));
+	lasers.push_back(laser_projectile);
 
-	createProjectile(laser_pr);
-	//projectiles.push_back(laser_pr);
 
 	//generate color of laser
 	std::random_device rd;
@@ -122,30 +121,24 @@ void Player::createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprit
 	}
 }
 
-void Player::updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite, const float dt)
+void Player::updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprites, 
+	std::vector<std::shared_ptr<Projectile>>& lasers, const float dt)
 {
-	if (projectiles.empty())
+	if (lasers.empty())
 		return;
 
-	auto projectile_iter = projectiles.begin();
-	auto laser_sprite_iter = laser_sprite.begin();
+	updateProjectile(dt, lasers);
+	auto laser = lasers.begin();
+	auto laser_sprite = laser_sprites.begin();
 	auto laserSpeed = 600.0f;
-	updateProjectile(dt, ProjectileType::Laser);
-	auto NA = 0.0f; //none applicable fiels
+	auto NA = 0.0f; //none applicable fields
 
-	while (projectile_iter != projectiles.end())
+	while (laser != lasers.end())
 	{
-		if ((*projectile_iter)->getType() == ProjectileType::Laser)
-		{
-			auto [x, y] = (*projectile_iter)->getProjectilePosition();
-			(*laser_sprite_iter)->updateSpritePosition("either", x, y, NA, NA);
-			++projectile_iter;
-			++laser_sprite_iter;
-		}
-		else
-		{
-			++projectile_iter;
-		}
+			auto [x, y] = (*laser)->getProjectilePosition();
+			(*laser_sprite)->updateSpritePosition("either", x, y, NA, NA);
+			++laser_sprite;
+			++laser;
 	}
 }
 

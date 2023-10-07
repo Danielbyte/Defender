@@ -35,6 +35,35 @@ void Shooter::updateProjectile(float dt, const ProjectileType type)
 	}
 }
 
+void Shooter::updateProjectile(const float dt, std::vector<std::shared_ptr<Projectile>>& projectile)
+{
+	if (projectile.empty())
+		return;
+
+	auto projectile_iter = projectile.begin();
+
+	while (projectile_iter != projectile.end())
+	{
+			auto _direction = (*projectile_iter)->getProjectileDirection();
+			if (_direction == "left")
+			{
+				auto [x, y] = (*projectile_iter)->getProjectilePosition();
+				auto speed = (*projectile_iter)->getSpeed();
+				auto newX = x - speed * dt;
+				(*projectile_iter)->updateTrajectory(newX);
+			}
+
+			if (_direction == "right")
+			{
+				auto [x, y] = (*projectile_iter)->getProjectilePosition();
+				auto speed = (*projectile_iter)->getSpeed();
+				auto newX = x + speed * dt;
+				(*projectile_iter)->updateTrajectory(newX);
+			}
+		++projectile_iter;
+	}
+}
+
 void Shooter::createProjectile(std::shared_ptr<Projectile>& projectile)
 {
 	projectiles.push_back(projectile);

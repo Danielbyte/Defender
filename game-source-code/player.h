@@ -16,12 +16,12 @@ class Player : Shooter
 public:
 	Player();
 	void updatePlayer(const bool& left, const bool& right,const bool& up, const bool& down, bool& space,
-		std::shared_ptr<PlayerSprite>& player_sprite, 
-		std::vector<std::shared_ptr<LaserSprite>>& laser_sprite,const float dt, bool& gameOver);
+		std::shared_ptr<PlayerSprite>& player_sprite, std::vector<std::shared_ptr<LaserSprite>>& laser_sprite, 
+		std::vector<std::shared_ptr<Projectile>>& lasers, const float dt, bool& gameOver);
 
 	std::tuple<float,float> getPlayerPosition() const;
-	void createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite);
-	void updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite, const float dt);
+	void createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite, std::vector<std::shared_ptr<Projectile>>& lasers);
+	void updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprites, std::vector<std::shared_ptr<Projectile>>& lasers,const float dt);
 	std::string getDirection() const;
 	void restartAnimationWatch();
 	void setPlayerState(PlayerState _state);

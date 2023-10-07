@@ -8,7 +8,7 @@ void Game::updateGame(const float dt)
 	updateHumanoids(dt);
 
 	player_obj->updatePlayer(leftPressed, rightPressed, upPressed, downPressed,spacePressed,player_sprite,
-		laser_sprite,dt, gameOver);
+		laser_sprite, lasers,dt, gameOver);
 
 	if (player_obj->getPlayerState() == PlayerState::Dead)
 		return;
@@ -50,7 +50,7 @@ void Game::updateCollisions()
 	update_collisions.landerAndHumanoidCollisions(lander_objects, humanoid_objects);
 	update_collisions.playerAndFallingHumanoidCollisions(player_obj, humanoid_objects,humanoid_sprites);
 	update_collisions.humanoidAndGroundCollisions(humanoid_objects,humanoid_sprites);
-	update_collisions.playerLaserAndHumanoidCollisions(humanoid_objects, humanoid_sprites, laser_sprite);
+	//update_collisions.playerLaserAndHumanoidCollisions(humanoid_objects, humanoid_sprites, laser_sprite);
 	update_collisions.playerAndMissileCollisions(player_obj, lander_missile_sprites);
 }
 
