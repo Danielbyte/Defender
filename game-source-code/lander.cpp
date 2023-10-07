@@ -126,7 +126,9 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 	auto [x, y] = player->getPlayerPosition();
 	playerXposref = x;
 	playerYposref = y;
-	createMissiles(missile_sprites);
+
+	if (!isTeleporting)
+		createMissiles(missile_sprites);
 
 	auto horizontalOffset = 400.0f;
 	auto verticalOffset = 40.0f;
@@ -397,21 +399,14 @@ void Lander::updateMissileSprites(std::vector<std::shared_ptr<MissileSprite>>& m
 
 	while (missile_obj != projectiles.end())
 	{
-		if ((*missile_obj)->getType() == ProjectileType::LanderMissile)
-		{
-			auto [x, y] = (*missile_obj)->getProjectilePosition();
-			(*missile_sprite)->updateSpritePosition("either", x, y, miniMapXpos,miniMapYpos);
-			(*missile_obj)->updateFrameCounter();
-			auto frame = (*missile_obj)->getFrameCounter();
-			(*missile_sprite)->setTexture(frame);
-			++missile_obj;
-			++missile_sprite;
-		}
 
-		else
-		{
-			++missile_obj;
-		}
+		auto [x, y] = (*missile_obj)->getProjectilePosition();
+		(*missile_sprite)->updateSpritePosition("either", x, y, miniMapXpos,miniMapYpos);
+		(*missile_obj)->updateFrameCounter();
+		auto frame = (*missile_obj)->getFrameCounter();
+		(*missile_sprite)->setTexture(frame);
+		++missile_obj;
+		++missile_sprite;
 	}
 }
 
@@ -509,7 +504,7 @@ void Lander::generateTeleportPosition(std::shared_ptr<Player>& player)
 	auto angle = distribution(gen);
 
 	auto [xPlayerPos, yPlayerPos] = player->getPlayerPosition();
-	auto radius = 100.0f;
+	auto radius = 120.0f;
 	auto pi = 22.0f / 7.0f;
 	xPosition = xPlayerPos + radius * cos(angle * pi / 180.0f);
 	yPosition = yPlayerPos + radius * sin(angle * pi / 180.0f);
@@ -526,6 +521,7 @@ void Lander::generateTeleportPosition(std::shared_ptr<Player>& player)
 	if (yPosition >= 480.0f)
 	{
 		yPosition = 400.0f;
+		xPosition += 60.0f;
 	}
 }
 

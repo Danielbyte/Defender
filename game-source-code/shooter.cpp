@@ -11,26 +11,23 @@ void Shooter::updateProjectile(float dt, const ProjectileType type)
 
 	while (projectile_iter != projectiles.end())
 	{
-		if ((*projectile_iter)->getType() == type)
+		auto _direction = (*projectile_iter)->getProjectileDirection();
+		if (_direction == "left")
 		{
-			auto _direction = (*projectile_iter)->getProjectileDirection();
-
-			if (_direction == "left")
-			{
-				auto [x, y] = (*projectile_iter)->getProjectilePosition();
-				auto speed = (*projectile_iter)->getSpeed();
-				auto newX = x - speed * dt;
-				(*projectile_iter)->updateTrajectory(newX);
-			}
-
-			if (_direction == "right")
-			{
-				auto [x, y] = (*projectile_iter)->getProjectilePosition();
-				auto speed = (*projectile_iter)->getSpeed();
-				auto newX = x + speed * dt;
-				(*projectile_iter)->updateTrajectory(newX);
-			}
+			auto [x, y] = (*projectile_iter)->getProjectilePosition();
+			auto speed = (*projectile_iter)->getSpeed();
+			auto newX = x - speed * dt;
+			(*projectile_iter)->updateTrajectory(newX);
 		}
+
+		if (_direction == "right")
+		{
+			auto [x, y] = (*projectile_iter)->getProjectilePosition();
+			auto speed = (*projectile_iter)->getSpeed();
+			auto newX = x + speed * dt;
+			(*projectile_iter)->updateTrajectory(newX);
+		}
+		
 		++projectile_iter;
 	}
 }
