@@ -87,8 +87,11 @@ void Projectile::updateTrajectory(const float x)
 	xPosition = x;
 	yPosition = (slope * x) + yIntercept;
 
-	if (lifeTime->time_elapsed() >= 2.0f || yPosition <= 100.0f)
+	if (lifeTime->time_elapsed() >= 1.0f)
 		Delete = true;
+
+	//if (yPosition <= 100.0f)
+		//std::cout << "Delete" << std::endl;
 }
 
 void Projectile::updatePosition(const float x, const float y)

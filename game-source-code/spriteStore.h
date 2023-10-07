@@ -3,6 +3,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include "stopWatch.h"
+#include <memory>
 
 class SpriteStore
 {

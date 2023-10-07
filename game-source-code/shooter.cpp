@@ -7,10 +7,6 @@ void Shooter::updateProjectile(float dt, const ProjectileType type)
 	if (projectiles.empty())
 		return;
 
-	//Avoid glitches in game
-	if (dt > 0.017f)
-		dt = 1 / 60.0f;
-
 	auto projectile_iter = projectiles.begin();
 
 	while (projectile_iter != projectiles.end())

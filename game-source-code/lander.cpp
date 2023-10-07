@@ -18,8 +18,6 @@ Lander::Lander():
 {}
 
 Lander::Lander(std::shared_ptr<Player>& player):
-	xPosition{ 0.0f },
-	yPosition{ 0.0f },
 	leftSide{ false },
 	rightSide{ false },
 	landerSpeed{ 50.0f },
@@ -516,16 +514,16 @@ void Lander::generateTeleportPosition(std::shared_ptr<Player>& player)
 	xPosition = xPlayerPos + radius * cos(angle * pi / 180.0f);
 	yPosition = yPlayerPos + radius * sin(angle * pi / 180.0f);
 
-	if (yPlayerPos <= 120.0f)
+	if (yPosition <= 120.0f)
 	{
 		angle = 0.0f;
 		xPosition = xPlayerPos + radius * cos(angle * pi / 180.0f);
-		yPosition = yPlayerPos + radius * sin(angle * pi / 180.0f);
+		yPosition = yPlayerPos + 50.0f;
 	}
 
 	//Don't generate landers in humanoid zone
 	//landers should teleport to humanoid zone rather
-	if (yPlayerPos >= 480.0f)
+	if (yPosition >= 480.0f)
 	{
 		yPosition = 400.0f;
 	}
