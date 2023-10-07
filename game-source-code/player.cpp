@@ -83,7 +83,7 @@ void Player::createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprit
 {
 	auto horizontalOffset = 74.0f;
 	auto verticalOffset = 5.0f;
-	auto id = projectiles.size() + 1;
+	auto id = projectiles.size() + 1000000;
 	auto laser_projectile = std::make_shared<Projectile>(Projectile(x_playerPosition, y_playerPosition, direction,
 		horizontalOffset, verticalOffset,x_playerPosition,y_playerPosition,id,ProjectileType::Laser,laserSpeed));
 	lasers.push_back(laser_projectile);

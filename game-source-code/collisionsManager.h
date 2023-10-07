@@ -17,7 +17,8 @@ public:
 
 	void landerAndLaserCollisions(std::vector<std::shared_ptr<Lander>>& landers,
 		std::vector<std::shared_ptr<LanderSprite>>& lander_sprites,
-		std::vector<std::shared_ptr<LaserSprite>>& laser_sprites, std::vector<std::shared_ptr<Humanoid>>& humanoids,
+		std::vector<std::shared_ptr<LaserSprite>>& laser_sprites,
+		std::vector<std::shared_ptr<Projectile>>& lasers, std::vector<std::shared_ptr<Humanoid>>& humanoids,
 		int& landersDestroyed);
 
 	void landerAndHumanoidCollisions(std::vector<std::shared_ptr<Lander>>& landers,

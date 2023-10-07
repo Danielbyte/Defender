@@ -100,71 +100,55 @@ void CollisionsManager::playerAndMissileCollisions(std::shared_ptr<Player>& play
 
 void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lander>>& landers,
 	std::vector<std::shared_ptr<LanderSprite>>& lander_sprites, std::vector<std::shared_ptr<LaserSprite>>& laser_sprites,
-	std::vector<std::shared_ptr<Humanoid>>& humanoids, int& landersDestroyed)
+	std::vector<std::shared_ptr<Projectile>>& lasers, std::vector<std::shared_ptr<Humanoid>>& humanoids, int& landersDestroyed)
 {
 	if (landers.empty())
 		return;
 
-	std::shared_ptr<Shooter> shooter_obj = std::make_shared<Shooter>();
-	auto _projectiles = shooter_obj->getProjectiles();
 	auto laser_sprite = laser_sprites.begin();
-	
-	auto projectile_iter = _projectiles.begin();
+	auto lander_sprite = lander_sprites.begin();
+	auto lander = landers.begin();
 
-	while (projectile_iter != _projectiles.end())
+	for (auto& laser : lasers)
 	{
-		if ((*projectile_iter)->getType() == ProjectileType::Laser)
+	    while (lander != landers.end())
 		{
-			auto lander_obj = landers.begin();
-			auto lander_sprite = lander_sprites.begin();
-			auto hadAcollision = false;
-			while (lander_obj != landers.end())
+			auto [landerXpos, landerYpos] = (*lander)->getPosition();
+			auto [laserXpos, laserYpos] = laser->getProjectilePosition();
+
+			auto isCollided = collisions.checkCollision(landerXpos, landerYpos, landerWidth, landerLength, laserXpos, laserYpos,
+				laserWidth, laserLength);
+
+			if (isCollided)
 			{
-				auto [landerXpos, landerYpos] = (*lander_obj)->getPosition();
-				auto [laserXpos, laserYpos] = (*projectile_iter)->getProjectilePosition();
-
-
-			    auto isCollided = collisions.checkCollision(landerXpos, landerYpos, landerWidth, landerLength,laserXpos,
-					laserYpos, laserWidth, laserLength);
-				
-				if (isCollided)
-				{
-					landers.erase(lander_obj);
-					lander_sprites.erase(lander_sprite);
-					(*laser_sprite)->remove();
-					shooter_obj->deleteProjectile((*projectile_iter)->getProjectileId());
-					shooter_obj->updateIds();
-					_projectiles.erase(projectile_iter);
-					hadAcollision = true;
-					++landersDestroyed;
-				}
-				else
-				{
-					++lander_obj;
-					++lander_sprite;
-				}
+				landers.erase(lander);
+				lander_sprites.erase(lander_sprite);
+				(*laser_sprite)->remove();
 			}
 
-			if (!hadAcollision) { ++projectile_iter; }
-			++laser_sprite;
+			else
+			{
+				++lander;
+				++lander_sprite;
+			}
 		}
-
-		else
-		{
-			++projectile_iter;
-		}
+		++laser_sprite;
 	}
 	
+	
 	laser_sprite = laser_sprites.begin();
+	auto laser = lasers.begin();
 	while (laser_sprite != laser_sprites.end())
 	{
 		if ((*laser_sprite)->needsDeletion())
 		{
 			laser_sprites.erase(laser_sprite);
+			lasers.erase(laser);
 		}
 		else
 		{
 			++laser_sprite;
+			++laser;
 		}
 	}
 
