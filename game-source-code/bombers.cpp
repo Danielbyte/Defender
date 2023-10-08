@@ -82,24 +82,36 @@ void Bombers::moveNorthEast(const float dt)
 {
 	xPosition += bomberSpeed * dt;
 	yPosition -= bomberSpeed * dt;
+
+	if (yPosition <= 150.0f)
+		moveEast(dt);
 }
 
 void Bombers::moveSouthEast(const float dt)
 {
 	xPosition += bomberSpeed * dt;
 	yPosition += bomberSpeed * dt;
+
+	if (yPosition >= 480.0f)
+		moveEast(dt);
 }
 
 void Bombers::moveSouthWest(const float dt)
 {
 	xPosition -= bomberSpeed * dt;
 	yPosition += bomberSpeed * dt;
+
+	if (yPosition >= 480.0f)
+		moveNorthWest(dt);
 }
 
 void Bombers::moveNorthWest(const float dt)
 {
 	xPosition -= bomberSpeed * dt;
 	yPosition -= bomberSpeed * dt;
+
+	if (yPosition <= 150.0f)
+		moveWest(dt);
 }
 
 void Bombers::moveEast(const float dt)
