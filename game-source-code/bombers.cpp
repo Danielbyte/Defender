@@ -23,14 +23,14 @@ void Bombers::spawn(float playerXposition, float playerYposition, std::string pl
 {
 	if (playerDirection == "left")
 	{
-		xPosition = playerXposition - 200.0f;
+		xPosition = playerXposition - 500.0f;
 		moveRight = true;
 	}
 		
 
 	if (playerDirection == "right")
 	{
-		xPosition = playerXposition + 200.0f;
+		xPosition = playerXposition + 500.0f;
 		moveLeft = true;
 	}
 		
