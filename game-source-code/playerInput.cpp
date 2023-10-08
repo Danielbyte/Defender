@@ -15,6 +15,7 @@ void Game::handleInput()
 		
 		if (event.type == sf::Event::KeyPressed)
 		{
+			window->setKeyRepeatEnabled(false);
 			switch (event.key.code)
 			{
 			case sf::Keyboard::Escape:
@@ -46,6 +47,7 @@ void Game::handleInput()
 
 			case sf::Keyboard::Space:
 				//Load player ship bullets
+				window->setKeyRepeatEnabled(false);
 				spacePressed = true;
 				break;
 
