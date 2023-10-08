@@ -19,5 +19,24 @@ std::tuple<float, float> Mine::getPosition() const
 
 void Mine::updateMine(std::vector<std::shared_ptr<Mine>>& mines, std::vector<std::shared_ptr<MineSprite>>& mine_sprites)
 {
+	auto mine = mines.begin();
+	auto mine_sprite = mine_sprites.begin();
+	auto NA = 0.0f;
+	while (mine != mines.end())
+	{
+		auto [xPos, yPos] = (*mine)->getPosition();
+		(*mine_sprite)->updateSpritePosition("either", xPos, yPos, NA, NA);
 
+		//Mine should detonate after 10 seconds
+		if (lifeTime->time_elapsed() >= 10.0f)
+		{
+			mines.erase(mine);
+			mine_sprites.erase(mine_sprite);
+		}
+		else
+		{
+			++mine;
+			++mine_sprite;
+		}
+	}
 }
