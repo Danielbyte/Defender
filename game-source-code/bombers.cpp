@@ -31,7 +31,7 @@ void Bombers::spawn(float playerXposition, float playerYposition, std::string pl
 	if (playerDirection == "right")
 	{
 		xPosition = playerXposition + 200.0f;
-		moveLeft;
+		moveLeft = true;
 	}
 		
 	yPosition = playerYposition;
@@ -39,37 +39,57 @@ void Bombers::spawn(float playerXposition, float playerYposition, std::string pl
 		yPosition = 400.0f;	
 }
 
-void Bombers::update(std::shared_ptr<Player>& player)
+void Bombers::update(std::shared_ptr<Player>& player, const float dt)
 {
 	auto [playerXpos, playerYpos] = player->getPlayerPosition();
 
-	if (yPosition > playerYpos)
+	if (moveLeft)
 	{
+		if (playerYpos > yPosition)
+		{
+			moveSouthWest(dt);
+			return;
+		}
 
+		if (playerYpos < yPosition)
+		{
+			moveNorthWest(dt);
+			return;
+		}
 	}
 
-	if (yPosition < playerXpos)
+	if (moveRight)
 	{
+		if (playerYpos < yPosition)
+		{
+			moveNorthEast(dt);
+			return;
+		}
 
+		if (playerYpos > yPosition)
+		{
+			moveSouthEast(dt);
+			return;
+		}
 	}
 }
 
-void Bombers::moveNorthEast()
+void Bombers::moveNorthEast(const float dt)
 {
 
 }
 
-void Bombers::moveSouthEast()
+void Bombers::moveSouthEast(const float dt)
 {
 
 }
 
-void Bombers::moveSouthWest()
+void Bombers::moveSouthWest(const float dt)
 {
 
 }
 
-void Bombers::moveNorthWest()
+void Bombers::moveNorthWest(const float dt)
 {
 
 }
