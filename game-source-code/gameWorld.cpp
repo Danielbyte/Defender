@@ -43,7 +43,7 @@ Enemy GameWorld::generateEnemy()
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	int min = 0;
-	int max = 3;
+	int max = 2;
 	std::uniform_int_distribution<int>distribution(min, max);
 	auto _enemy = distribution(gen);
 
