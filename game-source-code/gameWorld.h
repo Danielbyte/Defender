@@ -7,6 +7,8 @@
 #include "humanoid.h"
 #include "landscape.h"
 #include "landscapeSprite.h"
+#include "bombers.h"
+#include "bomberSprite.h"
 
 enum class Enemy{Lander,Bomber,Pod,None};
 
@@ -17,7 +19,8 @@ public:
 
 	void updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_objects,
 		std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites, std::shared_ptr<Player>& player,
-		std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
+		std::vector<std::shared_ptr<MissileSprite>>& missile_sprites, std::vector<std::shared_ptr<Bombers>>& bombers,
+		std::vector<std::shared_ptr<BomberSprite>>& bomber_sprites);
 
 	Enemy generateEnemy();
 
@@ -32,6 +35,9 @@ private:
 
 	void createLander(std::vector<std::shared_ptr<Lander>>& lander_objects,
 		std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites, std::shared_ptr<Player>& player);
+
+	void createBomber(std::vector<std::shared_ptr<Bombers>>& bombers,
+		std::vector<std::shared_ptr<BomberSprite>>& bomber_sprites, std::shared_ptr<Player>& player);
     
 	void garbageCollector(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
 

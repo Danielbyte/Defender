@@ -66,6 +66,11 @@ void Game::display(const float dt)
 			window->draw(humanoid->getSprite());
 		}
 
+		for (auto& bomber : bomber_sprites)
+		{
+			window->draw(bomber->getSprite());
+		}
+
 		minimap->drawMiniMap(window, player_sprite, lander_object_sprites, humanoid_sprites);
 	}
 

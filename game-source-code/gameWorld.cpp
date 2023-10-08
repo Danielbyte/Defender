@@ -7,7 +7,8 @@ numberOfLanders{0}
 
 void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_objects,
 	std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites, std::shared_ptr<Player>& player,
-	std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
+	std::vector<std::shared_ptr<MissileSprite>>& missile_sprites, std::vector<std::shared_ptr<Bombers>>& bombers,
+	std::vector<std::shared_ptr<BomberSprite>>& bomber_sprites)
 {
 	auto _time = world_watch->time_elapsed();
 	generateEnemy();
@@ -21,7 +22,8 @@ void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_obj
 		createLander(lander_objects, lander_object_sprites, player);
 		break;
 	case Enemy::Bomber:
-		//std::cout << "Create Bomber" << std::endl;
+		std::cout << "Bomber" << std::endl;
+		createBomber(bombers, bomber_sprites, player);
 		break;
 	case Enemy::Pod:
 		//std::cout << "Create Pod" << std::endl;
@@ -125,4 +127,14 @@ void GameWorld::garbageCollector(std::vector<std::shared_ptr<MissileSprite>>& mi
 			++missile_sprite;
 		}
 	}
+}
+
+void GameWorld::createBomber(std::vector<std::shared_ptr<Bombers>>& bombers,
+	std::vector<std::shared_ptr<BomberSprite>>& bomber_sprites, std::shared_ptr<Player>& player)
+{
+	auto bomber = std::make_shared<Bombers>(player);
+	bombers.push_back(bomber);
+
+	auto bomber_sprite = std::make_shared<BomberSprite>();
+	bomber_sprites.push_back(bomber_sprite);
 }
