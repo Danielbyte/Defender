@@ -56,6 +56,8 @@ void Bombers::update(std::shared_ptr<Player>& player, const float dt)
 			moveNorthWest(dt);
 			return;
 		}
+
+		moveWest(dt);
 	}
 
 	if (moveRight)
@@ -71,26 +73,42 @@ void Bombers::update(std::shared_ptr<Player>& player, const float dt)
 			moveSouthEast(dt);
 			return;
 		}
+
+		moveEast(dt);
 	}
 }
 
 void Bombers::moveNorthEast(const float dt)
 {
-
+	xPosition += bomberSpeed * dt;
+	yPosition -= bomberSpeed * dt;
 }
 
 void Bombers::moveSouthEast(const float dt)
 {
-
+	xPosition += bomberSpeed * dt;
+	yPosition += bomberSpeed * dt;
 }
 
 void Bombers::moveSouthWest(const float dt)
 {
-
+	xPosition -= bomberSpeed * dt;
+	yPosition += bomberSpeed * dt;
 }
 
 void Bombers::moveNorthWest(const float dt)
 {
+	xPosition -= bomberSpeed * dt;
+	yPosition -= bomberSpeed * dt;
+}
 
+void Bombers::moveEast(const float dt)
+{
+	xPosition += bomberSpeed * dt;
+}
+
+void Bombers::moveWest(const float dt)
+{
+	xPosition -= bomberSpeed * dt;
 }
 

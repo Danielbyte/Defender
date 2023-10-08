@@ -12,6 +12,8 @@ public:
 	void moveSouthEast(const float dt);
 	void moveSouthWest(const float dt);
 	void moveNorthWest(const float dt);
+	void moveEast(const float dt);
+	void moveWest(const float dt);
 
 private:
 	float xPosition;
