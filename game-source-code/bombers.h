@@ -14,6 +14,7 @@ public:
 	void moveNorthWest(const float dt);
 	void moveEast(const float dt);
 	void moveWest(const float dt);
+	std::tuple<float, float> getPosition() const;
 
 private:
 	float xPosition;

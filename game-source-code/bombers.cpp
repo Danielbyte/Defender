@@ -124,3 +124,8 @@ void Bombers::moveWest(const float dt)
 	xPosition -= bomberSpeed * dt;
 }
 
+std::tuple<float, float> Bombers::getPosition() const
+{
+	return { xPosition, yPosition };
+}
+
