@@ -3,13 +3,13 @@
 Shooter::Shooter(){}
 
 void Shooter::updateProjectile(float dt, const ProjectileType type,
-	std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
+	std::vector<std::shared_ptr<MissileSprite>>& projectile_sprites)
 {
 	if (projectiles.empty())
 		return;
 
 	auto projectile_iter = projectiles.begin();
-	auto missile_sprite = missile_sprites.begin();
+	auto missile_sprite = projectile_sprites.begin();
 
 	while (projectile_iter != projectiles.end())
 	{
@@ -50,13 +50,13 @@ void Shooter::updateProjectile(float dt, const ProjectileType type,
 	}
 
 	projectile_iter = projectiles.begin();
-	missile_sprite = missile_sprites.begin();
-	while (missile_sprite != missile_sprites.end())
+	missile_sprite = projectile_sprites.begin();
+	while (missile_sprite != projectile_sprites.end())
 	{
 		if ((*missile_sprite)->needsDeletion())
 		{
 			deleteProjectile((*projectile_iter)->getProjectileId());
-			missile_sprites.erase(missile_sprite);
+			projectile_sprites.erase(missile_sprite);
 		}
 		else
 		{
@@ -66,7 +66,7 @@ void Shooter::updateProjectile(float dt, const ProjectileType type,
 	}
 }
 
-void Shooter::updateProjectile(const float dt, std::vector<std::shared_ptr<Projectile>>& projectile)
+void Shooter::updateProjectile(const float dt, std::vector<std::shared_ptr<Projectile>>& projectile, std::vector<std::shared_ptr<LaserSprite>>& projectile_sprites)
 {
 	if (projectile.empty())
 		return;
@@ -91,7 +91,27 @@ void Shooter::updateProjectile(const float dt, std::vector<std::shared_ptr<Proje
 				auto newX = x + speed * dt;
 				(*projectile_iter)->updateTrajectory(newX);
 			}
+
 		++projectile_iter;
+	}
+
+	auto projectile_sprite = projectile_sprites.begin();
+	projectile_iter = projectile.begin();
+
+	while (projectile_iter != projectile.end())
+	{
+		auto life_time = (*projectile_iter)->getLifeTime();
+		if (life_time >= 2.0f)
+		{
+			projectile.erase(projectile_iter);
+			projectile_sprites.erase(projectile_sprite);
+		}
+
+		else
+		{
+			++projectile_iter;
+			++projectile_sprite;
+		}
 	}
 }
 

@@ -29,7 +29,7 @@ public:
 	ProjectileType getType() const;
 	float getSpeed() const;
 	bool getDelete() const;
-	void markForDeletion();
+	float getLifeTime() const;
 
 private:
 	std::string direction;

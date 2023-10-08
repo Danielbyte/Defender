@@ -95,15 +95,15 @@ void Projectile::updateTrajectory(const float x)
 		Delete = true;
 }
 
-void Projectile::markForDeletion()
-{
-	Delete = true;
-}
-
 void Projectile::updatePosition(const float x, const float y)
 {
 	xPosition = x;
 	yPosition = y;
+}
+
+float Projectile::getLifeTime() const
+{
+	return lifeTime->time_elapsed();
 }
 
 unsigned long long int Projectile::getProjectileId() const

@@ -126,7 +126,7 @@ void Player::updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprit
 	if (lasers.empty())
 		return;
 
-	updateProjectile(dt, lasers);
+	updateProjectile(dt, lasers, laser_sprites);
 	auto laser = lasers.begin();
 	auto laser_sprite = laser_sprites.begin();
 	auto laserSpeed = 600.0f;
