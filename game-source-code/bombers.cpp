@@ -3,14 +3,16 @@ Bombers::Bombers():
 	xPosition{-5.0f},
 	yPosition{-5.0f},
 	moveLeft{false},
-	moveRight{false}
+	moveRight{false},
+	bomberSpeed{300.0f}
 {}
 
 Bombers::Bombers(std::shared_ptr<Player>& player):
 	xPosition{-5.0f},
 	yPosition{-5.0f},
 	moveLeft{false},
-	moveRight{false}
+	moveRight{false},
+	bomberSpeed{300.0f}
 {
 	auto [xPlayerPos, yPlayerPos] = player->getPlayerPosition();
 	auto playerDirection = player->getDirection();
@@ -37,7 +39,38 @@ void Bombers::spawn(float playerXposition, float playerYposition, std::string pl
 		yPosition = 400.0f;	
 }
 
-void Bombers::update()
+void Bombers::update(std::shared_ptr<Player>& player)
+{
+	auto [playerXpos, playerYpos] = player->getPlayerPosition();
+
+	if (yPosition > playerYpos)
+	{
+
+	}
+
+	if (yPosition < playerXpos)
+	{
+
+	}
+}
+
+void Bombers::moveNorthEast()
 {
 
 }
+
+void Bombers::moveSouthEast()
+{
+
+}
+
+void Bombers::moveSouthWest()
+{
+
+}
+
+void Bombers::moveNorthWest()
+{
+
+}
+
