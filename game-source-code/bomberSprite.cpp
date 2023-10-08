@@ -1,7 +1,7 @@
 #include "bomberSprite.h"
 
 BomberSprite::BomberSprite():
-	period{0.1f}
+	period{0.13f}
 {
 	sf::Vector2f dimensions;
 	sf::Vector2f miniDimensions;

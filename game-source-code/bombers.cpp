@@ -38,8 +38,6 @@ void Bombers::spawn(float playerXposition, float playerYposition, std::string pl
 	if (playerYposition >= 480.0f || playerYposition <= 150.0f)
 		yPosition = 400.0f;	
 
-	std::cout << "Ypos: " << yPosition << std::endl;
-	std::cout << "Xpos: " << xPosition << std::endl;
 }
 
 void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSprite>& bomber_sprite, const float dt)
@@ -51,16 +49,22 @@ void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSpri
 		if (playerYpos > yPosition)
 		{
 			moveSouthWest(dt);
+			bomber_sprite->setTexture();
+			bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
 			return;
 		}
 
 		if (playerYpos < yPosition)
 		{
 			moveNorthWest(dt);
+			bomber_sprite->setTexture();
+			bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
 			return;
 		}
 
 		moveWest(dt);
+		bomber_sprite->setTexture();
+		bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
 	}
 
 	if (moveRight)
@@ -68,20 +72,23 @@ void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSpri
 		if (playerYpos < yPosition)
 		{
 			moveNorthEast(dt);
+			bomber_sprite->setTexture();
+			bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
 			return;
 		}
 
 		if (playerYpos > yPosition)
 		{
 			moveSouthEast(dt);
+			bomber_sprite->setTexture();
+			bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
 			return;
 		}
 
 		moveEast(dt);
+		bomber_sprite->setTexture();
+		bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
 	}
-
-	bomber_sprite->setTexture();
-	bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
 }
 
 void Bombers::moveNorthEast(const float dt)
