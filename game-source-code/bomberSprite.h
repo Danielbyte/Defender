@@ -8,6 +8,7 @@ class BomberSprite : public SpriteStore
 public:
 	BomberSprite();
 	void virtual loadTextures();
+	void setTexture();
 
 private:
 	sf::Texture bomber1_t;
@@ -17,6 +18,8 @@ private:
 	sf::Texture bomber5_t;
 	sf::Texture bomber6_t;
 	sf::Texture bomber7_t;
+	std::shared_ptr<StopWatch> animation_watch = std::make_shared<StopWatch>();
+	float period;
 };
 #endif // !BOMBERSPRITE_H
 
