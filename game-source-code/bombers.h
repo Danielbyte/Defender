@@ -1,13 +1,15 @@
 #ifndef BOMBERS_H
 #define BOMBERS_H
+
 #include "player.h"
+#include "bomberSprite.h"
 
 class Bombers
 {
 public:
 	Bombers();
 	Bombers(std::shared_ptr<Player>& player);
-	void update(std::shared_ptr<Player>& player, const float dt);
+	void update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSprite>& bomber_sprite, const float dt);
 	void moveNorthEast(const float dt);
 	void moveSouthEast(const float dt);
 	void moveSouthWest(const float dt);

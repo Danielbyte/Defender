@@ -15,6 +15,8 @@
 #include "landscape.h"
 #include "landscapeSprite.h"
 #include "minimap.h"
+#include "bombers.h"
+#include "bomberSprite.h"
 
 class Game
 {
@@ -97,6 +99,10 @@ private:
 	std::vector<std::shared_ptr<Lander>> lander_objects;
 	std::vector<std::shared_ptr<LanderSprite>> lander_object_sprites;
 	std::vector<std::shared_ptr<MissileSprite>> lander_missile_sprites;
+
+	//Bomber entity
+	std::vector<std::shared_ptr<Bombers>> bombers;
+	std::vector<std::shared_ptr<BomberSprite>> bomber_sprites;
 
 	//Collision object
 	CollisionsManager update_collisions;

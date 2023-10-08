@@ -39,7 +39,7 @@ void Bombers::spawn(float playerXposition, float playerYposition, std::string pl
 		yPosition = 400.0f;	
 }
 
-void Bombers::update(std::shared_ptr<Player>& player, const float dt)
+void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSprite>& bomber_sprite, const float dt)
 {
 	auto [playerXpos, playerYpos] = player->getPlayerPosition();
 
@@ -76,6 +76,9 @@ void Bombers::update(std::shared_ptr<Player>& player, const float dt)
 
 		moveEast(dt);
 	}
+
+	bomber_sprite->setTexture();
+	bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
 }
 
 void Bombers::moveNorthEast(const float dt)

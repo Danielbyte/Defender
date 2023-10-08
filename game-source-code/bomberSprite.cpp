@@ -35,31 +35,37 @@ void BomberSprite::setTexture()
 	if (time >= 0.0f && time <= period)
 	{
 		updateSpriteTexture(bomber1_t, mini_t);
+		return;
 	}
 
 	if (time > period && time <= 2 * period)
 	{
 		updateSpriteTexture(bomber2_t, mini_t);
+		return;
 	}
 
 	if (time > 2 * period && time <= 3 * period)
 	{
 		updateSpriteTexture(bomber3_t, mini_t);
+		return;
 	}
 
 	if (time > 3 * period && time <= 4 * period)
 	{
 		updateSpriteTexture(bomber4_t, mini_t);
+		return;
 	}
 
 	if (time > 4 * period && time <= 5 * period)
 	{
 		updateSpriteTexture(bomber5_t, mini_t);
+		return;
 	}
 
 	if (time > 5 * period && time <= 6 * period)
 	{
 		updateSpriteTexture(bomber6_t, mini_t);
+		return;
 	}
 
 	if (time > 6 * period && time <= 7 * period)
