@@ -72,3 +72,16 @@ void Game::updateProjectiles(const float dt)
 	lander_object->updateMissileSprites(lander_missile_sprites);
 	shooter_object->updateProjectile(dt,ProjectileType::LanderMissile, lander_missile_sprites);
 }
+
+void Game::updateBombers(const float dt)
+{
+	auto bomber = bombers.begin();
+	auto bomber_sprite = bomber_sprites.begin();
+
+	while (bomber != bombers.end())
+	{
+		(*bomber)->update(player_obj, *bomber_sprite, dt);
+		++bomber;
+		++bomber_sprite;
+	}
+}

@@ -27,6 +27,7 @@ public:
 	void updateGame(const float dt); //Defined in update.cpp
 	void updateLanders(const float dt);
 	void updateHumanoids(const float dt);
+	void updateBombers(const float dt);
 	void updateCollisions();
 	void updateProjectiles(const float dt);
 	void display(const float dt); //Defined in displayManager.cpp
