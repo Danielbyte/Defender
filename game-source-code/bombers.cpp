@@ -40,10 +40,12 @@ void Bombers::spawn(float playerXposition, float playerYposition, std::string pl
 
 }
 
-void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSprite>& bomber_sprite, const float dt)
+void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSprite>& bomber_sprite,
+	std::vector<std::shared_ptr<Mine>>& mines, std::vector<std::shared_ptr<MineSprite>>& mine_sprites, 
+	const float dt)
 {
 	auto [playerXpos, playerYpos] = player->getPlayerPosition();
-
+	
 	if (moveLeft)
 	{
 		if (playerYpos > yPosition)
@@ -51,6 +53,7 @@ void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSpri
 			moveSouthWest(dt);
 			bomber_sprite->setTexture();
 			bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
+			spawnMine(mines, mine_sprites);
 			return;
 		}
 
@@ -59,12 +62,14 @@ void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSpri
 			moveNorthWest(dt);
 			bomber_sprite->setTexture();
 			bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
+			spawnMine(mines, mine_sprites);
 			return;
 		}
 
 		moveWest(dt);
 		bomber_sprite->setTexture();
 		bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
+		spawnMine(mines, mine_sprites);
 	}
 
 	if (moveRight)
@@ -74,6 +79,7 @@ void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSpri
 			moveNorthEast(dt);
 			bomber_sprite->setTexture();
 			bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
+			spawnMine(mines, mine_sprites);
 			return;
 		}
 
@@ -82,12 +88,14 @@ void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSpri
 			moveSouthEast(dt);
 			bomber_sprite->setTexture();
 			bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
+			spawnMine(mines, mine_sprites);
 			return;
 		}
 
 		moveEast(dt);
 		bomber_sprite->setTexture();
 		bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
+		spawnMine(mines, mine_sprites);
 	}
 }
 
@@ -140,5 +148,28 @@ void Bombers::moveWest(const float dt)
 std::tuple<float, float> Bombers::getPosition() const
 {
 	return { xPosition, yPosition };
+}
+
+void Bombers::spawnMine(std::vector<std::shared_ptr<Mine>>& mines,
+	std::vector<std::shared_ptr<MineSprite>>& mine_sprites)
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	int min = 0;
+	int max = 11;
+	std::uniform_int_distribution<int>distribution(min, max);
+
+	auto decision = distribution(gen);
+
+	if (decision <= 5)
+	{
+		auto mine = std::make_shared<Mine>(xPosition, yPosition);
+		mines.push_back(mine);
+		auto mine_sprite = std::make_shared<MineSprite>();
+		mine_sprites.push_back(mine_sprite);
+	}
+
+	auto mine_obj = std::make_shared<Mine>();
+	mine_obj->updateMine(mines, mine_sprites);
 }
 

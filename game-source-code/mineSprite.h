@@ -15,6 +15,7 @@ private:
 	sf::Texture mine2_t;
 	sf::Texture mini_t;
 	std::shared_ptr<StopWatch>animation_watch = std::make_shared<StopWatch>();
+	float period;
 
 };
 #endif // !MINESPRITE_H

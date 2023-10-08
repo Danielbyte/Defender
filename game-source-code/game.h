@@ -104,6 +104,8 @@ private:
 	//Bomber entity
 	std::vector<std::shared_ptr<Bombers>> bombers;
 	std::vector<std::shared_ptr<BomberSprite>> bomber_sprites;
+	std::vector<std::shared_ptr<Mine>> mines;
+	std::vector<std::shared_ptr<MineSprite>> mine_sprites;
 
 	//Collision object
 	CollisionsManager update_collisions;

@@ -26,6 +26,7 @@ void Mine::updateMine(std::vector<std::shared_ptr<Mine>>& mines, std::vector<std
 	{
 		auto [xPos, yPos] = (*mine)->getPosition();
 		(*mine_sprite)->updateSpritePosition("either", xPos, yPos, NA, NA);
+		(*mine_sprite)->setTexture();
 
 		//Mine should detonate after 10 seconds
 		if (lifeTime->time_elapsed() >= 10.0f)
