@@ -5,7 +5,7 @@ class Mine
 {
 public:
 	Mine();
-
+	void placeMine();
 private:
 
 };
