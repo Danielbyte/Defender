@@ -96,8 +96,9 @@ void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSpri
 		moveEast(dt);
 		bomber_sprite->setTexture();
 		bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
-		spawnMine(mines, mine_sprites);
 	}
+
+	spawnMine(mines, mine_sprites);
 }
 
 void Bombers::moveNorthEast(const float dt)

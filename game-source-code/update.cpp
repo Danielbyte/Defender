@@ -86,4 +86,10 @@ void Game::updateBombers(const float dt)
 		++bomber;
 		++bomber_sprite;
 	}
+
+	if (bombers.empty())
+	{
+		auto mine_obj = std::make_shared<Mine>();
+		mine_obj->updateMine(mines, mine_sprites);
+	}
 }
