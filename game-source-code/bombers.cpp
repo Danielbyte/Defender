@@ -4,7 +4,8 @@ Bombers::Bombers():
 	yPosition{-5.0f},
 	moveLeft{false},
 	moveRight{false},
-	bomberSpeed{50.0f}
+	bomberSpeed{50.0f},
+	isDodgingBullet{false}
 {}
 
 Bombers::Bombers(std::shared_ptr<Player>& player):
@@ -12,7 +13,8 @@ Bombers::Bombers(std::shared_ptr<Player>& player):
 	yPosition{-5.0f},
 	moveLeft{false},
 	moveRight{false},
-	bomberSpeed{50.0f}
+	bomberSpeed{50.0f},
+	isDodgingBullet{false}
 {
 	auto [xPlayerPos, yPlayerPos] = player->getPlayerPosition();
 	auto playerDirection = player->getDirection();
@@ -43,10 +45,30 @@ void Bombers::spawn(float playerXposition, float playerYposition, std::string pl
 
 void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSprite>& bomber_sprite,
 	std::vector<std::shared_ptr<Mine>>& mines, std::vector<std::shared_ptr<MineSprite>>& mine_sprites, 
-	const float dt)
+	std::vector<std::shared_ptr<Projectile>>& lasers, const float dt)
 {
 	auto [playerXpos, playerYpos] = player->getPlayerPosition();
 	
+	if (!isDodgingBullet)
+	{
+		isDodgingBullet = avoidFire(playerYpos, dt);
+
+		if (isDodgingBullet)
+		{
+			dodge_missile->restart();
+		}	
+	}
+
+	if (isDodgingBullet)
+	{
+		if (dodge_missile->time_elapsed() >= 5.0f)
+		{
+			isDodgingBullet = false;
+			dodge_missile->restart();
+		}
+	}
+		
+
 	if (moveLeft)
 	{
 		if (playerYpos > yPosition)
@@ -177,3 +199,43 @@ void Bombers::spawnMine(std::vector<std::shared_ptr<Mine>>& mines,
 	mine_obj->updateMine(mines, mine_sprites);
 }
 
+bool Bombers::avoidFire(const float playerYposition, const float dt)
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	int min = 0;
+	int max = 11;
+	std::uniform_int_distribution<int>distribution(min, max);
+
+	auto decision = distribution(gen);
+	auto sameLevel = false;
+
+	if (decision > 5)
+	{
+		return true;
+	}
+	
+	return false;
+}
+
+void Bombers::moveNorth(const float dt)
+{
+	if (yPosition <= 150.0f)
+	{
+		moveSouth(dt);
+		return;
+	}
+		
+	yPosition -= bomberSpeed * dt;
+}
+
+void Bombers::moveSouth(const float dt)
+{
+	if (yPosition >= 480)
+	{
+		moveNorth(dt);
+		return;
+	}
+
+	yPosition += bomberSpeed * dt;
+}
