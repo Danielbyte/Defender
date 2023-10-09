@@ -163,7 +163,7 @@ void Bombers::spawnMine(std::vector<std::shared_ptr<Mine>>& mines,
 	auto decision = distribution(gen);
 	auto time = mine_plant->time_elapsed();
 
-	if (decision <= 5 && time >= 3.0f)
+	if (decision <= 5 && time >= 2.0f)
 	{
 		auto mine = std::make_shared<Mine>(xPosition, yPosition);
 		mines.push_back(mine);
