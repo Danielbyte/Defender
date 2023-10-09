@@ -1,8 +1,7 @@
 #include "gameWorld.h"
 
 GameWorld::GameWorld():
-enemy{Enemy::None}, //initially, there are no enemies
-numberOfLanders{0}
+enemy{Enemy::None} //initially, there are no enemies
 {}
 
 void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_objects,
@@ -77,17 +76,12 @@ Enemy GameWorld::generateEnemy()
 void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_objects,
 	std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites, std::shared_ptr<Player>& player)
 {
-	if (numberOfLanders == 6)
-		return;
-
 	auto lander_object = std::make_shared<Lander>(player);
 	lander_objects.push_back(lander_object);
 
 	auto lander_sprite = std::make_shared<LanderSprite>();
 	lander_object_sprites.push_back(lander_sprite);
 	world_watch->restart();
-	
-	++numberOfLanders;
 }
 
 void GameWorld::placeHumanoids(std::vector<std::shared_ptr<Humanoid>>& humanoid_objects,

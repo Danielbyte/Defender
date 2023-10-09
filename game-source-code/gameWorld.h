@@ -40,8 +40,6 @@ private:
 		std::vector<std::shared_ptr<BomberSprite>>& bomber_sprites, std::shared_ptr<Player>& player);
     
 	void garbageCollector(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
-
-	int numberOfLanders;
 };
 #endif // !GAMEWORLD_H
 

@@ -11,7 +11,9 @@ laserWidth{2.0f},
 laserLength{100.0f},
 humanoidWidth{6.0f},
 humanoidLength{16.0f},
-groundLevel{580.0f}
+groundLevel{580.0f},
+bomberWidth{20.0f},
+bomberLength{20.0f}
 {}
 
 void CollisionsManager::playerLanderCollisions(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& landers,
@@ -335,6 +337,59 @@ void CollisionsManager::playerLaserAndHumanoidCollisions(std::vector<std::shared
 		{
 			++laser_sprite;
 			++projectile;
+		}
+	}
+}
+
+void CollisionsManager::LaserAndBomberCollisions(std::vector<std::shared_ptr<Bombers>>& bombers, std::vector<std::shared_ptr<BomberSprite>>& bomber_sprites,
+	std::vector<std::shared_ptr<Projectile>>& lasers, std::vector<std::shared_ptr<LaserSprite>>& laser_sprites)
+{
+
+	auto laser = lasers.begin();
+	auto laser_sprite = laser_sprites.begin();
+
+	while (laser != lasers.end())
+	{
+		auto bomber = bombers.begin();
+		auto bomber_sprite = bomber_sprites.begin();
+		while (bomber != bombers.end())
+		{
+			auto [laserXpos, laserYpos] = (*laser)->getProjectilePosition();
+			auto [bomberXpos, bomberYpos] = (*bomber)->getPosition();
+
+			auto isCollided = collisions.checkCollision(laserXpos, laserYpos, laserWidth, laserLength, 
+				bomberXpos, bomberYpos, bomberWidth, bomberLength);
+
+			if (isCollided)
+			{
+				bombers.erase(bomber);
+				bomber_sprites.erase(bomber_sprite);
+				(*laser_sprite)->remove();
+			}
+			else
+			{
+				++bomber;
+				++bomber_sprite;
+			}
+		}
+		++laser;
+		++laser_sprite;
+	}
+
+	laser_sprite = laser_sprites.begin();
+	laser = lasers.begin();
+
+	while (laser_sprite != laser_sprites.end())
+	{
+		if ((*laser_sprite)->needsDeletion())
+		{
+			lasers.erase(laser);
+			laser_sprites.erase(laser_sprite);
+		}
+		else
+		{
+			++laser;
+			++laser_sprite;
 		}
 	}
 }

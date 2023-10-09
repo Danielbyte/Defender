@@ -4,6 +4,7 @@
 #include "collisions.h"
 #include "player.h"
 #include "lander.h"
+#include "bombers.h"
 
 class CollisionsManager
 {
@@ -34,6 +35,9 @@ public:
 		std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites, 
 		std::vector<std::shared_ptr<LaserSprite>>& laser_sprites, std::vector<std::shared_ptr<Projectile>>& lasers);
 
+	void LaserAndBomberCollisions(std::vector<std::shared_ptr<Bombers>>& bombers, std::vector<std::shared_ptr<BomberSprite>>& bomber_sprites,
+		std::vector<std::shared_ptr<Projectile>>& lasers, std::vector<std::shared_ptr<LaserSprite>>& laser_sprites);
+
 private:
 	void setAbductionStates(std::shared_ptr<Lander>& lander, std::shared_ptr<Humanoid>& humanoid);
 
@@ -45,6 +49,7 @@ private:
 	float laserWidth, laserLength;
 	float humanoidWidth, humanoidLength;
 	float groundLevel;
+	float bomberWidth, bomberLength;
 	Collisions collisions;
 
 };
