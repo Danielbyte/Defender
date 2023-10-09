@@ -55,6 +55,7 @@ void Game::updateCollisions()
 	update_collisions.playerAndMissileCollisions(player_obj, lander_missile_sprites);
 	update_collisions.LaserAndBomberCollisions(bombers, bomber_sprites, lasers, laser_sprite);
 	update_collisions.MineAndPlayerCollisions(mines, mine_sprites, player_obj);
+	update_collisions.playerAndBomberCollisions(bombers, bomber_sprites, player_obj);
 }
 
 void Game::updateHumanoids(const float dt)

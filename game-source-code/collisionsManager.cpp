@@ -422,3 +422,31 @@ void CollisionsManager::MineAndPlayerCollisions(std::vector<std::shared_ptr<Mine
 		}
 	}
 }
+
+void CollisionsManager::playerAndBomberCollisions(std::vector<std::shared_ptr<Bombers>>& bombers, std::vector<std::shared_ptr<BomberSprite>>& bomber_sprites,
+	std::shared_ptr<Player>& player)
+{
+	auto [playerXpos, playerYpos] = player->getPlayerPosition();
+	auto bomber = bombers.begin();
+	auto bomber_sprite = bomber_sprites.begin();
+
+	while (bomber != bombers.end())
+	{
+		auto [bomberXpos, bomberYpos] = (*bomber)->getPosition();
+		auto isCollided = collisions.checkCollision(playerXpos, playerYpos, playerWidth, playerLength,
+			bomberXpos, bomberYpos, bomberWidth, bomberLength);
+
+		if (isCollided)
+		{
+			bombers.erase(bomber);
+			bomber_sprites.erase(bomber_sprite);
+			player->restartAnimationWatch();
+			player->setPlayerState(PlayerState::Dead);
+		}
+		else
+		{
+			++bomber;
+			++bomber_sprite;
+		}
+	}
+}
