@@ -75,7 +75,8 @@ void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSpri
 		{
 			moveSouthWest(dt);
 			bomber_sprite->setTexture();
-			bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
+			auto [miniXpos, miniYpos] = getMiniMapPositrion();
+			bomber_sprite->updateSpritePosition("either", xPosition, yPosition, miniXpos, miniYpos);
 			spawnMine(mines, mine_sprites);
 			return;
 		}
@@ -84,14 +85,16 @@ void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSpri
 		{
 			moveNorthWest(dt);
 			bomber_sprite->setTexture();
-			bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
+			auto [miniXpos, miniYpos] = getMiniMapPositrion();
+			bomber_sprite->updateSpritePosition("either", xPosition, yPosition, miniXpos, miniYpos);
 			spawnMine(mines, mine_sprites);
 			return;
 		}
 
 		moveWest(dt);
 		bomber_sprite->setTexture();
-		bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
+		auto [miniXpos, miniYpos] = getMiniMapPositrion();
+		bomber_sprite->updateSpritePosition("either", xPosition, yPosition, miniXpos, miniYpos);
 		spawnMine(mines, mine_sprites);
 	}
 
@@ -101,7 +104,8 @@ void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSpri
 		{
 			moveNorthEast(dt);
 			bomber_sprite->setTexture();
-			bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
+			auto [miniXpos, miniYpos] = getMiniMapPositrion();
+			bomber_sprite->updateSpritePosition("either", xPosition, yPosition, miniXpos, miniYpos);
 			spawnMine(mines, mine_sprites);
 			return;
 		}
@@ -110,14 +114,16 @@ void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSpri
 		{
 			moveSouthEast(dt);
 			bomber_sprite->setTexture();
-			bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
+			auto [miniXpos, miniYpos] = getMiniMapPositrion();
+			bomber_sprite->updateSpritePosition("either", xPosition, yPosition, miniXpos, miniYpos);
 			spawnMine(mines, mine_sprites);
 			return;
 		}
 
 		moveEast(dt);
 		bomber_sprite->setTexture();
-		bomber_sprite->updateSpritePosition("either", xPosition, yPosition, 0.0f, 0.0f);
+		auto [miniXpos, miniYpos] = getMiniMapPositrion();
+		bomber_sprite->updateSpritePosition("either", xPosition, yPosition, miniXpos, miniYpos);
 	}
 
 	spawnMine(mines, mine_sprites);
@@ -238,4 +244,17 @@ void Bombers::moveSouth(const float dt)
 	}
 
 	yPosition += bomberSpeed * dt;
+}
+
+std::tuple <float, float> Bombers::getMiniMapPositrion()
+{
+	auto horizontalOffset = 400.0f;
+	auto verticalOffset = 40.0f;
+	auto horizontallScalingFactor = 0.5f;
+	auto verticalScalingFactor = (1.0f / 6.0f);
+
+	auto miniMapXpos = (xPosition - horizontalOffset) * horizontallScalingFactor;
+	auto miniMapYpos = (yPosition - verticalOffset) * verticalScalingFactor;
+
+	return { miniMapXpos, miniMapYpos };
 }

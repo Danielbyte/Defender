@@ -26,6 +26,7 @@ public:
 	void moveNorth(const float dt);
 	void moveSouth(const float dt);
 	std::tuple<float, float> getPosition() const;
+	std::tuple <float, float> getMiniMapPositrion();
 
 private:
 	float xPosition;

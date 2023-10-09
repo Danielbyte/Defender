@@ -8,8 +8,8 @@ BomberSprite::BomberSprite():
 	sf::Vector2f NA;
 	dimensions.x = 20.0f;
 	dimensions.y = 20.0f;
-	miniDimensions.x = 13.0f;
-	miniDimensions.y = 5.0f;
+	miniDimensions.x = 21.0f;
+	miniDimensions.y = 8.0f;
 
 	loadTextures();
 	InitialiseEntityOrigin(dimensions, miniDimensions, NA);
@@ -26,6 +26,7 @@ void BomberSprite::loadTextures()
 	bomber5_t.loadFromFile("resources/bomber5.png");
 	bomber6_t.loadFromFile("resources/bomber6.png");
 	bomber7_t.loadFromFile("resources/bomber7.png");
+	mini_t.loadFromFile("resources/mini-bomber.png");
 }
 
 void BomberSprite::setTexture()
