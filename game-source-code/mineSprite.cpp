@@ -1,7 +1,7 @@
 #include "mineSprite.h"
 
 MineSprite::MineSprite():
-	period{0.1f}
+	period{0.15f}
 {
 	sf::Vector2f dimensions;
 	sf::Vector2f NA;
@@ -25,11 +25,14 @@ void MineSprite::setTexture()
 	if (time >= 0.0f && time <= period)
 	{
 		updateSpriteTexture(mine1_t, mini_t);
+		return;
 	}
 
 	if (time > period && time <= 2 * period)
 	{
 		updateSpriteTexture(mine2_t, mini_t);
-		animation_watch->restart();
+		return;
 	}
+
+	animation_watch->restart();
 }

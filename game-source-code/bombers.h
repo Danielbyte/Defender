@@ -31,6 +31,8 @@ private:
 
 	void spawn(float playerXposition, float playerYposition, std::string playerDirection);
 	void spawnMine(std::vector<std::shared_ptr<Mine>>& mines, std::vector<std::shared_ptr<MineSprite>>& mine_sprites);
+
+	std::shared_ptr<StopWatch>mine_plant = std::make_shared<StopWatch>();
 };
 #endif // !BOMBERS_H
 

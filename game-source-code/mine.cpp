@@ -17,6 +17,11 @@ std::tuple<float, float> Mine::getPosition() const
 	return { xPosition, yPosition };
 }
 
+float Mine::getLifeTime() const
+{
+	return lifeTime->time_elapsed();
+}
+
 void Mine::updateMine(std::vector<std::shared_ptr<Mine>>& mines, std::vector<std::shared_ptr<MineSprite>>& mine_sprites)
 {
 	auto mine = mines.begin();
@@ -29,7 +34,7 @@ void Mine::updateMine(std::vector<std::shared_ptr<Mine>>& mines, std::vector<std
 		(*mine_sprite)->setTexture();
 
 		//Mine should detonate after 10 seconds
-		if (lifeTime->time_elapsed() >= 10.0f)
+		if ((*mine)->getLifeTime() >= 10.0f)
 		{
 			mines.erase(mine);
 			mine_sprites.erase(mine_sprite);

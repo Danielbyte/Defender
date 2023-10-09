@@ -10,6 +10,7 @@ public:
 	Mine(float _xPosition, float _yPosition);
 	std::tuple<float, float> getPosition() const;
 	void updateMine(std::vector<std::shared_ptr<Mine>>& mines, std::vector<std::shared_ptr<MineSprite>>& mine_sprites);
+	float getLifeTime() const;
 
 private:
 	float xPosition;

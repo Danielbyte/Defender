@@ -17,6 +17,7 @@ Bombers::Bombers(std::shared_ptr<Player>& player):
 	auto [xPlayerPos, yPlayerPos] = player->getPlayerPosition();
 	auto playerDirection = player->getDirection();
 	spawn(xPlayerPos, yPlayerPos, playerDirection);
+	mine_plant->restart();
 }
 
 void Bombers::spawn(float playerXposition, float playerYposition, std::string playerDirection)
@@ -160,13 +161,15 @@ void Bombers::spawnMine(std::vector<std::shared_ptr<Mine>>& mines,
 	std::uniform_int_distribution<int>distribution(min, max);
 
 	auto decision = distribution(gen);
+	auto time = mine_plant->time_elapsed();
 
-	if (decision <= 5)
+	if (decision <= 5 && time >= 3.0f)
 	{
 		auto mine = std::make_shared<Mine>(xPosition, yPosition);
 		mines.push_back(mine);
 		auto mine_sprite = std::make_shared<MineSprite>();
 		mine_sprites.push_back(mine_sprite);
+		mine_plant->restart();
 	}
 
 	auto mine_obj = std::make_shared<Mine>();
