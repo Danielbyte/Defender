@@ -38,6 +38,9 @@ public:
 	void LaserAndBomberCollisions(std::vector<std::shared_ptr<Bombers>>& bombers, std::vector<std::shared_ptr<BomberSprite>>& bomber_sprites,
 		std::vector<std::shared_ptr<Projectile>>& lasers, std::vector<std::shared_ptr<LaserSprite>>& laser_sprites);
 
+	void MineAndPlayerCollisions(std::vector<std::shared_ptr<Mine>>& mines, std::vector<std::shared_ptr<MineSprite>>& mine_sprites,
+		std::shared_ptr<Player>& player);
+
 private:
 	void setAbductionStates(std::shared_ptr<Lander>& lander, std::shared_ptr<Humanoid>& humanoid);
 
@@ -50,6 +53,7 @@ private:
 	float humanoidWidth, humanoidLength;
 	float groundLevel;
 	float bomberWidth, bomberLength;
+	float mineWidth, mineLength;
 	Collisions collisions;
 
 };

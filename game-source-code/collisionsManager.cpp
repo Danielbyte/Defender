@@ -13,7 +13,9 @@ humanoidWidth{6.0f},
 humanoidLength{16.0f},
 groundLevel{580.0f},
 bomberWidth{20.0f},
-bomberLength{20.0f}
+bomberLength{20.0f},
+mineWidth{8.0f},
+mineLength{8.0f}
 {}
 
 void CollisionsManager::playerLanderCollisions(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& landers,
@@ -390,6 +392,33 @@ void CollisionsManager::LaserAndBomberCollisions(std::vector<std::shared_ptr<Bom
 		{
 			++laser;
 			++laser_sprite;
+		}
+	}
+}
+
+void CollisionsManager::MineAndPlayerCollisions(std::vector<std::shared_ptr<Mine>>& mines, std::vector<std::shared_ptr<MineSprite>>& mine_sprites,
+	std::shared_ptr<Player>& player)
+{
+	auto mine = mines.begin();
+	auto mine_sprite = mine_sprites.begin();
+	while (mine != mines.end())
+	{
+		auto [playerXpos, playerYpos] = player->getPlayerPosition();
+		auto [mineXpos, mineYpos] = (*mine)->getPosition();
+		auto isCollided = collisions.checkCollision(playerXpos, playerYpos, playerWidth, playerLength,
+			mineXpos, mineYpos, mineWidth, mineLength);
+
+		if (isCollided)
+		{
+			mines.erase(mine);
+			mine_sprites.erase(mine_sprite);
+			player->restartAnimationWatch();
+			player->setPlayerState(PlayerState::Dead);
+		}
+		else
+		{
+			++mine;
+			++mine_sprite;
 		}
 	}
 }
