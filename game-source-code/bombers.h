@@ -14,7 +14,7 @@ public:
 
 	void update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSprite>& bomber_sprite,
 		std::vector<std::shared_ptr<Mine>>& mines, std::vector<std::shared_ptr<MineSprite>>& mine_sprites,
-		std::vector<std::shared_ptr<Projectile>>& lasers, const float dt);
+		const float dt);
 
 	void moveNorthEast(const float dt);
 	void moveSouthEast(const float dt);
@@ -22,7 +22,7 @@ public:
 	void moveNorthWest(const float dt);
 	void moveEast(const float dt);
 	void moveWest(const float dt);
-	bool avoidFire(const float playerYposition, const float dt);
+	bool avoidFire(const float playerYpos, const float playerXpos, const float dt);
 	void moveNorth(const float dt);
 	void moveSouth(const float dt);
 	std::tuple<float, float> getPosition() const;
@@ -35,9 +35,11 @@ private:
 	bool moveRight;
 	float bomberSpeed;
 	bool isDodgingBullet;
+	int dodgeChances;
 
 	void spawn(float playerXposition, float playerYposition, std::string playerDirection);
 	void spawnMine(std::vector<std::shared_ptr<Mine>>& mines, std::vector<std::shared_ptr<MineSprite>>& mine_sprites);
+	void decreaseDodgeChance();
 
 	std::shared_ptr<StopWatch>mine_plant = std::make_shared<StopWatch>();
 	std::shared_ptr<StopWatch>dodge_missile = std::make_shared<StopWatch>();

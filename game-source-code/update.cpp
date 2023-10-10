@@ -84,7 +84,7 @@ void Game::updateBombers(const float dt)
 
 	while (bomber != bombers.end())
 	{
-		(*bomber)->update(player_obj, *bomber_sprite,mines, mine_sprites, lasers, dt);
+		(*bomber)->update(player_obj, *bomber_sprite,mines, mine_sprites, dt);
 		++bomber;
 		++bomber_sprite;
 	}

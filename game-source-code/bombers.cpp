@@ -5,7 +5,8 @@ Bombers::Bombers():
 	moveLeft{false},
 	moveRight{false},
 	bomberSpeed{50.0f},
-	isDodgingBullet{false}
+	isDodgingBullet{false},
+	dodgeChances{2}
 {}
 
 Bombers::Bombers(std::shared_ptr<Player>& player):
@@ -14,7 +15,8 @@ Bombers::Bombers(std::shared_ptr<Player>& player):
 	moveLeft{false},
 	moveRight{false},
 	bomberSpeed{50.0f},
-	isDodgingBullet{false}
+	isDodgingBullet{false},
+	dodgeChances{2}
 {
 	auto [xPlayerPos, yPlayerPos] = player->getPlayerPosition();
 	auto playerDirection = player->getDirection();
@@ -45,13 +47,13 @@ void Bombers::spawn(float playerXposition, float playerYposition, std::string pl
 
 void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSprite>& bomber_sprite,
 	std::vector<std::shared_ptr<Mine>>& mines, std::vector<std::shared_ptr<MineSprite>>& mine_sprites, 
-	std::vector<std::shared_ptr<Projectile>>& lasers, const float dt)
+	const float dt)
 {
 	auto [playerXpos, playerYpos] = player->getPlayerPosition();
 	
 	if (!isDodgingBullet)
 	{
-		isDodgingBullet = avoidFire(playerYpos, dt);
+		isDodgingBullet = avoidFire(playerYpos, playerXpos, dt);
 
 		if (isDodgingBullet)
 		{
@@ -61,11 +63,17 @@ void Bombers::update(std::shared_ptr<Player>& player, std::shared_ptr<BomberSpri
 
 	if (isDodgingBullet)
 	{
-		if (dodge_missile->time_elapsed() >= 5.0f)
+		moveSouth(dt);
+		bomber_sprite->setTexture();
+		auto [miniXpos, miniYpos] = getMiniMapPositrion();
+		bomber_sprite->updateSpritePosition("either", xPosition, yPosition, miniXpos, miniYpos);
+		spawnMine(mines, mine_sprites);
+		if (dodge_missile->time_elapsed() >= 2.0f)
 		{
 			isDodgingBullet = false;
 			dodge_missile->restart();
 		}
+		return;
 	}
 		
 
@@ -205,8 +213,16 @@ void Bombers::spawnMine(std::vector<std::shared_ptr<Mine>>& mines,
 	mine_obj->updateMine(mines, mine_sprites);
 }
 
-bool Bombers::avoidFire(const float playerYposition, const float dt)
+bool Bombers::avoidFire(const float playerYpos, const float playerXpos, const float dt)
 {
+	auto sameLevel = false;
+	auto vertical_diff = abs(yPosition - playerYpos);
+	auto horizontal_diff = abs(xPosition - playerXpos);
+
+	if (vertical_diff <= 5.0f && horizontal_diff <= 350.0f)
+		sameLevel = true;
+	
+
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	int min = 0;
@@ -214,13 +230,14 @@ bool Bombers::avoidFire(const float playerYposition, const float dt)
 	std::uniform_int_distribution<int>distribution(min, max);
 
 	auto decision = distribution(gen);
-	auto sameLevel = false;
+	
 
-	if (decision > 5)
+	if (decision > 5 && sameLevel && dodgeChances > 0)
 	{
+		decreaseDodgeChance();
 		return true;
 	}
-	
+		
 	return false;
 }
 
@@ -237,7 +254,7 @@ void Bombers::moveNorth(const float dt)
 
 void Bombers::moveSouth(const float dt)
 {
-	if (yPosition >= 480)
+	if (yPosition >= 480.0f)
 	{
 		moveNorth(dt);
 		return;
@@ -257,4 +274,12 @@ std::tuple <float, float> Bombers::getMiniMapPositrion()
 	auto miniMapYpos = (yPosition - verticalOffset) * verticalScalingFactor;
 
 	return { miniMapXpos, miniMapYpos };
+}
+
+void Bombers::decreaseDodgeChance()
+{
+	--dodgeChances;
+
+	if (dodgeChances <= 0)
+		dodgeChances = 0;
 }

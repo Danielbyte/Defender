@@ -12,7 +12,7 @@ void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_obj
 	auto _time = world_watch->time_elapsed();
 	generateEnemy();
 
-	if (_time < 2.0f || enemy == Enemy::None)
+	if (_time < 1.5f || enemy == Enemy::None)
 		return;
 
 	switch (enemy)
