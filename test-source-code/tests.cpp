@@ -698,3 +698,26 @@ TEST_CASE("Test if bomber is spawned at the right of player if player is facing 
 	CHECK_GT(xBomberPos, xPlayerPos);
 	CHECK_EQ(yBomberPos, yPlayerPos);
 }
+
+TEST_CASE("Test if bomber is spawned at the left side of player if player is facing left")
+{
+	auto player = std::make_shared<Player>();
+	auto player_sprite = std::make_shared<PlayerSprite>();
+	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+	std::vector<std::shared_ptr<Projectile>>lasers;
+
+	//Update player to face left
+	auto left = true;
+	auto right = false;
+	auto up = false;
+	auto down = false;
+	auto space = false;
+	auto gameOver = false;
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, lasers, deltaTime, gameOver);
+	
+	auto bomber = std::make_shared<Bombers>(player);
+	auto [xPlayerPos, yPlayerPos] = player->getPlayerPosition();
+	auto [xBomberPos, yBomberPos] = bomber->getPosition();
+	CHECK_LE(xBomberPos, xPlayerPos);
+	CHECK_EQ(yBomberPos, yPlayerPos);
+}
