@@ -378,7 +378,7 @@ TEST_CASE("Test if a laser is generated if user presses space key")
 	//laser should have lasers sprites afte space key press
 	CHECK(laser_sprites.empty() == false);
 }
-/*
+
 //Test cases for the humanoid object
 auto humanoidSpeed = 0.9f;
 auto abductionSpeed = 50.0f; //vertical humanoid speed changes on abduction to make sure it sync with lander speed 
@@ -505,7 +505,7 @@ TEST_CASE("Test if humanoid falls to its death after abducting lander is shot by
 	CHECK_EQ(initXpos, secondXpos);
 	CHECK_EQ(secondXpos, thirdXpos);
 }
-
+/*
 //Test cases for the lander object
 auto landerSpeed = 50.0f;
 auto landerHumanoidZone = 480.0f;
