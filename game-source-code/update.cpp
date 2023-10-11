@@ -20,6 +20,7 @@ void Game::updateGame(const float dt)
 
 	updateProjectiles(dt);
 	updateCollisions();
+	updateGameState();
 	updateBombers(dt);
 	updateScore();
 }
@@ -42,12 +43,7 @@ void Game::updateCollisions()
 	update_collisions.landerAndLaserCollisions(lander_objects, lander_object_sprites, laser_sprite, 
 		lasers, humanoid_objects,player_obj, manage_score, landersDestroyed);
 
-	auto totalLanders = 6;
-	if (landersDestroyed == totalLanders)
-	{
-		playerWon = true;
-		return;
-	}
+
 
 	update_collisions.landerAndHumanoidCollisions(lander_objects,lander_object_sprites, humanoid_objects,humanoid_sprites, number0fHumanoids);
 	update_collisions.playerAndFallingHumanoidCollisions(player_obj, humanoid_objects,humanoid_sprites, manage_score);
@@ -76,6 +72,21 @@ void Game::updateProjectiles(const float dt)
 	std::shared_ptr<Lander>lander_object = std::make_shared<Lander>();
 	lander_object->updateMissileSprites(lander_missile_sprites);
 	shooter_object->updateProjectile(dt,ProjectileType::LanderMissile, lander_missile_sprites);
+}
+
+void Game::updateGameState()
+{
+	auto totalLanders = 6;
+	if (landersDestroyed == totalLanders)
+	{
+		playerWon = true;
+		return;
+	}
+
+	if (number0fHumanoids == 0)
+	{
+		gameOver = true;
+	}
 }
 
 void Game::updateBombers(const float dt)

@@ -32,6 +32,7 @@ public:
 	void updateCollisions();
 	void updateProjectiles(const float dt);
 	void display(const float dt); //Defined in displayManager.cpp
+	void updateGameState();
 private:
 	void updateCamera();
 	void updateBackgroundView();
