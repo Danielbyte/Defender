@@ -26,7 +26,8 @@ public:
 		std::vector<std::shared_ptr<Humanoid>>& humanoids);
 
 	void playerAndFallingHumanoidCollisions(std::shared_ptr<Player>& player,
-		std::vector<std::shared_ptr<Humanoid>>& humanoids,std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites);
+		std::vector<std::shared_ptr<Humanoid>>& humanoids,std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites,
+		std::shared_ptr<ScoreManager>& manage_score);
 
 	void humanoidAndGroundCollisions(std::vector<std::shared_ptr<Humanoid>>& humanoids,
 		std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites);

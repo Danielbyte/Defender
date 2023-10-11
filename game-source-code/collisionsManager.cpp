@@ -223,7 +223,8 @@ void CollisionsManager::dropHumanoid(std::shared_ptr<Humanoid>& humanoid, std::v
 }
 
 void CollisionsManager::playerAndFallingHumanoidCollisions(std::shared_ptr<Player>& player,
-	std::vector<std::shared_ptr<Humanoid>>& humanoids, std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites)
+	std::vector<std::shared_ptr<Humanoid>>& humanoids, std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites,
+	std::shared_ptr<ScoreManager>& manage_score)
 {
 	auto humanoid_sprite = humanoid_sprites.begin();
 
@@ -238,8 +239,12 @@ void CollisionsManager::playerAndFallingHumanoidCollisions(std::shared_ptr<Playe
 		if (isCollided)
 		{
 			if (humanoid->getHumanoidState() == HumanoidState::Falling)
+			{
+				manage_score->updateCurrentScore(player, "rescue");
+				manage_score->updateHighScore(player->getScore());
 				humanoid->setHumanoidState(HumanoidState::Rescued);
-
+			}
+				
 			if (humanoid->getHumanoidState() == HumanoidState::Rescued)
 			{
 				auto distanceBetween = abs(playerXpos - humanoidXpos);
