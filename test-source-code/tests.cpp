@@ -505,7 +505,7 @@ TEST_CASE("Test if humanoid falls to its death after abducting lander is shot by
 	CHECK_EQ(initXpos, secondXpos);
 	CHECK_EQ(secondXpos, thirdXpos);
 }
-/*
+
 //Test cases for the lander object
 auto landerSpeed = 50.0f;
 auto landerHumanoidZone = 480.0f;
@@ -573,6 +573,8 @@ TEST_CASE("Test if lander can detect once it reaches the humanoid region")
 	//keep moving lander until it reaches the humanoid zone
 	for (int i = 0; i <= 100; ++i)
 		lander->moveSouth(deltaTime);
+
+	lander->test_setTeleportationState(false);
 
 	lander->updateLander(lander_sprite, deltaTime, player, missile_sprites, humanoids);
 	inHumanoidZone = lander->test_getIfInHumanoidZone();
@@ -685,8 +687,3 @@ TEST_CASE("Test if lander can move North Westerly")
 	CHECK_EQ(finalXpos, expectedXpos);
 	CHECK_EQ(finalYpos, expectedYpos);
 }
-*/
-//PROJECTILE TESTS
-//Laser Projectiles
-//Save for the last iteration
-//I AM NOT HERE TO SUFFER

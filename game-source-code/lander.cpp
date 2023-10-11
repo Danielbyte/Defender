@@ -527,3 +527,8 @@ bool Lander::getIfTeleporting() const
 {
 	return isTeleporting;
 }
+
+void Lander::test_setTeleportationState(bool teleporting)
+{
+	isTeleporting = teleporting;
+}
