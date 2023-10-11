@@ -39,6 +39,8 @@ void Game::display(const float dt)
 		window->draw(landscape2_sprite->getSprite());
 		window->draw(miniMapSection_s);
 		window->draw(player_sprite->getSprite());
+		window->draw(highScore);
+		window->draw(currentScore);
 		for (auto& laser : laser_sprite)
 		{
 			window->draw(laser->getSprite());

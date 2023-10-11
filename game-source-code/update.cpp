@@ -21,6 +21,7 @@ void Game::updateGame(const float dt)
 	updateProjectiles(dt);
 	updateCollisions();
 	updateBombers(dt);
+	updateScore();
 }
 
 void Game::updateLanders(const float dt)
@@ -94,4 +95,18 @@ void Game::updateBombers(const float dt)
 		auto mine_obj = std::make_shared<Mine>();
 		mine_obj->updateMine(mines, mine_sprites);
 	}
+}
+
+void Game::updateScore()
+{
+	auto [xPlayerPos, yPlayerPos] = player_obj->getPlayerPosition();
+	std::string _highScore = std::to_string(manage_score->getHighScore());
+	highScorePosition.x = xPlayerPos + 300.0f;
+	highScore.setString("High Score: " + _highScore);
+	highScore.setPosition(highScorePosition);
+
+	std::string _currentScore = std::to_string(player_obj->getScore());
+	currentScore.setString("Score: " + _currentScore);
+	currentScorePosition.x = xPlayerPos - 400.0f;
+	currentScore.setPosition(currentScorePosition);
 }

@@ -72,6 +72,21 @@ Game::Game():
 	miniMapSection_s.setOrigin(400.0f, 50.0f);
 	miniMapSection_s.setPosition(miniMapSectionPosition);
 
+	//Score Display settings
+	highScore.setFont(font);
+	highScore.setCharacterSize(12);
+	highScore.setFillColor(sf::Color::Green);
+	highScorePosition.x = 750.0f;
+	highScorePosition.y = 15.0f;
+	highScore.setPosition(highScorePosition);
+
+	currentScore.setFont(font);
+	currentScore.setCharacterSize(12);
+	currentScore.setFillColor(sf::Color::Red);
+	currentScorePosition.x = 50.0f;
+	currentScorePosition.y = 15.0f;
+	currentScore.setPosition(currentScorePosition);
+
 }
 
 void Game::run()

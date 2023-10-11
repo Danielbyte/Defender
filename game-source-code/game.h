@@ -35,6 +35,7 @@ public:
 private:
 	void updateCamera();
 	void updateBackgroundView();
+	void updateScore();
 
 	//Window
 	unsigned int windowWidth = 800ul;
@@ -116,6 +117,10 @@ private:
 
 	//Score Management
 	std::shared_ptr<ScoreManager>manage_score = std::make_shared<ScoreManager>();
+	sf::Text highScore;
+	sf::Text currentScore;
+	sf::Vector2f highScorePosition;
+	sf::Vector2f currentScorePosition;
 
 	bool gameOver;
 	bool playerWon;
