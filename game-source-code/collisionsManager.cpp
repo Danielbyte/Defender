@@ -103,7 +103,8 @@ void CollisionsManager::playerAndMissileCollisions(std::shared_ptr<Player>& play
 
 void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lander>>& landers,
 	std::vector<std::shared_ptr<LanderSprite>>& lander_sprites, std::vector<std::shared_ptr<LaserSprite>>& laser_sprites,
-	std::vector<std::shared_ptr<Projectile>>& lasers, std::vector<std::shared_ptr<Humanoid>>& humanoids, int& landersDestroyed)
+	std::vector<std::shared_ptr<Projectile>>& lasers, std::vector<std::shared_ptr<Humanoid>>& humanoids,
+	std::shared_ptr<Player>& player, std::shared_ptr<ScoreManager>& score_manager, int& landersDestroyed)
 {
 	if (landers.empty())
 		return;
@@ -125,6 +126,8 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 
 			if (isCollided)
 			{
+				score_manager->updateCurrentScore(player, "lander");
+				score_manager->updateHighScore(player->getScore());
 				landers.erase(lander);
 				lander_sprites.erase(lander_sprite);
 				(*laser_sprite)->remove();

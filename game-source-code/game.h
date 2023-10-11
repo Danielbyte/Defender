@@ -17,6 +17,7 @@
 #include "minimap.h"
 #include "bombers.h"
 #include "bomberSprite.h"
+#include "scoreManager.h"
 
 class Game
 {
@@ -112,6 +113,9 @@ private:
 
 	//Shooter object to update projectiles
 	std::shared_ptr<Shooter>shooter_object = std::make_shared<Shooter>();
+
+	//Score Management
+	std::shared_ptr<ScoreManager>manage_score = std::make_shared<ScoreManager>();
 
 	bool gameOver;
 	bool playerWon;

@@ -39,7 +39,7 @@ void Game::updateCollisions()
 {
 	update_collisions.playerLanderCollisions(player_obj, lander_objects, lander_object_sprites);
 	update_collisions.landerAndLaserCollisions(lander_objects, lander_object_sprites, laser_sprite, 
-		lasers, humanoid_objects,landersDestroyed);
+		lasers, humanoid_objects,player_obj, manage_score, landersDestroyed);
 
 	auto totalLanders = 6;
 	if (landersDestroyed == totalLanders)

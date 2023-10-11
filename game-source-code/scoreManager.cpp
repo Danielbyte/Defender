@@ -16,7 +16,7 @@ void ScoreManager::updateHighScore(const int currentScore)
 {
 	if (currentScore < 0) throw NegativeScoreNotAllowed{};
 
-	highScoreFile.open("resources/high_score.text");
+	highScoreFile.open("resources/high_score.txt");
 
 	//update high score if prev high score is undertaken
 	if (highScoreFile.is_open())
@@ -27,7 +27,7 @@ void ScoreManager::updateHighScore(const int currentScore)
 	}
 	highScoreFile.close();
 
-	outFile.open("resources/high_score.text");
+	outFile.open("resources/high_score.txt");
 	if (outFile.is_open())
 		outFile << highScore;
 
