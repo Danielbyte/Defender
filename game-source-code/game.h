@@ -125,6 +125,7 @@ private:
 	bool gameOver;
 	bool playerWon;
 	int landersDestroyed;
+	int number0fHumanoids;
 };
 #endif
 

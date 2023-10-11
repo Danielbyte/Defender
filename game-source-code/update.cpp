@@ -49,10 +49,10 @@ void Game::updateCollisions()
 		return;
 	}
 
-	update_collisions.landerAndHumanoidCollisions(lander_objects, humanoid_objects);
+	update_collisions.landerAndHumanoidCollisions(lander_objects,lander_object_sprites, humanoid_objects,humanoid_sprites, number0fHumanoids);
 	update_collisions.playerAndFallingHumanoidCollisions(player_obj, humanoid_objects,humanoid_sprites, manage_score);
-	update_collisions.humanoidAndGroundCollisions(humanoid_objects,humanoid_sprites);
-	update_collisions.playerLaserAndHumanoidCollisions(humanoid_objects, humanoid_sprites, laser_sprite, lasers);
+	update_collisions.humanoidAndGroundCollisions(humanoid_objects,humanoid_sprites, number0fHumanoids);
+	update_collisions.playerLaserAndHumanoidCollisions(humanoid_objects, humanoid_sprites, laser_sprite, lasers, number0fHumanoids);
 	update_collisions.playerAndMissileCollisions(player_obj, lander_missile_sprites);
 	update_collisions.LaserAndBomberCollisions(bombers, bomber_sprites, lasers, laser_sprite, player_obj, manage_score);
 	update_collisions.MineAndPlayerCollisions(mines, mine_sprites, player_obj);

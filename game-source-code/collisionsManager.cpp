@@ -166,11 +166,13 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 	}
 }
 
-void CollisionsManager::landerAndHumanoidCollisions(std::vector<std::shared_ptr<Lander>>& landers,
-	std::vector<std::shared_ptr<Humanoid>>& humanoids)
+void CollisionsManager::landerAndHumanoidCollisions(std::vector<std::shared_ptr<Lander>>& landers,std::vector<std::shared_ptr<LanderSprite>>& lander_sprites,
+	std::vector<std::shared_ptr<Humanoid>>& humanoids, std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites, int& numberOfHumanoids)
 {
+	auto lander_sprite = lander_sprites.begin();
 	for (auto& lander : landers)
 	{
+		auto humanoid_sprite = humanoid_sprites.begin();
 		for (auto& humanoid : humanoids)
 		{
 
@@ -182,13 +184,48 @@ void CollisionsManager::landerAndHumanoidCollisions(std::vector<std::shared_ptr<
 				setAbductionStates(lander, humanoid);
 				break;
 			case HumanoidState::Abducted:
-				//checkStateOfAbductingLander(humanoid, isCollided);
+				killLanderAndHumanoid(lander, *lander_sprite, *humanoid_sprite);
 				break;
 			case HumanoidState::Falling:
 				break;
 			default:
 				break;
 			}
+			++humanoid_sprite;
+		}
+		++lander_sprite;
+	}
+
+	auto lander = landers.begin();
+    lander_sprite = lander_sprites.begin();
+	while (lander != landers.end())
+	{
+		if ((*lander_sprite)->needsDeletion())
+		{
+			landers.erase(lander);
+			lander_sprites.erase(lander_sprite);
+		}
+		else
+		{
+			++lander;
+			++lander_sprite;
+		}
+	}
+
+	auto humanoid = humanoids.begin();
+	auto humanoid_sprite = humanoid_sprites.begin();
+	while (humanoid != humanoids.end())
+	{
+		if ((*humanoid_sprite)->needsDeletion())
+		{
+			humanoids.erase(humanoid);
+			humanoid_sprites.erase(humanoid_sprite);
+			--numberOfHumanoids;
+		}
+		else
+		{
+			++humanoid;
+			++humanoid_sprite;
 		}
 	}
 }
@@ -206,6 +243,18 @@ void CollisionsManager::setAbductionStates(std::shared_ptr<Lander>& lander, std:
 		lander->setToascend();
 		humanoid->setToAbducted();
 		humanoid->setAbductingLanderId(lander->getLocalId()); //reference to the abducting id
+	}
+}
+
+void CollisionsManager::killLanderAndHumanoid(std::shared_ptr<Lander>& lander, std::shared_ptr<LanderSprite>& lander_sprite,
+	std::shared_ptr<HumanoidSprite>& humanoid_sprite)
+{
+	auto [landerXpos, landerYpos] = lander->getPosition();
+
+	if (landerYpos <= 108.0f)
+	{
+		lander_sprite->remove();
+		humanoid_sprite->remove();
 	}
 }
 
@@ -257,7 +306,7 @@ void CollisionsManager::playerAndFallingHumanoidCollisions(std::shared_ptr<Playe
 }
 
 void CollisionsManager::humanoidAndGroundCollisions(std::vector<std::shared_ptr<Humanoid>>& humanoids,
-	std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites)
+	std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites, int& numberOfHumanoids)
 {
 	auto humanoid_sprite = humanoid_sprites.begin();
 	auto humanoid = humanoids.begin();
@@ -276,6 +325,7 @@ void CollisionsManager::humanoidAndGroundCollisions(std::vector<std::shared_ptr<
 				humanoid_sprites.erase(humanoid_sprite);
 				humanoids.erase(humanoid);
 				humanoidDead = true;
+				--numberOfHumanoids;
 				break;
 
 			case HumanoidState::Rescued:
@@ -298,7 +348,7 @@ void CollisionsManager::humanoidAndGroundCollisions(std::vector<std::shared_ptr<
 
 void CollisionsManager::playerLaserAndHumanoidCollisions(std::vector<std::shared_ptr<Humanoid>>& humanoids,
 	std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites, 
-	std::vector<std::shared_ptr<LaserSprite>>& laser_sprites, std::vector<std::shared_ptr<Projectile>>& lasers)
+	std::vector<std::shared_ptr<LaserSprite>>& laser_sprites, std::vector<std::shared_ptr<Projectile>>& lasers, int& numberOfHumanoids)
 {
 	auto laser_sprite = laser_sprites.begin();
 	auto projectile = lasers.begin();
@@ -322,6 +372,7 @@ void CollisionsManager::playerLaserAndHumanoidCollisions(std::vector<std::shared
 				(*laser_sprite)->remove();
 				humanoids.erase(humanoid);
 				humanoid_sprites.erase(humanoid_sprite);
+				--numberOfHumanoids;
 			}
 			else
 			{

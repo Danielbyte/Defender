@@ -10,7 +10,8 @@ Game::Game():
 	isMoving{false},
 	gameOver{false},
 	playerWon{false},
-	landersDestroyed{0}
+	landersDestroyed{0},
+	number0fHumanoids{5}
 {
 	viewCenter.x = 400.0f;
 	viewCenter.y = windowHeight / 2.0f;
