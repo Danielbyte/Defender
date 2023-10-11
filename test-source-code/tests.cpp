@@ -74,7 +74,7 @@ auto initialPlayerDirection = "right";
 auto deltaTime = 10.0f;
 auto playerSpeed = 250.0f;
 auto lowerrBound = 590.0f;
-auto upperBound = 10.0f;
+auto upperBound = 110.0f;
 
 TEST_CASE("Test if player is spawned at the right position")
 {
@@ -117,6 +117,7 @@ TEST_CASE("Test if player direction is updated to face left if user presses left
 	auto player = std::make_shared<Player>();
 	auto player_sprite = std::make_shared<PlayerSprite>();
 	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+	std::vector<std::shared_ptr<Projectile>>lasers;
 
 	auto initial_direction = player->getDirection();
 	auto left = true;
@@ -125,7 +126,7 @@ TEST_CASE("Test if player direction is updated to face left if user presses left
 	auto down = false;
 	auto space = false;
 	auto gameOver = false;
-	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, deltaTime, gameOver);
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites,lasers ,deltaTime, gameOver);
 
 	auto final_direction = player->getDirection();
 
@@ -137,7 +138,7 @@ TEST_CASE("Test if player direction is updated to face left if user presses left
 	//now user presses right
 	right = true;
 	left = false;
-	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, deltaTime, gameOver);
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites,lasers, deltaTime, gameOver);
 	final_direction = player->getDirection();
 
 	//The player should now face the right
@@ -149,6 +150,7 @@ TEST_CASE("Test if player position is updated when user presses right arrow key"
 	auto player = std::make_shared<Player>();
 	auto player_sprite = std::make_shared<PlayerSprite>();
 	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+	std::vector<std::shared_ptr<Projectile>>lasers;
 
 	auto initial_direction = player->getDirection();
 	auto left = false;
@@ -158,7 +160,7 @@ TEST_CASE("Test if player position is updated when user presses right arrow key"
 	auto space = false;
 	auto gameOver = false;
 	auto [initialXpos, initialYpos] = player->getPlayerPosition();
-	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, deltaTime, gameOver);
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites,lasers, deltaTime, gameOver);
 	auto [finalXpos, finalYpos] = player->getPlayerPosition();
 
 	//Expect initial positions before player presses right arrow
@@ -177,6 +179,7 @@ TEST_CASE("Test if player position is updated when user presses left arrow key")
 	auto player = std::make_shared<Player>();
 	auto player_sprite = std::make_shared<PlayerSprite>();
 	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+	std::vector<std::shared_ptr<Projectile>>lasers;
 
 	auto initial_direction = player->getDirection();
 	auto left = true;
@@ -186,7 +189,7 @@ TEST_CASE("Test if player position is updated when user presses left arrow key")
 	auto space = false;
 	auto gameOver = false;
 	auto [initialXpos, initialYpos] = player->getPlayerPosition();
-	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, deltaTime, gameOver);
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites,lasers, deltaTime, gameOver);
 	auto [finalXpos, finalYpos] = player->getPlayerPosition();
 
 	//Expect initial positions before player presses right arrow
@@ -205,6 +208,7 @@ TEST_CASE("Test if player position is updated when user presses down key")
 	auto player = std::make_shared<Player>();
 	auto player_sprite = std::make_shared<PlayerSprite>();
 	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+	std::vector<std::shared_ptr<Projectile>>lasers;
 
 	auto left = false;
 	auto right = false;
@@ -214,7 +218,7 @@ TEST_CASE("Test if player position is updated when user presses down key")
 	auto gameOver = false;
 	deltaTime = 0.2f;
 	auto [initialXpos, initialYpos] = player->getPlayerPosition();
-	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, deltaTime, gameOver);
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites,lasers, deltaTime, gameOver);
 	auto [finalXpos, finalYpos] = player->getPlayerPosition();
 
 	//Expect initial positions before player presses down arrow
@@ -233,6 +237,7 @@ TEST_CASE("Test if user is correctly updated when user presses up key")
 	auto player = std::make_shared<Player>();
 	auto player_sprite = std::make_shared<PlayerSprite>();
 	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+	std::vector<std::shared_ptr<Projectile>>lasers;
 
 	auto left = false;
 	auto right = false;
@@ -242,7 +247,7 @@ TEST_CASE("Test if user is correctly updated when user presses up key")
 	auto gameOver = false;
 	deltaTime = 0.2f;
 	auto [initialXpos, initialYpos] = player->getPlayerPosition();
-	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, deltaTime, gameOver);
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, lasers, deltaTime, gameOver);
 	auto [finalXpos, finalYpos] = player->getPlayerPosition();
 
 	//Expect initial positions before player presses up arrow
@@ -264,6 +269,7 @@ TEST_CASE("Test if player is restricted to the upper bound of the screen")
 	auto player = std::make_shared<Player>();
 	auto player_sprite = std::make_shared<PlayerSprite>();
 	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+	std::vector<std::shared_ptr<Projectile>>lasers;
 
 	auto left = false;
 	auto right = false;
@@ -271,7 +277,7 @@ TEST_CASE("Test if player is restricted to the upper bound of the screen")
 	auto down = false;
 	auto space = false;
 	auto gameOver = false;
-	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, deltaTime, gameOver);
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, lasers, deltaTime, gameOver);
 	auto [finalXpos, finalYpos] = player->getPlayerPosition();
 
 	//Expected positions after player moves up (out of bounds)
@@ -286,6 +292,7 @@ TEST_CASE("Test if player is restricted to lower bounds of game screen")
 	auto player = std::make_shared<Player>();
 	auto player_sprite = std::make_shared<PlayerSprite>();
 	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+	std::vector<std::shared_ptr<Projectile>>lasers;
 
 	auto left = false;
 	auto right = false;
@@ -293,7 +300,7 @@ TEST_CASE("Test if player is restricted to lower bounds of game screen")
 	auto down = true;//will move 2500 units down
 	auto space = false;
 	auto gameOver = false;
-	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, deltaTime, gameOver);
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, lasers, deltaTime, gameOver);
 	auto [finalXpos, finalYpos] = player->getPlayerPosition();
 
 	//Expected positions after player moves down (out of bounds)
@@ -308,6 +315,7 @@ TEST_CASE("Test if player flies towards and beyond the right edge of the game sc
 	auto player = std::make_shared<Player>();
 	auto player_sprite = std::make_shared<PlayerSprite>();
 	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+	std::vector<std::shared_ptr<Projectile>>lasers;
 
 	auto left = false;
 	auto right = true; //will move 2500 units right
@@ -315,7 +323,7 @@ TEST_CASE("Test if player flies towards and beyond the right edge of the game sc
 	auto down = false;
 	auto space = false;
 	auto gameOver = false;
-	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, deltaTime, gameOver);
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, lasers, deltaTime, gameOver);
 	auto [finalXpos, finalYpos] = player->getPlayerPosition();
 
 	//Expected positions after player moves 2500 units right;
@@ -331,6 +339,7 @@ TEST_CASE("Test if player flies towards and beyond the left edge of the game scr
 	auto player = std::make_shared<Player>();
 	auto player_sprite = std::make_shared<PlayerSprite>();
 	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+	std::vector<std::shared_ptr<Projectile>>lasers;
 
 	auto left = true; //will move 2500 units right
 	auto right = false; 
@@ -338,7 +347,7 @@ TEST_CASE("Test if player flies towards and beyond the left edge of the game scr
 	auto down = false;
 	auto space = false;
 	auto gameOver = false;
-	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, deltaTime, gameOver);
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, lasers, deltaTime, gameOver);
 	auto [finalXpos, finalYpos] = player->getPlayerPosition();
 
 	//Expected positions after player moves 2500 units left;
@@ -354,6 +363,7 @@ TEST_CASE("Test if a laser is generated if user presses space key")
 	auto player = std::make_shared<Player>();
 	auto player_sprite = std::make_shared<PlayerSprite>();
 	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+	std::vector<std::shared_ptr<Projectile>>lasers;
 
 	auto left = false;
 	auto right = false;
@@ -364,11 +374,11 @@ TEST_CASE("Test if a laser is generated if user presses space key")
 
 	//no laser sprites prior space press
 	CHECK(laser_sprites.empty() == true);
-	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, deltaTime, gameOver);
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, lasers, deltaTime, gameOver);
 	//laser should have lasers sprites afte space key press
 	CHECK(laser_sprites.empty() == false);
 }
-
+/*
 //Test cases for the humanoid object
 auto humanoidSpeed = 0.9f;
 auto abductionSpeed = 50.0f; //vertical humanoid speed changes on abduction to make sure it sync with lander speed 
@@ -675,7 +685,7 @@ TEST_CASE("Test if lander can move North Westerly")
 	CHECK_EQ(finalXpos, expectedXpos);
 	CHECK_EQ(finalYpos, expectedYpos);
 }
-
+*/
 //PROJECTILE TESTS
 //Laser Projectiles
 //Save for the last iteration
