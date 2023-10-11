@@ -687,3 +687,14 @@ TEST_CASE("Test if lander can move North Westerly")
 	CHECK_EQ(finalXpos, expectedXpos);
 	CHECK_EQ(finalYpos, expectedYpos);
 }
+
+//Bomber test cases
+TEST_CASE("Test if bomber is spawned at the right of player if player is facing right")
+{
+	auto player = std::make_shared<Player>();
+	auto bomber = std::make_shared<Bombers>(player);
+	auto [xPlayerPos, yPlayerPos] = player->getPlayerPosition();
+	auto [xBomberPos, yBomberPos] = bomber->getPosition();
+	CHECK_GT(xBomberPos, xPlayerPos);
+	CHECK_EQ(yBomberPos, yPlayerPos);
+}
