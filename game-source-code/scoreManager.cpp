@@ -1,11 +1,12 @@
 #include "scoreManager.h"
 
 ScoreManager::ScoreManager():
-	highScore{0},
 	landerPoints{5},
 	bomberPoints{5},
 	rescuePoints{5}
-{}
+{
+	updateHighScore(0);
+}
 
 int ScoreManager::getHighScore()
 {
