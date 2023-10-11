@@ -3,7 +3,8 @@
 Player::Player():
 	playerSpeed{250.0f},
 	laserSpeed{700.0f},
-	state{PlayerState::Alive}
+	state{PlayerState::Alive},
+	playerScore{0}
 {
 	x_playerPosition = 400.0f;
 	y_playerPosition = 300.0f; 
@@ -164,4 +165,14 @@ void Player::setPlayerState(PlayerState _state)
 PlayerState Player::getPlayerState() const
 {
 	return state;
+}
+
+void Player::updatePlayerScore(const int points)
+{
+	playerScore += points;
+}
+
+int Player::getScore() const
+{
+	return playerScore;
 }

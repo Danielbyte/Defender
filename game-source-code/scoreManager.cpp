@@ -38,16 +38,16 @@ void ScoreManager::updateCurrentScore(std::shared_ptr<Player>& player, const std
 {
 	if (scoreType == "lander")
 	{
-
+		player->updatePlayerScore(landerPoints);
 	}
 
 	if (scoreType == "bomber")
 	{
-
+		player->updatePlayerScore(bomberPoints);
 	}
 
 	if (scoreType == "rescue")
 	{
-
+		player->updatePlayerScore(rescuePoints);
 	}
 }

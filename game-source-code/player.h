@@ -26,6 +26,8 @@ public:
 	void restartAnimationWatch();
 	void setPlayerState(PlayerState _state);
 	PlayerState getPlayerState() const;
+	void updatePlayerScore(const int points);
+	int getScore() const;
 
 private:
 	float x_playerPosition;
@@ -34,6 +36,7 @@ private:
 	std::string direction;
 	float laserSpeed;
 	PlayerState state;
+	int playerScore;
 	StopWatch animation_watch;
 
 };
