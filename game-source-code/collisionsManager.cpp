@@ -347,7 +347,8 @@ void CollisionsManager::playerLaserAndHumanoidCollisions(std::vector<std::shared
 }
 
 void CollisionsManager::LaserAndBomberCollisions(std::vector<std::shared_ptr<Bombers>>& bombers, std::vector<std::shared_ptr<BomberSprite>>& bomber_sprites,
-	std::vector<std::shared_ptr<Projectile>>& lasers, std::vector<std::shared_ptr<LaserSprite>>& laser_sprites)
+	std::vector<std::shared_ptr<Projectile>>& lasers, std::vector<std::shared_ptr<LaserSprite>>& laser_sprites,
+	std::shared_ptr<Player>& player, std::shared_ptr<ScoreManager>& manage_score)
 {
 
 	auto laser = lasers.begin();
@@ -367,6 +368,8 @@ void CollisionsManager::LaserAndBomberCollisions(std::vector<std::shared_ptr<Bom
 
 			if (isCollided)
 			{
+				manage_score->updateCurrentScore(player, "bomber");
+				manage_score->updateHighScore(player->getScore());
 				bombers.erase(bomber);
 				bomber_sprites.erase(bomber_sprite);
 				(*laser_sprite)->remove();
