@@ -12,7 +12,7 @@ int ScoreManager::getHighScore()
 	return highScore;
 }
 
-void ScoreManager::updateHighScore(const int currentScore, const std::string scoreType)
+void ScoreManager::updateHighScore(const int currentScore)
 {
 	if (currentScore < 0) throw NegativeScoreNotAllowed{};
 
@@ -32,4 +32,22 @@ void ScoreManager::updateHighScore(const int currentScore, const std::string sco
 		outFile << highScore;
 
 	outFile.close();
+}
+
+void ScoreManager::updateCurrentScore(std::shared_ptr<Player>& player, const std::string scoreType)
+{
+	if (scoreType == "lander")
+	{
+
+	}
+
+	if (scoreType == "bomber")
+	{
+
+	}
+
+	if (scoreType == "rescue")
+	{
+
+	}
 }
