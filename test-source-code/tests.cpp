@@ -689,6 +689,7 @@ TEST_CASE("Test if lander can move North Westerly")
 }
 
 //Bomber test cases
+auto bomberPositionOffset = 500.0f;
 TEST_CASE("Test if bomber is spawned at the right of player if player is facing right")
 {
 	auto player = std::make_shared<Player>();
@@ -721,3 +722,45 @@ TEST_CASE("Test if bomber is spawned at the left side of player if player is fac
 	CHECK_LE(xBomberPos, xPlayerPos);
 	CHECK_EQ(yBomberPos, yPlayerPos);
 }
+
+TEST_CASE("Test if bomber position can be correctly retrieved if player faces right")
+{
+	auto player = std::make_shared<Player>();
+	auto bomber = std::make_shared<Bombers>(player);
+	auto [xPlayerPos, yPlayerPos] = player->getPlayerPosition();
+	auto [xBomberPos, yBomberPos] = bomber->getPosition();
+
+	//Player facing right
+	auto expectedBomberXposition = xPlayerPos + bomberPositionOffset;
+	auto expectedBomberYposition = yPlayerPos;
+	CHECK_EQ(xBomberPos, expectedBomberXposition);
+	CHECK_EQ(yBomberPos, expectedBomberYposition);
+}
+
+TEST_CASE("Test if bomber position can be correctly retrieved if player faces left")
+{
+	auto player = std::make_shared<Player>();
+	auto player_sprite = std::make_shared<PlayerSprite>();
+	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+	std::vector<std::shared_ptr<Projectile>>lasers;
+
+	//Update player to face left
+	auto left = true;
+	auto right = false;
+	auto up = false;
+	auto down = false;
+	auto space = false;
+	auto gameOver = false;
+	player->updatePlayer(left, right, up, down, space, player_sprite, laser_sprites, lasers, deltaTime, gameOver);
+
+	auto bomber = std::make_shared<Bombers>(player);
+	auto [xPlayerPos, yPlayerPos] = player->getPlayerPosition();
+	auto [xBomberPos, yBomberPos] = bomber->getPosition();
+
+	//Player facing right
+	auto expectedBomberXposition = xPlayerPos - bomberPositionOffset;
+	auto expectedBomberYposition = yPlayerPos;
+	CHECK_EQ(xBomberPos, expectedBomberXposition);
+	CHECK_EQ(yBomberPos, expectedBomberYposition);
+}
+
