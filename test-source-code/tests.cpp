@@ -865,3 +865,15 @@ TEST_CASE("Test if bomber can travel North Westerly")
 	CHECK_EQ(finalBomberXpos, expectedXpos);
 	CHECK_EQ(finalBomberYpos, expectedYpos);
 }
+
+//Bomber mine tests
+TEST_CASE("Test if Bomber can place mine")
+{
+	auto xPosition = 100.0f;
+	auto yPosition = 400.0f;
+	auto mine = std::make_shared<Mine>(xPosition, yPosition);
+
+	auto [xMinePos, yMinePos] = mine->getPosition();
+	CHECK(xMinePos == xPosition);
+	CHECK(yMinePos == yPosition);
+}
