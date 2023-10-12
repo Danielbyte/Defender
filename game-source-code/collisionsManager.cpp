@@ -184,7 +184,7 @@ void CollisionsManager::landerAndHumanoidCollisions(std::vector<std::shared_ptr<
 				setAbductionStates(lander, humanoid);
 				break;
 			case HumanoidState::Abducted:
-				killLanderAndHumanoid(lander, *lander_sprite, *humanoid_sprite);
+				killLanderAndHumanoid(lander, *lander_sprite, humanoid, *humanoid_sprite);
 				break;
 			case HumanoidState::Falling:
 				break;
@@ -247,14 +247,18 @@ void CollisionsManager::setAbductionStates(std::shared_ptr<Lander>& lander, std:
 }
 
 void CollisionsManager::killLanderAndHumanoid(std::shared_ptr<Lander>& lander, std::shared_ptr<LanderSprite>& lander_sprite,
-	std::shared_ptr<HumanoidSprite>& humanoid_sprite)
+	std::shared_ptr<Humanoid>& humanoid, std::shared_ptr<HumanoidSprite>& humanoid_sprite)
 {
 	auto [landerXpos, landerYpos] = lander->getPosition();
+	auto lander_id = lander->getLocalId();
+	auto humanoidLander_id = humanoid->getAbductingLanderId();
 
 	if (landerYpos <= 108.0f)
 	{
 		lander_sprite->remove();
-		humanoid_sprite->remove();
+
+		if (lander_id == humanoidLander_id)
+			humanoid_sprite->remove();
 	}
 }
 

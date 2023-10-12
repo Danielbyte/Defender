@@ -49,7 +49,7 @@ public:
 private:
 	void setAbductionStates(std::shared_ptr<Lander>& lander, std::shared_ptr<Humanoid>& humanoid);
 	void killLanderAndHumanoid(std::shared_ptr<Lander>& lander, std::shared_ptr<LanderSprite>& lander_sprite,
-		 std::shared_ptr<HumanoidSprite>& humanoid_sprite);
+		 std::shared_ptr<Humanoid>& humanoid, std::shared_ptr<HumanoidSprite>& humanoid_sprite);
 
 	void dropHumanoid(std::shared_ptr<Humanoid>& humanoid, std::vector<std::shared_ptr<Lander>>& landers);
 
