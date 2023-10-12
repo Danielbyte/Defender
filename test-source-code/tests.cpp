@@ -690,6 +690,7 @@ TEST_CASE("Test if lander can move North Westerly")
 
 //Bomber test cases
 auto bomberPositionOffset = 500.0f;
+auto bomberSpeed = 50.0f;
 TEST_CASE("Test if bomber is spawned at the right of player if player is facing right")
 {
 	auto player = std::make_shared<Player>();
@@ -764,3 +765,18 @@ TEST_CASE("Test if bomber position can be correctly retrieved if player faces le
 	CHECK_EQ(yBomberPos, expectedBomberYposition);
 }
 
+TEST_CASE("Test if bomber can move South")
+{
+	auto player = std::make_shared<Player>();
+	auto bomber = std::make_shared<Bombers>(player);
+	auto [xPlayerPos, yPlayerPos] = player->getPlayerPosition();
+	auto [xBomberPos, yBomberPos] = bomber->getPosition();
+
+	bomber->moveSouth(deltaTime);
+
+	auto [finalBomberXpos, finalBomberYpos] = bomber->getPosition();
+	auto expectedYpos = yBomberPos + bomberSpeed * deltaTime;
+	auto expectedXpos = xBomberPos;
+	CHECK_EQ(finalBomberXpos, expectedXpos);
+	CHECK_EQ(finalBomberYpos, expectedYpos);
+}
