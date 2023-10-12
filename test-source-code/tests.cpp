@@ -877,3 +877,33 @@ TEST_CASE("Test if Bomber can place mine")
 	CHECK(xMinePos == xPosition);
 	CHECK(yMinePos == yPosition);
 }
+
+TEST_CASE("Test if mine detonates after  10 seconds")
+{
+	std::vector<std::shared_ptr<Mine>>mines;
+	std::vector<std::shared_ptr<MineSprite>>mine_sprites;
+
+	auto xPosition = 150.0f;
+	auto yPosition = 400.0f;
+	auto mine = std::make_shared<Mine>(xPosition, yPosition);
+	mines.push_back(mine);
+	
+	auto mine_sprite = std::make_shared<MineSprite>();
+	mine_sprites.push_back(mine_sprite);
+
+	auto timer = std::make_shared<StopWatch>();
+
+	auto numberofMines = mines.size();
+	auto numberOfMineSprites = mine_sprites.size();
+	CHECK(numberofMines == numberOfMineSprites);
+	CHECK(numberofMines == 1);
+
+	//Fast forward to 10 seconds
+	mine->test_updateMine(mines, mine_sprites, 10.0f);
+
+	numberofMines = mines.size();
+	numberOfMineSprites = mine_sprites.size();
+
+	CHECK(numberofMines == numberOfMineSprites);
+	CHECK(numberofMines == 0);
+}
