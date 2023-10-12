@@ -831,3 +831,20 @@ TEST_CASE("Test if bomber can travel South Easterly")
 	CHECK_EQ(finalBomberXpos, expectedXpos);
 	CHECK_EQ(finalBomberYpos, expectedYpos);
 }
+
+TEST_CASE("Test if bomber can travel South Westerly")
+{
+	auto player = std::make_shared<Player>();
+	auto bomber = std::make_shared<Bombers>(player);
+	auto [xPlayerPos, yPlayerPos] = player->getPlayerPosition();
+	auto [xBomberPos, yBomberPos] = bomber->getPosition();
+
+	bomber->moveSouthWest(dt);
+
+	auto [finalBomberXpos, finalBomberYpos] = bomber->getPosition();
+	auto expectedYpos = yBomberPos + bomberSpeed * dt;
+	auto expectedXpos = xBomberPos - bomberSpeed * dt;
+
+	CHECK_EQ(finalBomberXpos, expectedXpos);
+	CHECK_EQ(finalBomberYpos, expectedYpos);
+}
