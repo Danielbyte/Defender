@@ -1097,3 +1097,29 @@ TEST_CASE("Test if game ends when player collides with bomber")
 	PlayerState player_state = player->getPlayerState();
 	CHECK(player_state == PlayerState::Dead);
 }
+
+TEST_CASE("Test if game ends when player collides with bomber")
+{
+	auto player = std::make_shared<Player>();
+	auto player_sprite = std::make_shared<PlayerSprite>();
+	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+	std::vector<std::shared_ptr<Projectile>>lasers;
+
+	auto [playerXpos, playerYpos] = player->getPlayerPosition();
+
+	std::vector<std::shared_ptr<Mine>>mines;
+	std::vector<std::shared_ptr<MineSprite>>mine_sprites;
+
+	auto mine = std::make_shared<Mine>(playerXpos, playerYpos);
+	//set player to collide with mine
+	mines.push_back(mine);
+
+	auto mine_sprite = std::make_shared<MineSprite>();
+	mine_sprites.push_back(mine_sprite);
+
+	auto collision_manager = std::make_unique<CollisionsManager>();
+	collision_manager->MineAndPlayerCollisions(mines, mine_sprites, player);
+
+	PlayerState player_state = player->getPlayerState();
+	CHECK(player_state == PlayerState::Dead);
+}
