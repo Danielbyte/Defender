@@ -44,6 +44,8 @@ public:
 	bool test_getIfInHumanoidZone() const;
 	bool getIfTeleporting() const;
 	void test_setTeleportationState(bool teleporting); // for test purposes only
+
+	void tests_setPosition(float x, float y);
 	
 private:
 	void createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);

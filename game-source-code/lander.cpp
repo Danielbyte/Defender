@@ -532,3 +532,9 @@ void Lander::test_setTeleportationState(bool teleporting)
 {
 	isTeleporting = teleporting;
 }
+
+void Lander::tests_setPosition(float x, float y)
+{
+	xPosition = x;
+	yPosition = y;
+}
