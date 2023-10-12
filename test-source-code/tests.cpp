@@ -1165,6 +1165,39 @@ TEST_CASE("Test if lander dies if it is shot by the player")
 
 	CHECK(landersDestroyed == 1);
 	CHECK_EQ(landers.empty(), true);
-	
+}
 
+TEST_CASE("Test if bomber dies if it is shot by the player")
+{
+	std::vector<std::shared_ptr<Bombers>> bombers;
+	std::vector<std::shared_ptr<BomberSprite>> bomber_sprites;
+	std::vector<std::shared_ptr<LaserSprite>> laser_sprites;
+	std::vector<std::shared_ptr<Projectile>> lasers;
+	auto player = std::make_shared<Player>();
+	auto landersDestroyed = 0;
+
+	auto bomber = std::make_shared<Bombers>();
+	auto landerXpos = 100.0f;
+	auto landerYpos = 400.0f;
+	bomber->tests_SetPosition(landerXpos, landerYpos);
+	bombers.push_back(bomber);
+
+	auto bomber_sprite = std::make_shared<BomberSprite>();
+	bomber_sprites.push_back(bomber_sprite);
+
+	auto NA = 0.0f;
+	auto laser = std::make_shared<Projectile>(NA, NA, "right", NA, NA, NA, NA, ProjectileType::Laser, NA);
+	laser->updatePosition(landerXpos, landerYpos);
+	lasers.push_back(laser);
+
+	auto laser_sprite = std::make_shared<LaserSprite>();
+	laser_sprites.push_back(laser_sprite);
+
+	auto manage_collision = std::make_unique<CollisionsManager>();
+	auto manage_score = std::make_shared<ScoreManager>();
+
+	auto numberOfBombers = bombers.size();
+	CHECK(numberOfBombers == 1);
+	manage_collision->LaserAndBomberCollisions(bombers, bomber_sprites, lasers, laser_sprites, player, manage_score);
+	CHECK_EQ(bombers.empty(), true);
 }
