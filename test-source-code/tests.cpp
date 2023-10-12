@@ -691,6 +691,7 @@ TEST_CASE("Test if lander can move North Westerly")
 //Bomber test cases
 auto bomberPositionOffset = 500.0f;
 auto bomberSpeed = 50.0f;
+auto dt = 1.0f / 60.0f;
 TEST_CASE("Test if bomber is spawned at the right of player if player is facing right")
 {
 	auto player = std::make_shared<Player>();
@@ -772,10 +773,10 @@ TEST_CASE("Test if bomber can move South")
 	auto [xPlayerPos, yPlayerPos] = player->getPlayerPosition();
 	auto [xBomberPos, yBomberPos] = bomber->getPosition();
 
-	bomber->moveSouth(deltaTime);
+	bomber->moveSouth(dt);
 
 	auto [finalBomberXpos, finalBomberYpos] = bomber->getPosition();
-	auto expectedYpos = yBomberPos + bomberSpeed * deltaTime;
+	auto expectedYpos = yBomberPos + bomberSpeed * dt;
 	auto expectedXpos = xBomberPos;
 	CHECK_EQ(finalBomberXpos, expectedXpos);
 	CHECK_EQ(finalBomberYpos, expectedYpos);
@@ -788,11 +789,28 @@ TEST_CASE("Test if bomber can move North")
 	auto [xPlayerPos, yPlayerPos] = player->getPlayerPosition();
 	auto [xBomberPos, yBomberPos] = bomber->getPosition();
 
-	bomber->moveNorth(deltaTime);
+	bomber->moveNorth(dt);
 
 	auto [finalBomberXpos, finalBomberYpos] = bomber->getPosition();
-	auto expectedYpos = yBomberPos - bomberSpeed * deltaTime;
+	auto expectedYpos = yBomberPos - bomberSpeed * dt;
 	auto expectedXpos = xBomberPos;
+	CHECK_EQ(finalBomberXpos, expectedXpos);
+	CHECK_EQ(finalBomberYpos, expectedYpos);
+}
+
+TEST_CASE("Test if bomber can travel North Easterly")
+{
+	auto player = std::make_shared<Player>();
+	auto bomber = std::make_shared<Bombers>(player);
+	auto [xPlayerPos, yPlayerPos] = player->getPlayerPosition();
+	auto [xBomberPos, yBomberPos] = bomber->getPosition();
+
+	bomber->moveNorthEast(dt);
+
+	auto [finalBomberXpos, finalBomberYpos] = bomber->getPosition();
+	auto expectedYpos = yBomberPos - bomberSpeed * dt;
+	auto expectedXpos = xBomberPos + bomberSpeed * dt;
+
 	CHECK_EQ(finalBomberXpos, expectedXpos);
 	CHECK_EQ(finalBomberYpos, expectedYpos);
 }
