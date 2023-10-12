@@ -989,3 +989,30 @@ TEST_CASE("Test for top vertical collisions between any two entities")
 
 	CHECK(isCollided == true);
 }
+
+TEST_CASE("Test for bottom vertical collisions between any two entities")
+{
+	auto collisions = std::make_shared<Collisions>();
+	auto object1Xposition = 10.0f;
+	auto object1Yposition = 200.0f;
+	auto object1Width = 20.0f;
+	auto object1Length = 50.0f;
+
+	auto object2Xposition = 10.0f;
+	auto object2Yposition = 350.0f;
+	auto object2Width = 20.0f;
+	auto object2Length = 50.0f;
+
+	auto isCollided = collisions->checkCollision(object1Xposition, object1Yposition, object1Width, object1Length,
+		object2Xposition, object2Yposition, object2Width, object2Length);
+
+	CHECK(isCollided == false);
+
+	//move second object upwards such that it collides with first object
+	object2Yposition = 220.0f;
+
+	isCollided = collisions->checkCollision(object1Xposition, object1Yposition, object1Width, object1Length,
+		object2Xposition, object2Yposition, object2Width, object2Length);
+
+	CHECK(isCollided == true);
+}
