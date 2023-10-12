@@ -1043,3 +1043,57 @@ TEST_CASE("Test if game ends when player collides with lander")
 	PlayerState player_state = player->getPlayerState();
 	CHECK(player_state == PlayerState::Dead);
 }
+
+TEST_CASE("Test if game ends when player collides with lander")
+{
+	auto player = std::make_shared<Player>();
+	auto player_sprite = std::make_shared<PlayerSprite>();
+	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+	std::vector<std::shared_ptr<Projectile>>lasers;
+
+	auto [playerXpos, playerYpos] = player->getPlayerPosition();
+
+	std::vector<std::shared_ptr<Lander>>landers;
+	std::vector<std::shared_ptr<LanderSprite>>lander_sprites;
+
+	auto lander = std::make_shared<Lander>(player);
+	//set lander to collide with player
+	lander->tests_setPosition(playerXpos, playerYpos);
+	landers.push_back(lander);
+
+	auto lander_sprite = std::make_shared<LanderSprite>();
+	lander_sprites.push_back(lander_sprite);
+
+	auto collision_manager = std::make_unique<CollisionsManager>();
+	collision_manager->playerLanderCollisions(player, landers, lander_sprites);
+
+	PlayerState player_state = player->getPlayerState();
+	CHECK(player_state == PlayerState::Dead);
+}
+
+TEST_CASE("Test if game ends when player collides with bomber")
+{
+	auto player = std::make_shared<Player>();
+	auto player_sprite = std::make_shared<PlayerSprite>();
+	std::vector<std::shared_ptr<LaserSprite>>laser_sprites;
+	std::vector<std::shared_ptr<Projectile>>lasers;
+
+	auto [playerXpos, playerYpos] = player->getPlayerPosition();
+
+	std::vector<std::shared_ptr<Bombers>>bombers;
+	std::vector<std::shared_ptr<BomberSprite>>bomber_sprites;
+
+	auto bomber = std::make_shared<Bombers>(player);
+	//set bomber to collide with player
+	bomber->tests_SetPosition(playerXpos, playerYpos);
+	bombers.push_back(bomber);
+
+	auto bomber_sprite = std::make_shared<BomberSprite>();
+	bomber_sprites.push_back(bomber_sprite);
+
+	auto collision_manager = std::make_unique<CollisionsManager>();
+	collision_manager->playerAndBomberCollisions(bombers,bomber_sprites, player);
+
+	PlayerState player_state = player->getPlayerState();
+	CHECK(player_state == PlayerState::Dead);
+}

@@ -283,3 +283,9 @@ void Bombers::decreaseDodgeChance()
 	if (dodgeChances <= 0)
 		dodgeChances = 0;
 }
+
+void Bombers::tests_SetPosition(float x, float y)
+{
+	yPosition = y;
+	xPosition = x;
+}

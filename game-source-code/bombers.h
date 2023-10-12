@@ -28,6 +28,8 @@ public:
 	std::tuple<float, float> getPosition() const;
 	std::tuple <float, float> getMiniMapPositrion();
 
+	void tests_SetPosition(float x, float y); //for test purposes only
+
 private:
 	float xPosition;
 	float yPosition;
