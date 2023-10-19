@@ -2,7 +2,7 @@
 
 Player::Player():
 	playerSpeed{250.0f},
-	laserSpeed{700.0f},
+	laserSpeed{600.0f},
 	state{PlayerState::Alive},
 	playerScore{0}
 {

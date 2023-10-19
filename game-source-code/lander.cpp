@@ -505,9 +505,9 @@ void Lander::generateTeleportPosition(std::shared_ptr<Player>& player)
 	auto radius = 100.0f;
 	auto pi = 22.0f / 7.0f;
 	xPosition = xPlayerPos + radius * cos(angle * pi / 180.0f);
-	yPosition = yPlayerPos + radius * sin(angle * pi / 180.0f);
+	yPosition = yPlayerPos + radius * (-sin(angle * pi / 180.0f));
 
-	if (yPlayerPos <= 120.0f)
+	if (yPlayerPos <= 200.0f)
 	{
 		minAngle = 210.0f;
 		maxAngle = 330.0f;

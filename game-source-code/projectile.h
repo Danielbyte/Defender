@@ -7,7 +7,7 @@
 #include <string>
 #include <iostream>
 
-enum class ProjectileType { Laser, LanderMissile };
+enum class ProjectileType { Laser, LanderMissile, unknown };
 
 class Projectile
 {
@@ -27,7 +27,7 @@ public:
 	void updatePosition(const float x, const float y);
 	unsigned long long int getProjectileId() const;
 	ProjectileType getType() const;
-	float getSpeed() const;
+	float getSpeed();
 	bool getDelete() const;
 	float getLifeTime() const;
 

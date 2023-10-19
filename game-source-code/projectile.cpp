@@ -11,6 +11,7 @@ Projectile::Projectile():
 	slope{0.0f},
 	yIntercept{0.0f},
 	projectileId{0},
+	typeOfShooter{ProjectileType::unknown},
 	speed{0.0f},
 	Delete{false}
 {}
@@ -19,6 +20,7 @@ Projectile::Projectile(const float x, const float y, const std::string _directio
 	const float verticalOffset,const float _targetXpos, const float _targetYpos, ProjectileType _typeOfShooter, const float _speed)
 {
 	direction = _direction;
+	
 	yPosition = y + verticalOffset;
 	initialYpos = yPosition;
 
@@ -89,7 +91,7 @@ void Projectile::calculateTrajectoryConstants()
 void Projectile::updateTrajectory(const float x)
 {
 	xPosition = x;
-	yPosition = (slope * x) + yIntercept;
+	yPosition = (slope * xPosition) + yIntercept;
 
 	if (lifeTime->time_elapsed() >= 1.0f)
 		Delete = true;
@@ -116,8 +118,11 @@ ProjectileType Projectile::getType() const
 	return typeOfShooter;
 }
 
-float Projectile::getSpeed() const
+float Projectile::getSpeed()
 {
+	if (slope >= 2.0f || slope <= -2.0f)
+		speed = 10.0f;
+
 	return speed;
 }
 
