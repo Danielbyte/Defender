@@ -509,17 +509,26 @@ void Lander::generateTeleportPosition(std::shared_ptr<Player>& player)
 
 	if (yPosition <= 120.0f)
 	{
-		angle = 0.0f;
+		auto minAngle = 210.0f;
+		auto maxAngle = 330.0f;
+		std::uniform_real_distribution<float>distribution(minAngle, maxAngle);
+		auto angle = distribution(gen);
+
 		xPosition = xPlayerPos + radius * cos(angle * pi / 180.0f);
-		yPosition = yPlayerPos + 50.0f;
+		yPosition = yPlayerPos + radius * sin(angle * pi / 180.0f);
 	}
 
 	//Don't generate landers in humanoid zone
 	//landers should teleport to humanoid zone rather
 	if (yPosition >= 480.0f)
 	{
-		yPosition = 400.0f;
-		xPosition += 100.0f;
+		auto minAngle = 60.0f;
+		auto maxAngle = 120.0f;
+		std::uniform_real_distribution<float>distribution(minAngle, maxAngle);
+		auto angle = distribution(gen);
+
+		xPosition = xPlayerPos + radius * cos(angle * pi / 180.0f);
+		yPosition = yPlayerPos + radius * sin(angle * pi / 180.0f);
 	}
 }
 

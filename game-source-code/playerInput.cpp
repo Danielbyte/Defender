@@ -15,7 +15,7 @@ void Game::handleInput()
 		
 		if (event.type == sf::Event::KeyPressed)
 		{
-			window->setKeyRepeatEnabled(false);
+			window->setKeyRepeatEnabled(true);
 			switch (event.key.code)
 			{
 			case sf::Keyboard::Escape:
