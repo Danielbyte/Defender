@@ -547,3 +547,8 @@ void Lander::tests_setPosition(float x, float y)
 	xPosition = x;
 	yPosition = y;
 }
+
+bool Lander::getIsAbducting() const
+{
+	return isAbducting;
+}

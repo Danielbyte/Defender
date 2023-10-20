@@ -175,8 +175,6 @@ void CollisionsManager::landerAndHumanoidCollisions(std::vector<std::shared_ptr<
 		auto humanoid_sprite = humanoid_sprites.begin();
 		for (auto& humanoid : humanoids)
 		{
-
-
 			auto humanoid_state = humanoid->getHumanoidState();
 			switch (humanoid_state)
 			{

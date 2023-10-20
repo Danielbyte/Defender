@@ -120,8 +120,8 @@ ProjectileType Projectile::getType() const
 
 float Projectile::getSpeed()
 {
-	if (slope >= 2.0f || slope <= -2.0f)
-		speed = 10.0f;
+	if (slope >= 1.5f || slope <= -1.5f)
+		speed = 12.0f;
 
 	return speed;
 }

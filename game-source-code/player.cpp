@@ -22,13 +22,13 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 	auto miniMapXpos = (x_playerPosition - horizontalOffset) * horizontallScalingFactor;
 	auto miniMapYpos = (y_playerPosition - verticalOffset) * verticalScalingFactor;
 
-	if (space)
+	if (space && state != PlayerState::Dead)
 	{
 		createLasers(laser_sprite, lasers);
 		space = false;
 	}
 
-	if (right)
+	if (right && state != PlayerState::Dead)
 	{
 		direction = "right";
 		player_sprite->updateSpritePosition(direction,x_playerPosition,y_playerPosition,miniMapXpos,miniMapYpos);
@@ -36,7 +36,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 		x_playerPosition += playerSpeed * dt;
 	}
 
-	if (left)
+	if (left && state != PlayerState::Dead)
 	{
 		direction = "left";
 		player_sprite->updateSpritePosition(direction,x_playerPosition,y_playerPosition,miniMapXpos, miniMapYpos);
@@ -44,7 +44,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 		x_playerPosition -= playerSpeed * dt;
 	}
 
-	if (up)
+	if (up && state != PlayerState::Dead)
 	{
 		y_playerPosition -= playerSpeed * dt;
 		float upBoundary = 110.0f;
@@ -53,7 +53,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 			y_playerPosition = upBoundary;
 	}
 
-	if (down)
+	if (down && state != PlayerState::Dead)
 	{
 		y_playerPosition += playerSpeed * dt;
 		float downBoundary = 600.0f - 10.0f;
@@ -77,6 +77,9 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 		break;
 	}
 	
+	if (state == PlayerState::Dead)
+		return;
+
 	updateLasers(laser_sprite, lasers, dt);
 }
 

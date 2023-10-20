@@ -5,13 +5,13 @@ void Game::updateGame(const float dt)
 	if (!isPlaying)
 		return;
 
-	updateHumanoids(dt);
-
-	player_obj->updatePlayer(leftPressed, rightPressed, upPressed, downPressed,spacePressed,player_sprite,
-		laser_sprite, lasers,dt, gameOver);
+	player_obj->updatePlayer(leftPressed, rightPressed, upPressed, downPressed, spacePressed, player_sprite,
+		laser_sprite, lasers, dt, gameOver);
 
 	if (player_obj->getPlayerState() == PlayerState::Dead)
 		return;
+
+	updateHumanoids(dt);
 
 	game_world->updateGameWorld(lander_objects, lander_object_sprites, player_obj, lander_missile_sprites,bombers, bomber_sprites);
 

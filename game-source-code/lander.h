@@ -43,6 +43,7 @@ public:
 	std::tuple<bool, bool> test_getSide();
 	bool test_getIfInHumanoidZone() const;
 	bool getIfTeleporting() const;
+	bool getIsAbducting() const;
 	void test_setTeleportationState(bool teleporting); // for test purposes only
 
 	void tests_setPosition(float x, float y);
