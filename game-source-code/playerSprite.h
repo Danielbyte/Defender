@@ -13,9 +13,16 @@ public:
 private:
 	sf::Texture player_tR;
 	sf::Texture player_tL;
-	sf::Texture player_death_tR;
-	sf::Texture player_death_TL;
 	sf::Texture miniPlayer_t;
+	sf::Texture crushing1_t;
+	sf::Texture crushing2_t;
+	sf::Texture crushing3_t;
+	sf::Texture crushing4_t;
+	sf::Texture crushing5_t;
+	sf::Texture crushing6_t;
+	float animation_period;
+
+	void setCrushingTexture(StopWatch& animation_watch);
 };
 
 #endif // !PLAYERSPRITE_H

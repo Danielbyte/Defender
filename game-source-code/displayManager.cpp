@@ -38,7 +38,6 @@ void Game::display(const float dt)
 		window->draw(landscape1_sprite->getSprite());
 		window->draw(landscape2_sprite->getSprite());
 		window->draw(miniMapSection_s);
-		window->draw(player_sprite->getSprite());
 		window->draw(highScore);
 		window->draw(currentScore);
 		for (auto& laser : laser_sprite)
@@ -77,6 +76,14 @@ void Game::display(const float dt)
 		{
 			window->draw(mine->getSprite());
 		}
+
+		PlayerState playerState = player_obj->getPlayerState();
+
+		if (playerState == PlayerState::Alive)
+			window->draw(player_sprite->getSprite());
+
+		if (playerState == PlayerState::Dead)
+			window->draw(player_sprite->getAnimationSprite());
 
 		minimap->drawMiniMap(window, player_sprite, lander_object_sprites, humanoid_sprites, bomber_sprites);
 	}
