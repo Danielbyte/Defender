@@ -19,7 +19,6 @@ private:
 	sf::Texture crushing3_t;
 	sf::Texture crushing4_t;
 	sf::Texture crushing5_t;
-	sf::Texture crushing6_t;
 	float animation_period;
 
 	void setCrushingTexture(StopWatch& animation_watch);

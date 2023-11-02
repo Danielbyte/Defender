@@ -26,7 +26,6 @@ void PlayerSprite::loadTextures()
 	crushing3_t.loadFromFile("resources/crushing-player3.png");
 	crushing4_t.loadFromFile("resources/crushing-player4.png");
 	crushing5_t.loadFromFile("resources/crushing-player5.png");
-	crushing6_t.loadFromFile("resources/crushing-player6.png");
 }
 
 void PlayerSprite::setTexture(std::string playerState, bool& gameOver, StopWatch& animation_watch)
@@ -39,14 +38,14 @@ void PlayerSprite::setTexture(std::string playerState, bool& gameOver, StopWatch
 		if (left)
 		{
 			setCrushingTexture(animation_watch);
-			if ((animation_watch.time_elapsed() > 6 * animation_period))
+			if ((animation_watch.time_elapsed() > 5 * animation_period))
 				gameOver = true;
 
 			return;
 		}
 
 		setCrushingTexture(animation_watch);
-		if ((animation_watch.time_elapsed() > 6 * animation_period))
+		if ((animation_watch.time_elapsed() > 5 * animation_period))
 			gameOver = true;
 
 		return;
@@ -80,7 +79,4 @@ void PlayerSprite::setCrushingTexture(StopWatch& animation_watch)
 
 	if (_time > 4 * animation_period && _time <= 5 * animation_period)
 		updateAnimationSpriteTexture(crushing5_t, miniPlayer_t);
-
-	if (_time > 5 * animation_period && _time <= 6 * animation_period)
-		updateAnimationSpriteTexture(crushing6_t, miniPlayer_t);
 }
