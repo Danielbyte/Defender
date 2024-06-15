@@ -5,7 +5,7 @@ state{HumanoidState::Walking}, //Humanoid initially walking
 direction{"unknown"},
 xPosition{0.0f},
 yPosition{0.0f},
-speed{0.9f},
+speed{15.0f},
 abductingLanderId{0},
 distance {0.0f}
 {
