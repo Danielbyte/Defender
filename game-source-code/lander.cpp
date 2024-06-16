@@ -5,7 +5,7 @@ Lander::Lander():
 	yPosition{0.0f},
 	leftSide{false},
 	rightSide{false},
-	landerSpeed{50.0f},
+	landerSpeed{80.0f},
 	reachedHumanoidZone{false},
 	direction{Direction::Other},
 	playerXposref{0.0f},
