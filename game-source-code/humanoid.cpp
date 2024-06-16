@@ -38,7 +38,7 @@ void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& h
 	if (humanoid_watch->time_elapsed() > 2.72f && (state == HumanoidState::Walking || state == HumanoidState::Turning))
 	{
 		//Control humanoid turning (should take about 2.24 seconds)
-		if (humanoid_watch->time_elapsed() <= 4.96)
+		if (humanoid_watch->time_elapsed() <= 4.96f)
 		{
 			state = HumanoidState::Turning;
 			updateHumanoidSprite(humanoid_sprite);
@@ -51,10 +51,14 @@ void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& h
 		state = HumanoidState::Walking;
 
 		//Change humanoid direction
+		auto updated = false; //flag variable to prevent a double update (i.e, if line 55 updates direction to left line 61 will automatically update if flag is not implemented)
 		if (direction == "right")
+		{
 			direction = "left";
+			updated = true;
+		}
 
-		if (direction == "left")
+		if (direction == "left" && !updated)
 			direction = "right";
 	}
 
