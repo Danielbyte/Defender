@@ -1,7 +1,7 @@
 #include "humanoidSprite.h"
 
 HumanoidSprite::HumanoidSprite():
-	texture_period{0.08f}
+	texture_period{0.03f}
 {
 	sf::Vector2f dimensions;
 	dimensions.x = 48.0f;

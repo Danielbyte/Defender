@@ -7,7 +7,7 @@ previous_direction{"unknown"},
 new_direction{"unknown"},
 xPosition{0.0f},
 yPosition{0.0f},
-speed{15.0f},
+speed{30.0f},
 abductingLanderId{0},
 distance {0.0f},
 changingDirection{false}
@@ -38,13 +38,13 @@ std::tuple<float, float> Humanoid::getPosition() const
 void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& humanoid_sprite,std::shared_ptr<Player>& p)
 {
 	//humanoid need to be turning if humanoid_watch > 2.72 seconds
-	if (humanoid_watch->time_elapsed() > 2.56f && (state == HumanoidState::Walking || state == HumanoidState::Turning))
+	if (humanoid_watch->time_elapsed() > 0.96f && (state == HumanoidState::Walking || state == HumanoidState::Turning))
 	{
 		//Decide if humanoid wants to change direction
 		if (!changingDirection)
 		{
 			previous_direction = direction;
-			generateDirection();
+			canChangeDirection();
 			new_direction = direction;
 
 			if (direction == previous_direction)
@@ -57,7 +57,7 @@ void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& h
 		changingDirection = true;
 
 		//Control humanoid turning (should take about 2.24 seconds)
-		if (humanoid_watch->time_elapsed() <= 5.28f)
+		if (humanoid_watch->time_elapsed() <= 1.98f)
 		{
 			direction = previous_direction;
 			state = HumanoidState::Turning;
@@ -180,6 +180,28 @@ void Humanoid::generateDirection()
 
 	if(_direction > 5)
 		direction = "left";
+}
+
+void Humanoid::canChangeDirection()
+{
+	auto prev_direction = direction;
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	int min = 4;
+	int max = 10;
+	std::uniform_int_distribution<int>distribution(min, max);
+	auto _direction = distribution(gen);
+
+	if ((_direction % 3) == 0)
+	{
+		if (previous_direction == "right")
+		{
+			direction = "left";
+			return;
+		}
+		direction = "right";
+	}
 }
 
 void Humanoid::setToAbducted()

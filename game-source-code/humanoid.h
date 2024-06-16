@@ -32,6 +32,7 @@ private:
 	void updateHumanoidSprite(std::shared_ptr<HumanoidSprite>& humanoid_sprite);
 	void generateXposition();
 	void generateDirection();
+	void canChangeDirection(); //Decision if humanoid should change direction
 	HumanoidState state;
 	std::string direction;
 	std::string previous_direction;
