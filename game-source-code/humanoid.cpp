@@ -3,11 +3,14 @@
 Humanoid::Humanoid():
 state{HumanoidState::Walking}, //Humanoid initially walking
 direction{"unknown"},
+previous_direction{"unknown"},
+new_direction{"unknown"},
 xPosition{0.0f},
 yPosition{0.0f},
 speed{15.0f},
 abductingLanderId{0},
-distance {0.0f}
+distance {0.0f},
+changingDirection{false}
 {
 	placeHumanoid();
 }
@@ -35,11 +38,28 @@ std::tuple<float, float> Humanoid::getPosition() const
 void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& humanoid_sprite,std::shared_ptr<Player>& p)
 {
 	//humanoid need to be turning if humanoid_watch > 2.72 seconds
-	if (humanoid_watch->time_elapsed() > 2.72f && (state == HumanoidState::Walking || state == HumanoidState::Turning))
+	if (humanoid_watch->time_elapsed() > 2.56f && (state == HumanoidState::Walking || state == HumanoidState::Turning))
 	{
-		//Control humanoid turning (should take about 2.24 seconds)
-		if (humanoid_watch->time_elapsed() <= 4.96f)
+		//Decide if humanoid wants to change direction
+		if (!changingDirection)
 		{
+			previous_direction = direction;
+			generateDirection();
+			new_direction = direction;
+
+			if (direction == previous_direction)
+			{
+				humanoid_watch->restart();
+				return;
+			}
+		}
+
+		changingDirection = true;
+
+		//Control humanoid turning (should take about 2.24 seconds)
+		if (humanoid_watch->time_elapsed() <= 5.28f)
+		{
+			direction = previous_direction;
 			state = HumanoidState::Turning;
 			updateHumanoidSprite(humanoid_sprite);
 			return;
@@ -47,19 +67,11 @@ void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& h
 
 		//Humanoid done turning, therefore direction should change as well.
 		//Need to restart the watch as well
+		//Humanoid done changing direction
 		humanoid_watch->restart();
 		state = HumanoidState::Walking;
-
-		//Change humanoid direction
-		auto updated = false; //flag variable to prevent a double update (i.e, if line 55 updates direction to left line 61 will automatically update if flag is not implemented)
-		if (direction == "right")
-		{
-			direction = "left";
-			updated = true;
-		}
-
-		if (direction == "left" && !updated)
-			direction = "right";
+		direction = new_direction;
+		changingDirection = false;
 	}
 
 	if (state == HumanoidState::Rescued)
@@ -85,11 +97,11 @@ void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& h
 		return;
 	}
 
-	if (direction == "right")
+	if (direction == "right" && humanoid_watch->time_elapsed() <= 2.72f)
 		xPosition += speed * dt;
 		
 
-	if (direction == "left")
+	if (direction == "left" && humanoid_watch->time_elapsed() <= 2.72f)
 	    xPosition -= speed * dt;
 		
 	updateHumanoidSprite(humanoid_sprite);

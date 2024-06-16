@@ -34,12 +34,15 @@ private:
 	void generateDirection();
 	HumanoidState state;
 	std::string direction;
+	std::string previous_direction;
+	std::string new_direction;
 	float xPosition;
 	float yPosition;
 	float speed;
 	std::shared_ptr<StopWatch>humanoid_watch = std::make_shared<StopWatch>();
 	unsigned int abductingLanderId;
 	float distance;
+	bool changingDirection;
 };
 #endif // !HUMANOID_H
 

@@ -39,7 +39,7 @@ void Game::updateLanders(const float dt)
 
 void Game::updateCollisions()
 {
-	update_collisions.playerLanderCollisions(player_obj, lander_objects, lander_object_sprites);
+	//update_collisions.playerLanderCollisions(player_obj, lander_objects, lander_object_sprites);
 	update_collisions.landerAndLaserCollisions(lander_objects, lander_object_sprites, laser_sprite, 
 		lasers, humanoid_objects,player_obj, manage_score, landersDestroyed);
 
@@ -47,10 +47,10 @@ void Game::updateCollisions()
 	update_collisions.playerAndFallingHumanoidCollisions(player_obj, humanoid_objects,humanoid_sprites, manage_score);
 	update_collisions.humanoidAndGroundCollisions(humanoid_objects,humanoid_sprites, number0fHumanoids);
 	update_collisions.playerLaserAndHumanoidCollisions(humanoid_objects, humanoid_sprites, laser_sprite, lasers, number0fHumanoids);
-	update_collisions.playerAndMissileCollisions(player_obj, lander_missile_sprites);
+	//update_collisions.playerAndMissileCollisions(player_obj, lander_missile_sprites);
 	update_collisions.LaserAndBomberCollisions(bombers, bomber_sprites, lasers, laser_sprite, player_obj, manage_score);
-	update_collisions.MineAndPlayerCollisions(mines, mine_sprites, player_obj);
-	update_collisions.playerAndBomberCollisions(bombers, bomber_sprites, player_obj);
+	//update_collisions.MineAndPlayerCollisions(mines, mine_sprites, player_obj);
+	//update_collisions.playerAndBomberCollisions(bombers, bomber_sprites, player_obj);
 }
 
 void Game::updateHumanoids(const float dt)

@@ -49,7 +49,6 @@ void HumanoidSprite::loadTextures()
 	humanoid30_t.loadFromFile("resources/humanoid30.png");
 	humanoid31_t.loadFromFile("resources/humanoid31.png");
 	humanoid32_t.loadFromFile("resources/humanoid32.png");
-	humanoid33_t.loadFromFile("resources/humanoid33.png");
 	humanoid34_t.loadFromFile("resources/humanoid34.png");
 
 	//Turning humanoid(s) (from left -> right)
@@ -115,7 +114,6 @@ void HumanoidSprite::loadTextures()
 	Rhumanoid30_t.loadFromFile("resources/Rhumanoid30.png");
 	Rhumanoid31_t.loadFromFile("resources/Rhumanoid31.png");
 	Rhumanoid32_t.loadFromFile("resources/Rhumanoid32.png");
-	Rhumanoid33_t.loadFromFile("resources/Rhumanoid33.png");
 	Rhumanoid34_t.loadFromFile("resources/Rhumanoid34.png");
 
 	//Turning humanoid(s) (from right to left)
@@ -191,88 +189,91 @@ void HumanoidSprite::turning(std::string direction, std::shared_ptr<StopWatch>hu
 
 	if (direction == "left")
 	{
-		if (_time > 34 * texture_period && _time <= 35 * texture_period)
-			updateSpriteTexture(Thumanoid1_t, miniMap_t);
-
-		if (_time > 35 * texture_period && _time <= 36 * texture_period)
-			updateSpriteTexture(Thumanoid2_t, miniMap_t);
-
-		if (_time > 36 * texture_period && _time <= 37 * texture_period)
-			updateSpriteTexture(Thumanoid3_t, miniMap_t);
-
-		if (_time > 37 * texture_period && _time <= 38 * texture_period)
-			updateSpriteTexture(Thumanoid4_t, miniMap_t);
+		if (_time > 34 * texture_period && _time <= 38 * texture_period)
+			updateSpriteTexture(humanoid34_t, miniMap_t);
 
 		if (_time > 38 * texture_period && _time <= 39 * texture_period)
-			updateSpriteTexture(Thumanoid5_t, miniMap_t);
+			updateSpriteTexture(Thumanoid1_t, miniMap_t);
 
 		if (_time > 39 * texture_period && _time <= 40 * texture_period)
-			updateSpriteTexture(Thumanoid6_t, miniMap_t);
+			updateSpriteTexture(Thumanoid2_t, miniMap_t);
 
 		if (_time > 40 * texture_period && _time <= 41 * texture_period)
-			updateSpriteTexture(Thumanoid7_t, miniMap_t);
+			updateSpriteTexture(Thumanoid3_t, miniMap_t);
 
 		if (_time > 41 * texture_period && _time <= 42 * texture_period)
-			updateSpriteTexture(Thumanoid8_t, miniMap_t);
+			updateSpriteTexture(Thumanoid4_t, miniMap_t);
 
 		if (_time > 42 * texture_period && _time <= 43 * texture_period)
-			updateSpriteTexture(Thumanoid9_t, miniMap_t);
+			updateSpriteTexture(Thumanoid5_t, miniMap_t);
 
 		if (_time > 43 * texture_period && _time <= 44 * texture_period)
-			updateSpriteTexture(Thumanoid10_t, miniMap_t);
+			updateSpriteTexture(Thumanoid6_t, miniMap_t);
 
 		if (_time > 44 * texture_period && _time <= 45 * texture_period)
-			updateSpriteTexture(Thumanoid11_t, miniMap_t);
+			updateSpriteTexture(Thumanoid7_t, miniMap_t);
 
 		if (_time > 45 * texture_period && _time <= 46 * texture_period)
-			updateSpriteTexture(Thumanoid12_t, miniMap_t);
+			updateSpriteTexture(Thumanoid8_t, miniMap_t);
 
 		if (_time > 46 * texture_period && _time <= 47 * texture_period)
-			updateSpriteTexture(Thumanoid13_t, miniMap_t);
+			updateSpriteTexture(Thumanoid9_t, miniMap_t);
 
 		if (_time > 47 * texture_period && _time <= 48 * texture_period)
-			updateSpriteTexture(Thumanoid14_t, miniMap_t);
+			updateSpriteTexture(Thumanoid10_t, miniMap_t);
 
 		if (_time > 48 * texture_period && _time <= 49 * texture_period)
-			updateSpriteTexture(Thumanoid15_t, miniMap_t);
+			updateSpriteTexture(Thumanoid11_t, miniMap_t);
 
 		if (_time > 49 * texture_period && _time <= 50 * texture_period)
-			updateSpriteTexture(Thumanoid16_t, miniMap_t);
+			updateSpriteTexture(Thumanoid12_t, miniMap_t);
 
 		if (_time > 50 * texture_period && _time <= 51 * texture_period)
-			updateSpriteTexture(Thumanoid17_t, miniMap_t);
+			updateSpriteTexture(Thumanoid13_t, miniMap_t);
 
 		if (_time > 51 * texture_period && _time <= 52 * texture_period)
-			updateSpriteTexture(Thumanoid18_t, miniMap_t);
+			updateSpriteTexture(Thumanoid14_t, miniMap_t);
 
 		if (_time > 52 * texture_period && _time <= 53 * texture_period)
-			updateSpriteTexture(Thumanoid19_t, miniMap_t);
+			updateSpriteTexture(Thumanoid15_t, miniMap_t);
 
 		if (_time > 53 * texture_period && _time <= 54 * texture_period)
-			updateSpriteTexture(Thumanoid20_t, miniMap_t);
+			updateSpriteTexture(Thumanoid16_t, miniMap_t);
 
 		if (_time > 54 * texture_period && _time <= 55 * texture_period)
-			updateSpriteTexture(Thumanoid21_t, miniMap_t);
+			updateSpriteTexture(Thumanoid17_t, miniMap_t);
 
 		if (_time > 55 * texture_period && _time <= 56 * texture_period)
-			updateSpriteTexture(Thumanoid22_t, miniMap_t);
+			updateSpriteTexture(Thumanoid18_t, miniMap_t);
 
 		if (_time > 56 * texture_period && _time <= 57 * texture_period)
-			updateSpriteTexture(Thumanoid23_t, miniMap_t);
+			updateSpriteTexture(Thumanoid19_t, miniMap_t);
 
 		if (_time > 57 * texture_period && _time <= 58 * texture_period)
-			updateSpriteTexture(Thumanoid24_t, miniMap_t);
+			updateSpriteTexture(Thumanoid20_t, miniMap_t);
 
 		if (_time > 58 * texture_period && _time <= 59 * texture_period)
-			updateSpriteTexture(Thumanoid25_t, miniMap_t);
+			updateSpriteTexture(Thumanoid21_t, miniMap_t);
 
 		if (_time > 59 * texture_period && _time <= 60 * texture_period)
-			updateSpriteTexture(Thumanoid26_t, miniMap_t);
+			updateSpriteTexture(Thumanoid22_t, miniMap_t);
 
 		if (_time > 60 * texture_period && _time <= 61 * texture_period)
-			updateSpriteTexture(Thumanoid27_t, miniMap_t);
+			updateSpriteTexture(Thumanoid23_t, miniMap_t);
 
 		if (_time > 61 * texture_period && _time <= 62 * texture_period)
+			updateSpriteTexture(Thumanoid24_t, miniMap_t);
+
+		if (_time > 62 * texture_period && _time <= 63 * texture_period)
+			updateSpriteTexture(Thumanoid25_t, miniMap_t);
+
+		if (_time > 63 * texture_period && _time <= 64 * texture_period)
+			updateSpriteTexture(Thumanoid26_t, miniMap_t);
+
+		if (_time > 64 * texture_period && _time <= 65 * texture_period)
+			updateSpriteTexture(Thumanoid27_t, miniMap_t);
+
+		if (_time > 65 * texture_period && _time <= 66 * texture_period)
 			updateSpriteTexture(Thumanoid28_t, miniMap_t);
 
 		return;
@@ -280,88 +281,91 @@ void HumanoidSprite::turning(std::string direction, std::shared_ptr<StopWatch>hu
 
 	if (direction == "right")
 	{
-		if (_time > 34 * texture_period && _time <= 35 * texture_period)
-			updateSpriteTexture(RThumanoid1_t, miniMap_t);
-
-		if (_time > 35 * texture_period && _time <= 36 * texture_period)
-			updateSpriteTexture(RThumanoid2_t, miniMap_t);
-
-		if (_time > 36 * texture_period && _time <= 37 * texture_period)
-			updateSpriteTexture(RThumanoid3_t, miniMap_t);
-
-		if (_time > 37 * texture_period && _time <= 38 * texture_period)
-			updateSpriteTexture(RThumanoid4_t, miniMap_t);
+		if (_time > 34 * texture_period && _time <= 38 * texture_period)
+			updateSpriteTexture(Rhumanoid34_t, miniMap_t);
 
 		if (_time > 38 * texture_period && _time <= 39 * texture_period)
-			updateSpriteTexture(RThumanoid5_t, miniMap_t);
+			updateSpriteTexture(RThumanoid1_t, miniMap_t);
 
 		if (_time > 39 * texture_period && _time <= 40 * texture_period)
-			updateSpriteTexture(RThumanoid6_t, miniMap_t);
+			updateSpriteTexture(RThumanoid2_t, miniMap_t);
 
 		if (_time > 40 * texture_period && _time <= 41 * texture_period)
-			updateSpriteTexture(RThumanoid7_t, miniMap_t);
+			updateSpriteTexture(RThumanoid3_t, miniMap_t);
 
 		if (_time > 41 * texture_period && _time <= 42 * texture_period)
-			updateSpriteTexture(RThumanoid8_t, miniMap_t);
+			updateSpriteTexture(RThumanoid4_t, miniMap_t);
 
 		if (_time > 42 * texture_period && _time <= 43 * texture_period)
-			updateSpriteTexture(RThumanoid9_t, miniMap_t);
+			updateSpriteTexture(RThumanoid5_t, miniMap_t);
 
 		if (_time > 43 * texture_period && _time <= 44 * texture_period)
-			updateSpriteTexture(RThumanoid10_t, miniMap_t);
+			updateSpriteTexture(RThumanoid6_t, miniMap_t);
 
 		if (_time > 44 * texture_period && _time <= 45 * texture_period)
-			updateSpriteTexture(RThumanoid11_t, miniMap_t);
+			updateSpriteTexture(RThumanoid7_t, miniMap_t);
 
 		if (_time > 45 * texture_period && _time <= 46 * texture_period)
-			updateSpriteTexture(RThumanoid12_t, miniMap_t);
+			updateSpriteTexture(RThumanoid8_t, miniMap_t);
 
 		if (_time > 46 * texture_period && _time <= 47 * texture_period)
-			updateSpriteTexture(RThumanoid13_t, miniMap_t);
+			updateSpriteTexture(RThumanoid9_t, miniMap_t);
 
 		if (_time > 47 * texture_period && _time <= 48 * texture_period)
-			updateSpriteTexture(RThumanoid14_t, miniMap_t);
+			updateSpriteTexture(RThumanoid10_t, miniMap_t);
 
 		if (_time > 48 * texture_period && _time <= 49 * texture_period)
-			updateSpriteTexture(RThumanoid15_t, miniMap_t);
+			updateSpriteTexture(RThumanoid11_t, miniMap_t);
 
 		if (_time > 49 * texture_period && _time <= 50 * texture_period)
-			updateSpriteTexture(RThumanoid16_t, miniMap_t);
+			updateSpriteTexture(RThumanoid12_t, miniMap_t);
 
 		if (_time > 50 * texture_period && _time <= 51 * texture_period)
-			updateSpriteTexture(RThumanoid17_t, miniMap_t);
+			updateSpriteTexture(RThumanoid13_t, miniMap_t);
 
 		if (_time > 51 * texture_period && _time <= 52 * texture_period)
-			updateSpriteTexture(RThumanoid18_t, miniMap_t);
+			updateSpriteTexture(RThumanoid14_t, miniMap_t);
 
 		if (_time > 52 * texture_period && _time <= 53 * texture_period)
-			updateSpriteTexture(RThumanoid19_t, miniMap_t);
+			updateSpriteTexture(RThumanoid15_t, miniMap_t);
 
 		if (_time > 53 * texture_period && _time <= 54 * texture_period)
-			updateSpriteTexture(RThumanoid20_t, miniMap_t);
+			updateSpriteTexture(RThumanoid16_t, miniMap_t);
 
 		if (_time > 54 * texture_period && _time <= 55 * texture_period)
-			updateSpriteTexture(RThumanoid21_t, miniMap_t);
+			updateSpriteTexture(RThumanoid17_t, miniMap_t);
 
 		if (_time > 55 * texture_period && _time <= 56 * texture_period)
-			updateSpriteTexture(RThumanoid22_t, miniMap_t);
+			updateSpriteTexture(RThumanoid18_t, miniMap_t);
 
 		if (_time > 56 * texture_period && _time <= 57 * texture_period)
-			updateSpriteTexture(RThumanoid23_t, miniMap_t);
+			updateSpriteTexture(RThumanoid19_t, miniMap_t);
 
 		if (_time > 57 * texture_period && _time <= 58 * texture_period)
-			updateSpriteTexture(RThumanoid24_t, miniMap_t);
+			updateSpriteTexture(RThumanoid20_t, miniMap_t);
 
 		if (_time > 58 * texture_period && _time <= 59 * texture_period)
-			updateSpriteTexture(RThumanoid25_t, miniMap_t);
+			updateSpriteTexture(RThumanoid21_t, miniMap_t);
 
 		if (_time > 59 * texture_period && _time <= 60 * texture_period)
-			updateSpriteTexture(RThumanoid26_t, miniMap_t);
+			updateSpriteTexture(RThumanoid22_t, miniMap_t);
 
 		if (_time > 60 * texture_period && _time <= 61 * texture_period)
-			updateSpriteTexture(RThumanoid27_t, miniMap_t);
+			updateSpriteTexture(RThumanoid23_t, miniMap_t);
 
 		if (_time > 61 * texture_period && _time <= 62 * texture_period)
+			updateSpriteTexture(RThumanoid24_t, miniMap_t);
+
+		if (_time > 62 * texture_period && _time <= 63 * texture_period)
+			updateSpriteTexture(RThumanoid25_t, miniMap_t);
+
+		if (_time > 63 * texture_period && _time <= 64 * texture_period)
+			updateSpriteTexture(RThumanoid26_t, miniMap_t);
+
+		if (_time > 64 * texture_period && _time <= 65 * texture_period)
+			updateSpriteTexture(RThumanoid27_t, miniMap_t);
+
+		if (_time > 65 * texture_period && _time <= 66 * texture_period)
 			updateSpriteTexture(RThumanoid28_t, miniMap_t);
 	}
 }
@@ -470,12 +474,6 @@ void HumanoidSprite::walkingAndAbuction(std::string direction, std::shared_ptr<S
 		if (_time > 31 * texture_period && _time <= 32 * texture_period)
 			updateSpriteTexture(humanoid32_t, miniMap_t);
 
-		if (_time > 32 * texture_period && _time <= 33 * texture_period)
-			updateSpriteTexture(humanoid33_t, miniMap_t);
-
-		if (_time > 33 * texture_period && _time <= 34 * texture_period)
-			updateSpriteTexture(humanoid34_t, miniMap_t);
-
 		return;	
 	}
 
@@ -576,12 +574,6 @@ void HumanoidSprite::walkingAndAbuction(std::string direction, std::shared_ptr<S
 
 		if (_time > 31 * texture_period && _time <= 32 * texture_period)
 			updateSpriteTexture(Rhumanoid32_t, miniMap_t);
-
-		if (_time > 32 * texture_period && _time <= 33 * texture_period)
-			updateSpriteTexture(Rhumanoid33_t, miniMap_t);
-
-		if (_time > 33 * texture_period && _time <= 34 * texture_period)
-			updateSpriteTexture(Rhumanoid34_t, miniMap_t);
 	}
 }
 
