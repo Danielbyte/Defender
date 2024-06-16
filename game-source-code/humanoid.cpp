@@ -34,6 +34,30 @@ std::tuple<float, float> Humanoid::getPosition() const
 
 void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& humanoid_sprite,std::shared_ptr<Player>& p)
 {
+	//humanoid need to be turning if humanoid_watch > 2.72 seconds
+	if (humanoid_watch->time_elapsed() > 2.72f && (state == HumanoidState::Walking || state == HumanoidState::Turning))
+	{
+		//Control humanoid turning (should take about 2.24 seconds)
+		if (humanoid_watch->time_elapsed() <= 4.96)
+		{
+			state = HumanoidState::Turning;
+			updateHumanoidSprite(humanoid_sprite);
+			return;
+		}
+
+		//Humanoid done turning, therefore direction should change as well.
+		//Need to restart the watch as well
+		humanoid_watch->restart();
+		state = HumanoidState::Walking;
+
+		//Change humanoid direction
+		if (direction == "right")
+			direction = "left";
+
+		if (direction == "left")
+			direction = "right";
+	}
+
 	if (state == HumanoidState::Rescued)
 	{
 		updateHumanoid(p, humanoid_sprite);
@@ -67,7 +91,7 @@ void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& h
 	updateHumanoidSprite(humanoid_sprite);
 }
 
-void Humanoid::updateHumanoid(std::shared_ptr<Player>& player, std::shared_ptr<HumanoidSprite>& humanoid_sprite)
+void Humanoid::updateHumanoid(std::shared_ptr<Player>& player, std::shared_ptr<HumanoidSprite>& humanoid_sprite)// This overloaded function is called when humanoid is being rescued
 {
 	auto [xPlayerPos, yPlayerPos] = player->getPlayerPosition();
 	if (xPosition <= xPlayerPos)
@@ -98,6 +122,11 @@ void Humanoid::updateHumanoidSprite(std::shared_ptr<HumanoidSprite>& humanoid_sp
 
 		case HumanoidState::Dead:
 			break;
+
+		case HumanoidState::Turning:
+			humanoid_sprite->setTexture(direction, "Turning", xPosition, yPosition, humanoid_watch);
+			break;
+
 		default:
 			break;
 		}

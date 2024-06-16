@@ -50,7 +50,37 @@ void HumanoidSprite::loadTextures()
 	humanoid32_t.loadFromFile("resources/humanoid32.png");
 	humanoid33_t.loadFromFile("resources/humanoid33.png");
 	humanoid34_t.loadFromFile("resources/humanoid34.png");
-	humanoid35_t.loadFromFile("resources/humanoid35.png");
+
+	//Turning humanoid(s)
+	Thumanoid1_t.loadFromFile("resources/Thumanoid1.png");
+	Thumanoid2_t.loadFromFile("resources/Thumanoid2.png");
+	Thumanoid3_t.loadFromFile("resources/Thumanoid3.png");
+	Thumanoid4_t.loadFromFile("resources/Thumanoid4.png");
+	Thumanoid5_t.loadFromFile("resources/Thumanoid5.png");
+	Thumanoid6_t.loadFromFile("resources/Thumanoid6.png");
+	Thumanoid7_t.loadFromFile("resources/Thumanoid7.png");
+	Thumanoid8_t.loadFromFile("resources/Thumanoid8.png");
+	Thumanoid9_t.loadFromFile("resources/Thumanoid9.png");
+	Thumanoid10_t.loadFromFile("resources/Thumanoid10.png");
+	Thumanoid11_t.loadFromFile("resources/Thumanoid11.png");
+	Thumanoid12_t.loadFromFile("resources/Thumanoid12.png");
+	Thumanoid13_t.loadFromFile("resources/Thumanoid13.png");
+	Thumanoid14_t.loadFromFile("resources/Thumanoid14.png");
+	Thumanoid15_t.loadFromFile("resources/Thumanoid15.png");
+	Thumanoid16_t.loadFromFile("resources/Thumanoid16.png");
+	Thumanoid17_t.loadFromFile("resources/Thumanoid17.png");
+	Thumanoid18_t.loadFromFile("resources/Thumanoid18.png");
+	Thumanoid19_t.loadFromFile("resources/Thumanoid19.png");
+	Thumanoid20_t.loadFromFile("resources/Thumanoid20.png");;
+	Thumanoid21_t.loadFromFile("resources/Thumanoid21.png");;
+	Thumanoid22_t.loadFromFile("resources/Thumanoid22.png");;
+	Thumanoid23_t.loadFromFile("resources/Thumanoid23.png");;
+	Thumanoid24_t.loadFromFile("resources/Thumanoid24.png");;
+	Thumanoid25_t.loadFromFile("resources/Thumanoid25.png");;
+	Thumanoid26_t.loadFromFile("resources/Thumanoid26.png");;
+	Thumanoid27_t.loadFromFile("resources/Thumanoid27.png");;
+	Thumanoid28_t.loadFromFile("resources/Thumanoid28.png");;
+
 	fallingHumanoid1_t.loadFromFile("resources/falling-humanoid1.png");
 	fallingHumanoid2_t.loadFromFile("resources/falling-humanoid2.png");
 	fallingHumanoid3_t.loadFromFile("resources/falling-humanoid3.png");
@@ -78,14 +108,114 @@ void HumanoidSprite::setTexture(std::string direction, const std::string state, 
 	{
 		falling(direction,humanoid_watch);
 		updateSpritePosition(direction, xPos, yPos, miniMapXpos, miniMapYpos);
+		return;
+	}
+
+	if (state == "Turning")
+	{
+		turning(direction, humanoid_watch);
+		updateSpritePosition(direction, xPos, yPos, miniMapXpos, miniMapYpos);
+	}
+}
+
+void HumanoidSprite::turning(std::string direction, std::shared_ptr<StopWatch>humanoid_watch)
+{
+	auto _time = humanoid_watch->time_elapsed();
+	if (direction == "left")
+	{
+		if (_time > 34 * texture_period && _time <= 35 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid1_t, miniMap_t);
+
+		if (_time > 35 * texture_period && _time <= 36 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid2_t, miniMap_t);
+
+		if (_time > 36 * texture_period && _time <= 37 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid3_t, miniMap_t);
+
+		if (_time > 37 * texture_period && _time <= 38 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid4_t, miniMap_t);
+
+		if (_time > 38 * texture_period && _time <= 39 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid5_t, miniMap_t);
+
+		if (_time > 39 * texture_period && _time <= 40 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid6_t, miniMap_t);
+
+		if (_time > 40 * texture_period && _time <= 41 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid7_t, miniMap_t);
+
+		if (_time > 41 * texture_period && _time <= 42 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid8_t, miniMap_t);
+
+		if (_time > 42 * texture_period && _time <= 43 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid9_t, miniMap_t);
+
+		if (_time > 43 * texture_period && _time <= 44 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid10_t, miniMap_t);
+
+		if (_time > 44 * texture_period && _time <= 45 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid11_t, miniMap_t);
+
+		if (_time > 45 * texture_period && _time <= 46 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid12_t, miniMap_t);
+
+		if (_time > 46 * texture_period && _time <= 47 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid13_t, miniMap_t);
+
+		if (_time > 47 * texture_period && _time <= 48 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid14_t, miniMap_t);
+
+		if (_time > 48 * texture_period && _time <= 49 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid15_t, miniMap_t);
+
+		if (_time > 49 * texture_period && _time <= 50 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid16_t, miniMap_t);
+
+		if (_time > 50 * texture_period && _time <= 51 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid17_t, miniMap_t);
+
+		if (_time > 51 * texture_period && _time <= 52 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid18_t, miniMap_t);
+
+		if (_time > 52 * texture_period && _time <= 53 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid19_t, miniMap_t);
+
+		if (_time > 53 * texture_period && _time <= 54 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid20_t, miniMap_t);
+
+		if (_time > 54 * texture_period && _time <= 55 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid21_t, miniMap_t);
+
+		if (_time > 55 * texture_period && _time <= 56 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid22_t, miniMap_t);
+
+		if (_time > 56 * texture_period && _time <= 57 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid23_t, miniMap_t);
+
+		if (_time > 57 * texture_period && _time <= 58 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid24_t, miniMap_t);
+
+		if (_time > 58 * texture_period && _time <= 59 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid25_t, miniMap_t);
+
+		if (_time > 59 * texture_period && _time <= 60 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid26_t, miniMap_t);
+
+		if (_time > 60 * texture_period && _time <= 61 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid27_t, miniMap_t);
+
+		if (_time > 61 * texture_period && _time <= 62 * texture_period)
+			updateAnimationSpriteTexture(Thumanoid28_t, miniMap_t);
+
+		return;
 	}
 }
 
 void HumanoidSprite::walkingAndAbuction(std::string direction, std::shared_ptr<StopWatch>humanoid_watch)
 {
 	auto _time = humanoid_watch->time_elapsed();
-	if (_time > 35 * texture_period)
-		humanoid_watch->restart();
+	/*if (_time > 35 * texture_period)
+		humanoid_watch->restart();*/
 	
 	if (direction == "left")
 	{
@@ -191,8 +321,6 @@ void HumanoidSprite::walkingAndAbuction(std::string direction, std::shared_ptr<S
 		if (_time > 33 * texture_period && _time <= 34 * texture_period)
 			updateSpriteTexture(humanoid34_t, miniMap_t);
 
-		if (_time > 34 * texture_period && _time <= 35 * texture_period)
-			updateSpriteTexture(humanoid35_t, miniMap_t);
 		return;	
 	}
 

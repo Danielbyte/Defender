@@ -10,7 +10,7 @@
 #include "player.h"
 
 
-enum class HumanoidState{Walking,Abducted,Falling,Dead,Rescued};
+enum class HumanoidState{Walking,Abducted,Falling,Dead,Rescued,Turning};
 
 class Humanoid
 {
