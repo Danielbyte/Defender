@@ -579,7 +579,7 @@ void HumanoidSprite::walkingAndAbuction(std::string direction, std::shared_ptr<S
 
 void HumanoidSprite::falling(std::string direction, std::shared_ptr<StopWatch>humanoid_watch)
 {
-	texture_period = 0.1f;
+	//texture_period = 0.1f;
 
 	auto _time = humanoid_watch->time_elapsed();
 	if (_time > 3 * texture_period)

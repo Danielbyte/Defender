@@ -97,11 +97,11 @@ void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& h
 		return;
 	}
 
-	if (direction == "right" && humanoid_watch->time_elapsed() <= 2.72f)
+	if (direction == "right" && humanoid_watch->time_elapsed() <= 0.96f)
 		xPosition += speed * dt;
 		
 
-	if (direction == "left" && humanoid_watch->time_elapsed() <= 2.72f)
+	if (direction == "left" && humanoid_watch->time_elapsed() <= 0.96f)
 	    xPosition -= speed * dt;
 		
 	updateHumanoidSprite(humanoid_sprite);
@@ -224,3 +224,4 @@ void Humanoid::setDistance(const float distanceBetween)
 	auto offset = 0.2f;
 	distance = distanceBetween - offset;
 }
+
