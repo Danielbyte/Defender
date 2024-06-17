@@ -12,8 +12,8 @@ LanderSprite::LanderSprite():
 	miniDimensions.y = 5.0f;
 
 	sf::Vector2f teleportDimensions;
-	teleportDimensions.x = 100.0f;
-	teleportDimensions.y = 100.0f;
+	teleportDimensions.x = 118.0f;
+	teleportDimensions.y = 200.0f;
 
 	loadTextures();
 	InitialiseEntityOrigin(mainDimensions, miniDimensions, teleportDimensions);
@@ -25,7 +25,7 @@ void LanderSprite::setTexture(std::shared_ptr<StopWatch>& watch, bool& isTelepor
 
 	if (isTeleporting)
 	{
-		auto period = 7.0f / 90.0f;
+		auto period = 0.12f;
 		if (_time >= 0.0f && _time <= period)
 		{
 			updateAnimationSpriteTexture(landerTeleport1_t, miniMap_t);
@@ -50,37 +50,8 @@ void LanderSprite::setTexture(std::shared_ptr<StopWatch>& watch, bool& isTelepor
 			return;
 		}
 
-		if (_time > 4 * period && _time <= 5 * period)
-		{
-			updateAnimationSpriteTexture(landerTeleport5_t, miniMap_t);
-			return;
-		}
-
-		if (_time > 5 * period && _time <= 6 * period)
-		{
-			updateAnimationSpriteTexture(landerTeleport6_t, miniMap_t);
-			return;
-		}
-
-		if (_time > 6 * period && _time <= 7 * period)
-		{
-			updateAnimationSpriteTexture(landerTeleport7_t, miniMap_t);
-			return;
-		}
-
-		if (_time > 7 * period && _time <= 8 * period)
-		{
-			updateAnimationSpriteTexture(landerTeleport8_t, miniMap_t);
-			return;
-		}
-
-		if (_time > 8 * period && _time <= 9 * period)
-		{
-			updateAnimationSpriteTexture(landerTeleport9_t, miniMap_t);
-			isTeleporting = false;
-			watch->restart();
-			return;
-		}
+		isTeleporting = false;
+		watch->restart();
 	}
 
 	if (_time >= 0 && _time <= sprite_period)
@@ -184,15 +155,11 @@ void LanderSprite::setTexture(std::shared_ptr<StopWatch>& watch, bool& isTelepor
 
 void LanderSprite::loadTextures()
 {
-	landerTeleport1_t.loadFromFile("resources/lander-teleport-1.png");
-	landerTeleport2_t.loadFromFile("resources/lander-teleport-2.png");
-	landerTeleport3_t.loadFromFile("resources/lander-teleport-3.png");
-	landerTeleport4_t.loadFromFile("resources/lander-teleport-4.png");
-	landerTeleport5_t.loadFromFile("resources/lander-teleport-5.png");
-	landerTeleport6_t.loadFromFile("resources/lander-teleport-6.png");
-	landerTeleport7_t.loadFromFile("resources/lander-teleport-7.png");
-	landerTeleport8_t.loadFromFile("resources/lander-teleport-8.png");
-	landerTeleport9_t.loadFromFile("resources/lander-teleport-9.png");
+	landerTeleport1_t.loadFromFile("resources/lander-teleport1.png");
+	landerTeleport2_t.loadFromFile("resources/lander-teleport2.png");
+	landerTeleport3_t.loadFromFile("resources/lander-teleport3.png");
+	landerTeleport4_t.loadFromFile("resources/lander-teleport4.png");
+
 	lander1_t.loadFromFile("resources/lander1.png");
 	lander2_t.loadFromFile("resources/lander2.png");
 	lander3_t.loadFromFile("resources/lander3.png");
