@@ -149,6 +149,7 @@ void HumanoidSprite::loadTextures()
 	fallingHumanoid1_t.loadFromFile("resources/falling-humanoid1.png");
 	fallingHumanoid2_t.loadFromFile("resources/falling-humanoid2.png");
 	fallingHumanoid3_t.loadFromFile("resources/falling-humanoid3.png");
+	fallingHumanoid4_t.loadFromFile("resources/falling-humanoid4.png");
 	miniMap_t.loadFromFile("resources/mini-humanoid.png");
 }
 
@@ -582,7 +583,7 @@ void HumanoidSprite::falling(std::string direction, std::shared_ptr<StopWatch>hu
 	//texture_period = 0.1f;
 
 	auto _time = humanoid_watch->time_elapsed();
-	if (_time > 3 * texture_period)
+	if (_time > 4 * texture_period)
 		humanoid_watch->restart();
 	
 	if (_time >= 0.0f && _time <= texture_period)
@@ -594,5 +595,10 @@ void HumanoidSprite::falling(std::string direction, std::shared_ptr<StopWatch>hu
 	if (_time > 2 * texture_period && _time <= 3 * texture_period)
 	{
 		updateSpriteTexture(fallingHumanoid3_t, miniMap_t);
+	}
+
+	if (_time > 3 * texture_period && _time <= 4 * texture_period)
+	{
+		updateSpriteTexture(fallingHumanoid4_t, miniMap_t);
 	}
 }
