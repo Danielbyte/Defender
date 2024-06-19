@@ -14,6 +14,9 @@ Lander::Lander():
 	isAbducting{false},
 	ascend{false},
 	isTeleporting{true},
+	isShot{false},
+	isExploding{false},
+	canDelete{false},
 	localId{0}
 {}
 
@@ -64,7 +67,20 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 	std::shared_ptr<Player>& player, std::vector<std::shared_ptr<MissileSprite>>& missile_sprites,
 	std::vector<std::shared_ptr<Humanoid>>& humanoids)
 {
+	if (isShot)
+	{
+		auto horizontalOffset = 400.0f;
+		auto verticalOffset = 40.0f;
+		auto horizontallScalingFactor = 0.5f;
+		auto verticalScalingFactor = (1.0f / 6.0f);
 
+		auto miniMapXpos = (xPosition - horizontalOffset) * horizontallScalingFactor;
+		auto miniMapYpos = (yPosition - verticalOffset) * verticalScalingFactor;
+
+		lander_sprite->setTexture(lander_watch, isTeleporting, isShot, isExploding, canDelete);
+		lander_sprite->updateSpritePosition("either", xPosition, yPosition, miniMapXpos, miniMapYpos);
+		return;
+	}
 		
 	if (!reachedHumanoidZone && !isTeleporting)
 	{
@@ -137,7 +153,7 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 
 	auto miniMapXpos = (xPosition - horizontalOffset) * horizontallScalingFactor;
 	auto miniMapYpos = (yPosition - verticalOffset) * verticalScalingFactor;
-	lander_sprite->setTexture(lander_watch, isTeleporting);
+	lander_sprite->setTexture(lander_watch, isTeleporting, isShot, isTeleporting, canDelete);
 	lander_sprite->updateSpritePosition("either", xPosition, yPosition, miniMapXpos, miniMapYpos);
 }
 
@@ -158,6 +174,12 @@ void Lander::moveNorth(const float& dt)
 	yPosition -= landerSpeed * dt;
 	restrictLander(dt);
 }
+
+bool Lander::canRemove() const
+{
+	return canDelete;
+}
+
 
 void Lander::moveSouth(const float& dt)
 {
@@ -551,4 +573,15 @@ void Lander::tests_setPosition(float x, float y)
 bool Lander::getIsAbducting() const
 {
 	return isAbducting;
+}
+
+void Lander::setToExplode()
+{
+	isShot = true;
+	isExploding = true;
+}
+
+std::tuple<bool, bool> Lander::getLanderStatus() const
+{
+	return { isShot, isExploding };
 }

@@ -47,6 +47,9 @@ public:
 	void test_setTeleportationState(bool teleporting); // for test purposes only
 
 	void tests_setPosition(float x, float y);
+	void setToExplode();
+	std::tuple<bool, bool> getLanderStatus() const;
+	bool canRemove() const;
 	
 private:
 	void createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
@@ -68,6 +71,9 @@ private:
 	bool isAbducting; //lander in the process of abducting a lander
 	bool ascend;
 	bool isTeleporting;
+	bool isShot;
+	bool isExploding;
+	bool canDelete;
 	static unsigned int globalId;
 	unsigned int localId; //Id with same scope as lander object
 	static void setId();

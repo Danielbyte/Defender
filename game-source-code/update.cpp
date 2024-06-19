@@ -32,16 +32,24 @@ void Game::updateLanders(const float dt)
 	while (object_iter != lander_objects.end())
 	{
 		(*object_iter)->updateLander(*sprite_iter,dt,player_obj,lander_missile_sprites,humanoid_objects);
-		++object_iter;
-		++sprite_iter;
+
+		if ((*object_iter)->canRemove())
+		{
+			lander_objects.erase(object_iter);
+			lander_object_sprites.erase(sprite_iter);
+		}
+		else
+		{
+			++object_iter;
+			++sprite_iter;
+		}
 	}
 }
 
 void Game::updateCollisions()
 {
 	//update_collisions.playerLanderCollisions(player_obj, lander_objects, lander_object_sprites);
-	update_collisions.landerAndLaserCollisions(lander_objects, lander_object_sprites, laser_sprite, 
-		lasers, humanoid_objects,player_obj, manage_score, landersDestroyed);
+	update_collisions.landerAndLaserCollisions(lander_objects, laser_sprite, lasers, humanoid_objects,player_obj, manage_score, landersDestroyed);
 
 	update_collisions.landerAndHumanoidCollisions(lander_objects,lander_object_sprites, humanoid_objects,humanoid_sprites, number0fHumanoids);
 	update_collisions.playerAndFallingHumanoidCollisions(player_obj, humanoid_objects,humanoid_sprites, manage_score);

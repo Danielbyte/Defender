@@ -5,6 +5,10 @@ SpriteStore::SpriteStore():
 	toTheRight{true},
 	canDelete{false}
 {
+	sf::Vector2f explosionSpriteDimensions;
+	explosionSpriteDimensions.x = 90.0f;
+	explosionSpriteDimensions.y = 90.0f;
+	explosionSprite.setOrigin (explosionSpriteDimensions / 2.0f);
 }
 
 void SpriteStore::updateSpritePosition(const std::string& entityDirection, const float x_pos,const float y_pos,
@@ -25,6 +29,7 @@ void SpriteStore::updateSpritePosition(const std::string& entityDirection, const
 	entitySprite.setPosition(x_pos, y_pos);
 	miniSprite.setPosition(miniXpos, miniYpos);
 	animationSprite.setPosition(x_pos, y_pos);
+	explosionSprite.setPosition(x_pos, y_pos);
 }
 
 sf::Sprite SpriteStore::getSprite() const
@@ -76,7 +81,18 @@ void SpriteStore::updateAnimationSpriteTexture(sf::Texture& animationTexture, sf
 	miniSprite.setTexture(miniTexture);
 }
 
+void SpriteStore::updateExplosionSpriteTexture(sf::Texture& explosionTexture, sf::Texture& miniTexture)
+{
+	explosionSprite.setTexture(explosionTexture);
+	miniSprite.setTexture(miniTexture);
+}
+
 sf::Sprite SpriteStore::getAnimationSprite() const
 {
 	return animationSprite;
+}
+
+sf::Sprite SpriteStore::getExplosionSprite() const
+{
+	return explosionSprite;
 }

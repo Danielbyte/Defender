@@ -1,7 +1,8 @@
 #include "landerSprite.h"
 
 LanderSprite::LanderSprite():
-	sprite_period{0.03f} //display each sprite for 0.5 sec
+	sprite_period{0.03f}, //display each sprite for 0.5 sec
+	startedExplosion{false}
 {
 	sf::Vector2f mainDimensions;
 	mainDimensions.x = 40.0f;
@@ -19,10 +20,69 @@ LanderSprite::LanderSprite():
 	InitialiseEntityOrigin(mainDimensions, miniDimensions, teleportDimensions);
 }
 
-void LanderSprite::setTexture(std::shared_ptr<StopWatch>& watch, bool& isTeleporting)
+void LanderSprite::setTexture(std::shared_ptr<StopWatch>& watch, bool& isTeleporting, bool isShot, bool& isExploding, bool& canDelete)
 {
-	auto _time = watch->time_elapsed();
+	
 
+	if (isShot)
+	{
+		if (!startedExplosion)
+		{
+			watch->restart();
+			startedExplosion = true;
+		}
+		auto _time = watch->time_elapsed();
+
+		auto period = 0.03f;
+		if (_time >= 0.0f && _time <= period)
+			updateExplosionSpriteTexture(explosion1_t, miniMap_t);
+
+		if (_time > period && _time <= 2 * period)
+			updateExplosionSpriteTexture(explosion2_t, miniMap_t);
+
+		if (_time > 2 * period && _time <= 3 * period)
+			updateExplosionSpriteTexture(explosion3_t, miniMap_t);
+
+		if (_time > 3 * period && _time <= 4 * period)
+			updateExplosionSpriteTexture(explosion4_t, miniMap_t);
+
+		if (_time > 4 * period && _time <= 5 * period)
+			updateExplosionSpriteTexture(explosion5_t, miniMap_t);
+
+		if (_time > 5 * period && _time <= 6 * period)
+			updateExplosionSpriteTexture(explosion6_t, miniMap_t);
+
+		if (_time > 6 * period && _time <= 7 * period)
+			updateExplosionSpriteTexture(explosion7_t, miniMap_t);
+
+		if (_time > 7 * period && _time <= 8 * period)
+			updateExplosionSpriteTexture(explosion8_t, miniMap_t);
+
+		if (_time > 8 * period && _time <= 9 * period)
+			updateExplosionSpriteTexture(explosion9_t, miniMap_t);
+
+		if (_time > 9 * period && _time <= 10 * period)
+			updateExplosionSpriteTexture(explosion10_t, miniMap_t);
+
+		if (_time > 10 * period && _time <= 11 * period)
+			updateExplosionSpriteTexture(explosion11_t, miniMap_t);
+
+		if (_time > 11 * period && _time <= 12 * period)
+			updateExplosionSpriteTexture(explosion12_t, miniMap_t);
+
+		if (_time > 12 * period && _time <= 13 * period)
+			updateExplosionSpriteTexture(explosion13_t, miniMap_t);
+
+		if (_time > 13 * period && _time <= 14 * period)
+			updateExplosionSpriteTexture(explosion14_t, miniMap_t);
+
+		if (_time > 14 * period)
+			canDelete = true;
+
+		return;
+	}
+
+	auto _time = watch->time_elapsed();
 	if (isTeleporting)
 	{
 		auto period = 0.12f;
@@ -177,4 +237,20 @@ void LanderSprite::loadTextures()
 	lander15_t.loadFromFile("resources/lander15.png");
 	lander16_t.loadFromFile("resources/lander16.png");
 	miniMap_t.loadFromFile("resources/mini-lander.png");
+
+	//load explosion textures
+	explosion1_t.loadFromFile("resources/explosion1.png");
+	explosion2_t.loadFromFile("resources/explosion2.png");
+	explosion3_t.loadFromFile("resources/explosion3.png");
+	explosion4_t.loadFromFile("resources/explosion4.png");
+	explosion5_t.loadFromFile("resources/explosion5.png");
+	explosion6_t.loadFromFile("resources/explosion6.png");
+	explosion7_t.loadFromFile("resources/explosion7.png");
+	explosion8_t.loadFromFile("resources/explosion8.png");
+	explosion9_t.loadFromFile("resources/explosion9.png");
+	explosion10_t.loadFromFile("resources/explosion10.png");
+	explosion11_t.loadFromFile("resources/explosion11.png");
+	explosion12_t.loadFromFile("resources/explosion12.png");
+	explosion13_t.loadFromFile("resources/explosion13.png");
+	explosion14_t.loadFromFile("resources/explosion14.png");
 }

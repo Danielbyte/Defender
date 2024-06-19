@@ -101,10 +101,10 @@ void CollisionsManager::playerAndMissileCollisions(std::shared_ptr<Player>& play
 	}
 }
 
-void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lander>>& landers,
-	std::vector<std::shared_ptr<LanderSprite>>& lander_sprites, std::vector<std::shared_ptr<LaserSprite>>& laser_sprites,
-	std::vector<std::shared_ptr<Projectile>>& lasers, std::vector<std::shared_ptr<Humanoid>>& humanoids,
-	std::shared_ptr<Player>& player, std::shared_ptr<ScoreManager>& score_manager, int& landersDestroyed)
+void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lander>>& landers, 
+	std::vector<std::shared_ptr<LaserSprite>>& laser_sprites, std::vector<std::shared_ptr<Projectile>>& lasers,
+	std::vector<std::shared_ptr<Humanoid>>& humanoids, std::shared_ptr<Player>& player, 
+	std::shared_ptr<ScoreManager>& score_manager, int& landersDestroyed)
 {
 	if (landers.empty())
 		return;
@@ -114,7 +114,6 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 
 	while (laser != lasers.end())
 	{
-		auto lander_sprite = lander_sprites.begin();
 		auto lander = landers.begin();
 		while (lander != landers.end())
 		{
@@ -128,16 +127,11 @@ void CollisionsManager::landerAndLaserCollisions(std::vector<std::shared_ptr<Lan
 			{
 				score_manager->updateCurrentScore(player, "lander");
 				score_manager->updateHighScore(player->getScore());
-				landers.erase(lander);
-				lander_sprites.erase(lander_sprite);
+				(*lander)->setToExplode();
 				(*laser_sprite)->remove();
 				++landersDestroyed;
 			}
-			else
-			{
-				++lander;
-				++lander_sprite;
-			}
+			++lander;
 		}
 		++laser_sprite;
 		++laser;
@@ -267,10 +261,16 @@ void CollisionsManager::dropHumanoid(std::shared_ptr<Humanoid>& humanoid, std::v
 	for (auto& lander : landers)
 	{
 		if (id == lander->getLocalId())
-			return;
+		{
+			auto [isShot, isExploding] = lander->getLanderStatus();
+			
+			if (isShot)
+			{
+				humanoid->setHumanoidState(HumanoidState::Falling);
+				break;
+			}
+		}
 	}
-
-	humanoid->setHumanoidState(HumanoidState::Falling);
 }
 
 void CollisionsManager::playerAndFallingHumanoidCollisions(std::shared_ptr<Player>& player,

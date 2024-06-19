@@ -48,11 +48,16 @@ void Game::display(const float dt)
 		auto lander = lander_objects.begin();
 		for (auto& _lander : lander_object_sprites)
 		{
-			if ((*lander)->getIfTeleporting())
+			auto [isShot, isExploding] = (*lander)->getLanderStatus();
+
+			if ((*lander)->getIfTeleporting() && !isShot)
 				window->draw(_lander->getAnimationSprite());
 
-			if (!(*lander)->getIfTeleporting())
+			if (!(*lander)->getIfTeleporting() && !isShot)
 				window->draw(_lander->getSprite());
+
+			if (isExploding)
+				window->draw(_lander->getExplosionSprite());
 
 			++lander;
 		}

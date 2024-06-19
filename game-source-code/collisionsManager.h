@@ -16,11 +16,9 @@ public:
 	void playerAndMissileCollisions(std::shared_ptr<Player>& player,
 		std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
 
-	void landerAndLaserCollisions(std::vector<std::shared_ptr<Lander>>& landers,
-		std::vector<std::shared_ptr<LanderSprite>>& lander_sprites,
-		std::vector<std::shared_ptr<LaserSprite>>& laser_sprites,
-		std::vector<std::shared_ptr<Projectile>>& lasers, std::vector<std::shared_ptr<Humanoid>>& humanoids,
-		std::shared_ptr<Player>& player, std::shared_ptr<ScoreManager>& score_manager ,int& landersDestroyed);
+	void landerAndLaserCollisions(std::vector<std::shared_ptr<Lander>>& landers, std::vector<std::shared_ptr<LaserSprite>>& laser_sprites,
+		std::vector<std::shared_ptr<Projectile>>& lasers, std::vector<std::shared_ptr<Humanoid>>& humanoids,std::shared_ptr<Player>& player, 
+		std::shared_ptr<ScoreManager>& score_manager ,int& landersDestroyed);
 
 	void landerAndHumanoidCollisions(std::vector<std::shared_ptr<Lander>>& landers, std::vector<std::shared_ptr<LanderSprite>>& lander_sprites,
 		std::vector<std::shared_ptr<Humanoid>>& humanoids, std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites, int& NumberOfHumanoids);
