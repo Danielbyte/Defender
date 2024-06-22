@@ -12,12 +12,12 @@ void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_obj
 {
 	if (initialization)
 	{
-		initialLanders(lander_objects, lander_sprites);
+		initialLanders(player, lander_objects, lander_sprites);
 		initialization = false; //Done initializing
 		return;
 	}
 	auto _time = world_watch->time_elapsed();
-	generateEnemy();
+	//generateEnemy();
 
 	if (_time < 1.5f || enemy == Enemy::None)
 		return;
@@ -44,9 +44,15 @@ void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_obj
 	garbageCollector(missile_sprites);
 }
 
-void GameWorld::initialLanders(std::vector<std::shared_ptr<Lander>>& lander_objects, std::vector<std::shared_ptr<LanderSprite>>& lander_sprites)
+void GameWorld::initialLanders(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& lander_objects, std::vector<std::shared_ptr<LanderSprite>>& lander_sprites)
 {
-	//create initial wave of sprites when game starts
+	//create initial wave of landers when game starts
+	auto lander_object = std::make_shared<Lander>(player,initialization);
+	lander_objects.push_back(lander_object);
+
+	auto lander_sprite = std::make_shared<LanderSprite>();
+	lander_sprites.push_back(lander_sprite);
+	world_watch->restart();
 }
 
 Enemy GameWorld::generateEnemy()
@@ -88,7 +94,7 @@ Enemy GameWorld::generateEnemy()
 void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_objects,
 	std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites, std::shared_ptr<Player>& player)
 {
-	auto lander_object = std::make_shared<Lander>(player);
+	auto lander_object = std::make_shared<Lander>(player, initialization);
 	lander_objects.push_back(lander_object);
 
 	auto lander_sprite = std::make_shared<LanderSprite>();

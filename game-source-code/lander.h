@@ -14,9 +14,9 @@ class Lander : public Shooter
 {
 public:
 	Lander();
-	Lander(std::shared_ptr<Player>& player);
+	Lander(std::shared_ptr<Player>& player, bool isInitial);
 	std::tuple<float, float> getPosition() const;
-	void generateInitialPosition(std::shared_ptr<Player>& player);
+	void generateInitialPosition(std::shared_ptr<Player>& player, bool initial_lander);
 
 	void updateLander(std::shared_ptr<LanderSprite>& lander_sprite,const float dt,std::shared_ptr<Player>& player,
 		std::vector<std::shared_ptr<MissileSprite>>& missile_sprites, std::vector<std::shared_ptr<Humanoid>>& humanoids);
@@ -54,7 +54,7 @@ public:
 private:
 	void createMissiles(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
 	void abductionDecision();
-	void generateTeleportPosition(std::shared_ptr<Player>& player);
+	void generateTeleportPosition(std::shared_ptr<Player>& player, bool initial_lander);
 	float xPosition;
 	float yPosition;
 	bool rightSide;

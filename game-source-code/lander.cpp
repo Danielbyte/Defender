@@ -20,7 +20,7 @@ Lander::Lander():
 	localId{0}
 {}
 
-Lander::Lander(std::shared_ptr<Player>& player):
+Lander::Lander(std::shared_ptr<Player>& player, bool isInitial):
 	leftSide{ false },
 	rightSide{ false },
 	landerSpeed{ 50.0f },
@@ -35,7 +35,7 @@ Lander::Lander(std::shared_ptr<Player>& player):
 	localId{ 0 }
 {
 	//generate spawn position
-	generateInitialPosition(player);
+	generateInitialPosition(player, isInitial);
 	setId();
 	setLocalId();
 	lander_watch->restart();
@@ -46,9 +46,9 @@ std::tuple<float, float> Lander::getPosition() const
 	return { xPosition,yPosition };
 }
 
-void Lander::generateInitialPosition(std::shared_ptr<Player>& player)
+void Lander::generateInitialPosition(std::shared_ptr<Player>& player, bool isInitial)
 {
-	generateTeleportPosition(player);
+	generateTeleportPosition(player, isInitial);
 
 	auto [playerXpos, playerYpos] = player->getPlayerPosition();
 	auto middle = playerXpos;
@@ -514,8 +514,15 @@ bool Lander::test_getIfInHumanoidZone() const
 	return reachedHumanoidZone;
 }
 
-void Lander::generateTeleportPosition(std::shared_ptr<Player>& player)
+void Lander::generateTeleportPosition(std::shared_ptr<Player>& player, bool initial_lander)
 {
+	if (initial_lander)
+	{
+		xPosition = 1250.0f;
+		yPosition = 150.0f;
+		return;
+	}
+
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	auto minAngle = 0.0f;

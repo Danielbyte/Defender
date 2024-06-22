@@ -40,6 +40,7 @@ void Game::display(const float dt)
 		window->draw(miniMapSection_s);
 		window->draw(highScore);
 		window->draw(currentScore);
+	
 		for (auto& laser : laser_sprite)
 		{
 			window->draw(laser->getSprite());

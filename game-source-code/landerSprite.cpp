@@ -13,8 +13,8 @@ LanderSprite::LanderSprite():
 	miniDimensions.y = 5.0f;
 
 	sf::Vector2f teleportDimensions;
-	teleportDimensions.x = 118.0f;
-	teleportDimensions.y = 200.0f;
+	teleportDimensions.x = 59.0f;
+	teleportDimensions.y = 100.0f;
 
 	loadTextures();
 	InitialiseEntityOrigin(mainDimensions, miniDimensions, teleportDimensions);

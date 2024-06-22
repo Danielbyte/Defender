@@ -33,7 +33,7 @@ private:
 	std::shared_ptr<Landscape> landscape_object = std::make_shared<Landscape>();
 	Enemy enemy;
 	bool initialization;
-	void initialLanders(std::vector<std::shared_ptr<Lander>>& lander_objects, std::vector<std::shared_ptr<LanderSprite>>& lander_sprites);
+	void initialLanders(std::shared_ptr<Player>& player,std::vector<std::shared_ptr<Lander>>& lander_objects, std::vector<std::shared_ptr<LanderSprite>>& lander_sprites);
 
 	void createLander(std::vector<std::shared_ptr<Lander>>& lander_objects,
 		std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites, std::shared_ptr<Player>& player);
