@@ -1,14 +1,21 @@
 #include "gameWorld.h"
 
 GameWorld::GameWorld():
-enemy{Enemy::None} //initially, there are no enemies
+enemy{Enemy::None}, //initially, there are no enemies
+initialization{true} //flag to signal if iinitial game objects have been instantiated
 {}
 
 void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_objects,
-	std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites, std::shared_ptr<Player>& player,
+	std::vector<std::shared_ptr<LanderSprite>>& lander_sprites, std::shared_ptr<Player>& player,
 	std::vector<std::shared_ptr<MissileSprite>>& missile_sprites, std::vector<std::shared_ptr<Bombers>>& bombers,
 	std::vector<std::shared_ptr<BomberSprite>>& bomber_sprites)
 {
+	if (initialization)
+	{
+		initialLanders(lander_objects, lander_sprites);
+		initialization = false; //Done initializing
+		return;
+	}
 	auto _time = world_watch->time_elapsed();
 	generateEnemy();
 
@@ -18,7 +25,7 @@ void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_obj
 	switch (enemy)
 	{
 	case Enemy::Lander:
-		createLander(lander_objects, lander_object_sprites, player);
+		createLander(lander_objects, lander_sprites, player);
 		break;
 	case Enemy::Bomber:
 		createBomber(bombers, bomber_sprites, player);
@@ -35,6 +42,11 @@ void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_obj
 
 	world_watch->restart(); //Remove once the other entity creation functions are done
 	garbageCollector(missile_sprites);
+}
+
+void GameWorld::initialLanders(std::vector<std::shared_ptr<Lander>>& lander_objects, std::vector<std::shared_ptr<LanderSprite>>& lander_sprites)
+{
+	//create initial wave of sprites when game starts
 }
 
 Enemy GameWorld::generateEnemy()
