@@ -527,16 +527,12 @@ void Lander::generateTeleportPosition(std::shared_ptr<Player>& player, bool init
 		{
 		case 1:
 		case 2:
-		case 3:
-		case 4:
-			xPosition = 1250.0f - (NumberOfLanders - 1) * 120.0f;
+			xPosition = 1350.0f - (NumberOfLanders - 1) * 250.0f;
 			break;
 
-		case 5:
-		case 6:
-		case 7:
-		case 8:
-			xPosition = -1250.0f + (NumberOfLanders + 1) * 120.0f;
+		case 3:
+		case 4:
+			xPosition = -1550.0f + (NumberOfLanders + 1) * 250.0f;
 			break;
 
 		default:

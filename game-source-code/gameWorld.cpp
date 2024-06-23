@@ -47,7 +47,7 @@ void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_obj
 void GameWorld::initialLanders(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& lander_objects, std::vector<std::shared_ptr<LanderSprite>>& lander_sprites)
 {
 	//create initial wave of landers when game starts
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		auto lander_object = std::make_shared<Lander>(player, initialization);
 		lander_objects.push_back(lander_object);
