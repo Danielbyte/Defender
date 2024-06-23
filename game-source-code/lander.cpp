@@ -34,13 +34,14 @@ Lander::Lander(std::shared_ptr<Player>& player, bool isInitial):
 	isTeleporting{true},
 	localId{ 0 }
 {
+	//increment number of landers evertime an instance of a lander is created
+	++NumberOfLanders;
+
 	//generate spawn position
 	generateInitialPosition(player, isInitial);
 	setId();
 	setLocalId();
 	lander_watch->restart();
-	//increment number of landers evertime an instance of a lander is created
-	++NumberOfLanders;
 }
 
 std::tuple<float, float> Lander::getPosition() const
@@ -520,8 +521,9 @@ void Lander::generateTeleportPosition(std::shared_ptr<Player>& player, bool init
 {
 	if (initial_lander)
 	{
-		xPosition = 1250.0f;
+		//Initial y position is the same for all landers.
 		yPosition = 150.0f;
+		xPosition = 1250.0f - (NumberOfLanders - 1) * 120.0f;
 		return;
 	}
 
