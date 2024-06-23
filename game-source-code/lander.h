@@ -78,6 +78,9 @@ private:
 	unsigned int localId; //Id with same scope as lander object
 	static void setId();
 	void setLocalId();
+
+	//Keep track of number of landers
+	static int NumberOfLanders;
 };
 #endif // !LANDER_H
 

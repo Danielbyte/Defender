@@ -39,6 +39,8 @@ Lander::Lander(std::shared_ptr<Player>& player, bool isInitial):
 	setId();
 	setLocalId();
 	lander_watch->restart();
+	//increment number of landers evertime an instance of a lander is created
+	++NumberOfLanders;
 }
 
 std::tuple<float, float> Lander::getPosition() const
@@ -592,3 +594,6 @@ std::tuple<bool, bool> Lander::getLanderStatus() const
 {
 	return { isShot, isExploding };
 }
+
+//Static variables are accessed at class level
+int Lander::NumberOfLanders = 0; //initialise
