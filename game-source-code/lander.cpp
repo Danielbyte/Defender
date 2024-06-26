@@ -82,7 +82,7 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 		auto miniMapXpos = (xPosition - horizontalOffset) * horizontallScalingFactor;
 		auto miniMapYpos = (yPosition - verticalOffset) * verticalScalingFactor;
 
-		lander_sprite->setTexture(lander_watch, isTeleporting, isShot, isExploding, canDelete);
+		lander_sprite->setTexture(lander_watch, isTeleporting, isShot, isExploding, canDelete,isAbducting);
 		lander_sprite->updateSpritePosition("either", xPosition, yPosition, miniMapXpos, miniMapYpos);
 		return;
 	}
@@ -159,7 +159,7 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 
 	auto miniMapXpos = (xPosition - horizontalOffset) * horizontallScalingFactor;
 	auto miniMapYpos = (yPosition - verticalOffset) * verticalScalingFactor;
-	lander_sprite->setTexture(lander_watch, isTeleporting, isShot, isTeleporting, canDelete);
+	lander_sprite->setTexture(lander_watch, isTeleporting, isShot, isShot, canDelete, isAbducting);
 	lander_sprite->updateSpritePosition("either", xPosition, yPosition, miniMapXpos, miniMapYpos);
 }
 
@@ -606,6 +606,7 @@ void Lander::setToExplode()
 {
 	isShot = true;
 	isExploding = true;
+	isAbducting = false;
 }
 
 std::tuple<bool, bool> Lander::getLanderStatus() const

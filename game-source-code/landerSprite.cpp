@@ -1,7 +1,7 @@
 #include "landerSprite.h"
 
 LanderSprite::LanderSprite():
-	sprite_period{0.03f}, //display each sprite for 0.5 sec
+	sprite_period{0.031f}, //display each sprite for 0.5 sec
 	startedExplosion{false}
 {
 	sf::Vector2f mainDimensions;
@@ -20,7 +20,8 @@ LanderSprite::LanderSprite():
 	InitialiseEntityOrigin(mainDimensions, miniDimensions, teleportDimensions);
 }
 
-void LanderSprite::setTexture(std::shared_ptr<StopWatch>& watch, bool& isTeleporting, bool isShot, bool& isExploding, bool& canDelete)
+void LanderSprite::setTexture(std::shared_ptr<StopWatch>& watch, bool& isTeleporting, bool isShot, bool& isExploding, bool& canDelete,
+	bool isAbducting)
 {
 	
 
@@ -82,9 +83,9 @@ void LanderSprite::setTexture(std::shared_ptr<StopWatch>& watch, bool& isTelepor
 		return;
 	}
 
-	auto _time = watch->time_elapsed();
 	if (isTeleporting)
 	{
+		auto _time = watch->time_elapsed();
 		auto period = 0.12f;
 		if (_time >= 0.0f && _time <= period)
 		{
@@ -114,97 +115,104 @@ void LanderSprite::setTexture(std::shared_ptr<StopWatch>& watch, bool& isTelepor
 		watch->restart();
 	}
 
+	if (isAbducting)
+	{
+		auto _time = watch->time_elapsed();
+		if (_time >= 0.0f && _time <= sprite_period)
+		{
+			updateSpriteTexture(lander1_t, miniMap_t);
+			return;
+		}
+
+		if (_time > sprite_period && _time <= 2 * sprite_period)
+		{
+			updateSpriteTexture(lander2_t, miniMap_t);
+			return;
+		}
+
+		if (_time > 2 * sprite_period && _time <= 3 * sprite_period)
+		{
+			updateSpriteTexture(lander3_t, miniMap_t);
+			return;
+		}
+
+		if (_time > 3 * sprite_period && _time <= 4 * sprite_period)
+		{
+			updateSpriteTexture(lander4_t, miniMap_t);
+			return;
+		}
+
+		if (_time > 4 * sprite_period && _time <= 5 * sprite_period)
+		{
+			updateSpriteTexture(lander5_t, miniMap_t);
+			return;
+		}
+
+		if (_time > 5 * sprite_period && _time <= 6 * sprite_period)
+		{
+			updateSpriteTexture(lander6_t, miniMap_t);
+			return;
+		}
+
+		if (_time > 6 * sprite_period && _time <= 7 * sprite_period)
+		{
+			updateSpriteTexture(lander7_t, miniMap_t);
+			return;
+		}
+
+		if (_time > 7 * sprite_period && _time <= 8 * sprite_period)
+		{
+			updateSpriteTexture(lander8_t, miniMap_t);
+			return;
+		}
+
+		watch->restart();
+	}
+
+	auto _time = watch->time_elapsed();
 	if (_time >= 0 && _time <= sprite_period)
-	{
-		updateSpriteTexture(lander1_t, miniMap_t);
-		return;
-	}
-
-	if (_time > sprite_period && _time <= 2 * sprite_period)
-	{
-		updateSpriteTexture(lander2_t, miniMap_t);
-		return;
-	}
-
-	if (_time > 2 * sprite_period && _time <= 3 * sprite_period)
-	{
-		updateSpriteTexture(lander3_t, miniMap_t);
-		return;
-	}
-
-	if (_time > 3 * sprite_period && _time <= 4 * sprite_period)
-	{
-		updateSpriteTexture(lander4_t, miniMap_t);
-		return;
-	}
-
-	if (_time > 4 * sprite_period && _time <= 5 * sprite_period)
-	{
-		updateSpriteTexture(lander5_t, miniMap_t);
-		return;
-	}
-
-	if (_time > 5 * sprite_period && _time <= 6 * sprite_period)
-	{
-		updateSpriteTexture(lander6_t, miniMap_t);
-		return;
-	}
-
-	if (_time > 6 * sprite_period && _time <= 7 * sprite_period)
-	{
-		updateSpriteTexture(lander7_t, miniMap_t);
-		return;
-	}
-
-	if (_time > 7 * sprite_period && _time <= 8 * sprite_period)
-	{
-		updateSpriteTexture(lander8_t, miniMap_t);
-		return;
-	}
-
-	if (_time > 8 * sprite_period && _time <= 9 * sprite_period)
 	{
 		updateSpriteTexture(lander9_t, miniMap_t);
 		return;
 	}
 
-	if (_time > 9 * sprite_period && _time <= 10 * sprite_period)
+	if (_time > sprite_period && _time <= 2 * sprite_period)
 	{
 		updateSpriteTexture(lander10_t, miniMap_t);
 		return;
 	}
 
-	if (_time > 10 * sprite_period && _time <= 11 * sprite_period)
+	if (_time > 2 * sprite_period && _time <= 3 * sprite_period)
 	{
 		updateSpriteTexture(lander11_t, miniMap_t);
 		return;
 	}
 
-	if (_time > 11 * sprite_period && _time <= 12 * sprite_period)
+	if (_time > 3 * sprite_period && _time <= 4 * sprite_period)
 	{
 		updateSpriteTexture(lander12_t, miniMap_t);
 		return;
 	}
 
-	if (_time > 12 * sprite_period && _time <= 13 * sprite_period)
+	if (_time > 4 * sprite_period && _time <= 5 * sprite_period)
 	{
 		updateSpriteTexture(lander13_t, miniMap_t);
 		return;
 	}
 
-	if (_time > 13 * sprite_period && _time <= 14 * sprite_period)
+	if (_time > 5 * sprite_period && _time <= 6 * sprite_period)
 	{
 		updateSpriteTexture(lander14_t, miniMap_t);
 		return;
 	}
 
-	if (_time > 14 * sprite_period && _time <= 15 * sprite_period)
+	if (_time > 6 * sprite_period && _time <= 7 * sprite_period)
 	{
 		updateSpriteTexture(lander15_t, miniMap_t);
 		return;
 	}
 
-	if (_time > 15 * sprite_period && _time <= 16 * sprite_period)
+	if (_time > 7 * sprite_period && _time <= 8 * sprite_period)
 	{
 		updateSpriteTexture(lander16_t, miniMap_t);
 		return;
