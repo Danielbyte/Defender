@@ -32,6 +32,9 @@ Lander::Lander(std::shared_ptr<Player>& player, bool isInitial):
 	isAbducting{ false },
 	ascend{ false },
 	isTeleporting{true},
+	isShot{false},
+	isExploding{false},
+	canDelete{false},
 	localId{ 0 }
 {
 	//increment number of landers evertime an instance of a lander is created
