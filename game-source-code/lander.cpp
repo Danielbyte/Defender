@@ -57,15 +57,14 @@ void Lander::generateInitialPosition(std::shared_ptr<Player>& player, bool isIni
 	generateTeleportPosition(player, isInitial);
 
 	auto [playerXpos, playerYpos] = player->getPlayerPosition();
-	auto middle = playerXpos;
-	if (xPosition >= middle)
+	if (xPosition >= playerXpos) // lander on right side of player
 	{
 		rightSide = true;
 	}
 
 	else
 	{
-		leftSide = true;
+		leftSide = true; // lander on left side of player
 	}
 }
 
