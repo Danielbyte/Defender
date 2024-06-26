@@ -102,7 +102,7 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 			moveSouthEast(dt);
 		}
 
-		if (yPosition >= 480.0f)
+		if (yPosition >= 450.0f)
 			reachedHumanoidZone = true;
 	}
 
@@ -166,13 +166,11 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 void Lander::moveEast(const float& dt)
 {
 	xPosition += landerSpeed * dt;
-	restrictLander(dt);
 }
 
 void Lander::moveWest(const float& dt)
 {
 	xPosition -= landerSpeed * dt;
-	restrictLander(dt);
 }
 
 void Lander::moveNorth(const float& dt)
@@ -246,7 +244,7 @@ void Lander::pickDirection(std::vector<std::shared_ptr<Humanoid>>& humanoids, co
 		int min = 0;
 		int max = 4;
 		std::uniform_int_distribution<int>distribution(min, max);
-		auto decision = distribution(gen);
+		auto decision = 1; // Hard code lander to move Westerly once it has reached humanoid region (Needs better structure)
 
 		if (decision == 0)
 		{
@@ -297,7 +295,7 @@ void Lander::pickDirection(std::vector<std::shared_ptr<Humanoid>>& humanoids, co
 		int min = 3;
 		int max = 7;
 		std::uniform_int_distribution<int>distribution(min, max);
-		auto decision = distribution(gen);
+		auto decision = 6; //Hard code lander to move straight East (Needs restructuring)
 
 		if (decision == 3)
 		{
