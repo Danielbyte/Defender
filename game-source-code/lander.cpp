@@ -5,7 +5,7 @@ Lander::Lander():
 	yPosition{0.0f},
 	leftSide{false},
 	rightSide{false},
-	landerSpeed{80.0f},
+	landerSpeed{120.0f},
 	reachedHumanoidZone{false},
 	direction{Direction::Other},
 	playerXposref{0.0f},
@@ -23,7 +23,7 @@ Lander::Lander():
 Lander::Lander(std::shared_ptr<Player>& player, bool isInitial):
 	leftSide{ false },
 	rightSide{ false },
-	landerSpeed{ 50.0f },
+	landerSpeed{ 120.0f },
 	reachedHumanoidZone{ false },
 	direction{ Direction::Other },
 	playerXposref{ 0.0f },
@@ -107,6 +107,7 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 
 	if (reachedHumanoidZone)
 	{
+		landerSpeed = 80.0f; //lander at humanoid zone
 		//Lander should Hover around humanoid zone
 		pickDirection(humanoids,dt);
 		if (!isAbducting)

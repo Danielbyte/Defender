@@ -83,7 +83,7 @@ void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& h
 
 	if (state == HumanoidState::Abducted)
 	{
-		auto newSpeed = 50.0f; //set to lander speed
+		auto newSpeed = 80.0f; //set to lander speed
 		yPosition -= newSpeed * dt;
 		updateHumanoidSprite(humanoid_sprite);
 		return;
