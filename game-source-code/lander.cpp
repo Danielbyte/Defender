@@ -238,12 +238,6 @@ void Lander::pickDirection(std::vector<std::shared_ptr<Humanoid>>& humanoids, co
 
 	if (rightSide)
 	{
-		//decide whether to move diagonally up/down or move in a straight horizontal line
-		std::random_device rd;
-		std::mt19937 gen(rd());
-		int min = 0;
-		int max = 4;
-		std::uniform_int_distribution<int>distribution(min, max);
 		auto decision = 1; // Hard code lander to move Westerly once it has reached humanoid region (Needs better structure)
 
 		if (decision == 0)
@@ -289,12 +283,6 @@ void Lander::pickDirection(std::vector<std::shared_ptr<Humanoid>>& humanoids, co
 
 	else
 	{
-		//decide whether to move diagonally up/down or move in a straight horizontal line
-		std::random_device rd;
-		std::mt19937 gen(rd());
-		int min = 3;
-		int max = 7;
-		std::uniform_int_distribution<int>distribution(min, max);
 		auto decision = 6; //Hard code lander to move straight East (Needs restructuring)
 
 		if (decision == 3)

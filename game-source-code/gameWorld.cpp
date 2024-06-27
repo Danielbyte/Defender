@@ -14,10 +14,11 @@ void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_obj
 	{
 		initialLanders(player, lander_objects, lander_sprites);
 		initialization = false; //Done initializing
+		lander_watch->restart();
 		return;
 	}
 	auto _time = world_watch->time_elapsed();
-	//generateEnemy();
+	createLander(lander_objects, lander_sprites, player);
 
 	if (_time < 1.5f || enemy == Enemy::None)
 		return;
@@ -97,12 +98,17 @@ Enemy GameWorld::generateEnemy()
 void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_objects,
 	std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites, std::shared_ptr<Player>& player)
 {
-	auto lander_object = std::make_shared<Lander>(player, initialization);
+	if (lander_watch->time_elapsed() >= 5.0f)
+	{
+		std::cout << "It is time" << std::endl;
+		lander_watch->restart();
+	}
+	/*auto lander_object = std::make_shared<Lander>(player, initialization);
 	lander_objects.push_back(lander_object);
 
 	auto lander_sprite = std::make_shared<LanderSprite>();
 	lander_object_sprites.push_back(lander_sprite);
-	world_watch->restart();
+	world_watch->restart();*/
 }
 
 void GameWorld::placeHumanoids(std::vector<std::shared_ptr<Humanoid>>& humanoid_objects,
