@@ -112,7 +112,21 @@ void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_object
 				++landerCountWithinScreen; //increment number of landers within screen
 			}
 		}
-		std::cout << "Landers within screen: " << landerCountWithinScreen << std::endl;
+		if (landerCountWithinScreen <= 1) //spawn lander if there is zero or 1 lander within screen
+		{
+			//Generate 1 or 2 more landers within screen
+			std::random_device rd;
+			std::mt19937 gen(rd());
+			int min = 1;
+			int max = 2;
+			std::uniform_int_distribution<int>distribution(min, max);
+			auto numberOfLandersToSpawn = distribution(gen);
+			for (int i = 0; i < numberOfLandersToSpawn; ++i)
+			{
+				//Create lander objects.
+				//Need to decide if it should be on the left or right hand side of screen
+			}
+		}
 		lander_watch->restart();
 	}
 	/*auto lander_object = std::make_shared<Lander>(player, initialization);
