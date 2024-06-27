@@ -96,11 +96,23 @@ Enemy GameWorld::generateEnemy()
 }
 
 void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_objects,
-	std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites, std::shared_ptr<Player>& player)
+	std::vector<std::shared_ptr<LanderSprite>>& lander_sprites, std::shared_ptr<Player>& player)
 {
-	if (lander_watch->time_elapsed() >= 5.0f)
+	if (lander_watch->time_elapsed() >= 5.0f) //landers are at least spawned at 5 sec intervals
 	{
-		std::cout << "It is time" << std::endl;
+		auto landerCountWithinScreen = 0;
+		for (auto lander : lander_objects)
+		{
+			auto [landerXpos, landerYpos] = lander->getPosition();
+			auto [playerXpos, playerYpos] = player->getPlayerPosition();
+			auto distance = fabs(playerXpos - landerXpos); //get the absolute distance between player and lander
+			if (distance < 400.0f) //This distance is likely to change once game is pragrammed to function in full screen mode
+			{
+				//This lander is within the screen
+				++landerCountWithinScreen; //increment number of landers within screen
+			}
+		}
+		std::cout << "Landers within screen: " << landerCountWithinScreen << std::endl;
 		lander_watch->restart();
 	}
 	/*auto lander_object = std::make_shared<Lander>(player, initialization);
