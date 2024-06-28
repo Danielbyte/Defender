@@ -124,7 +124,14 @@ void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_object
 			for (int i = 0; i < numberOfLandersToSpawn; ++i)
 			{
 				//Create lander objects.
-				//Need to decide if it should be on the left or right hand side of screen
+				//Need to decide if it should be on the left or right hand side of screen.
+				if (i == 0)
+				{
+					//Generate lander on the left
+
+				}
+
+				//Generate lander on the right
 			}
 		}
 		lander_watch->restart();

@@ -579,10 +579,16 @@ void Lander::test_setTeleportationState(bool teleporting)
 	isTeleporting = teleporting;
 }
 
-void Lander::tests_setPosition(float x, float y)
+void Lander::setPosition(float x, float y)
 {
 	xPosition = x;
 	yPosition = y;
+}
+
+void Lander::setSide(bool isRight, bool isLeft)
+{
+	rightSide = isRight;
+	leftSide = isLeft;
 }
 
 bool Lander::getIsAbducting() const

@@ -46,7 +46,8 @@ public:
 	bool getIsAbducting() const;
 	void test_setTeleportationState(bool teleporting); // for test purposes only
 
-	void tests_setPosition(float x, float y);
+	void setPosition(float x, float y);
+	void setSide(bool isRight, bool isLeft);
 	void setToExplode();
 	std::tuple<bool, bool> getLanderStatus() const;
 	bool canRemove() const;
