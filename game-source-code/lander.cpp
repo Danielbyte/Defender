@@ -238,93 +238,15 @@ void Lander::pickDirection(std::vector<std::shared_ptr<Humanoid>>& humanoids, co
 
 	if (rightSide)
 	{
-		auto decision = 1; // Hard code lander to move Westerly once it has reached humanoid region (Needs better structure)
-
-		if (decision == 0)
-		{
-			//move south westerly
-			movement_watch->restart();
-			direction = Direction::SouthWest;
-			return;
-		}
-
-		if (decision == 1)
-		{
-			//move westerly
-			movement_watch->restart();
-			direction = Direction::West;
-			return;
-		}
-
-		if (decision == 2)
-		{
-			//move north westerly
-			movement_watch->restart();
-			direction = Direction::NorthWest;
-			return;
-		}
-
-		if (decision == 3)
-		{
-			//move northerly
-			movement_watch->restart();
-			direction = Direction::North;
-			return;
-		}
-
-		if (decision == 4)
-		{
-			//move south
-			movement_watch->restart();
-			direction = Direction::South;
-			return;
-		}
+		//move westerly
+		movement_watch->restart();
+		direction = Direction::West;
+		return;
 	}
 
-	else
-	{
-		auto decision = 6; //Hard code lander to move straight East (Needs restructuring)
-
-		if (decision == 3)
-		{
-			//move south North
-			movement_watch->restart();
-			direction = Direction::North;
-			return;
-		}
-
-		if (decision == 4)
-		{
-			//move south
-			movement_watch->restart();
-			direction = Direction::South;
-			return;
-		}
-
-		if (decision == 5)
-		{
-			//move south easterly
-			movement_watch->restart();
-			direction = Direction::SouthEast;
-			return;
-		}
-
-		if (decision == 6)
-		{
-			//move easterly
-			movement_watch->restart();
-			direction = Direction::East;
-			return;
-		}
-
-		if (decision == 7)
-		{
-			//move north easterly
-			movement_watch->restart();
-			direction = Direction::NorthEast;
-			return;
-		}
-	}
+	//move easterly
+	movement_watch->restart();
+	direction = Direction::East;	
 }
 
 void Lander::restrictLander(const float& dt)

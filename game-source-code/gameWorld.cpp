@@ -120,7 +120,7 @@ void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_object
 			int min = 1;
 			int max = 2;
 			std::uniform_int_distribution<int>distribution(min, max);
-			auto numberOfLandersToSpawn = distribution(gen);
+			auto numberOfLandersToSpawn = distribution(gen); //randomly generate the number of landers to spawn
 
 			auto landerYpos = 150.0f;//Landers will spawn at this height
 			for (int i = 0; i < numberOfLandersToSpawn; ++i)
