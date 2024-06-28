@@ -128,20 +128,20 @@ void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_object
 				if (i == 0)
 				{
 					//Generate lander on the left
+					auto lander_object = std::make_shared<Lander>(player, initialization);
+					lander_objects.push_back(lander_object);
 
 				}
-
-				//Generate lander on the right
+				else
+				{
+					//Generate lander on the right
+					auto lander_object = std::make_shared<Lander>(player, initialization);
+					lander_objects.push_back(lander_object);
+				}
 			}
 		}
 		lander_watch->restart();
 	}
-	/*auto lander_object = std::make_shared<Lander>(player, initialization);
-	lander_objects.push_back(lander_object);
-
-	auto lander_sprite = std::make_shared<LanderSprite>();
-	lander_object_sprites.push_back(lander_sprite);
-	world_watch->restart();*/
 }
 
 void GameWorld::placeHumanoids(std::vector<std::shared_ptr<Humanoid>>& humanoid_objects,
