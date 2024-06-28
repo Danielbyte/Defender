@@ -101,10 +101,10 @@ void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_object
 	if (lander_watch->time_elapsed() >= 5.0f) //landers are at least spawned at 5 sec intervals
 	{
 		auto landerCountWithinScreen = 0;
+		auto [playerXpos, playerYpos] = player->getPlayerPosition();
 		for (auto lander : lander_objects)
 		{
 			auto [landerXpos, landerYpos] = lander->getPosition();
-			auto [playerXpos, playerYpos] = player->getPlayerPosition();
 			auto distance = fabs(playerXpos - landerXpos); //get the absolute distance between player and lander
 			if (distance < 400.0f) //This distance is likely to change once game is pragrammed to function in full screen mode
 			{
@@ -121,6 +121,8 @@ void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_object
 			int max = 2;
 			std::uniform_int_distribution<int>distribution(min, max);
 			auto numberOfLandersToSpawn = distribution(gen);
+
+			auto landerYpos = 150.0f;//Landers will spawn at this height
 			for (int i = 0; i < numberOfLandersToSpawn; ++i)
 			{
 				//Create lander objects.
@@ -128,16 +130,32 @@ void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_object
 				if (i == 0)
 				{
 					//Generate lander on the left
+					auto landerXpos = playerXpos - 320.0f; //The 320 will change for full screen
 					auto lander_object = std::make_shared<Lander>(player, initialization);
+					lander_object->setPosition(landerXpos, landerYpos);
+					auto isRight = false;
+					auto isLeft = true;
+					lander_object->setSide(isRight, isLeft);
 					lander_objects.push_back(lander_object);
 
+					//corresponding sprite object
+					auto lander_sprite = std::make_shared<LanderSprite>();
+					lander_sprites.push_back(lander_sprite);
+					continue; //Should not generate lander on the right side if this conditional evaluated to true
 				}
-				else
-				{
-					//Generate lander on the right
-					auto lander_object = std::make_shared<Lander>(player, initialization);
-					lander_objects.push_back(lander_object);
-				}
+			
+				//Generate lander on the right
+				auto landerXpos = playerXpos + 320.0f;
+				auto lander_object = std::make_shared<Lander>(player, initialization);
+				lander_object->setPosition(landerXpos, landerYpos);
+				auto isRight = true;
+				auto isLeft = false;
+				lander_object->setSide(isRight, isLeft);
+				lander_objects.push_back(lander_object);
+
+				//corresponding sprite object
+				auto lander_sprite = std::make_shared<LanderSprite>();
+				lander_sprites.push_back(lander_sprite);
 			}
 		}
 		lander_watch->restart();
