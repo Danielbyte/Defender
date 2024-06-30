@@ -21,6 +21,7 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 	auto verticalScalingFactor = (1.0f / 6.0f);
 	auto miniMapXpos = (x_playerPosition - horizontalOffset) * horizontallScalingFactor;
 	auto miniMapYpos = (y_playerPosition - verticalOffset) * verticalScalingFactor;
+	float gameWorldWidth = 6400.0f;
 
 	if (space && state != PlayerState::Dead)
 	{
@@ -32,7 +33,6 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 	{
 		direction = "right";
 		x_playerPosition += playerSpeed * dt;
-		float gameWorldWidth = 6400.0f;
 		if (x_playerPosition > gameWorldWidth / 2)
 			x_playerPosition = -gameWorldWidth / 2;
 
@@ -42,9 +42,12 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 	if (left && state != PlayerState::Dead)
 	{
 		direction = "left";
-		player_sprite->updateSpritePosition(direction,x_playerPosition,y_playerPosition,miniMapXpos, miniMapYpos);
-		float leftBoundary = 25.0f;
 		x_playerPosition -= playerSpeed * dt;
+
+		if (x_playerPosition < -gameWorldWidth / 2)
+			x_playerPosition = gameWorldWidth / 2;
+
+		player_sprite->updateSpritePosition(direction, x_playerPosition, y_playerPosition, miniMapXpos, miniMapYpos);
 	}
 
 	if (up && state != PlayerState::Dead)
