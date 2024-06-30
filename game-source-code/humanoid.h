@@ -27,10 +27,10 @@ public:
 	void setAbductingLanderId(const unsigned int);
 	unsigned int getAbductingLanderId() const;
 	void setDistance(const float distance);
+	void setPosition(float xPos, float yPos);
 
 private:
 	void updateHumanoidSprite(std::shared_ptr<HumanoidSprite>& humanoid_sprite);
-	void generateXposition();
 	void generateDirection();
 	void canChangeDirection(); //Decision if humanoid should change direction
 	HumanoidState state;

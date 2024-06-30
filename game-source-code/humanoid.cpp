@@ -150,20 +150,13 @@ void Humanoid::updateHumanoidSprite(std::shared_ptr<HumanoidSprite>& humanoid_sp
 
 void Humanoid::placeHumanoid()
 {
-	 yPosition = 580.0f;
-     generateXposition();
 	 generateDirection();
 }
 
-void Humanoid::generateXposition()
+void Humanoid::setPosition(float xPos, float yPos)
 {
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	float min = -1000.0f;
-	float max = 1000.0f;
-	std::uniform_real_distribution<float>distribution(min, max);
-
-	xPosition = distribution(gen);
+	xPosition = xPos;
+	yPosition = yPos;
 }
 
 void Humanoid::generateDirection()

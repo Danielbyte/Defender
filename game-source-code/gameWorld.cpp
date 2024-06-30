@@ -165,13 +165,13 @@ void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_object
 void GameWorld::placeHumanoids(std::vector<std::shared_ptr<Humanoid>>& humanoid_objects,
 	std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites)
 {
-	//generate 5 humanoids
-	for (int i = 0; i < 5; ++i)
+	//generate 10 humanoids
+	for (int i = 0; i < 10; ++i)
 	{
-		auto humanoid = std::make_shared<Humanoid>();
+		/*auto humanoid = std::make_shared<Humanoid>();
 		humanoid_objects.push_back(humanoid);
 		auto humanoid_sprite = std::make_shared<HumanoidSprite>();
-		humanoid_sprites.push_back(humanoid_sprite);
+		humanoid_sprites.push_back(humanoid_sprite);*/
 	}
 }
 
