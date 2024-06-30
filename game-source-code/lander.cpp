@@ -354,8 +354,8 @@ bool Lander::checkForHumanoid(std::vector<std::shared_ptr<Humanoid>>& humanoids)
 		auto humanoid_state  = humanoid->getHumanoidState();
 		
 		auto [humanoidXpos, humanoidYpos] = humanoid->getPosition();
-		auto distance_betwwen = std::fabs(xPosition - humanoidXpos);
-		if (distance_betwwen <= 0.4f && humanoid_state == HumanoidState::Walking)
+		auto distance_between = std::fabs(xPosition - humanoidXpos);
+		if (distance_between <= 0.4f && humanoid_state == HumanoidState::Walking)
 		{
 			return true;
 		}
