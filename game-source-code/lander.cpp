@@ -166,11 +166,19 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 void Lander::moveEast(const float& dt)
 {
 	xPosition += landerSpeed * dt;
+	auto gameWidth = 6400.0f;
+	//Wrap lander object around game world
+	if (xPosition > gameWidth / 2)
+		xPosition = -gameWidth / 2;
 }
 
 void Lander::moveWest(const float& dt)
 {
 	xPosition -= landerSpeed * dt;
+	//Wrap lander around game world
+	auto gameWidth = 6400.0f;
+	if (xPosition < -gameWidth / 2)
+		xPosition = gameWidth / 2;
 }
 
 void Lander::moveNorth(const float& dt)
