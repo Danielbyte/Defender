@@ -97,12 +97,20 @@ void Humanoid::updateHumanoid(const float dt, std::shared_ptr<HumanoidSprite>& h
 		return;
 	}
 
+	auto gameWidth = 6400.0f;
 	if (direction == "right" && humanoid_watch->time_elapsed() <= 0.96f)
+	{
 		xPosition += speed * dt;
+		if (xPosition > gameWidth / 2)
+			xPosition = -gameWidth / 2;
+	}
 		
-
 	if (direction == "left" && humanoid_watch->time_elapsed() <= 0.96f)
-	    xPosition -= speed * dt;
+	{
+		xPosition -= speed * dt;
+		if (xPosition < -gameWidth / 2)
+			xPosition = gameWidth / 2;
+	}
 		
 	updateHumanoidSprite(humanoid_sprite);
 }
