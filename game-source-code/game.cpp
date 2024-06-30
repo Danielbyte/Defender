@@ -57,14 +57,6 @@ Game::Game():
 	background_s.setPosition(background1Position);
 	landscape1->updateTerrain(landscape1_sprite, background1Position.x);
 
-	background_t2.loadFromFile("resources/background2.png");
-	background_s2.setTexture(background_t2);
-	background_s2.setOrigin(3200 / 2.0f, windowHeight / 2.0f);
-	background2Position.x = -1400.0f;
-	background2Position.y = windowHeight / 2.0f;
-	background_s2.setPosition(background2Position);
-	landscape2->updateTerrain(landscape2_sprite, background2Position.x);
-
 	game_world->placeHumanoids(humanoid_objects, humanoid_sprites);
 
 	miniMapSection_t.loadFromFile("resources/minimap.png");
@@ -88,7 +80,6 @@ Game::Game():
 	currentScorePosition.x = 50.0f;
 	currentScorePosition.y = 15.0f;
 	currentScore.setPosition(currentScorePosition);
-
 }
 
 void Game::run()

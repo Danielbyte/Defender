@@ -34,7 +34,6 @@ void Game::display(const float dt)
 		window->clear();
 		window->setView(gameView);
 		window->draw(background_s);
-		//window->draw(background_s2);
 		//window->draw(landscape1_sprite->getSprite());
 		//window->draw(landscape2_sprite->getSprite());
 		window->draw(miniMapSection_s);
@@ -113,49 +112,5 @@ void Game::updateCamera()
 
 void Game::updateBackgroundView()
 {
-	auto [playerXpos, playerYpos] = player_obj->getPlayerPosition();
-	auto backgroundWidth = 3200.0f;
-
-	auto distance1 = abs(playerXpos - background1Position.x);
-	auto distance2 = abs(playerXpos - background2Position.x);
-	auto playerDirection = player_obj->getDirection();
-
-	if (distance2 > distance1)
-	{
-		if (playerDirection == "right")
-		{
-			if (playerXpos >= background1Position.x)
-				background2Position.x = background1Position.x + backgroundWidth;
-
-			background_s2.setPosition(background2Position);
-			landscape2->updateTerrain(landscape2_sprite, background2Position.x);
-			return;
-		}
-		
-		if (playerXpos <= background1Position.x)
-			background2Position.x = background1Position.x - backgroundWidth;
-
-		landscape2->updateTerrain(landscape2_sprite, background2Position.x);
-		background_s2.setPosition(background2Position);
-		return;
-	}
-
-	if (distance1 > distance2)
-	{
-		if (playerDirection == "right")
-		{
-			if (playerXpos >= background2Position.x)
-				background1Position.x = background2Position.x + backgroundWidth;
-
-			background_s.setPosition(background1Position);
-			landscape1->updateTerrain(landscape1_sprite, background1Position.x);
-			return;
-		}
-		
-		if (playerXpos <= background2Position.x)
-			background1Position.x = background2Position.x - backgroundWidth;
-
-		landscape1->updateTerrain(landscape1_sprite, background1Position.x);
-		background_s.setPosition(background1Position);
-	}
+	//Should Probably do more interesting things
 }

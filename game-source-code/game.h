@@ -52,10 +52,7 @@ private:
 
 	sf::Texture background_t;
 	sf::Sprite background_s;
-	sf::Texture background_t2;
-	sf::Sprite background_s2;
 	sf::Vector2f background1Position;
-	sf::Vector2f background2Position;
 
 	//View to set up the camera for scrolling
 	sf::View gameView;
