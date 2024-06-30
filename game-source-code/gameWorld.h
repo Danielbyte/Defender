@@ -43,6 +43,9 @@ private:
     
 	void garbageCollector(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites);
 	std::shared_ptr<StopWatch> lander_watch = std::make_shared<StopWatch>();//stop watch used for creation of landers
+
+	void placeHumanoid(std::vector<std::shared_ptr<Humanoid>>& humanoid_objects, std::vector<std::shared_ptr<HumanoidSprite>>&
+		humanoid_sprites, float xPos, float yPos);
 };
 #endif // !GAMEWORLD_H
 

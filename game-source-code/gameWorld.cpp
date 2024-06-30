@@ -166,13 +166,55 @@ void GameWorld::placeHumanoids(std::vector<std::shared_ptr<Humanoid>>& humanoid_
 	std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites)
 {
 	//generate 10 humanoids
+	auto humanoidYpos = 580.0f; //All humanoids will spawn at this height for now
 	for (int i = 0; i < 10; ++i)
 	{
-		/*auto humanoid = std::make_shared<Humanoid>();
-		humanoid_objects.push_back(humanoid);
-		auto humanoid_sprite = std::make_shared<HumanoidSprite>();
-		humanoid_sprites.push_back(humanoid_sprite);*/
+		switch (i)
+		{
+		case 0:
+			placeHumanoid(humanoid_objects, humanoid_sprites, -2560.0f, humanoidYpos);
+			break;
+		case 1:
+			placeHumanoid(humanoid_objects, humanoid_sprites, -1920.0f, humanoidYpos);
+			break;
+		case 2:
+			placeHumanoid(humanoid_objects, humanoid_sprites, -1280.0f, humanoidYpos);
+			break;
+		case 3:
+			placeHumanoid(humanoid_objects, humanoid_sprites, -640.0f, humanoidYpos);
+			break;
+		case 4:
+			placeHumanoid(humanoid_objects, humanoid_sprites, 0.0f, humanoidYpos);
+			break;
+		case 5:
+			placeHumanoid(humanoid_objects, humanoid_sprites, 300.0f, humanoidYpos);
+			break;
+		case 6:
+			placeHumanoid(humanoid_objects, humanoid_sprites, 700.0f, humanoidYpos);
+			break;
+		case 7:
+			placeHumanoid(humanoid_objects, humanoid_sprites, 1340.0f, humanoidYpos);
+			break;
+		case 8:
+			placeHumanoid(humanoid_objects, humanoid_sprites, 1980.0f, humanoidYpos);
+			break;
+		case 9:
+			placeHumanoid(humanoid_objects, humanoid_sprites, 2620.0f, humanoidYpos);
+			break;
+		default:
+			break;
+		}
 	}
+}
+
+void GameWorld::placeHumanoid(std::vector<std::shared_ptr<Humanoid>>& humanoid_objects, std::vector<std::shared_ptr<HumanoidSprite>>&
+	humanoid_sprites, float xPos, float yPos)
+{
+	auto humanoid = std::make_shared<Humanoid>();
+	humanoid->setPosition(xPos, yPos);
+	humanoid_objects.push_back(humanoid);
+	auto humanoid_sprite = std::make_shared<HumanoidSprite>();
+	humanoid_sprites.push_back(humanoid_sprite);
 }
 
 void GameWorld::garbageCollector(std::vector<std::shared_ptr<MissileSprite>>& missile_sprites)
