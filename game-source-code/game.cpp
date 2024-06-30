@@ -11,7 +11,8 @@ Game::Game():
 	gameOver{false},
 	playerWon{false},
 	landersDestroyed{0},
-	number0fHumanoids{5}
+	number0fHumanoids{5},
+	gameWorldWidth{6400.0f}
 {
 	viewCenter.x = 400.0f;
 	viewCenter.y = windowHeight / 2.0f;
@@ -50,8 +51,8 @@ Game::Game():
 
 	background_t.loadFromFile("resources/background.png");
 	background_s.setTexture(background_t);
-	background_s.setOrigin(3200/2.0f, windowHeight/2.0f);
-	background1Position.x = 1800.0f;
+	background_s.setOrigin(gameWorldWidth/2.0f, windowHeight/2.0f);
+	background1Position.x = 0.0f;
 	background1Position.y = windowHeight / 2.0f;
 	background_s.setPosition(background1Position);
 	landscape1->updateTerrain(landscape1_sprite, background1Position.x);

@@ -127,6 +127,7 @@ private:
 	bool playerWon;
 	int landersDestroyed;
 	int number0fHumanoids;
+	float gameWorldWidth; //Width of game world, for a universe that wraps around
 };
 #endif
 
