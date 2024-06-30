@@ -31,9 +31,12 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 	if (right && state != PlayerState::Dead)
 	{
 		direction = "right";
-		player_sprite->updateSpritePosition(direction,x_playerPosition,y_playerPosition,miniMapXpos,miniMapYpos);
-		float rightBoundary = 800.0f - 25.0f;
 		x_playerPosition += playerSpeed * dt;
+		float gameWorldWidth = 6400.0f;
+		if (x_playerPosition > gameWorldWidth / 2)
+			x_playerPosition = -gameWorldWidth / 2;
+
+		player_sprite->updateSpritePosition(direction, x_playerPosition, y_playerPosition, miniMapXpos, miniMapYpos);
 	}
 
 	if (left && state != PlayerState::Dead)

@@ -34,7 +34,7 @@ void Game::display(const float dt)
 		window->clear();
 		window->setView(gameView);
 		window->draw(background_s);
-		window->draw(background_s2);
+		//window->draw(background_s2);
 		//window->draw(landscape1_sprite->getSprite());
 		//window->draw(landscape2_sprite->getSprite());
 		window->draw(miniMapSection_s);
