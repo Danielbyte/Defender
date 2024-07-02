@@ -89,10 +89,10 @@ void Game::updateGameState()
 		return;
 	}
 
-	if (number0fHumanoids == 0)
+	/*if (number0fHumanoids == 0)
 	{
 		gameOver = true;
-	}
+	}*/
 }
 
 void Game::updateBombers(const float dt)

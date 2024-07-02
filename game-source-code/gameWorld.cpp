@@ -17,11 +17,7 @@ void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_obj
 		lander_watch->restart();
 		return;
 	}
-	auto _time = world_watch->time_elapsed();
 	createLander(lander_objects, lander_sprites, player);
-
-	if (_time < 1.5f || enemy == Enemy::None)
-		return;
 
 	switch (enemy)
 	{
@@ -40,8 +36,6 @@ void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_obj
 	default:
 		break;
 	}
-
-	world_watch->restart(); //Remove once the other entity creation functions are done
 	garbageCollector(missile_sprites);
 }
 
