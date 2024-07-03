@@ -39,11 +39,11 @@ private:
 	void updateScore();
 
 	//Window
-	unsigned int windowWidth = 800ul;
-	unsigned int windowHeight = 600ul;
+	unsigned int windowWidth = sf::VideoMode::getDesktopMode().width;
+	unsigned int windowHeight = sf::VideoMode::getDesktopMode().height;
 	bool isPlaying;
 	std::shared_ptr<sf::RenderWindow> window = std::make_shared<sf::RenderWindow>
-		(sf::VideoMode(windowWidth, windowHeight), "Defender");
+		(sf::VideoMode(windowWidth, windowHeight), "Defender", sf::Style::Fullscreen);
 
 	sf::Text splashScreenText;
 	sf::Text endOfGame;

@@ -14,15 +14,15 @@ Game::Game():
 	number0fHumanoids{5},
 	gameWorldWidth{6400.0f}
 {
-	viewCenter.x = 400.0f;
+	viewCenter.x = windowWidth / 2.0f;
 	viewCenter.y = windowHeight / 2.0f;
-	gameViewSize.x = 800.0f;
-	gameViewSize.y = 600.0f;
-	gameView.setCenter(viewCenter);
+	gameViewSize.x = windowWidth;
+	gameViewSize.y = windowHeight;
+	gameView.setCenter(gameViewSize);
 	gameView.setSize(gameViewSize);
 
-	miniMapViewSize.x = 800.0f;
-	miniMapViewSize.y = 600.0f;
+	miniMapViewSize.x = windowWidth;
+	miniMapViewSize.y = windowHeight;
 	miniMapView.setSize(miniMapViewSize);
 	miniMapView.setCenter(viewCenter);
 	miniMapView.setViewport(sf::FloatRect(0.3125f, 0.0f, 0.375f, 1.0f));
