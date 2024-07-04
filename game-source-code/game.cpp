@@ -14,11 +14,11 @@ Game::Game():
 	number0fHumanoids{5},
 	gameWorldWidth{6400.0f}
 {
-	viewCenter.x = windowWidth / 2.0f;
-	viewCenter.y = windowHeight / 2.0f;
+	viewCenter.x = windowWidth / 2;
+	viewCenter.y = windowHeight / 2;
 	gameViewSize.x = windowWidth;
 	gameViewSize.y = windowHeight;
-	gameView.setCenter(gameViewSize);
+	gameView.setCenter(viewCenter);
 	gameView.setSize(gameViewSize);
 
 	miniMapViewSize.x = windowWidth;

@@ -160,7 +160,7 @@ void GameWorld::placeHumanoids(std::vector<std::shared_ptr<Humanoid>>& humanoid_
 	std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites)
 {
 	//generate 10 humanoids
-	auto humanoidYpos = 580.0f; //All humanoids will spawn at this height for now
+	auto humanoidYpos = 740.0f; //All humanoids will spawn at this height for now
 	for (int i = 0; i < 10; ++i)
 	{
 		switch (i)
