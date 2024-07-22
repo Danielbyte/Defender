@@ -39,12 +39,13 @@ void GameWorld::updateGameWorld(std::vector<std::shared_ptr<Lander>>& lander_obj
 	garbageCollector(missile_sprites);
 }
 
-void GameWorld::initialLanders(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& lander_objects, std::vector<std::shared_ptr<LanderSprite>>& lander_sprites)
+void GameWorld::initialLanders(std::shared_ptr<Player>& player, std::vector<std::shared_ptr<Lander>>& lander_objects, 
+	std::vector<std::shared_ptr<LanderSprite>>& lander_sprites)
 {
 	//create initial wave of landers when game starts
 	for (int i = 0; i < 4; i++)
 	{
-		auto lander_object = std::make_shared<Lander>(player, initialization);
+		auto lander_object = std::make_shared<Lander>(player, initialization, horizontalScalingFactor,verticalScalingFactor);
 		lander_objects.push_back(lander_object);
 
 		auto lander_sprite = std::make_shared<LanderSprite>();
@@ -100,7 +101,7 @@ void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_object
 		{
 			auto [landerXpos, landerYpos] = lander->getPosition();
 			auto distance = fabs(playerXpos - landerXpos); //get the absolute distance between player and lander
-			if (distance < 400.0f) //This distance is likely to change once game is pragrammed to function in full screen mode
+			if (distance < (400.0f * horizontalScalingFactor)) //This distance is likely to change once game is pragrammed to function in full screen mode
 			{
 				//This lander is within the screen
 				++landerCountWithinScreen; //increment number of landers within screen
@@ -124,8 +125,10 @@ void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_object
 				if (i == 0)
 				{
 					//Generate lander on the left
-					auto landerXpos = playerXpos - 320.0f; //The 320 will change for full screen
-					auto lander_object = std::make_shared<Lander>(player, initialization);
+					auto landerXpos = playerXpos - (320.0f * horizontalScalingFactor); //The 320 will change for full screen
+					auto lander_object = std::make_shared<Lander>(player, initialization,
+						horizontalScalingFactor,verticalScalingFactor);
+
 					lander_object->setPosition(landerXpos, landerYpos);
 					auto isRight = false;
 					auto isLeft = true;
@@ -139,8 +142,9 @@ void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_object
 				}
 			
 				//Generate lander on the right
-				auto landerXpos = playerXpos + 320.0f;
-				auto lander_object = std::make_shared<Lander>(player, initialization);
+				auto landerXpos = playerXpos + (320.0f * horizontalScalingFactor);
+				auto lander_object = std::make_shared<Lander>(player, initialization, horizontalScalingFactor,
+					verticalScalingFactor);
 				lander_object->setPosition(landerXpos, landerYpos);
 				auto isRight = true;
 				auto isLeft = false;
@@ -157,7 +161,7 @@ void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_object
 }
 
 void GameWorld::placeHumanoids(std::vector<std::shared_ptr<Humanoid>>& humanoid_objects,
-	std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites, float horizontalScalingFactor, float verticalScalingFactor)
+	std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites)
 {
 	//generate 10 humanoids
 	auto humanoidYpos = (580.0f * verticalScalingFactor); 
@@ -244,4 +248,10 @@ void GameWorld::createBomber(std::vector<std::shared_ptr<Bombers>>& bombers,
 
 	auto bomber_sprite = std::make_shared<BomberSprite>();
 	bomber_sprites.push_back(bomber_sprite);
+}
+
+void GameWorld::setScalingRatios(float horizontalScalingRatio, float verticalScalingRatio)
+{
+	horizontalScalingFactor = horizontalScalingRatio;
+	verticalScalingFactor = verticalScalingRatio;
 }

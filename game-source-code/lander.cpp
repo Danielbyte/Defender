@@ -17,10 +17,11 @@ Lander::Lander():
 	isShot{false},
 	isExploding{false},
 	canDelete{false},
-	localId{0}
+	localId{0},
+	humanoidArea{500.0f}
 {}
 
-Lander::Lander(std::shared_ptr<Player>& player, bool isInitial):
+Lander::Lander(std::shared_ptr<Player>& player, bool isInitial, float horizontalScalingFactor, float verticalScalingFactor):
 	leftSide{ false },
 	rightSide{ false },
 	landerSpeed{ 120.0f },
@@ -35,13 +36,14 @@ Lander::Lander(std::shared_ptr<Player>& player, bool isInitial):
 	isShot{false},
 	isExploding{false},
 	canDelete{false},
-	localId{ 0 }
+	localId{ 0 },
+	humanoidArea{500.0f * verticalScalingFactor}
 {
 	//increment number of landers evertime an instance of a lander is created
 	++NumberOfLanders;
 
 	//generate spawn position
-	generateInitialPosition(player, isInitial);
+	generateInitialPosition(player, isInitial, horizontalScalingFactor, verticalScalingFactor);
 	setId();
 	setLocalId();
 	lander_watch->restart();
@@ -52,9 +54,10 @@ std::tuple<float, float> Lander::getPosition() const
 	return { xPosition,yPosition };
 }
 
-void Lander::generateInitialPosition(std::shared_ptr<Player>& player, bool isInitial)
+void Lander::generateInitialPosition(std::shared_ptr<Player>& player, bool isInitial, float horizontalScalingFactor,
+	float verticalScalingFactor)
 {
-	generateTeleportPosition(player, isInitial);
+	generateTeleportPosition(player, isInitial, horizontalScalingFactor, verticalScalingFactor);
 
 	auto [playerXpos, playerYpos] = player->getPlayerPosition();
 	if (xPosition >= playerXpos) // lander on right side of player
@@ -101,7 +104,7 @@ void Lander::updateLander(std::shared_ptr<LanderSprite>& lander_sprite, const fl
 			moveSouthEast(dt);
 		}
 
-		if (yPosition >= 450.0f)
+		if (yPosition >= humanoidArea)
 			reachedHumanoidZone = true;
 	}
 
@@ -436,22 +439,25 @@ bool Lander::test_getIfInHumanoidZone() const
 	return reachedHumanoidZone;
 }
 
-void Lander::generateTeleportPosition(std::shared_ptr<Player>& player, bool initial_lander)
+void Lander::generateTeleportPosition(std::shared_ptr<Player>& player, bool initial_lander, float horizontalScalingFactor,
+	float verticalScalingFactor)
 {
 	if (initial_lander)
 	{
 		//Initial y position is the same for all landers.
-		yPosition = 150.0f;
+		yPosition = 150.0f * verticalScalingFactor;
+		auto scale1 = 300.0f * horizontalScalingFactor;
+		auto scale2 = 400 * horizontalScalingFactor;
 		switch (NumberOfLanders)
 		{
 		case 1:
 		case 2:
-			xPosition = 1350.0f - (NumberOfLanders - 1) * 250.0f;
+			xPosition = (horizontalScalingFactor * 1350.0f) - (NumberOfLanders - 1) * scale2;
 			break;
 
 		case 3:
 		case 4:
-			xPosition = -1550.0f + (NumberOfLanders + 1) * 250.0f;
+			xPosition = - (horizontalScalingFactor * 1550.0f) + (NumberOfLanders + 1) * scale1;
 			break;
 
 		default:

@@ -25,7 +25,9 @@ public:
 	Enemy generateEnemy();
 
 	void placeHumanoids(std::vector<std::shared_ptr<Humanoid>>& humanoid_objects,
-		std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites, float horizontalScalingFactor, float verticalScalingFactor);
+		std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites);
+
+	void setScalingRatios(float horizontalScalingRatio, float verticalScalingRatio);
 
 private:
 	std::shared_ptr<Shooter> shooter_obj = std::make_shared<Shooter>();
@@ -33,7 +35,8 @@ private:
 	std::shared_ptr<Landscape> landscape_object = std::make_shared<Landscape>();
 	Enemy enemy;
 	bool initialization;
-	void initialLanders(std::shared_ptr<Player>& player,std::vector<std::shared_ptr<Lander>>& lander_objects, std::vector<std::shared_ptr<LanderSprite>>& lander_sprites);
+	void initialLanders(std::shared_ptr<Player>& player,std::vector<std::shared_ptr<Lander>>& lander_objects,
+		std::vector<std::shared_ptr<LanderSprite>>& lander_sprites);
 
 	void createLander(std::vector<std::shared_ptr<Lander>>& lander_objects,
 		std::vector<std::shared_ptr<LanderSprite>>& lander_object_sprites, std::shared_ptr<Player>& player);
@@ -46,6 +49,9 @@ private:
 
 	void placeHumanoid(std::vector<std::shared_ptr<Humanoid>>& humanoid_objects, std::vector<std::shared_ptr<HumanoidSprite>>&
 		humanoid_sprites, float xPos, float yPos);
+
+	float horizontalScalingFactor;
+	float verticalScalingFactor;
 };
 #endif // !GAMEWORLD_H
 

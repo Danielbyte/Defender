@@ -62,7 +62,8 @@ Game::Game():
 	background_s.setPosition(background1Position);
 	landscape1->updateTerrain(landscape1_sprite, background1Position.x);
 
-	game_world->placeHumanoids(humanoid_objects, humanoid_sprites,horizontalScalingRatio, verticalScalingRatio);
+	game_world->setScalingRatios(horizontalScalingRatio, verticalScalingRatio);
+	game_world->placeHumanoids(humanoid_objects, humanoid_sprites);
 
 	miniMapSection_t.loadFromFile("resources/minimap.png");
 	miniMapSection_s.setTexture(miniMapSection_t);
