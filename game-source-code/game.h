@@ -41,6 +41,8 @@ private:
 	//Window
 	unsigned int windowWidth = sf::VideoMode::getDesktopMode().width;
 	unsigned int windowHeight = sf::VideoMode::getDesktopMode().height;
+	unsigned int virtualWindowWidth = 800ul;
+	unsigned int virtualWindowHeight = 600ul;
 	bool isPlaying;
 	std::shared_ptr<sf::RenderWindow> window = std::make_shared<sf::RenderWindow>
 		(sf::VideoMode(windowWidth, windowHeight), "Defender", sf::Style::Fullscreen);
@@ -125,6 +127,9 @@ private:
 	int landersDestroyed;
 	int number0fHumanoids;
 	float gameWorldWidth; //Width of game world, for a universe that wraps around
+	//Variable will help attain resolution independence when game is played in different screen sizes
+	float horizontalScalingRatio;
+	float verticalScalingRatio;
 };
 #endif
 

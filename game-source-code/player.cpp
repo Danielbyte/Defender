@@ -4,7 +4,9 @@ Player::Player():
 	playerSpeed{250.0f},
 	laserSpeed{650.0f},
 	state{PlayerState::Alive},
-	playerScore{0}
+	playerScore{0},
+	downBoundary{0.0f},
+	upBoundary{0.0f}
 {
 	x_playerPosition = 400.0f;
 	y_playerPosition = 300.0f; 
@@ -53,7 +55,6 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 	if (up && state != PlayerState::Dead)
 	{
 		y_playerPosition -= playerSpeed * dt;
-		float upBoundary = 110.0f;
 		//Restrict player ship to updwards boundary of game window
 		if (y_playerPosition <= upBoundary)
 			y_playerPosition = upBoundary;
@@ -62,7 +63,6 @@ void Player::updatePlayer(const bool& left, const bool& right, const bool& up, c
 	if (down && state != PlayerState::Dead)
 	{
 		y_playerPosition += playerSpeed * dt;
-		float downBoundary = 600.0f - 10.0f;
 		//Restrict player ship to downwards boundary of game window
 		if (y_playerPosition >= downBoundary)
 			y_playerPosition = downBoundary;
@@ -184,4 +184,12 @@ void Player::updatePlayerScore(const int points)
 int Player::getScore() const
 {
 	return playerScore;
+}
+
+void Player::scalePosition(float horizontalScalingRatio, float verticalScalingRatio)
+{
+	y_playerPosition *= verticalScalingRatio;
+	x_playerPosition *= horizontalScalingRatio;
+	downBoundary = verticalScalingRatio * (600.0f) - 10.0f;
+	upBoundary = verticalScalingRatio * 110.0f;
 }

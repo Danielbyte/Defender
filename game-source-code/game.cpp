@@ -12,8 +12,13 @@ Game::Game():
 	playerWon{false},
 	landersDestroyed{0},
 	number0fHumanoids{5},
-	gameWorldWidth{6400.0f}
+	gameWorldWidth{6400.0f},
+	horizontalScalingRatio{1.0f},
+	verticalScalingRatio{1.0f}
+
 {
+	horizontalScalingRatio = static_cast<float>(windowWidth)/virtualWindowWidth;
+	verticalScalingRatio = static_cast<float>(windowHeight) / virtualWindowHeight;
 	viewCenter.x = windowWidth / 2;
 	viewCenter.y = windowHeight / 2;
 	gameViewSize.x = windowWidth;
@@ -80,6 +85,8 @@ Game::Game():
 	currentScorePosition.x = 50.0f;
 	currentScorePosition.y = 15.0f;
 	currentScore.setPosition(currentScorePosition);
+
+	player_obj->scalePosition(horizontalScalingRatio, verticalScalingRatio);
 }
 
 void Game::run()

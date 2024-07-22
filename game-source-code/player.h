@@ -19,6 +19,8 @@ public:
 		std::shared_ptr<PlayerSprite>& player_sprite, std::vector<std::shared_ptr<LaserSprite>>& laser_sprite, 
 		std::vector<std::shared_ptr<Projectile>>& lasers, const float dt, bool& gameOver);
 
+	void scalePosition(float horizontalScalingRatio, float verticalScalingRatio);
+
 	std::tuple<float,float> getPlayerPosition() const;
 	void createLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprite, std::vector<std::shared_ptr<Projectile>>& lasers);
 	void updateLasers(std::vector<std::shared_ptr<LaserSprite>>& laser_sprites, std::vector<std::shared_ptr<Projectile>>& lasers,const float dt);
@@ -38,6 +40,8 @@ private:
 	PlayerState state;
 	int playerScore;
 	StopWatch animation_watch;
+	float downBoundary;
+	float upBoundary;
 
 };
 #endif // !PLAYER_H
