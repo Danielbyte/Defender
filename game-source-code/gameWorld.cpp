@@ -157,43 +157,43 @@ void GameWorld::createLander(std::vector<std::shared_ptr<Lander>>& lander_object
 }
 
 void GameWorld::placeHumanoids(std::vector<std::shared_ptr<Humanoid>>& humanoid_objects,
-	std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites)
+	std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites, float horizontalScalingFactor, float verticalScalingFactor)
 {
 	//generate 10 humanoids
-	auto humanoidYpos = 740.0f; //All humanoids will spawn at this height for now
+	auto humanoidYpos = (580.0f * verticalScalingFactor); 
 	for (int i = 0; i < 10; ++i)
 	{
 		switch (i)
 		{
 		case 0:
-			placeHumanoid(humanoid_objects, humanoid_sprites, -2560.0f, humanoidYpos);
+			placeHumanoid(humanoid_objects, humanoid_sprites, -2560.0f * horizontalScalingFactor, humanoidYpos);
 			break;
 		case 1:
-			placeHumanoid(humanoid_objects, humanoid_sprites, -1920.0f, humanoidYpos);
+			placeHumanoid(humanoid_objects, humanoid_sprites, -1920.0f * horizontalScalingFactor, humanoidYpos);
 			break;
 		case 2:
-			placeHumanoid(humanoid_objects, humanoid_sprites, -1280.0f, humanoidYpos);
+			placeHumanoid(humanoid_objects, humanoid_sprites, -1280.0f * horizontalScalingFactor, humanoidYpos);
 			break;
 		case 3:
-			placeHumanoid(humanoid_objects, humanoid_sprites, -640.0f, humanoidYpos);
+			placeHumanoid(humanoid_objects, humanoid_sprites, -640.0f * horizontalScalingFactor, humanoidYpos);
 			break;
 		case 4:
 			placeHumanoid(humanoid_objects, humanoid_sprites, 0.0f, humanoidYpos);
 			break;
 		case 5:
-			placeHumanoid(humanoid_objects, humanoid_sprites, 300.0f, humanoidYpos);
+			placeHumanoid(humanoid_objects, humanoid_sprites, 300.0f * horizontalScalingFactor, humanoidYpos);
 			break;
 		case 6:
-			placeHumanoid(humanoid_objects, humanoid_sprites, 700.0f, humanoidYpos);
+			placeHumanoid(humanoid_objects, humanoid_sprites, 700.0f * horizontalScalingFactor, humanoidYpos);
 			break;
 		case 7:
-			placeHumanoid(humanoid_objects, humanoid_sprites, 1340.0f, humanoidYpos);
+			placeHumanoid(humanoid_objects, humanoid_sprites, 1340.0f * horizontalScalingFactor, humanoidYpos);
 			break;
 		case 8:
-			placeHumanoid(humanoid_objects, humanoid_sprites, 1980.0f, humanoidYpos);
+			placeHumanoid(humanoid_objects, humanoid_sprites, 1980.0f * horizontalScalingFactor, humanoidYpos);
 			break;
 		case 9:
-			placeHumanoid(humanoid_objects, humanoid_sprites, 2620.0f, humanoidYpos);
+			placeHumanoid(humanoid_objects, humanoid_sprites, 2620.0f * horizontalScalingFactor, humanoidYpos);
 			break;
 		default:
 			break;

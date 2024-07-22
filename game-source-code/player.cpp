@@ -190,6 +190,6 @@ void Player::scalePosition(float horizontalScalingRatio, float verticalScalingRa
 {
 	y_playerPosition *= verticalScalingRatio;
 	x_playerPosition *= horizontalScalingRatio;
-	downBoundary = verticalScalingRatio * (600.0f) - 10.0f;
+	downBoundary = verticalScalingRatio * (600.0f - 10.0f);
 	upBoundary = verticalScalingRatio * 110.0f;
 }

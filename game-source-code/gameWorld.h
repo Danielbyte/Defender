@@ -25,7 +25,7 @@ public:
 	Enemy generateEnemy();
 
 	void placeHumanoids(std::vector<std::shared_ptr<Humanoid>>& humanoid_objects,
-		std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites);
+		std::vector<std::shared_ptr<HumanoidSprite>>& humanoid_sprites, float horizontalScalingFactor, float verticalScalingFactor);
 
 private:
 	std::shared_ptr<Shooter> shooter_obj = std::make_shared<Shooter>();
